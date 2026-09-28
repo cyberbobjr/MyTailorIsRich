@@ -1,0 +1,45 @@
+module Base {
+    sound MTIR_ResizeClothes
+    {
+        category = Item,
+        loop = true,
+        clip
+        {
+            file = media/sound/mtir_resize_clothes.wav,
+            volume = 0.25
+        }
+    }
+
+    sound MTIR_ResizeFailed
+    {
+        category = Item,
+        loop = false,
+        clip
+        {
+            file = media/sound/mtir_resize_failed.wav,
+            volume = 0.25
+        }
+    }
+
+    sound MTIR_CheckSize
+    {
+        category = Item,
+        loop = true,
+        clip
+        {
+            file = media/sound/mtir_check_size.wav,
+            volume = 0.25
+        }
+    }
+
+    sound MTIR_TightClothesRip
+    {
+        category = Item,
+        loop = false,
+        clip
+        {
+            file = media/sound/mtir_tight_clothes_rip.wav,
+            volume = 0.25
+        }
+    }
+}

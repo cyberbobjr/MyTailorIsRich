@@ -1,0 +1,133 @@
+VERSION = 1,
+
+option MyTailorIsRich.NeedTailoringLevel
+{
+    type = boolean, default = true,
+    page = MyTailorIsRich, translation = MyTailorIsRich_NeedTailoringLevel,
+}
+
+option MyTailorIsRich.TailoringXpMultiplier
+{
+    type = double, min = 0.0, max = 100.0, default = 1.0,
+    page = MyTailorIsRich, translation = MyTailorIsRich_TailoringXpMultiplier,
+}
+
+option MyTailorIsRich.ActionTimeMultiplier
+{
+    type = double, min = 0.0, max = 100.0, default = 1.0,
+    page = MyTailorIsRich, translation = MyTailorIsRich_ActionTimeMultiplier,
+}
+
+option MyTailorIsRich.RipChanceMultiplier
+{
+    type = double, min = 0.0, max = 100.0, default = 1.0,
+    page = MyTailorIsRich, translation = MyTailorIsRich_RipChanceMultiplier,
+}
+
+option MyTailorIsRich.DropChanceMultiplier
+{
+    type = double, min = 0.0, max = 100.0, default = 1.0,
+    page = MyTailorIsRich, translation = MyTailorIsRich_DropChanceMultiplier,
+}
+
+option MyTailorIsRich.InsulationReduceMultiplier
+{
+    type = double, min = 0.0, max = 100.0, default = 1.0,
+    page = MyTailorIsRich, translation = MyTailorIsRich_InsulationReduceMultiplier,
+}
+
+option MyTailorIsRich.CombatSpeedReduceMultiplier
+{
+    type = double, min = 0.0, max = 100.0, default = 1.0,
+    page = MyTailorIsRich, translation = MyTailorIsRich_CombatSpeedReduceMultiplier,
+}
+
+option MyTailorIsRich.IncreaseTripChanceMultiplier
+{
+    type = double, min = 0.0, max = 100.0, default = 1.0,
+    page = MyTailorIsRich, translation = MyTailorIsRich_IncreaseTripChanceMultiplier,
+}
+
+option MyTailorIsRich.IncreaseStiffnessMultiplier
+{
+    type = double, min = 0.0, max = 100.0, default = 1.0,
+    page = MyTailorIsRich, translation = MyTailorIsRich_IncreaseStiffnessMultiplier,
+}
+
+option MyTailorIsRich.EnableClothesDegrading
+{
+    type = boolean, default = true,
+    page = MyTailorIsRich, translation = MyTailorIsRich_EnableClothesDegrading,
+}
+
+option MyTailorIsRich.MinDaysToDegrade
+{
+    type = integer, min = 1, max = 720, default = 30,
+    page = MyTailorIsRich, translation = MyTailorIsRich_MinDaysToDegrade,
+}
+
+option MyTailorIsRich.MaxDaysToDegrade
+{
+    type = integer, min = 1, max = 720, default = 360,
+    page = MyTailorIsRich, translation = MyTailorIsRich_MaxDaysToDegrade,
+}
+
+option MyTailorIsRich.ChanceToDegradeOnFailure
+{
+    type = double, min = 0.0, max = 1.0, default = 0.5,
+    page = MyTailorIsRich, translation = MyTailorIsRich_ChanceToDegradeOnFailure,
+}
+
+option MyTailorIsRich.ProtectionLossEachCondition
+{
+    type = double, min = 0.0, max = 100.0, default = 2.5,
+    page = MyTailorIsRich, translation = MyTailorIsRich_ProtectionLossEachCondition,
+}
+
+option MyTailorIsRich.ResistanceLossEachCondition
+{
+    type = double, min = 0.0, max = 100.0, default = 5.0,
+    page = MyTailorIsRich, translation = MyTailorIsRich_ResistanceLossEachCondition,
+}
+
+option MyTailorIsRich.ListCustomClothes
+{
+    type = string, default = ,
+    page = MyTailorIsRich, translation = MyTailorIsRich_ListCustomClothes,
+}
+
+option MyTailorIsRich.EnableShoeSizes
+{
+    type = boolean, default = true,
+    page = MyTailorIsRich, translation = MyTailorIsRich_EnableShoeSizes,
+}
+
+option MyTailorIsRich.ShoeEffectMultiplier
+{
+    type = double, min = 0.0, max = 10.0, default = 1.0,
+    page = MyTailorIsRich, translation = MyTailorIsRich_ShoeEffectMultiplier,
+}
+
+option MyTailorIsRich.ExtraSizedLocations
+{
+    type = string, default = ,
+    page = MyTailorIsRich, translation = MyTailorIsRich_ExtraSizedLocations,
+}
+
+option MyTailorIsRich.ListExcludedClothes
+{
+    type = string, default = ,
+    page = MyTailorIsRich, translation = MyTailorIsRich_ListExcludedClothes,
+}
+
+option MyTailorIsRich.PatternMaxUses
+{
+    type = integer, min = 1, max = 50, default = 5,
+    page = MyTailorIsRich, translation = MyTailorIsRich_PatternMaxUses,
+}
+
+option MyTailorIsRich.ShoePatternLevel
+{
+    type = integer, min = 0, max = 10, default = 6,
+    page = MyTailorIsRich, translation = MyTailorIsRich_ShoePatternLevel,
+}

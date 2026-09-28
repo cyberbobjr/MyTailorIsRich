@@ -1,0 +1,13 @@
+module Base
+{
+    /* Patron tracé par My Tailor Is Rich : le modèle est dans la ModData "MTIR_Pattern". */
+    item MTIR_TailorPattern
+    {
+        DisplayCategory = RecipeResource,
+        ItemType = base:normal,
+        Weight = 0.2,
+        Icon = Magazine_Sewing1,
+        StaticModel = SewingPattern,
+        WorldStaticModel = SewingPattern,
+    }
+}

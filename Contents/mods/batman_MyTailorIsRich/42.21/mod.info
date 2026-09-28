@@ -1,0 +1,9 @@
+name=batman_My Tailor Is Rich
+id=batman_MyTailorIsRich
+description=Clothing sizes, fitting, resizing and clothes wear for Build 42.21, solo and multiplayer. Local standalone fork of Realistic Clothes (Workshop 3491510356) ported to 42.21 with server-authoritative sizes. Tooltips via TooltipLib.
+poster=poster.png
+icon=icon.png
+versionMin=42.21
+require=\TooltipLib
+incompatible=\RealisticClothes
+modversion=0.1.0

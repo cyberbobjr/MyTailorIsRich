@@ -1,0 +1,126 @@
+-- ============================================================================
+-- My Tailor Is Rich — lire l'étiquette d'un vêtement
+-- Serveur (MP) ou local (solo) : complete() crée la taille si besoin, la révèle
+-- selon le niveau de Couture, donne l'XP et synchronise l'objet.
+-- ============================================================================
+
+require "TimedActions/ISBaseTimedAction"
+require "MyTailorIsRich/MTIR_Effects"
+
+MTIR_CheckSizeAction = ISBaseTimedAction:derive("MTIR_CheckSizeAction")
+
+function MTIR_CheckSizeAction:isValid()
+    if isClient() and self.started then
+        return true
+    end
+    return MTIR.hasItem(self.character, self.item)
+end
+
+function MTIR_CheckSizeAction:start()
+    self.item = MTIR.resolveItem(self.character, self.item)
+    self.started = true
+    self.item:setJobType(getText("IGUI_MTIR_JobType_CheckClothesSize"))
+    self.item:setJobDelta(0.0)
+    self:setActionAnim("Loot")
+    self:setAnimVariable("LootPosition", "")
+    self:setOverrideHandModels(nil, nil)
+    self.sound = self.character:getEmitter():playSound("MTIR_CheckSize")
+end
+
+function MTIR_CheckSizeAction:update()
+    self.item:setJobDelta(self:getJobDelta())
+end
+
+local function stopSound(self)
+    if self.sound and self.character:getEmitter():isPlaying(self.sound) then
+        self.character:stopOrTriggerSound(self.sound)
+    end
+end
+
+function MTIR_CheckSizeAction:stop()
+    stopSound(self)
+    self.started = false
+    self.item:setJobDelta(0.0)
+    ISBaseTimedAction.stop(self)
+end
+
+function MTIR_CheckSizeAction:perform()
+    stopSound(self)
+    self.started = false
+    self.item:setJobDelta(0.0)
+    ISBaseTimedAction.perform(self)
+end
+
+--- Chaussure : la pointure est imprimée à l'intérieur, lisible sans Couture.
+local function completeShoe(item, character)
+    local data = MTIR.ensureShoeData(item)
+    if not data then
+        return false
+    end
+    data.reveal = true
+    local diff = MTIR.getShoeDiff(item, MTIR.getPlayerShoeSize(character))
+    MTIR.syncItem(character, item)
+    MTIR.tell(character, { say = MTIR.pickShoeLabelSay(diff, data.size), refresh = true })
+    return true
+end
+
+function MTIR_CheckSizeAction:complete()
+    local item, character = self.item, self.character
+    if MTIR.canShoeHaveSize(item) then
+        return completeShoe(item, character)
+    end
+    if not MTIR.canClothesHaveSize(item) then
+        return false
+    end
+    local data = MTIR.ensureData(item)
+    if not data then
+        return false
+    end
+    if not data.size then
+        MTIR.tell(character, { say = { key = "IGUI_MTIR_Say_Unchosen_Clothes_Size" } })
+        return true
+    end
+
+    local clothesSize = MTIR.getClothesSizeFromName(data.size)
+    local diff = MTIR.getSizeDiff(clothesSize, MTIR.getPlayerSize(character))
+    local level = character:getPerkLevel(Perks.Tailoring)
+    local canRead = data.reveal or not MTIR.opt("NeedTailoringLevel")
+        or level >= MTIR.getRequiredLevelToCheck(item)
+
+    local say
+    if canRead then
+        local firstReading = not data.reveal
+        data.reveal = true
+        say = MTIR.pickLabelSay(diff, clothesSize)
+        if firstReading and level < 5 then
+            addXp(character, Perks.Tailoring, (0.5 - level * 0.1) * MTIR.opt("TailoringXpMultiplier"))
+        end
+    else
+        data.hint = true
+        say = MTIR.pickHintSay(diff)
+    end
+
+    MTIR.syncItem(character, item)
+    MTIR.tell(character, { say = say, refresh = true })
+    return true
+end
+
+function MTIR_CheckSizeAction:getDuration()
+    if self.character:isTimedActionInstant() then
+        return 1
+    end
+    if MTIR.canShoeHaveSize(self.item) then
+        return MTIR.getShoeCheckDuration()
+    end
+    return MTIR.getCheckDuration(self.item)
+end
+
+function MTIR_CheckSizeAction:new(character, item)
+    local o = ISBaseTimedAction.new(self, character)
+    o.item = item
+    o.stopOnWalk = false
+    o.stopOnRun = true
+    o.started = false
+    o.maxTime = o:getDuration()
+    return o
+end
