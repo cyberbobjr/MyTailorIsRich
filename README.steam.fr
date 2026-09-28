@@ -80,4 +80,4 @@ En mode debug, ou en MP avec un rôle autorisé à éditer les objets : clic dro
 
 [h2]Crédits[/h2]
 
-Basé sur [b]Realistic Clothes[/b] de son auteur d'origine (Workshop 3491510356). Réécrit et porté en Build 42.21 avec le multijoueur, puis enrichi des pointures de chaussures et des patrons de couture. Infobulles par [b]TooltipLib[/b].
+Basé sur [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], dont il reprend les sons. Réécrit et porté en Build 42.21 avec le multijoueur, puis enrichi des pointures de chaussures et des patrons de couture. Infobulles par [b]TooltipLib[/b].

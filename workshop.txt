@@ -85,6 +85,6 @@ description=[/list]
 description=
 description=[h2]Credits[/h2]
 description=
-description=Based on [b]Realistic Clothes[/b] by its original author (Workshop 3491510356). It was rewritten and ported to Build 42.21 with multiplayer support, then expanded with shoe sizes and sewing patterns. Tooltips by [b]TooltipLib[/b].
+description=Based on [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] by [b]Gootube[/b], including its sounds. It was rewritten and ported to Build 42.21 with multiplayer support, then expanded with shoe sizes and sewing patterns. Tooltips by [b]TooltipLib[/b].
 tags=Build 42;Clothing/Armor;Realistic;Multiplayer;Skills
 visibility=public

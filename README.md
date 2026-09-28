@@ -72,11 +72,11 @@ In debug mode, or in MP with a role allowed to edit items, right-click a garment
 
 ## Credits
 
-Based on **Realistic Clothes** by its original author (Workshop 3491510356). It was rewritten and ported to Build 42.21 with multiplayer support, then expanded with shoe sizes and sewing patterns. Tooltips by **TooltipLib**.
+Based on [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) by **Gootube** (Workshop 3491510356), including its sounds. It was rewritten and ported to Build 42.21 with multiplayer support, then expanded with shoe sizes and sewing patterns. Tooltips by **TooltipLib**.
 
 ## License
 
-The mod's code, translations and images are released under the [MIT License](LICENSE). The four sound files in `media/sound` come from Realistic Clothes (Workshop 3491510356) and remain the property of their authors: the MIT License does not cover them.
+The mod's code, translations and images are released under the [MIT License](LICENSE). The four sound files in `media/sound` come from [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) by Gootube and remain the property of their authors: the MIT License does not cover them.
 
 ---
 
@@ -150,8 +150,8 @@ En mode debug, ou en MP avec un rôle autorisé à éditer les objets : clic dro
 
 ## Crédits
 
-Basé sur **Realistic Clothes** de son auteur d'origine (Workshop 3491510356). Réécrit et porté en Build 42.21 avec le multijoueur, puis enrichi des pointures de chaussures et des patrons de couture. Infobulles par **TooltipLib**.
+Basé sur [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) de **Gootube** (Workshop 3491510356), dont il reprend les sons. Réécrit et porté en Build 42.21 avec le multijoueur, puis enrichi des pointures de chaussures et des patrons de couture. Infobulles par **TooltipLib**.
 
 ## Licence
 
-Le code, les traductions et les images du mod sont publiés sous [licence MIT](LICENSE). Les quatre sons de `media/sound` viennent de Realistic Clothes (Workshop 3491510356) et restent la propriété de leurs auteurs : la licence MIT ne les couvre pas.
+Le code, les traductions et les images du mod sont publiés sous [licence MIT](LICENSE). Les quatre sons de `media/sound` viennent de [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) de Gootube et restent la propriété de leurs auteurs : la licence MIT ne les couvre pas.
