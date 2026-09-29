@@ -90,7 +90,7 @@ English, French, German, Spanish, Portuguese (Brazil and Portugal), Russian and 
 
 ## Development
 
-`python tests/run_tests.py` checks the mod without starting the game: luacheck (`.luacheckrc`), Lua 5.1 syntax (Kahlua's language) and calls to `next()`, which Kahlua lacks, the translations (valid JSON, same keys and `%1` parameters as English, no lone `%`), the Steam descriptions (`README.steam*`: at most 8,000 characters, balanced BBCode, same links as English, `workshop.txt` in sync), and Lua tests run under [lupa](https://pypi.org/project/lupa/) with a mocked game API (`tests/lua/test_*.lua`). Requirements: `pip install lupa`, and luacheck. Tests that read the vanilla loot tables need the game: set `PZ_MEDIA` to its `media` folder; they are skipped otherwise. GitHub Actions runs the same checks on every push.
+`python tests/run_tests.py` checks the mod without starting the game: luacheck (`.luacheckrc`), Lua 5.1 syntax (Kahlua's language) and calls to `next()`, which Kahlua lacks, the translations (valid JSON, same keys and `%1` parameters as English, no lone `%`), the Steam descriptions (`README.steam*`: at most 8,000 UTF-8 bytes, balanced BBCode, same links as English, `workshop.txt` in sync), and Lua tests run under [lupa](https://pypi.org/project/lupa/) with a mocked game API (`tests/lua/test_*.lua`). Requirements: `pip install lupa`, and luacheck. Tests that read the vanilla loot tables need the game: set `PZ_MEDIA` to its `media` folder; they are skipped otherwise. GitHub Actions runs the same checks on every push.
 
 ## Credits
 
@@ -190,7 +190,7 @@ Anglais, français, allemand, espagnol, portugais (Brésil et Portugal), russe e
 
 ## Développement
 
-`python tests/run_tests.py` vérifie le mod sans lancer le jeu : luacheck (`.luacheckrc`), syntaxe Lua 5.1 (le langage de Kahlua) et appels à `next()`, absente de Kahlua, traductions (JSON valide, mêmes clés et mêmes paramètres `%1` que l'anglais, pas de `%` seul), descriptions Steam (`README.steam*` : 8 000 caractères au plus, BBCode équilibré, mêmes liens que l'anglais, `workshop.txt` synchronisé), et tests Lua exécutés sous [lupa](https://pypi.org/project/lupa/) avec l'API du jeu simulée (`tests/lua/test_*.lua`). Prérequis : `pip install lupa`, et luacheck. Les tests qui lisent les tables de butin vanilla demandent le jeu : définir `PZ_MEDIA` vers son dossier `media`, sinon ils sont ignorés. GitHub Actions lance les mêmes vérifications à chaque push.
+`python tests/run_tests.py` vérifie le mod sans lancer le jeu : luacheck (`.luacheckrc`), syntaxe Lua 5.1 (le langage de Kahlua) et appels à `next()`, absente de Kahlua, traductions (JSON valide, mêmes clés et mêmes paramètres `%1` que l'anglais, pas de `%` seul), descriptions Steam (`README.steam*` : 8 000 octets UTF-8 au plus, BBCode équilibré, mêmes liens que l'anglais, `workshop.txt` synchronisé), et tests Lua exécutés sous [lupa](https://pypi.org/project/lupa/) avec l'API du jeu simulée (`tests/lua/test_*.lua`). Prérequis : `pip install lupa`, et luacheck. Les tests qui lisent les tables de butin vanilla demandent le jeu : définir `PZ_MEDIA` vers son dossier `media`, sinon ils sont ignorés. GitHub Actions lance les mêmes vérifications à chaque push.
 
 ## Crédits
 

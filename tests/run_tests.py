@@ -5,7 +5,7 @@
 1. luacheck (configuration .luacheckrc) ;
 2. syntaxe Lua 5.1 de tous les fichiers du mod, appels à next() (absent de Kahlua) ;
 3. traductions : JSON valides, mêmes clés et mêmes paramètres que EN, pas de % seul ;
-4. descriptions Steam (README.steam*) : 8 000 caractères au plus, BBCode équilibré,
+4. descriptions Steam (README.steam*) : 8 000 octets UTF-8 au plus, BBCode équilibré,
    mêmes liens que l'anglais, description de workshop.txt identique à README.steam ;
 5. tests Lua (tests/lua/test_*.lua) sous lupa, avec l'API du jeu simulée.
 
@@ -34,8 +34,9 @@ REFERENCE_LANGUAGE = "EN"
 BARE_NEXT = re.compile(r"(?<![.:\w])next\s*\(")
 TOKEN = re.compile(r"%\d|%%|<LINE>|<RGB:[^>]*>")
 LONE_PERCENT = re.compile(r"%(?!\d)")
-# Limite de Steam pour la description d'un objet du Workshop (k_cchPublishedDocumentDescriptionMax).
-STEAM_DESCRIPTION_MAX = 8000
+# Limite de Steam pour la description d'un objet du Workshop, en octets UTF-8 (envoi
+# vérifié : 7 978 octets acceptés, 8 027 refusés avec EResult 8).
+STEAM_DESCRIPTION_MAX_BYTES = 8000
 STEAM_TAGS = ("h1", "h2", "h3", "b", "i", "u", "list", "table", "tr", "td", "url")
 STEAM_URL = re.compile(r"\[url=([^\]]+)\]")
 
@@ -160,12 +161,22 @@ def check_translations(report):
             report.ok(f"{language} : {sum(len(d) for d in reference.values())} clés conformes")
 
 
+def mod_ids():
+    """id= des mod.info (common/ et variantes), comme SteamWorkshopItem.validateModDotInfo."""
+    ids = []
+    for info in sorted((REPO / "Contents" / "mods").glob("*/*/mod.info")):
+        for line in info.read_text(encoding="utf-8", errors="replace").splitlines():
+            if line.startswith("id=") and line[3:].strip() not in ids:
+                ids.append(line[3:].strip())
+    return ids
+
+
 def upload_suffix_length(workshop):
-    """Texte ajouté par le jeu à la description envoyée (SteamWorkshopItem.getSubmitDescription) :
-    « \\n\\nWorkshop ID: <id> » puis « \\nMod ID: <id> » par mod (dossiers de Contents/mods)."""
+    """Octets ajoutés par le jeu à la description envoyée (SteamWorkshopItem.getSubmitDescription) :
+    « \\n\\nWorkshop ID: <id> » puis « \\nMod ID: <id> » par mod."""
     workshop_id = next((line.split("=", 1)[1] for line in workshop if line.startswith("id=")), "")
-    mods = [p.name for p in (REPO / "Contents" / "mods").iterdir() if p.is_dir()]
-    return len("\n\nWorkshop ID: " + workshop_id) + sum(len("\nMod ID: " + mod) for mod in mods)
+    suffix = "\n\nWorkshop ID: " + workshop_id + "".join("\nMod ID: " + mod for mod in mod_ids())
+    return len(suffix.encode("utf-8"))
 
 
 def check_steam_descriptions(report):
@@ -179,9 +190,10 @@ def check_steam_descriptions(report):
         before = report.failures
         # Seule la description anglaise passe par l'envoi du jeu ; les autres langues
         # se saisissent sur la page Steam, sans suffixe.
-        limit = STEAM_DESCRIPTION_MAX - (upload_suffix_length(workshop) if path == reference_path else 0)
-        if len(text) > limit:
-            report.fail(f"{path.name} : {len(text)} caractères (Steam : {limit} au plus)")
+        size = len(text.encode("utf-8"))
+        limit = STEAM_DESCRIPTION_MAX_BYTES - (upload_suffix_length(workshop) if path == reference_path else 0)
+        if size > limit:
+            report.fail(f"{path.name} : {size} octets UTF-8 (Steam : {limit} au plus)")
         for tag in STEAM_TAGS:
             opened = len(re.findall(r"\[" + tag + r"(?:=[^\]]*)?\]", text))
             closed = text.count(f"[/{tag}]")
@@ -190,7 +202,7 @@ def check_steam_descriptions(report):
         if Counter(STEAM_URL.findall(text)) != reference_urls:
             report.fail(f"{path.name} : liens différents de README.steam")
         if report.failures == before:
-            report.ok(f"{path.name} : {len(text)} caractères")
+            report.ok(f"{path.name} : {size} octets")
     description = [line[len("description="):] for line in workshop if line.startswith("description=")]
     if description != reference.splitlines():
         report.fail("workshop.txt : description différente de README.steam")
