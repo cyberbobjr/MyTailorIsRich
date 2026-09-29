@@ -11,15 +11,24 @@ MTIR_ChooseSizeAction = ISBaseTimedAction:derive("MTIR_ChooseSizeAction")
 
 local CHOOSE_DURATION = 20
 
+--- Validation partagée par isValid et complete (le serveur n'appelle pas isValid) :
+--- données de taille à compléter, ou nil.
+local function validate(self)
+    if not MTIR.SIZES[self.size] or not MTIR.hasItem(self.character, self.item) then
+        return nil
+    end
+    local data = MTIR.getData(self.item)
+    if not data or data.size ~= nil then
+        return nil
+    end
+    return data
+end
+
 function MTIR_ChooseSizeAction:isValid()
     if isClient() and self.started then
         return true
     end
-    if not MTIR.SIZES[self.size] or not MTIR.hasItem(self.character, self.item) then
-        return false
-    end
-    local data = MTIR.getData(self.item)
-    return data ~= nil and data.size == nil
+    return validate(self) ~= nil
 end
 
 function MTIR_ChooseSizeAction:start()
@@ -46,8 +55,8 @@ function MTIR_ChooseSizeAction:perform()
 end
 
 function MTIR_ChooseSizeAction:complete()
-    local data = MTIR.getData(self.item)
-    if not data or data.size ~= nil or not MTIR.SIZES[self.size] then
+    local data = validate(self)
+    if not data then
         return false
     end
     data.size = self.size

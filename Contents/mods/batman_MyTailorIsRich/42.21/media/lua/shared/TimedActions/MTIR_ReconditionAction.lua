@@ -3,20 +3,21 @@
 --   MTIR_ReconditionAction      : fil + bandes du même tissu
 --   MTIR_ReconditionSpareAction : fil + un exemplaire de rechange sacrifié
 -- complete() tire le résultat et consomme côté serveur en MP.
+--
+-- Paramètres réseau : champs nommés comme les paramètres de new() ; `threads`
+-- et `strips` sont des ArrayList ; `machinePos` vaut "x,y,z" sur une machine à
+-- coudre, "" à la main. Le fil nécessaire est recalculé par l'autorité (bonus
+-- de la machine compris), jamais reçu du client.
+-- Le serveur n'appelle jamais isValid (NetTimedAction.isValid) : complete()
+-- refait toute la validation (possession, doublons, types, outils en main).
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
-require "MyTailorIsRich/MTIR_Effects"
+require "MyTailorIsRich/MTIR_Alterations"
 
 -- ----------------------------------------------------------------------------
 -- Tronc commun
 -- ----------------------------------------------------------------------------
-
-local function stopSound(self)
-    if self.sound and self.character:getEmitter():isPlaying(self.sound) then
-        self.character:stopOrTriggerSound(self.sound)
-    end
-end
 
 local function startCommon(self)
     self.item = MTIR.resolveItem(self.character, self.item)
@@ -24,21 +25,24 @@ local function startCommon(self)
     self.item:setJobType(getText("IGUI_MTIR_JobType_ReconditionClothes"))
     self.item:setJobDelta(0.0)
     self:setActionAnim("SewingCloth")
+    -- À la main : aucun son (comportement d'origine) ; sur machine : son de la machine.
+    MTIR.MachineWork.start(self, nil)
 end
 
 local function updateCommon(self)
     self.item:setJobDelta(self:getJobDelta())
+    MTIR.MachineWork.update(self)
 end
 
 local function stopCommon(self)
-    stopSound(self)
+    MTIR.MachineWork.stopSound(self)
     self.started = false
     self.item:setJobDelta(0.0)
     ISBaseTimedAction.stop(self)
 end
 
 local function performCommon(self)
-    stopSound(self)
+    MTIR.MachineWork.stopSound(self)
     self.started = false
     self.item:setJobDelta(0.0)
     ISBaseTimedAction.perform(self)
@@ -48,7 +52,40 @@ local function durationCommon(self)
     if self.character:isTimedActionInstant() then
         return 1
     end
-    return MTIR.getReconditionDuration(self.item)
+    return MTIR.getReconditionDurationWith(self.item, MTIR.MachineWork.durationMods(self))
+end
+
+local function waitCommon(self)
+    return MTIR.MachineWork.waitToStart(self)
+end
+
+--- Vérifications communes (autorité et client avant le début) : bonus ou nil.
+local function commonMods(self)
+    local item, character = self.item, self.character
+    if not MTIR.canReconditionClothes(item) or item:getCondition() >= item:getConditionMax() then
+        return nil
+    end
+    if not self.needle or not self.scissors
+        or not MTIR.predicateNeedle(self.needle) or not MTIR.predicateScissors(self.scissors) then
+        return nil
+    end
+    local mods = MTIR.resolveWorkMods(character, self.machinePos, nil)
+    if not mods or not MTIR.hasThimbleFor(character, mods) then
+        return nil
+    end
+    if MTIR.getRemainingThread(self.threads) < MTIR.getReconditionThreadUses(item, mods) then
+        return nil
+    end
+    return mods
+end
+
+--- Possession commune : vêtement, aiguille et ciseaux, fil sans doublon.
+local function ownsCommon(self)
+    local character = self.character
+    return MTIR.hasItem(character, self.item)
+        and MTIR.hasItem(character, self.needle)
+        and MTIR.hasItem(character, self.scissors)
+        and MTIR.hasThreads(character, self.threads)
 end
 
 --- Réussite commune : gain d'état, compteur de réparations, XP Couture et Entretien.
@@ -69,24 +106,57 @@ local function applyReconditionFailure(item, character)
     addXp(character, Perks.Tailoring, MTIR.getTailoringXpForRecondition(item, false))
 end
 
+--- Fin commune, une fois l'issue décidée : usure de la machine, fil,
+--- statistiques, synchronisation et retour au client.
+local function finishCommon(self, mods, broke, threadUses, fx)
+    MTIR.MachineWork.applyWear(self, mods, broke)
+    MTIR.consumeThreads(self.threads, threadUses)
+    MTIR.updateOneClothes(self.item, self.character)
+    MTIR.syncItem(self.character, self.item)
+    MTIR.tell(self.character, fx)
+end
+
+local function failureFx(broke)
+    return { refresh = true, sound = "MTIR_ResizeFailed", say = broke and { key = "IGUI_MTIR_Say_NeedleBroke" } or nil }
+end
+
 -- ----------------------------------------------------------------------------
 -- Avec des bandes de tissu
 -- ----------------------------------------------------------------------------
 
 MTIR_ReconditionAction = ISBaseTimedAction:derive("MTIR_ReconditionAction")
 
+--- Bandes du tissu du vêtement, en nombre suffisant.
+local function stripsOk(self)
+    local stripType = MTIR.getStripType(MTIR.getClothesFabricType(self.item))
+    local strips = self.strips
+    if not stripType or not strips or strips:size() < MTIR.getRequiredStripToRecondition(self.item) then
+        return false
+    end
+    for i = 0, strips:size() - 1 do
+        if strips:get(i):getFullType() ~= stripType then
+            return false
+        end
+    end
+    return true
+end
+
+--- Validation partagée par isValid et complete : bonus de travail, ou nil.
+local function validateStrips(self)
+    if not ownsCommon(self) or not MTIR.hasAllItems(self.character, self.strips) or not stripsOk(self) then
+        return nil
+    end
+    return commonMods(self)
+end
+
 function MTIR_ReconditionAction:isValid()
     if isClient() and self.started then
         return true
     end
-    local character = self.character
-    return MTIR.hasItem(character, self.item)
-        and MTIR.hasItem(character, self.needle)
-        and MTIR.hasItem(character, self.scissors)
-        and MTIR.hasAllItems(character, self.threads)
-        and MTIR.hasAllItems(character, self.strips)
+    return validateStrips(self) ~= nil
 end
 
+MTIR_ReconditionAction.waitToStart = waitCommon
 MTIR_ReconditionAction.start = startCommon
 MTIR_ReconditionAction.update = updateCommon
 MTIR_ReconditionAction.stop = stopCommon
@@ -94,40 +164,42 @@ MTIR_ReconditionAction.perform = performCommon
 MTIR_ReconditionAction.getDuration = durationCommon
 
 function MTIR_ReconditionAction:complete()
-    local item, character = self.item, self.character
-    if not MTIR.canReconditionClothes(item) then
+    local mods = validateStrips(self)
+    if not mods then
         return false
     end
-    local threadUses = self.threadUses
-    local stripUses = self.strips:size()
+    local item, character = self.item, self.character
+    local threadUses = MTIR.getReconditionThreadUses(item, mods)
+    local stripUses = MTIR.getRequiredStripToRecondition(item)
     local fx = { refresh = true }
+    local broke = MTIR.MachineWork.rollBreak(mods)
+    local chance = MTIR.applySuccessMalus(MTIR.getSuccessChanceForRecondition(item, character, mods.levelBonus), mods)
 
-    if ZombRandFloat(0, 1) < MTIR.getSuccessChanceForRecondition(item, character) then
-        applyReconditionSuccess(item, character, MTIR.getPotentialRepairForRecondition(item, character))
+    if not broke and ZombRandFloat(0, 1) < chance then
+        applyReconditionSuccess(item, character, MTIR.getPotentialRepairForRecondition(item, character, mods.levelBonus))
     else
         applyReconditionFailure(item, character)
         threadUses = math.ceil(threadUses / 2)
         stripUses = math.ceil(stripUses / 2)
-        fx.sound = "MTIR_ResizeFailed"
+        fx = failureFx(broke)
     end
 
-    MTIR.consumeThreads(self.threads, threadUses)
     MTIR.consumeItems(self.strips, stripUses)
-    MTIR.updateOneClothes(item, character)
-    MTIR.syncItem(character, item)
-    MTIR.tell(character, fx)
+    finishCommon(self, mods, broke, threadUses, fx)
     return true
 end
 
-function MTIR_ReconditionAction:new(character, item, needle, scissors, threads, strips, threadUses)
+--- machinePos : "x,y,z" d'une machine à coudre (MTIR.encodeMachinePos), ou nil/"" à la main.
+function MTIR_ReconditionAction:new(character, item, needle, scissors, threads, strips, machinePos)
     local o = ISBaseTimedAction.new(self, character)
     o.item = item
     o.needle = needle
     o.scissors = scissors
     o.threads = threads
     o.strips = strips
-    o.threadUses = threadUses
-    o.stopOnWalk = false
+    o.machinePos = type(machinePos) == "string" and machinePos or ""
+    -- Sur une machine, s'éloigner interrompt le travail ; à la main, on coud en marchant.
+    o.stopOnWalk = o.machinePos ~= ""
     o.stopOnRun = true
     o.started = false
     o.maxTime = o:getDuration()
@@ -140,18 +212,28 @@ end
 
 MTIR_ReconditionSpareAction = ISBaseTimedAction:derive("MTIR_ReconditionSpareAction")
 
+--- Validation partagée par isValid et complete : exemplaire possédé, du même
+--- type (MTIR.isValidSpare) et niveau effectif suffisant ; bonus ou nil.
+local function validateSpare(self)
+    if not ownsCommon(self) or not MTIR.hasItem(self.character, self.spareItem)
+        or not MTIR.isValidSpare(self.item, self.spareItem) then
+        return nil
+    end
+    local mods = commonMods(self)
+    if not mods or MTIR.getEffectiveTailoring(self.character, mods) < MTIR.getRequiredLevelToRecondition(self.item) then
+        return nil
+    end
+    return mods
+end
+
 function MTIR_ReconditionSpareAction:isValid()
     if isClient() and self.started then
         return true
     end
-    local character = self.character
-    return MTIR.hasItem(character, self.item)
-        and MTIR.hasItem(character, self.needle)
-        and MTIR.hasItem(character, self.scissors)
-        and MTIR.hasItem(character, self.spareItem)
-        and MTIR.hasAllItems(character, self.threads)
+    return validateSpare(self) ~= nil
 end
 
+MTIR_ReconditionSpareAction.waitToStart = waitCommon
 MTIR_ReconditionSpareAction.start = startCommon
 MTIR_ReconditionSpareAction.update = updateCommon
 MTIR_ReconditionSpareAction.stop = stopCommon
@@ -172,15 +254,19 @@ local function wearDownSpare(spareItem)
 end
 
 function MTIR_ReconditionSpareAction:complete()
-    local item, character, spareItem = self.item, self.character, self.spareItem
-    if not MTIR.canReconditionClothes(item) then
+    local mods = validateSpare(self)
+    if not mods then
         return false
     end
-    local threadUses = self.threadUses
+    local item, character, spareItem = self.item, self.character, self.spareItem
+    local threadUses = MTIR.getReconditionThreadUses(item, mods)
     local fx = { refresh = true }
+    local broke = MTIR.MachineWork.rollBreak(mods)
+    local chance = MTIR.applySuccessMalus(MTIR.getSuccessChanceUsingSpare(item, character, spareItem, mods.levelBonus), mods)
 
-    if ZombRandFloat(0, 1) < MTIR.getSuccessChanceUsingSpare(item, character, spareItem) then
-        applyReconditionSuccess(item, character, MTIR.getPotentialRepairUsingSpare(item, character, spareItem))
+    if not broke and ZombRandFloat(0, 1) < chance then
+        applyReconditionSuccess(item, character,
+            MTIR.getPotentialRepairUsingSpare(item, character, spareItem, mods.levelBonus))
         MTIR.removeItem(spareItem)
     else
         applyReconditionFailure(item, character)
@@ -188,25 +274,24 @@ function MTIR_ReconditionSpareAction:complete()
         if not wearDownSpare(spareItem) then
             MTIR.syncItem(character, spareItem)
         end
-        fx.sound = "MTIR_ResizeFailed"
+        fx = failureFx(broke)
     end
 
-    MTIR.consumeThreads(self.threads, threadUses)
-    MTIR.updateOneClothes(item, character)
-    MTIR.syncItem(character, item)
-    MTIR.tell(character, fx)
+    finishCommon(self, mods, broke, threadUses, fx)
     return true
 end
 
-function MTIR_ReconditionSpareAction:new(character, item, needle, scissors, threads, spareItem, threadUses)
+--- machinePos : "x,y,z" d'une machine à coudre (MTIR.encodeMachinePos), ou nil/"" à la main.
+function MTIR_ReconditionSpareAction:new(character, item, needle, scissors, threads, spareItem, machinePos)
     local o = ISBaseTimedAction.new(self, character)
     o.item = item
     o.needle = needle
     o.scissors = scissors
     o.threads = threads
     o.spareItem = spareItem
-    o.threadUses = threadUses
-    o.stopOnWalk = false
+    o.machinePos = type(machinePos) == "string" and machinePos or ""
+    -- Sur une machine, s'éloigner interrompt le travail ; à la main, on coud en marchant.
+    o.stopOnWalk = o.machinePos ~= ""
     o.stopOnRun = true
     o.started = false
     o.maxTime = o:getDuration()

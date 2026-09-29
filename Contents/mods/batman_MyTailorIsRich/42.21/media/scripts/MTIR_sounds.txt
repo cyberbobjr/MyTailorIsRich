@@ -42,4 +42,32 @@ module Base {
             volume = 0.25
         }
     }
+
+    /* Machine à coudre électrique : Brother XL-2610, vitesse lente, Joseph Sardin,
+       BigSoundBank n° 1115, CC0. Boucle de 6 s (fondu enchaîné à la jonction). */
+    sound MTIR_SewingMachineElectric
+    {
+        category = Object,
+        loop = true,
+        clip
+        {
+            file = media/sound/mtir_machine_electric.ogg,
+            distanceMax = 20,
+            volume = 0.6,
+        }
+    }
+
+    /* Machine à coudre à pédale : Singer d'avant-guerre (ganterie), Work With Sounds /
+       Museum of Municipal Engineering, CC BY 4.0, via Wikimedia Commons. Boucle de 6 s. */
+    sound MTIR_SewingMachineTreadle
+    {
+        category = Object,
+        loop = true,
+        clip
+        {
+            file = media/sound/mtir_machine_treadle.ogg,
+            distanceMax = 12,
+            volume = 0.6,
+        }
+    }
 }

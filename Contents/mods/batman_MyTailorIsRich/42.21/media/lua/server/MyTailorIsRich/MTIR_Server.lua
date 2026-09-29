@@ -13,6 +13,7 @@
 require "MyTailorIsRich/MTIR_Effects"
 require "MyTailorIsRich/MTIR_ShoeEffects"
 require "MyTailorIsRich/MTIR_VanillaHooks"
+require "MyTailorIsRich/MTIR_MachineSound"
 
 if isClient() then
     return
@@ -22,6 +23,8 @@ local STIFFNESS_TICKS = 30
 local DISCOMFORT_SYNC_TICKS = 300
 local CLIMB_COOLDOWN_MS = 500
 local FALL_COOLDOWN_MS = 1500
+--- Au plus un relais de son de machine par joueur et par intervalle.
+local MACHINE_SOUND_COOLDOWN_MS = 500
 
 local function forEachAuthorityPlayer(callback)
     if isServer() then
@@ -170,6 +173,41 @@ function Commands.fall(player)
     end
     lastFall[key] = now
     MTIR.rollShoeLossEvent(player, "fall")
+end
+
+--- Son de la machine (MTIR_MachineSound) : relayé aux autres joueurs proches.
+--- Marche : son connu, machine présente et à portée du joueur. Arrêt : toujours
+--- relayé (la machine a pu être ramassée entre-temps).
+local lastMachineSound = {}
+
+function Commands.machineSound(player, args)
+    local x, y, z = args.x, args.y, args.z
+    if type(x) ~= "number" or type(y) ~= "number" or type(z) ~= "number" then
+        return
+    end
+    local relay = { x = x, y = y, z = z, on = args.on == true }
+    if relay.on then
+        local key = MTIR.playerKey(player)
+        local now = getTimestampMs()
+        if lastMachineSound[key] and now - lastMachineSound[key] < MACHINE_SOUND_COOLDOWN_MS then
+            return
+        end
+        local machine = MTIR.findSewingMachine(getCell():getGridSquare(x, y, z))
+        if not machine or MTIR.getMachineSound(machine) ~= args.sound
+            or not MTIR.isWithinReach(player, machine) then
+            return
+        end
+        lastMachineSound[key] = now
+        relay.sound = args.sound
+    end
+    local players = getOnlinePlayers()
+    local range = MTIR.MachineSound.RELAY_RANGE
+    for i = 0, (players and players:size() or 0) - 1 do
+        local other = players:get(i)
+        if other ~= player and math.abs(other:getX() - x) <= range and math.abs(other:getY() - y) <= range then
+            sendServerCommand(other, MTIR.NET_MODULE, "machineSound", relay)
+        end
+    end
 end
 
 local function onClientCommand(module, command, player, args)

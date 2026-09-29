@@ -52,7 +52,12 @@ local DEFAULTS = {
     ExtraSizedLocations = "",
     ListExcludedClothes = "",
     PatternMaxUses = 5,
-    ShoePatternLevel = 6,
+    ShoePatternLevel = 8,
+    RequireThimble = true,
+    MachineBonusMultiplier = 1.0,
+    MachineNoiseMultiplier = 1.0,
+    EnableMachineMaintenance = true,
+    SewingLootMultiplier = 1.0,
 }
 
 --- Lecture directe des options sandbox : suit les changements faits par un admin.
@@ -564,9 +569,10 @@ function MTIR.getMaintenanceXpForRecondition(conditionGain, repairedTimes)
     return conditionGain * 0.5 / (repairedTimes + 1)
 end
 
-function MTIR.getPotentialRepairForRecondition(item, player)
+--- levelBonus (facultatif) : niveaux de Couture ajoutés par une machine à coudre.
+function MTIR.getPotentialRepairForRecondition(item, player, levelBonus)
     local maintenance = player:getPerkLevel(Perks.Maintenance)
-    local tailoring = player:getPerkLevel(Perks.Tailoring)
+    local tailoring = player:getPerkLevel(Perks.Tailoring) + (levelBonus or 0)
     local repairedTimes = MTIR.getRepairedTimes(item)
     local delta = tailoring - (MTIR.getDegradeDifficulty(item) or 1) + 1
     local potential = delta >= 0 and ((3 * delta) / (2 + delta) * 0.25) or 0
@@ -574,9 +580,9 @@ function MTIR.getPotentialRepairForRecondition(item, player)
     return potential / (1 + repairedTimes)
 end
 
-function MTIR.getSuccessChanceForRecondition(item, player)
+function MTIR.getSuccessChanceForRecondition(item, player, levelBonus)
     local maintenance = player:getPerkLevel(Perks.Maintenance)
-    local tailoring = player:getPerkLevel(Perks.Tailoring)
+    local tailoring = player:getPerkLevel(Perks.Tailoring) + (levelBonus or 0)
     local repairedTimes = MTIR.getRepairedTimes(item)
     local delta = tailoring - (MTIR.getDegradeDifficulty(item) or 1) + 1
     local chance = delta >= 0 and ((5 * delta) / (1.5 + delta) * 0.25) or (delta * 0.25)
@@ -590,13 +596,13 @@ local function spareBonus(item, spareItem, damping)
     return 0.05 * spareItem:getCondition() / (1 + 0.5 * spareRepaired) / (1 + damping * MTIR.getRepairedTimes(item))
 end
 
-function MTIR.getPotentialRepairUsingSpare(item, player, spareItem)
-    local potential = MTIR.getPotentialRepairForRecondition(item, player) + spareBonus(item, spareItem, 0.25)
+function MTIR.getPotentialRepairUsingSpare(item, player, spareItem, levelBonus)
+    local potential = MTIR.getPotentialRepairForRecondition(item, player, levelBonus) + spareBonus(item, spareItem, 0.25)
     return math.max(0, math.min(1, potential))
 end
 
-function MTIR.getSuccessChanceUsingSpare(item, player, spareItem)
-    local chance = MTIR.getSuccessChanceForRecondition(item, player) + spareBonus(item, spareItem, 0.1)
+function MTIR.getSuccessChanceUsingSpare(item, player, spareItem, levelBonus)
+    local chance = MTIR.getSuccessChanceForRecondition(item, player, levelBonus) + spareBonus(item, spareItem, 0.1)
     return math.max(0, math.min(1, chance))
 end
 
@@ -613,6 +619,13 @@ end
 function MTIR.predicateScissors(item)
     if item:isBroken() then return false end
     return item:hasTag(ItemTag.SCISSORS) or item:getType() == "Scissors"
+end
+
+--- Bobine de fil : objet à utilisations de type Thread ou tag base:thread
+--- (contrôle de l'autorité : un aliment ou une huile a aussi des utilisations).
+function MTIR.predicateThread(item)
+    if not instanceof(item, "DrainableComboItem") then return false end
+    return item:getType() == "Thread" or item:hasTag(ItemTag.THREAD)
 end
 
 function MTIR.getRemainingThread(threads)

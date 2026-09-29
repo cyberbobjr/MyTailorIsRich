@@ -11,11 +11,16 @@ require "MyTailorIsRich/MTIR_Effects"
 
 MTIR_DebugSizeAction = ISBaseTimedAction:derive("MTIR_DebugSizeAction")
 
+--- Validation partagée par isValid et complete (le serveur n'appelle pas isValid).
+local function validate(self)
+    return MTIR.canUseDebug(self.character) and MTIR.hasItem(self.character, self.item)
+end
+
 function MTIR_DebugSizeAction:isValid()
     if isClient() and self.started then
         return true
     end
-    return MTIR.canUseDebug(self.character) and MTIR.hasItem(self.character, self.item)
+    return validate(self)
 end
 
 function MTIR_DebugSizeAction:start()
@@ -50,7 +55,7 @@ end
 
 function MTIR_DebugSizeAction:complete()
     local item, character = self.item, self.character
-    if not MTIR.canUseDebug(character) or not applyDebugSize(item, self.mode, self.size) then
+    if not validate(self) or not applyDebugSize(item, self.mode, self.size) then
         return false
     end
     MTIR.updateOneClothes(item, character)

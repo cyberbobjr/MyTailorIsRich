@@ -10,4 +10,39 @@ module Base
         StaticModel = SewingPattern,
         WorldStaticModel = SewingPattern,
     }
+
+    /* Machine à coudre électrique posable (tuile mtir_sewing_01_0..3, IsTableTop).
+       À la création, Moveable.ReadFromWorldSprite lit le poids (PickUpWeight/10),
+       le nom (Moveables.json) et l'icône depuis la tuile, comme Mov_Microwave. */
+    item Mov_MTIR_SewingMachine
+    {
+        DisplayCategory = Furniture,
+        ItemType = base:moveable,
+        Icon = default,
+        Weight = 0.5,
+        WorldObjectSprite = mtir_sewing_01_0,
+    }
+
+    /* Machine à coudre à pédale posable (tuile mtir_treadle_01_0..3, meuble au sol). */
+    item Mov_MTIR_TreadleMachine
+    {
+        DisplayCategory = Furniture,
+        ItemType = base:moveable,
+        Icon = default,
+        Weight = 0.5,
+        WorldObjectSprite = mtir_treadle_01_0,
+    }
+
+    /* Patron du commerce : OnCreate (MTIR_PrintedPatterns.lua) tire un vêtement
+       et pose la ModData "MTIR_Pattern", comme un patron tracé. */
+    item MTIR_PrintedPattern
+    {
+        DisplayCategory = RecipeResource,
+        ItemType = base:normal,
+        Weight = 0.2,
+        Icon = Magazine_Sewing1,
+        StaticModel = SewingPattern,
+        WorldStaticModel = SewingPattern,
+        OnCreate = MTIR.onCreatePrintedPattern,
+    }
 }

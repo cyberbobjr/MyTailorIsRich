@@ -1,15 +1,19 @@
 -- ============================================================================
 -- My Tailor Is Rich — tracer un patron d'après un vêtement ou des chaussures
--- Ciseaux en main principale, crayon ou stylo dans l'autre ; les feuilles sont
--- consommées, le modèle est conservé intact. complete() crée le patron sur
--- l'autorité (serveur en MP).
+-- Sur une table de travail (MTIR_WorkTable), ciseaux en main principale, crayon
+-- ou stylo dans l'autre. Le modèle est décousu et découpé pour reporter ses
+-- pièces sur les feuilles : il est détruit, comme les feuilles. complete() crée
+-- le patron sur l'autorité (serveur en MP).
 --
 -- Paramètres réseau : champs nommés comme les paramètres de new() ; `papers`
--- est une ArrayList (une table Lua arriverait vide).
+-- est une ArrayList (une table Lua arriverait vide) ; `tablePos` est "x,y,z".
+-- Le serveur n'appelle jamais isValid (NetTimedAction.isValid) : complete()
+-- refait toute la validation (possession, doublons, types, outils en main).
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
 require "MyTailorIsRich/MTIR_Patterns"
+require "MyTailorIsRich/MTIR_WorkTable"
 
 MTIR_TracePatternAction = ISBaseTimedAction:derive("MTIR_TracePatternAction")
 
@@ -18,7 +22,7 @@ local function canTrace(character, item, papers)
     if not model or not MTIR.canTraceCondition(item) or character:isEquippedClothing(item) then
         return nil
     end
-    if not papers or papers:size() < MTIR.getRequiredPaper(model) then
+    if papers:size() < MTIR.getRequiredPaper(model) then
         return nil
     end
     if character:getPerkLevel(Perks.Tailoring) < MTIR.getRequiredLevelToTrace(model) then
@@ -27,16 +31,35 @@ local function canTrace(character, item, papers)
     return model
 end
 
+--- Validation partagée par isValid et complete : modèle décrit, ou nil.
+--- Feuilles sans doublon et du bon type, ciseaux et crayon en main, table à portée.
+local function validate(self)
+    local character = self.character
+    local workTable = MTIR.workTableFromPos(self.tablePos)
+    if not workTable or not MTIR.isWithinReach(character, workTable)
+        or not MTIR.hasItem(character, self.item)
+        or not MTIR.hasAllItemsOf(character, self.papers, MTIR.predicatePaper)
+        or not MTIR.holdsTools(character, self.scissors, self.pen)
+        or not MTIR.predicateScissors(self.scissors) or not MTIR.predicatePen(self.pen) then
+        return nil
+    end
+    return canTrace(character, self.item, self.papers)
+end
+
 function MTIR_TracePatternAction:isValid()
     if isClient() and self.started then
         return true
     end
-    local character = self.character
-    return MTIR.hasItem(character, self.item)
-        and MTIR.hasAllItems(character, self.papers)
-        and MTIR.sameItem(character:getPrimaryHandItem(), self.scissors)
-        and MTIR.sameItem(character:getSecondaryHandItem(), self.pen)
-        and canTrace(character, self.item, self.papers) ~= nil
+    return validate(self) ~= nil
+end
+
+function MTIR_TracePatternAction:waitToStart()
+    local workTable = MTIR.workTableFromPos(self.tablePos)
+    if not workTable then
+        return false
+    end
+    self.character:faceThisObject(workTable)
+    return self.character:shouldBeTurning()
 end
 
 function MTIR_TracePatternAction:start()
@@ -46,7 +69,8 @@ function MTIR_TracePatternAction:start()
     self.started = true
     self.item:setJobType(getText("IGUI_MTIR_JobType_TracePattern"))
     self.item:setJobDelta(0.0)
-    self:setActionAnim(CharacterActionAnims.Craft)
+    -- Mains au travail sur une surface (animation vanilla B42 des établis).
+    self:setActionAnim("Making_Surface")
     self:setOverrideHandModels(self.scissors, self.pen)
     self.character:getEmitter():playSound("MapAddNote")
 end
@@ -69,7 +93,7 @@ end
 
 function MTIR_TracePatternAction:complete()
     local character, item = self.character, self.item
-    local model = canTrace(character, item, self.papers)
+    local model = validate(self)
     if not model then
         return false
     end
@@ -77,6 +101,8 @@ function MTIR_TracePatternAction:complete()
         return false
     end
     MTIR.consumeItems(self.papers, MTIR.getRequiredPaper(model))
+    -- Le modèle a été découpé pour reporter ses pièces : il ne reste rien.
+    MTIR.removeItem(item)
     addXp(character, Perks.Tailoring, MTIR.getTraceXp(model))
     MTIR.tell(character, { refresh = true, halo = { itemType = MTIR.PATTERN_ITEM, good = true } })
     return true
@@ -90,8 +116,9 @@ function MTIR_TracePatternAction:getDuration()
     return model and MTIR.getTraceDuration(model) or 1
 end
 
-function MTIR_TracePatternAction:new(character, item, scissors, pen, papers)
+function MTIR_TracePatternAction:new(character, item, scissors, pen, papers, tablePos)
     local o = ISBaseTimedAction.new(self, character)
+    o.tablePos = tablePos
     o.item = item
     o.scissors = scissors
     o.pen = pen

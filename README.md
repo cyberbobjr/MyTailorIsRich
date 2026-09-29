@@ -45,13 +45,27 @@ A blister is a small foot scratch without zombie infection. Like any foot injury
 
 ## Sewing patterns
 
-- Right-click a sized garment or pair of shoes: **Trace a pattern**. You need scissors, a pen or pencil and sheets of paper (more for complex clothes). The model must be in good condition (50% or more) and is kept intact.
+- Right-click a sized garment or pair of shoes: **Trace a pattern**. You need scissors, a pen or pencil and sheets of paper (more for complex clothes). Work at a table, desk, counter or workbench nearby: your character walks to it. The model must be in good condition (50% or more) and **is destroyed**: it is unpicked and cut up to transfer its pieces onto the paper.
+- **Store-bought patterns** turn up in sewing shops, tailoring bookshelves and fashion bookstores. Each one is drawn at random among all the clothes and shoes that could be traced, **including those added by other mods**, with a good precision.
 - Right-click the pattern: **Sew from pattern**, then pick any size (XS–XXL, or EU 35–47 for shoes). The new item comes out with its size known.
+- Sewing **by hand** (patterns, resizing, reconditioning) needs a **thimble** in your inventory (sandbox option). Machines don't need one.
 - Materials follow the fabric of the model: cotton (ripped sheets, cotton fabric roll), denim (denim strips, denim rolls) or leather (leather strips, tanned leather). Bigger sizes use more fabric. Leather work also accepts an awl and a sharp knife.
 - **Precision**: the result can come out one size off (bigger or smaller). The risk goes from 50% down to 0% with the Tailoring level of the tracer plus that of the sewer.
 - A pattern survives **5 sewings** (success or failure), then falls apart.
-- Required Tailoring: garment difficulty + fabric (cotton 0, denim 1, leather 2); tracing needs one level less. **Shoes need level 6** (sandbox option).
+- Required Tailoring: garment difficulty + fabric (cotton 0, denim 1, leather 2); tracing needs one level less. **Shoes need level 8** (sandbox option), a needle **and an awl**, thread, **glue**, and leather or fabric depending on the model (trainers and slippers in cotton, the rest in leather); they are always sewn by hand. Rubber or plastic shoes (wellies, flip-flops) have no pattern.
 - No pattern for ballistic protection or items without a sewable fabric.
+
+## Sewing machines
+
+- Two placeable machines: an **electric sewing machine** that sits on any table, and a heavy **treadle sewing machine** in its cast-iron cabinet that stands on its own. Both are found in sewing workshops and fabric shops, clothing and department stores, the bedding aisle of supermarkets, people's storage (garages, detached or attached, storage units, attics, sheds, storage rooms, closets) and, more rarely, wherever a sewing kit can turn up; the treadle one also among antiques. Pick them up and place them like any furniture.
+- Click a machine (or right-click it) to open its panel, with three tabs:
+  - **Pattern**: drag a clothing pattern into the slot (or click the slot to choose one), pick the size and the **quantity** to sew in a row. The panel shows the garment that will come out and the exact list of items used, and remembers the last pattern you used.
+  - **Resize**: let out or take in a garment.
+  - **Recondition**: repair a worn garment with fabric strips or a spare one.
+- The button shows the progress ("Sewing 2/5… 45%"). Your character walks to the machine and works facing it.
+- **Electric**: needs **power** (the grid indoors, or a generator); twice as fast, +2 Tailoring levels, more precise size, 30% less thread. **Treadle**: no power needed; 25% faster, +1 level, 15% less thread.
+- **Noise**: a running machine can be heard by zombies (the electric one much further than the treadle one).
+- **Maintenance**: machines wear out with use; below 50% they are less reliable, sometimes **break the needle** you hold, and **jam** at 0%. Their **condition** is shown in the panel (bar and percentage). **Service** them with a screwdriver and a little cooking oil (vegetable or olive); the repair skill is Electrical for the electric machine, Mechanics for the treadle one. The machine keeps its wear when moved.
 
 ## Multiplayer
 
@@ -59,7 +73,7 @@ The server decides everything: sizes, resizing, wear, blisters, stiffness and lo
 
 ## Sandbox options
 
-Tailoring level requirement, tailoring XP, action time, rip / drop / trip / stiffness multipliers, insulation and combat penalties, clothes degrading (on/off, min/max days, failure chance, protection and resistance loss), custom clothes list, **extra sized body locations**, **excluded clothes**, **shoe sizes on/off**, **shoe fit effects intensity** (0 disables blisters, discomfort, extra endurance and lost shoes), **sewings per pattern**, **Tailoring level for shoe patterns**.
+Tailoring level requirement, tailoring XP, action time, rip / drop / trip / stiffness multipliers, insulation and combat penalties, clothes degrading (on/off, min/max days, failure chance, protection and resistance loss), custom clothes list, **extra sized body locations**, **excluded clothes**, **shoe sizes on/off**, **shoe fit effects intensity** (0 disables blisters, discomfort, extra endurance and lost shoes), **sewings per pattern**, **Tailoring level for shoe patterns**, **thimble for hand sewing**, **sewing machine bonus**, **machine noise**, **machine maintenance**, **sewing loot rarity**.
 
 ## Debug
 
@@ -76,7 +90,7 @@ Based on [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/
 
 ## License
 
-The mod's code, translations and images are released under the [MIT License](LICENSE). The four sound files in `media/sound` come from [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) by Gootube and remain the property of their authors: the MIT License does not cover them.
+The mod's code, translations and images are released under the [MIT License](LICENSE). The four sound files in `media/sound` come from [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) by Gootube and remain the property of their authors: the MIT License does not cover them. Sewing machine sounds: electric machine by Joseph Sardin ([BigSoundBank](https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html), CC0); treadle machine by Work With Sounds / Museum of Municipal Engineering ([Wikimedia Commons](https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)), trimmed into loops.
 
 ---
 
@@ -123,13 +137,27 @@ Une ampoule est une petite égratignure au pied, sans infection zombie. Comme to
 
 ## Patrons de couture
 
-- Clic droit sur un vêtement ou une paire de chaussures ayant une taille : **Tracer un patron**. Il faut des ciseaux, un stylo ou un crayon et des feuilles de papier (plus pour un vêtement complexe). Le modèle doit être en bon état (50 % ou plus) ; il reste intact.
+- Clic droit sur un vêtement ou une paire de chaussures ayant une taille : **Tracer un patron**. Il faut des ciseaux, un stylo ou un crayon et des feuilles de papier (plus pour un vêtement complexe). On travaille à une table, un bureau, un comptoir ou un établi proche : le personnage s'y rend. Le modèle doit être en bon état (50 % ou plus) et **il est détruit** : on le découd et on le découpe pour reporter ses pièces sur le papier.
+- Des **patrons du commerce** se trouvent dans les merceries, les rayons couture et les librairies de mode. Chacun est tiré au hasard parmi tous les vêtements et chaussures traçables, **y compris ceux des autres mods**, avec une bonne précision.
 - Clic droit sur le patron : **Coudre d'après le patron**, puis choisissez la taille (XS à XXL, ou 35 à 47 pour les chaussures). L'objet obtenu a une taille connue.
+- Coudre **à la main** (patrons, retouches, remises en état) demande un **dé à coudre** dans l'inventaire (option sandbox). Les machines n'en ont pas besoin.
 - Les matériaux suivent le tissu du modèle : coton (draps déchirés, rouleau de coton), jean (bandes de jean, rouleaux de jean) ou cuir (lanières de cuir, cuir tanné). Une grande taille demande plus de tissu. Pour le cuir, une alêne et un couteau aiguisé conviennent aussi.
 - **Précision** : l'objet peut sortir avec une taille d'écart, plus grand ou plus petit. Le risque passe de 50 % à 0 % selon le niveau de Couture du traceur et celui de la couturière ou du couturier.
 - Un patron supporte **5 coutures** (réussies ou non), puis part en morceaux.
-- Couture requise : difficulté du vêtement + tissu (coton 0, jean 1, cuir 2) ; le tracé demande un niveau de moins. **Les chaussures demandent le niveau 6** (option sandbox).
+- Couture requise : difficulté du vêtement + tissu (coton 0, jean 1, cuir 2) ; le tracé demande un niveau de moins. **Les chaussures demandent le niveau 8** (option sandbox), une aiguille **et un poinçon**, du fil, **de la colle**, et du cuir ou du tissu selon le modèle (baskets et chaussons en coton, le reste en cuir) ; elles se cousent toujours à la main. Les chaussures en caoutchouc ou en plastique (bottes de pluie, tongs) n'ont pas de patron.
 - Pas de patron pour une protection balistique ni pour un objet sans tissu cousable.
+
+## Machines à coudre
+
+- Deux machines posables : une **machine à coudre électrique**, qui se pose sur n'importe quelle table, et une lourde **machine à pédale** dans son meuble en fonte, autonome. On les trouve dans les ateliers de couture et les merceries, les magasins de vêtements et les grands magasins, le rayon linge des supermarchés, le stockage des particuliers (garages séparés ou attenants, box de stockage, greniers, abris de jardin, réserves, placards) et, plus rarement, partout où l'on trouve un kit de couture ; celle à pédale aussi parmi les antiquités. Elles se ramassent et se posent comme des meubles.
+- Cliquez sur une machine (ou clic droit) pour ouvrir son panneau à trois onglets :
+  - **Patron** : glissez un patron de vêtement dans l'emplacement (ou cliquez dessus pour en choisir un), choisissez la taille et la **quantité** à coudre à la suite. Le panneau montre le vêtement produit et la liste exacte des objets utilisés, et se souvient du dernier patron utilisé.
+  - **Retouche** : agrandir ou rétrécir un vêtement.
+  - **Remise en état** : réparer un vêtement usé avec des bandes de tissu ou un exemplaire de rechange.
+- Le bouton affiche la progression (« Couture 2/5… 45 % »). Le personnage se rend à la machine et travaille face à elle.
+- **Électrique** : demande du **courant** (réseau à l'intérieur, ou groupe électrogène) ; deux fois plus rapide, +2 niveaux de Couture, taille plus précise, 30 % de fil en moins. **À pédale** : sans courant ; 25 % plus rapide, +1 niveau, 15 % de fil en moins.
+- **Bruit** : une machine en marche s'entend par les zombies (l'électrique bien plus loin que celle à pédale).
+- **Entretien** : les machines s'usent ; sous 50 % elles sont moins fiables, **cassent parfois l'aiguille** tenue en main et se **bloquent** à 0 %. Leur **état** s'affiche dans le panneau (barre et pourcentage). **Entretenez-les** avec un tournevis et un peu d'huile de cuisine (végétale ou d'olive) ; la compétence utilisée est l'Électricité pour l'électrique, la Mécanique pour celle à pédale. La machine garde son usure quand on la déplace.
 
 ## Multijoueur
 
@@ -137,7 +165,7 @@ Le serveur décide de tout : tailles, retouches, usure, ampoules, courbatures, c
 
 ## Options sandbox
 
-Niveau de couture requis, XP de couture, durée des actions, multiplicateurs de déchirure, de chute du vêtement, de chute et de raideur, pertes d'isolation et de vitesse de combat, usure (activation, jours min/max, usure en cas d'échec, pertes de protection et de résistance), liste de vêtements supplémentaires, **emplacements supplémentaires**, **vêtements exclus**, **pointures activées ou non**, **intensité des effets des chaussures** (0 coupe ampoules, inconfort, endurance supplémentaire et pertes de chaussures), **coutures par patron**, **niveau de Couture des patrons de chaussures**.
+Niveau de couture requis, XP de couture, durée des actions, multiplicateurs de déchirure, de chute du vêtement, de chute et de raideur, pertes d'isolation et de vitesse de combat, usure (activation, jours min/max, usure en cas d'échec, pertes de protection et de résistance), liste de vêtements supplémentaires, **emplacements supplémentaires**, **vêtements exclus**, **pointures activées ou non**, **intensité des effets des chaussures** (0 coupe ampoules, inconfort, endurance supplémentaire et pertes de chaussures), **coutures par patron**, **niveau de Couture des patrons de chaussures**, **dé à coudre pour coudre à la main**, **bonus des machines**, **bruit des machines**, **entretien des machines**, **rareté du butin de couture**.
 
 ## Débogage
 
@@ -154,4 +182,4 @@ Basé sur [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails
 
 ## Licence
 
-Le code, les traductions et les images du mod sont publiés sous [licence MIT](LICENSE). Les quatre sons de `media/sound` viennent de [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) de Gootube et restent la propriété de leurs auteurs : la licence MIT ne les couvre pas.
+Le code, les traductions et les images du mod sont publiés sous [licence MIT](LICENSE). Les quatre sons de `media/sound` viennent de [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) de Gootube et restent la propriété de leurs auteurs : la licence MIT ne les couvre pas. Sons des machines à coudre : machine électrique de Joseph Sardin ([BigSoundBank](https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html), CC0) ; machine à pédale de Work With Sounds / Museum of Municipal Engineering ([Wikimedia Commons](https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)), découpés en boucles.

@@ -604,6 +604,36 @@ function MTIR.hasAllItems(character, items)
     return true
 end
 
+--- Vrai si chaque objet de l'ArrayList satisfait `predicate` (liste absente : faux).
+function MTIR.allItemsMatch(items, predicate)
+    if not items then
+        return false
+    end
+    for i = 0, items:size() - 1 do
+        local item = items:get(i)
+        if not item or not predicate(item) then
+            return false
+        end
+    end
+    return true
+end
+
+--- Possession sans doublon d'une liste dont chaque objet est du type attendu.
+function MTIR.hasAllItemsOf(character, items, predicate)
+    return MTIR.hasAllItems(character, items) and MTIR.allItemsMatch(items, predicate)
+end
+
+--- Possession sans doublon de bobines de fil (MTIR.predicateThread).
+function MTIR.hasThreads(character, threads)
+    return MTIR.hasAllItemsOf(character, threads, MTIR.predicateThread)
+end
+
+--- Outils tenus : `primary` en main principale ET `secondary` dans l'autre (nil : faux).
+function MTIR.holdsTools(character, primary, secondary)
+    return MTIR.sameItem(character:getPrimaryHandItem(), primary)
+        and MTIR.sameItem(character:getSecondaryHandItem(), secondary)
+end
+
 --- Client MP : récupère l'instance locale à jour après les échanges réseau.
 function MTIR.resolveItem(character, item)
     if not isClient() or not item then

@@ -1,0 +1,110 @@
+module Base
+{
+    /* Machine à coudre électrique : entité B42 sur les tuiles mtir_sewing_01_0..3.
+       La pose d'un meuble crée l'entité (ISMoveableSpriteProps:placeMoveableInternal
+       -> GameEntityFactory.CreateIsoEntityFromCellLoading). ISEntityUI ouvre alors
+       le panneau du mod par LuaOpenWindow (clic direct ou menu contextuel vanilla).
+       Doit rester dans module Base : EntityScriptName est résolu sans module. */
+    xuiSkin default
+    {
+        entity ES_MTIR_SewingMachine
+        {
+            LuaWindowClass = MTIR_SewingMachineWindow,
+            LuaOpenWindow = MTIR_SewingMachineWindow.openFromEntity,
+            DisplayName = IGUI_MTIR_Machine_Title,
+        }
+    }
+
+    xuiSkin default
+    {
+        entity ES_MTIR_TreadleMachine
+        {
+            LuaWindowClass = MTIR_SewingMachineWindow,
+            LuaOpenWindow = MTIR_SewingMachineWindow.openFromEntity,
+            DisplayName = IGUI_MTIR_Treadle_Title,
+        }
+    }
+
+    entity MTIR_SewingMachine
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_MTIR_SewingMachine,
+            uiEnabled = true,
+        }
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = mtir_sewing_01_0,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = mtir_sewing_01_1,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = mtir_sewing_01_2,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = mtir_sewing_01_3,
+                }
+            }
+        }
+    }
+
+    /* Machine à coudre à pédale : même panneau, sans courant. */
+    entity MTIR_TreadleMachine
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_MTIR_TreadleMachine,
+            uiEnabled = true,
+        }
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = mtir_treadle_01_0,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = mtir_treadle_01_1,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = mtir_treadle_01_2,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = mtir_treadle_01_3,
+                }
+            }
+        }
+    }
+}

@@ -43,5 +43,15 @@
     "Sandbox_MyTailorIsRich_PatternMaxUses": "Coutures par patron",
     "Sandbox_MyTailorIsRich_PatternMaxUses_tooltip": "Nombre de coutures (réussies ou non) qu'un patron tracé supporte avant de partir en morceaux.",
     "Sandbox_MyTailorIsRich_ShoePatternLevel": "Couture pour les patrons de chaussures",
-    "Sandbox_MyTailorIsRich_ShoePatternLevel_tooltip": "Niveau de Couture pour coudre des chaussures d'après un patron. Le tracé demande un niveau de moins. Ignoré si le niveau de couture requis est désactivé."
+    "Sandbox_MyTailorIsRich_ShoePatternLevel_tooltip": "Niveau de Couture pour coudre des chaussures d'après un patron. Le tracé demande un niveau de moins. Ignoré si le niveau de couture requis est désactivé.",
+    "Sandbox_MyTailorIsRich_RequireThimble": "Dé à coudre pour coudre à la main",
+    "Sandbox_MyTailorIsRich_RequireThimble_tooltip": "Coudre à la main (patrons, retouches, remises en état) demande un dé à coudre dans l'inventaire. Il n'est pas consommé. Les machines à coudre n'en ont pas besoin.",
+    "Sandbox_MyTailorIsRich_MachineBonusMultiplier": "Bonus des machines à coudre",
+    "Sandbox_MyTailorIsRich_MachineBonusMultiplier_tooltip": "Multiplie tous les bonus des machines à coudre (vitesse, niveaux de Couture, précision de taille, fil économisé). 0 = aucun bonus, 2 = bonus doublés.",
+    "Sandbox_MyTailorIsRich_MachineNoiseMultiplier": "Bruit des machines à coudre",
+    "Sandbox_MyTailorIsRich_MachineNoiseMultiplier_tooltip": "Multiplie la portée du bruit qui attire les zombies pendant qu'une machine tourne. 0 = machines silencieuses.",
+    "Sandbox_MyTailorIsRich_EnableMachineMaintenance": "Entretien des machines à coudre",
+    "Sandbox_MyTailorIsRich_EnableMachineMaintenance_tooltip": "Les machines s'usent, peuvent casser des aiguilles et se bloquer, et s'entretiennent avec un tournevis et de l'huile (végétale, d'olive…).",
+    "Sandbox_MyTailorIsRich_SewingLootMultiplier": "Butin de couture",
+    "Sandbox_MyTailorIsRich_SewingLootMultiplier_tooltip": "Multiplie la fréquence des machines à coudre et des patrons du commerce dans le butin. 0 = jamais."
 }

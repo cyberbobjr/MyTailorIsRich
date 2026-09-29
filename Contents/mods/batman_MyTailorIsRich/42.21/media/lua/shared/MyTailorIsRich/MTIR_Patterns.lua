@@ -8,7 +8,9 @@
 --     et la couturière sont doués ;
 --   * usure : PatternMaxUses coutures (réussies ou non), puis le patron est perdu ;
 --   * garde-fous : pas de protection balistique, tissu cousable (coton, jean,
---     cuir) ; les chaussures sont en cuir et demandent plus de Couture.
+--     cuir) ; chaussures : tissu ou cuir selon le modèle (MTIR.getShoeMaterial),
+--     jamais en caoutchouc ou en plastique ; elles demandent plus de Couture,
+--     une aiguille ET une alêne, et de la colle.
 -- Le patron système vanilla (SewingPattern) apprend des recettes figées : il
 -- n'est pas utilisé ici.
 -- ============================================================================
@@ -17,13 +19,18 @@ require "MyTailorIsRich/MTIR_Sizing"
 require "MyTailorIsRich/MTIR_Effects"
 
 MTIR.PATTERN_ITEM = "Base.MTIR_TailorPattern"
+--- Patron du commerce trouvé dans le butin (données posées par MTIR_PrintedPatterns.lua).
+MTIR.PRINTED_PATTERN_ITEM = "Base.MTIR_PrintedPattern"
 MTIR.PATTERN_DATA_KEY = "MTIR_Pattern"
 
 local PAPER_TYPE = "Base.SheetPaper2"
 local SHOE_PAPER = 2
 local SHOE_MATERIAL_UNITS = 6
 local SHOE_THREAD = 5
-local SHOE_DIFFICULTY = 3
+--- Difficulté d'un patron de chaussures (partagée avec MTIR_PrintedPatterns.lua).
+MTIR.SHOE_PATTERN_DIFFICULTY = 3
+--- Colle consommée par une paire de chaussures (utilisations d'un objet base:glue).
+MTIR.SHOE_GLUE_USES = 1
 local MAX_OFF_CHANCE = 0.5
 local OFF_CHANCE_PER_LEVEL = 0.05
 local MIN_TRACE_CONDITION = 0.5
@@ -46,6 +53,19 @@ local MATERIALS = {
     },
 }
 
+-- Chaussures sans FabricType reconnu : mots-clés cherchés dans le type, le
+-- ClothingItem et l'icône du script (jamais dans le nom affiché, traduit : le
+-- serveur et le client doivent conclure pareil).
+-- Caoutchouc ou plastique : pas de patron possible.
+local SHOE_RUBBER_KEYS = {
+    "wellie", "welly", "wellington", "rubber", "gumboot", "rainboot", "galosh",
+    "flipflop", "flip_flop", "flip-flop", "crocs", "tiresandal", "tire_sandal", "plastic", "jelly",
+}
+-- Toile ou tissu (coton) ; tout le reste est en cuir.
+local SHOE_FABRIC_KEYS = {
+    "trainer", "sneaker", "slipper", "canvas", "espadrille", "tennis", "running", "plimsoll", "converse",
+}
+
 -- Tissu en plus ou en moins selon la taille cousue.
 local SIZE_MATERIAL_DELTA = { XS = -2, S = -1, M = 0, L = 0, XL = 1, XXL = 2 }
 
@@ -54,7 +74,11 @@ local SIZE_MATERIAL_DELTA = { XS = -2, S = -1, M = 0, L = 0, XL = 1, XXL = 2 }
 -- ----------------------------------------------------------------------------
 
 function MTIR.isPattern(item)
-    return item ~= nil and item:getFullType() == MTIR.PATTERN_ITEM
+    if item == nil then
+        return false
+    end
+    local fullType = item:getFullType()
+    return fullType == MTIR.PATTERN_ITEM or fullType == MTIR.PRINTED_PATTERN_ITEM
 end
 
 --- { fullType, kind, fabric, difficulty, precision, uses } ou nil.
@@ -78,6 +102,35 @@ end
 -- Tracer
 -- ----------------------------------------------------------------------------
 
+local function containsAny(text, keys)
+    for _, key in ipairs(keys) do
+        if string.find(text, key, 1, true) then
+            return true
+        end
+    end
+    return false
+end
+
+--- Matière d'une paire (script Item) : FabricType du script s'il est cousable,
+--- sinon "Cotton" (baskets, pantoufles, toile…) ou "Leather" ; nil pour le
+--- caoutchouc ou le plastique (bottes de pluie, tongs, sabots en plastique…).
+--- Partagé par le tracé (MTIR.describeModel) et les patrons du commerce.
+function MTIR.getShoeMaterial(scriptItem)
+    if not scriptItem then
+        return nil
+    end
+    local fabric = scriptItem:getFabricType()
+    if fabric and MTIR.FABRIC_DIFFICULTY[fabric] ~= nil then
+        return fabric
+    end
+    local text = string.lower(tostring(scriptItem:getFullName()) .. "|" .. tostring(scriptItem:getClothingItem())
+        .. "|" .. tostring(scriptItem:getIcon()))
+    if containsAny(text, SHOE_RUBBER_KEYS) then
+        return nil
+    end
+    return containsAny(text, SHOE_FABRIC_KEYS) and "Cotton" or "Leather"
+end
+
 --- Genre du modèle traçable, ou nil et une clé de raison (nil si pas de taille du tout).
 function MTIR.getTraceKind(item)
     if not item or not instanceof(item, "Clothing") then
@@ -93,6 +146,9 @@ function MTIR.getTraceKind(item)
     if kind == "clothes" and not MTIR.getClothesFabricType(item) then
         return nil, "IGUI_MTIR_Pattern_NoFabric"
     end
+    if kind == "shoe" and not MTIR.getShoeMaterial(item:getScriptItem()) then
+        return nil, "IGUI_MTIR_Pattern_NoShoeFabric"
+    end
     return kind, nil
 end
 
@@ -103,7 +159,8 @@ function MTIR.describeModel(item)
         return nil
     end
     if kind == "shoe" then
-        return { kind = "shoe", fabric = "Leather", difficulty = SHOE_DIFFICULTY }
+        local fabric = MTIR.getShoeMaterial(item:getScriptItem())
+        return { kind = "shoe", fabric = fabric, difficulty = MTIR.SHOE_PATTERN_DIFFICULTY }
     end
     return { kind = "clothes", fabric = MTIR.getClothesFabricType(item), difficulty = MTIR.getClothesDifficulty(item) }
 end
@@ -216,16 +273,17 @@ function MTIR.getPatternMaterialUnits(data, size)
     return math.max(2, 2 + data.difficulty * 3 + (SIZE_MATERIAL_DELTA[size] or 0))
 end
 
-function MTIR.getPatternThread(data)
-    if data.kind == "shoe" then
-        return SHOE_THREAD
-    end
-    return data.difficulty * 2 + 1
+--- Couture à la main : aucun bonus (sur machine : MTIR.getMachineMods, MTIR_SewingMachine.lua).
+MTIR.SEW_BY_HAND = { durationFactor = 1, levelBonus = 0, precisionBonus = 0, threadFactor = 1 }
+
+function MTIR.getPatternThread(data, mods)
+    local base = data.kind == "shoe" and SHOE_THREAD or (data.difficulty * 2 + 1)
+    return math.max(1, math.ceil(base * (mods or MTIR.SEW_BY_HAND).threadFactor))
 end
 
-function MTIR.getSewDuration(data)
+function MTIR.getSewDuration(data, mods)
     local base = data.kind == "shoe" and 750 or (300 + data.difficulty * 150)
-    return math.max(1, base * MTIR.opt("ActionTimeMultiplier"))
+    return math.max(1, base * (mods or MTIR.SEW_BY_HAND).durationFactor * MTIR.opt("ActionTimeMultiplier"))
 end
 
 function MTIR.getSewXp(data, isSuccess)
@@ -255,6 +313,56 @@ function MTIR.rollPatternSize(data, size, tailoring)
         offset = -offset
     end
     return sizes[index + offset] or size
+end
+
+--- Chaussures : alêne (en plus de l'aiguille) et colle (MTIR.SHOE_GLUE_USES utilisations).
+local function addShoeTools(ctx, inventory, data)
+    ctx.needsAwl = MTIR.patternNeedsAwl(data)
+    ctx.needsGlue = MTIR.patternNeedsGlue(data)
+    ctx.requiredGlue = ctx.needsGlue and MTIR.SHOE_GLUE_USES or 0
+    ctx.awl = ctx.needsAwl and inventory:getFirstEvalRecurse(MTIR.predicateAwl) or nil
+    ctx.glue = ctx.needsGlue and inventory:getFirstEvalRecurse(MTIR.predicateGlue) or nil
+end
+
+--- Tout ce qu'il faut pour coudre `size` d'après un patron : outils, fil, tissu,
+--- niveau, chances et durée. Partagé par le menu contextuel et le panneau de la machine.
+--- Champs des chaussures : needsAwl, awl (alêne ou nil), needsGlue, glue (objet
+--- base:glue ou nil), requiredGlue (utilisations) ; `ready` les exige.
+function MTIR.getSewRequirements(player, data, size, mods)
+    mods = mods or MTIR.SEW_BY_HAND
+    local inventory = player:getInventory()
+    local allThreads = inventory:getItemsFromType("Thread", true)
+    local requiredThread = MTIR.getPatternThread(data, mods)
+    local requiredUnits = MTIR.getPatternMaterialUnits(data, size)
+    local available, materials = MTIR.pickPatternMaterials(inventory, data.fabric, requiredUnits)
+    local tailoring = player:getPerkLevel(Perks.Tailoring)
+    local requiredLevel = MTIR.getRequiredLevelToSew(data)
+    local effective = tailoring + mods.levelBonus
+    local ctx = {
+        needle = inventory:getFirstEvalRecurse(MTIR.predicatePatternNeedle(data.fabric, data.kind)),
+        scissors = inventory:getFirstEvalRecurse(MTIR.predicatePatternCutter(data.fabric, data.kind)),
+        requiredThread = requiredThread,
+        remainingThread = MTIR.getRemainingThread(allThreads),
+        threads = MTIR.pickThreads(allThreads, requiredThread),
+        requiredUnits = requiredUnits,
+        availableUnits = available,
+        materials = materials,
+        tailoring = tailoring,
+        effectiveLevel = effective,
+        requiredLevel = requiredLevel,
+        thimble = MTIR.needsThimble(mods) and MTIR.findThimble(player) or nil,
+        needsThimble = MTIR.needsThimble(mods),
+        success = effective >= requiredLevel
+            and math.max(0, math.min(1, MTIR.getSuccessChanceForChange(effective, requiredLevel) - (mods.successMalus or 0)))
+            or 0,
+        offChance = MTIR.getPatternOffChance(data, tailoring + mods.precisionBonus),
+        duration = MTIR.getSewDuration(data, mods),
+    }
+    addShoeTools(ctx, inventory, data)
+    ctx.ready = ctx.needle ~= nil and ctx.scissors ~= nil and ctx.threads ~= nil and ctx.materials ~= nil
+        and effective >= requiredLevel and (not ctx.needsThimble or ctx.thimble ~= nil)
+        and (not ctx.needsAwl or ctx.awl ~= nil) and (not ctx.needsGlue or ctx.glue ~= nil)
+    return ctx
 end
 
 -- ----------------------------------------------------------------------------
@@ -338,22 +446,53 @@ function MTIR.consumeMaterials(fabric, items, units)
     end
 end
 
---- Aiguille (ou alêne pour le cuir) et outil de coupe (ou couteau pour le cuir).
-function MTIR.predicatePatternNeedle(fabric)
+--- Aiguille, ou alêne pour un vêtement en cuir. Chaussures (kind "shoe") :
+--- aiguille seulement, l'alêne est exigée en plus (MTIR.predicateAwl).
+function MTIR.predicatePatternNeedle(fabric, kind)
     return function(item)
-        if fabric == "Leather" and not item:isBroken() and item:hasTag(ItemTag.AWL) then
+        if kind ~= "shoe" and fabric == "Leather" and MTIR.predicateAwl(item) then
             return true
         end
         return MTIR.predicateNeedle(item)
     end
 end
 
-function MTIR.predicatePatternCutter(fabric)
+--- Ciseaux, ou couteau aiguisé pour le cuir et pour toutes les chaussures.
+function MTIR.predicatePatternCutter(fabric, kind)
     return function(item)
-        if fabric == "Leather" and not item:isBroken() and item:hasTag(ItemTag.SHARP_KNIFE) then
+        if (kind == "shoe" or fabric == "Leather") and not item:isBroken() and item:hasTag(ItemTag.SHARP_KNIFE) then
             return true
         end
         return MTIR.predicateScissors(item)
+    end
+end
+
+--- Alêne (tag base:awl : alênes, jeu de poinçons, couteau suisse, multitool…).
+function MTIR.predicateAwl(item)
+    return not item:isBroken() and item:hasTag(ItemTag.AWL)
+end
+
+--- Colle (tag base:glue : colle, colle à bois) avec assez d'utilisations.
+function MTIR.predicateGlue(item)
+    return item:hasTag(ItemTag.GLUE) and instanceof(item, "DrainableComboItem")
+        and item:getCurrentUses() >= MTIR.SHOE_GLUE_USES
+end
+
+function MTIR.patternNeedsAwl(data)
+    return data ~= nil and data.kind == "shoe"
+end
+
+function MTIR.patternNeedsGlue(data)
+    return data ~= nil and data.kind == "shoe"
+end
+
+--- Autorité : consomme la colle (UseAndSync retire l'objet vide et synchronise).
+function MTIR.consumeGlue(glue, uses)
+    for _ = 1, uses do
+        if glue:getCurrentUses() <= 0 then
+            return
+        end
+        glue:UseAndSync()
     end
 end
 

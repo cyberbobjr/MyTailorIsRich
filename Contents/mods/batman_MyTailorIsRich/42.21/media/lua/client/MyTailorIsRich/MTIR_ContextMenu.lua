@@ -5,10 +5,12 @@
 -- ============================================================================
 
 require "MyTailorIsRich/MTIR_Effects"
+require "MyTailorIsRich/MTIR_Alterations"
 require "ISUI/ISInventoryPaneContextMenu"
 require "TimedActions/MTIR_CheckSizeAction"
 require "TimedActions/MTIR_ResizeAction"
 require "TimedActions/MTIR_ReconditionAction"
+require "TimedActions/MTIR_MachineMaintenanceAction"
 require "TimedActions/MTIR_ChooseSizeAction"
 require "TimedActions/MTIR_DebugSizeAction"
 require "MyTailorIsRich/MTIR_ShoeEffects"
@@ -88,11 +90,6 @@ local function singleClothing(items)
     return nil
 end
 
-local function getTools(player)
-    local inventory = player:getInventory()
-    return inventory:getFirstEvalRecurse(MTIR.predicateNeedle), inventory:getFirstEvalRecurse(MTIR.predicateScissors)
-end
-
 --- Déséquipe ou rapatrie le vêtement avant de travailler dessus.
 local function bringClothing(player, item)
     if player:isEquippedClothing(item) then
@@ -137,71 +134,102 @@ local function addCheckSizeOption(items, player, context)
 end
 
 -- ----------------------------------------------------------------------------
+-- Besoins communs (texte riche des infobulles)
+-- ----------------------------------------------------------------------------
+
+local function needsHeader()
+    return " <LINE> <LINE> <RGB:1,1,1> " .. getText("Tooltip_craft_Needs") .. ":"
+end
+
+--- Ligne du dé à coudre, seulement quand il est exigé (couture à la main, option RequireThimble).
+local function thimbleLine(req)
+    if not req.needsThimble then
+        return ""
+    end
+    return needLine(req.thimble ~= nil, getText("IGUI_MTIR_Need_Thimble"))
+end
+
+--- Aiguille, ciseaux, fil et dé (champs de MTIR.getResizeRequirements / getReconditionRequirements).
+local function toolLines(req)
+    return needsHeader()
+        .. needLine(req.needle ~= nil, getItemNameFromFullType("Base.Needle"))
+        .. needLine(req.scissors ~= nil, getItemNameFromFullType("Base.Scissors"))
+        .. needLine(req.threads ~= nil,
+            getItemNameFromFullType("Base.Thread") .. " " .. req.remainingThread .. "/" .. req.requiredThread)
+        .. thimbleLine(req)
+end
+
+local function materialLine(req)
+    return needLine(req.materials ~= nil, getItemNameFromFullType(req.materialType) .. " "
+        .. req.availableMaterial .. "/" .. req.requiredMaterial)
+end
+
+-- Partagé avec MTIR_PatternMenu.lua.
+MTIR.MenuUtil.needsHeader = needsHeader
+MTIR.MenuUtil.thimbleLine = thimbleLine
+
+--- Déséquipe ou rapatrie le vêtement, puis marche jusqu'à la machine s'il y en a une.
+--- Faux si la machine est inaccessible (rien n'est alors ajouté après les transferts).
+local function bringToWork(player, item, machine)
+    bringClothing(player, item)
+    if machine then
+        return luautils.walkAdjObject(player, machine, true, true)
+    end
+    return true
+end
+
+-- ----------------------------------------------------------------------------
 -- Retoucher
 -- ----------------------------------------------------------------------------
 
-local function queueResize(player, item, needle, scissors, threads, materials, upsize)
-    ISInventoryPaneContextMenu.transferIfNeeded(player, threads)
-    ISInventoryPaneContextMenu.transferIfNeeded(player, materials)
-    bringClothing(player, item)
-    ISWorldObjectContextMenu.equip(player, player:getPrimaryHandItem(), scissors, true)
-    ISWorldObjectContextMenu.equip(player, player:getSecondaryHandItem(), needle, false)
-    ISTimedActionQueue.add(MTIR_ResizeAction:new(player, item, needle, scissors, threads, materials, upsize))
+--- Transferts, outils en main puis retouche. machine : objet machine à coudre, ou nil (à la main).
+local function queueResize(player, item, req, upsize, machine)
+    ISInventoryPaneContextMenu.transferIfNeeded(player, req.threads)
+    ISInventoryPaneContextMenu.transferIfNeeded(player, req.materials)
+    if not bringToWork(player, item, machine) then
+        return
+    end
+    ISWorldObjectContextMenu.equip(player, player:getPrimaryHandItem(), req.scissors, true)
+    ISWorldObjectContextMenu.equip(player, player:getSecondaryHandItem(), req.needle, false)
+    ISTimedActionQueue.add(MTIR_ResizeAction:new(player, item, req.needle, req.scissors, req.threads,
+        req.materials, upsize, machine and MTIR.encodeMachinePos(machine) or ""))
 end
 
---- Une option de retouche. upsize : bandes de tissu ; sinon trombones.
-local function addResizeSubOption(subMenu, player, item, targetSize, upsize, tools)
-    local tailoring = player:getPerkLevel(Perks.Tailoring)
-    local requiredLevel = MTIR.getRequiredLevelToChange(item, upsize)
-    local requiredThread = MTIR.getRequiredThreadCount(item)
-    local requiredMaterial = upsize and MTIR.getRequiredStripCount(item) or MTIR.getRequiredPaperclip(item)
-    local successChance = MTIR.getSuccessChanceForChange(tailoring, requiredLevel)
+--- Texte riche : chance puis besoins (MTIR.getResizeRequirements).
+local function describeResize(item, req, upsize)
+    return chanceHeader("Tooltip_chanceSuccess", req.success)
+        .. toolLines(req)
+        .. materialLine(req)
+        .. tailoringLine(req.effectiveLevel, req.requiredLevel)
+end
 
-    local inventory = player:getInventory()
-    local allThreads = inventory:getItemsFromType("Thread", true)
-    local remainingThread = MTIR.getRemainingThread(allThreads)
-    local materialType = upsize and MTIR.getStripType(MTIR.getClothesFabricType(item)) or "Base.Paperclip"
-    local allMaterials = inventory:getItemsFromType(materialType, true)
-    local threads = MTIR.pickThreads(allThreads, requiredThread)
-    local materials = MTIR.pickItems(allMaterials, requiredMaterial)
-
-    local option = subMenu:addOption(getText("IGUI_MTIR_JobType_ToSize", targetSize.name), player, queueResize,
-        item, tools.needle, tools.scissors, threads, materials, upsize)
-
+--- Une option de retouche à la main. upsize : bandes de tissu ; sinon trombones.
+local function addResizeSubOption(subMenu, player, item, upsize)
+    local req = MTIR.getResizeRequirements(player, item, upsize, MTIR.SEW_BY_HAND)
+    local option = subMenu:addOption(getText("IGUI_MTIR_JobType_ToSize", req.targetSize.name), player, queueResize,
+        item, req, upsize, nil)
     local tooltip = ISInventoryPaneContextMenu.addToolTip()
     tooltip.texture = item:getTex()
-    tooltip:setName(getItemNameFromFullType(item:getFullType()) .. " (" .. targetSize.name .. ")")
-    tooltip.description = chanceHeader("Tooltip_chanceSuccess", successChance)
-        .. " <LINE> <LINE> <RGB:1,1,1> " .. getText("Tooltip_craft_Needs") .. ":"
-        .. needLine(tools.needle ~= nil, getItemNameFromFullType("Base.Needle"))
-        .. needLine(tools.scissors ~= nil, getItemNameFromFullType("Base.Scissors"))
-        .. needLine(remainingThread >= requiredThread, getItemNameFromFullType("Base.Thread") .. " " .. remainingThread .. "/" .. requiredThread)
-        .. needLine(allMaterials:size() >= requiredMaterial, getItemNameFromFullType(materialType) .. " " .. allMaterials:size() .. "/" .. requiredMaterial)
-        .. tailoringLine(tailoring, requiredLevel)
+    tooltip:setName(getItemNameFromFullType(item:getFullType()) .. " (" .. req.targetSize.name .. ")")
+    tooltip.description = describeResize(item, req, upsize)
     option.toolTip = tooltip
-    option.notAvailable = not (tailoring >= requiredLevel and tools.needle and tools.scissors and threads and materials)
+    option.notAvailable = not req.ready
 end
 
 local function addResizeOption(item, player, context)
-    local data = MTIR.getData(item)
-    if item:isBroken() or not data or not data.size or not data.reveal or data.resized ~= 0 then
+    local canUp = MTIR.getResizeTarget(item, true) ~= nil
+    local canDown = MTIR.getResizeTarget(item, false) ~= nil
+    if not canUp and not canDown then
         return
     end
-    local nextSize = MTIR.getNextSize(data.size)
-    local prevSize = MTIR.getPrevSize(data.size)
-    if not nextSize and not prevSize then
-        return
-    end
-    local needle, scissors = getTools(player)
-    local tools = { needle = needle, scissors = scissors }
     local option = context:addOption(getText("IGUI_MTIR_JobType_ResizeClothes"))
     local subMenu = context:getNew(context)
     context:addSubMenu(option, subMenu)
-    if nextSize then
-        addResizeSubOption(subMenu, player, item, nextSize, true, tools)
+    if canUp then
+        addResizeSubOption(subMenu, player, item, true)
     end
-    if prevSize then
-        addResizeSubOption(subMenu, player, item, prevSize, false, tools)
+    if canDown then
+        addResizeSubOption(subMenu, player, item, false)
     end
 end
 
@@ -209,50 +237,24 @@ end
 -- Remettre en état
 -- ----------------------------------------------------------------------------
 
-local function queueReconditionStrips(player, item, needle, scissors, threads, strips, threadUses)
-    ISInventoryPaneContextMenu.transferIfNeeded(player, needle)
-    ISInventoryPaneContextMenu.transferIfNeeded(player, scissors)
-    ISInventoryPaneContextMenu.transferIfNeeded(player, threads)
-    ISInventoryPaneContextMenu.transferIfNeeded(player, strips)
-    bringClothing(player, item)
-    ISTimedActionQueue.add(MTIR_ReconditionAction:new(player, item, needle, scissors, threads, strips, threadUses))
-end
-
-local function queueReconditionSpare(player, item, needle, scissors, threads, spareItem, threadUses)
-    ISInventoryPaneContextMenu.transferIfNeeded(player, needle)
-    ISInventoryPaneContextMenu.transferIfNeeded(player, scissors)
-    ISInventoryPaneContextMenu.transferIfNeeded(player, threads)
-    ISInventoryPaneContextMenu.transferIfNeeded(player, spareItem)
-    bringClothing(player, item)
-    ISTimedActionQueue.add(MTIR_ReconditionSpareAction:new(player, item, needle, scissors, threads, spareItem, threadUses))
-end
-
-local function reconditionNeeds(ctx)
-    return " <LINE> <LINE> <RGB:1,1,1> " .. getText("Tooltip_craft_Needs") .. ":"
-        .. needLine(ctx.needle ~= nil, getItemNameFromFullType("Base.Needle"))
-        .. needLine(ctx.scissors ~= nil, getItemNameFromFullType("Base.Scissors"))
-        .. needLine(ctx.remainingThread >= ctx.requiredThread,
-            getItemNameFromFullType("Base.Thread") .. " " .. ctx.remainingThread .. "/" .. ctx.requiredThread)
-end
-
-local function addStripSubOption(subMenu, player, item, ctx)
-    local stripType = MTIR.getStripType(MTIR.getClothesFabricType(item))
-    local allStrips = player:getInventory():getItemsFromType(stripType, true)
-    local requiredStrip = MTIR.getRequiredStripToRecondition(item)
-    local strips = MTIR.pickItems(allStrips, requiredStrip)
-    local potential = math.max(0, math.min(1, MTIR.getPotentialRepairForRecondition(item, player)))
-    local chance = math.max(0, math.min(1, MTIR.getSuccessChanceForRecondition(item, player)))
-
-    local option = subMenu:addOption(getText("IGUI_MTIR_JobType_Recondition_UseStrip", getItemNameFromFullType(stripType)),
-        player, queueReconditionStrips, item, ctx.needle, ctx.scissors, ctx.threads, strips, ctx.requiredThread)
-    option.notAvailable = not (ctx.needle and ctx.scissors and ctx.threads and strips)
-    option.toolTip = ISInventoryPaneContextMenu.addToolTip()
-    option.toolTip.description = chanceHeader("Tooltip_potentialRepair", potential)
-        .. " <LINE>" .. chanceHeader("Tooltip_chanceSuccess", chance)
-        .. reconditionNeeds(ctx)
-        .. needLine(allStrips:size() >= requiredStrip,
-            getItemNameFromFullType(stripType) .. " " .. allStrips:size() .. "/" .. requiredStrip)
-        .. repairedLine(ctx.repairedTimes)
+--- Transferts puis remise en état. spareItem : exemplaire de rechange, ou nil (bandes).
+--- machine : objet machine à coudre, ou nil (à la main).
+local function queueRecondition(player, item, req, spareItem, machine)
+    ISInventoryPaneContextMenu.transferIfNeeded(player, req.needle)
+    ISInventoryPaneContextMenu.transferIfNeeded(player, req.scissors)
+    ISInventoryPaneContextMenu.transferIfNeeded(player, req.threads)
+    ISInventoryPaneContextMenu.transferIfNeeded(player, spareItem or req.materials)
+    if not bringToWork(player, item, machine) then
+        return
+    end
+    local machinePos = machine and MTIR.encodeMachinePos(machine) or ""
+    if spareItem then
+        ISTimedActionQueue.add(MTIR_ReconditionSpareAction:new(player, item, req.needle, req.scissors, req.threads,
+            spareItem, machinePos))
+    else
+        ISTimedActionQueue.add(MTIR_ReconditionAction:new(player, item, req.needle, req.scissors, req.threads,
+            req.materials, machinePos))
+    end
 end
 
 local function spareDisplayName(spareItem)
@@ -264,85 +266,139 @@ local function spareDisplayName(spareItem)
     return name
 end
 
-local function addSpareSubOption(subMenu, player, item, spareItem, ctx)
-    local tailoring = player:getPerkLevel(Perks.Tailoring)
-    local requiredLevel = MTIR.getRequiredLevelToRecondition(item)
-    local hasLevel = tailoring >= requiredLevel
-    local potential = hasLevel and MTIR.getPotentialRepairUsingSpare(item, player, spareItem) or 0
-    local chance = hasLevel and MTIR.getSuccessChanceUsingSpare(item, player, spareItem) or 0
+--- Ligne de l'exemplaire de rechange, teintée selon son état et ses réparations.
+local function spareLine(spareItem)
     local spareCondition = spareItem:getCondition() / spareItem:getConditionMax()
     local spareRepaired = MTIR.getRepairedTimes(spareItem)
     local effective = spareCondition / (1 + 0.5 * spareRepaired)
-
     local grey = ColorInfo.new(0.5, 0.5, 0.5, 1)
     local color = ColorInfo.new(0, 0, 0, 1)
     getCore():getGoodHighlitedColor():interp(grey, 1 - effective, color)
-    local name = spareDisplayName(spareItem)
-
-    local option = subMenu:addOption(getText("IGUI_MTIR_JobType_Recondition_UseSpare", name), player,
-        queueReconditionSpare, item, ctx.needle, ctx.scissors, ctx.threads, spareItem, ctx.requiredThread)
-    option.notAvailable = not (ctx.needle and ctx.scissors and ctx.threads and hasLevel)
-    option.toolTip = ISInventoryPaneContextMenu.addToolTip()
-    option.toolTip.description = chanceHeader("Tooltip_potentialRepair", potential)
-        .. " <LINE>" .. chanceHeader("Tooltip_chanceSuccess", chance)
-        .. reconditionNeeds(ctx)
-        .. " <LINE> <RGB:" .. color:getR() .. "," .. color:getG() .. "," .. color:getB() .. "> " .. name
+    return " <LINE> <RGB:" .. color:getR() .. "," .. color:getG() .. "," .. color:getB() .. "> "
+        .. spareDisplayName(spareItem)
         .. " <SPACE> (" .. math.ceil(spareCondition * 100) .. "%, "
         .. getText("IGUI_MTIR_JobType_Recondition_RepairedTimes", tostring(spareRepaired)) .. ")"
-        .. tailoringLine(tailoring, requiredLevel)
-        .. repairedLine(ctx.repairedTimes)
 end
 
-local function addMissingSpareSubOption(subMenu, player, item, ctx)
+--- Texte riche : potentiel, chance puis besoins (MTIR.getReconditionRequirements).
+local function describeRecondition(item, req, spareItem)
+    local text = chanceHeader("Tooltip_potentialRepair", req.potential)
+        .. " <LINE>" .. chanceHeader("Tooltip_chanceSuccess", req.success)
+        .. toolLines(req)
+    if spareItem then
+        text = text .. spareLine(spareItem) .. tailoringLine(req.effectiveLevel, req.requiredLevel)
+    else
+        text = text .. materialLine(req)
+    end
+    return text .. repairedLine(req.repairedTimes)
+end
+
+local function addStripSubOption(subMenu, player, item)
+    local req = MTIR.getReconditionRequirements(player, item, MTIR.SEW_BY_HAND, nil)
+    local option = subMenu:addOption(getText("IGUI_MTIR_JobType_Recondition_UseStrip",
+        getItemNameFromFullType(req.materialType)), player, queueRecondition, item, req, nil, nil)
+    option.notAvailable = not req.ready
+    option.toolTip = ISInventoryPaneContextMenu.addToolTip()
+    option.toolTip.description = describeRecondition(item, req, nil)
+end
+
+local function addSpareSubOption(subMenu, player, item, spareItem)
+    local req = MTIR.getReconditionRequirements(player, item, MTIR.SEW_BY_HAND, spareItem)
+    local option = subMenu:addOption(getText("IGUI_MTIR_JobType_Recondition_UseSpare", spareDisplayName(spareItem)),
+        player, queueRecondition, item, req, spareItem, nil)
+    option.notAvailable = not req.ready
+    option.toolTip = ISInventoryPaneContextMenu.addToolTip()
+    option.toolTip.description = describeRecondition(item, req, spareItem)
+end
+
+local function addMissingSpareSubOption(subMenu, player, item)
+    local req = MTIR.getReconditionRequirements(player, item, MTIR.SEW_BY_HAND, nil)
     local name = getItemNameFromFullType(item:getFullType())
     local option = subMenu:addOption(getText("IGUI_MTIR_JobType_Recondition_UseSpare", name))
     option.notAvailable = true
     option.toolTip = ISInventoryPaneContextMenu.addToolTip()
     option.toolTip.description = colorForPercent(0.5) .. getText("Tooltip_potentialRepair") .. " ???"
         .. " <LINE>" .. colorForPercent(0.5) .. getText("Tooltip_chanceSuccess") .. " ???"
-        .. reconditionNeeds(ctx)
+        .. toolLines(req)
         .. " <LINE>" .. ISInventoryPaneContextMenu.bhs .. name
-        .. tailoringLine(player:getPerkLevel(Perks.Tailoring), MTIR.getRequiredLevelToRecondition(item))
-        .. repairedLine(ctx.repairedTimes)
+        .. tailoringLine(req.effectiveLevel, req.requiredLevel)
+        .. repairedLine(req.repairedTimes)
 end
 
 local function addReconditionOption(item, player, context)
     if item:getCondition() >= item:getConditionMax() then
         return
     end
-    local needle, scissors = getTools(player)
-    local allThreads = player:getInventory():getItemsFromType("Thread", true)
-    local requiredThread = MTIR.getRequiredThreadToRecondition(item)
-    local ctx = {
-        needle = needle,
-        scissors = scissors,
-        requiredThread = requiredThread,
-        remainingThread = MTIR.getRemainingThread(allThreads),
-        threads = MTIR.pickThreads(allThreads, requiredThread),
-        repairedTimes = MTIR.getRepairedTimes(item),
-    }
-
     local option = context:addOption(getText("IGUI_MTIR_JobType_ReconditionClothes"))
     local subMenu = context:getNew(context)
     context:addSubMenu(option, subMenu)
 
     if MTIR.getClothesFabricType(item) then
-        addStripSubOption(subMenu, player, item, ctx)
+        addStripSubOption(subMenu, player, item)
     end
 
     local spares = player:getInventory():getItemsFromType(item:getFullType(), true)
     local hasSpare = false
     for i = 0, spares:size() - 1 do
         local spareItem = spares:get(i)
-        if spareItem ~= item then
+        if MTIR.isValidSpare(item, spareItem) then
             hasSpare = true
-            addSpareSubOption(subMenu, player, item, spareItem, ctx)
+            addSpareSubOption(subMenu, player, item, spareItem)
         end
     end
     if not hasSpare then
-        addMissingSpareSubOption(subMenu, player, item, ctx)
+        addMissingSpareSubOption(subMenu, player, item)
     end
 end
+
+-- ----------------------------------------------------------------------------
+-- Entretenir une machine à coudre (appelé par le panneau de la machine)
+-- ----------------------------------------------------------------------------
+
+--- Texte riche des besoins d'un entretien (MTIR.getMaintenanceRequirements).
+local function describeMaintenance(req)
+    local perkName = PerkFactory.getPerk(req.perk):getName()
+    return getText("IGUI_MTIR_Maintenance_Info", tostring(math.floor(req.condition + 0.5)), tostring(req.gain))
+        .. needsHeader()
+        .. needLine(req.screwdriver ~= nil, getItemNameFromFullType("Base.Screwdriver"))
+        .. needLine(req.oil ~= nil, getText("IGUI_MTIR_Maintenance_Oil", tostring(req.requiredOilUses)))
+        .. " <LINE> <RGB:1,1,1> " .. perkName .. " " .. req.perkLevel
+end
+
+--- Marche jusqu'à la machine, tournevis en main, puis entretien. Faux si rien n'a été lancé.
+local function queueMaintenance(player, machine)
+    local req = MTIR.getMaintenanceRequirements(player, machine)
+    if not req.ready then
+        return false
+    end
+    ISInventoryPaneContextMenu.transferIfNeeded(player, req.oil)
+    if not luautils.walkAdjObject(player, machine, true, true) then
+        return false
+    end
+    ISWorldObjectContextMenu.equip(player, player:getPrimaryHandItem(), req.screwdriver, true)
+    ISTimedActionQueue.add(MTIR_MachineMaintenanceAction:new(player, MTIR.encodeMachinePos(machine),
+        req.screwdriver, req.oil))
+    return true
+end
+
+--- Interface des retouches, remises en état et entretiens, partagée avec le panneau
+--- de la machine à coudre (MTIR_SewingMachineWindow.lua) :
+---   describeResize(item, req, upsize)           -> texte riche (req : MTIR.getResizeRequirements)
+---   describeRecondition(item, req, spareItem)   -> texte riche (req : MTIR.getReconditionRequirements)
+---   describeMaintenance(req)                    -> texte riche (req : MTIR.getMaintenanceRequirements)
+---   queueResize(player, item, req, upsize, machine|nil)
+---   queueRecondition(player, item, req, spareItem|nil, machine|nil)
+---   queueMaintenance(player, machine)           -> vrai si l'entretien a été mis en file
+--- machine = nil : travail à la main ; sinon marche jusqu'à la machine avant l'action.
+MTIR.AlterUI = {
+    describeResize = describeResize,
+    describeRecondition = describeRecondition,
+    describeMaintenance = describeMaintenance,
+    queueResize = queueResize,
+    queueRecondition = queueRecondition,
+    queueMaintenance = queueMaintenance,
+    spareDisplayName = spareDisplayName,
+}
 
 -- ----------------------------------------------------------------------------
 -- Choisir la taille d'un vêtement fabriqué

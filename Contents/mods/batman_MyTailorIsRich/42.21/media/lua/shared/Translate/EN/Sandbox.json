@@ -43,5 +43,15 @@
     "Sandbox_MyTailorIsRich_PatternMaxUses": "Sewings per pattern",
     "Sandbox_MyTailorIsRich_PatternMaxUses_tooltip": "How many times a traced pattern can be used (success or failure) before it falls apart.",
     "Sandbox_MyTailorIsRich_ShoePatternLevel": "Tailoring for shoe patterns",
-    "Sandbox_MyTailorIsRich_ShoePatternLevel_tooltip": "Tailoring level to sew shoes from a pattern. Tracing needs one level less. Ignored when the tailoring level requirement is off."
+    "Sandbox_MyTailorIsRich_ShoePatternLevel_tooltip": "Tailoring level to sew shoes from a pattern. Tracing needs one level less. Ignored when the tailoring level requirement is off.",
+    "Sandbox_MyTailorIsRich_RequireThimble": "Thimble for hand sewing",
+    "Sandbox_MyTailorIsRich_RequireThimble_tooltip": "Sewing by hand (patterns, resizing, reconditioning) needs a thimble in the inventory. It is not used up. Sewing machines don't need one.",
+    "Sandbox_MyTailorIsRich_MachineBonusMultiplier": "Sewing machine bonus",
+    "Sandbox_MyTailorIsRich_MachineBonusMultiplier_tooltip": "Scales every sewing machine bonus (speed, Tailoring levels, size precision, thread saved). 0 = a machine gives no bonus, 2 = twice the bonus.",
+    "Sandbox_MyTailorIsRich_MachineNoiseMultiplier": "Sewing machine noise",
+    "Sandbox_MyTailorIsRich_MachineNoiseMultiplier_tooltip": "Scales the range of the noise that attracts zombies while a machine runs. 0 = silent machines.",
+    "Sandbox_MyTailorIsRich_EnableMachineMaintenance": "Sewing machine maintenance",
+    "Sandbox_MyTailorIsRich_EnableMachineMaintenance_tooltip": "Machines wear out, can break needles and jam, and need a screwdriver and cooking oil to be serviced.",
+    "Sandbox_MyTailorIsRich_SewingLootMultiplier": "Sewing loot",
+    "Sandbox_MyTailorIsRich_SewingLootMultiplier_tooltip": "Scales how often sewing machines and store-bought patterns appear in loot. 0 = never."
 }

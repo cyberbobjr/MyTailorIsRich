@@ -1,4 +1,5 @@
 [h1]My Tailor Is Rich — Tailles de vêtements et pointures[/h1]
+
 [b]Build 42.21 · Solo et multijoueur[/b]
 
 Les vêtements et les chaussures ont enfin une taille. Trouvez ce qui vous va, retouchez le reste, et réfléchissez avant de sprinter avec des bottes trois pointures trop grandes.
@@ -37,7 +38,7 @@ Les vêtements et les chaussures ont enfin une taille. Trouvez ce qui vous va, r
 [/list]
 
 [table]
-[tr][th]Ajustement[/th][th]Effets[/th][/tr]
+[tr][td]Ajustement[/td][td]Effets[/td][/tr]
 [tr][td]Trop petites de 3 pointures ou plus[/td][td]Impossibles à enfiler[/td][/tr]
 [tr][td]Trop petites de 1 ou 2 pointures[/td][td]Humeur [b]Inconfort[/b], [b]ampoules[/b] (une jauge de frottement monte en marchant, plus vite en courant ; le personnage prévient à mi-chemin), courbatures aux pieds[/td][/tr]
 [tr][td]Bonne pointure ou une de plus[/td][td]Rien[/td][/tr]
@@ -50,34 +51,28 @@ Une ampoule est une petite égratignure au pied, sans infection zombie. Comme to
 [h2]Patrons de couture[/h2]
 
 [list]
-[*]Clic droit sur un vêtement ou une paire de chaussures ayant une taille : [b]Tracer un patron[/b]. Il faut des ciseaux, un stylo ou un crayon et des feuilles de papier (plus pour un vêtement complexe). Le modèle doit être en bon état (50 % ou plus) ; il reste intact.
-[*]Clic droit sur le patron : [b]Coudre d'après le patron[/b], puis choisissez la taille (XS à XXL, ou 35 à 47 pour les chaussures). L'objet obtenu a une taille connue.
-[*]Les matériaux suivent le tissu du modèle : coton (draps déchirés, rouleau de coton), jean (bandes de jean, rouleaux de jean) ou cuir (lanières de cuir, cuir tanné). Une grande taille demande plus de tissu. Pour le cuir, une alêne et un couteau aiguisé conviennent aussi.
-[*][b]Précision[/b] : l'objet peut sortir avec une taille d'écart, plus grand ou plus petit. Le risque passe de 50 % à 0 % selon le niveau de Couture du traceur et celui de la couturière ou du couturier.
-[*]Un patron supporte [b]5 coutures[/b] (réussies ou non), puis part en morceaux.
-[*]Couture requise : difficulté du vêtement + tissu (coton 0, jean 1, cuir 2) ; le tracé demande un niveau de moins. [b]Les chaussures demandent le niveau 6[/b] (option sandbox).
-[*]Pas de patron pour une protection balistique ni pour un objet sans tissu cousable.
+[*][b]Tracez un patron[/b] sur une table en découpant un vêtement ou une paire ayant une taille (ciseaux, stylo, papier ; le modèle est détruit), ou trouvez des [b]patrons du commerce[/b], tirés parmi tous les vêtements traçables, [b]mods compris[/b].
+[*][b]Cousez d'après le patron[/b] dans la taille de votre choix, avec le tissu du modèle (coton, jean, cuir). Un faible niveau peut donner une taille d'écart. Un patron sert 5 fois.
+[*]Coudre à la main demande un [b]dé à coudre[/b]. Les chaussures demandent la Couture 8, une aiguille [b]et un poinçon[/b], de la colle, et du cuir ou du tissu selon le modèle ; elles se cousent à la main. Les chaussures en caoutchouc (bottes de pluie, tongs) n'ont pas de patron.
+[*]Les patrons du commerce se trouvent dans les merceries, les rayons couture et les librairies de mode.
+[/list]
+
+[h2]Machines à coudre[/h2]
+
+[list]
+[*]Machines [b]électrique[/b] (sur une table, avec du courant : deux fois plus rapide, +2 niveaux de Couture) et [b]à pédale[/b] (lourd meuble, sans courant : 25 % plus rapide, +1 niveau), dans les merceries, magasins de vêtements, supermarchés, le stockage des particuliers (garages, box, greniers, abris, placards) et partout où traîne un kit de couture.
+[*]Cliquez sur une machine : onglets [b]Patron[/b] (taille, quantité à la suite, aperçu du vêtement, objets utilisés exacts), [b]Retouche[/b] et [b]Remise en état[/b], avec une barre de progression.
+[*]Les machines font du [b]bruit[/b] qui attire les zombies (l'électrique bien plus loin), [b]s'usent[/b], cassent des aiguilles et se bloquent. Leur état s'affiche dans le panneau : entretenez-les avec un tournevis et un peu d'huile de cuisine (végétale ou d'olive).
 [/list]
 
 [h2]Multijoueur[/h2]
 
-Le serveur décide de tout : tailles, retouches, usure, ampoules, courbatures, chaussures perdues. Il synchronise ensuite le résultat vers les clients. Toutes les actions passent par le système réseau vanilla de la Build 42.
+Le serveur décide de tout : tailles, retouches, usure, ampoules, courbatures, chaussures perdues, coutures, machines et leur usure. Il vérifie chaque objet utilisé, puis synchronise le résultat vers les clients. Toutes les actions passent par le système réseau vanilla de la Build 42, et une machine ne sert qu'à un joueur à la fois.
 
 [h2]Options sandbox[/h2]
 
-Niveau de couture requis, XP de couture, durée des actions, multiplicateurs de déchirure, de chute du vêtement, de chute et de raideur, pertes d'isolation et de vitesse de combat, usure (activation, jours min/max, usure en cas d'échec, pertes de protection et de résistance), liste de vêtements supplémentaires, [b]emplacements supplémentaires[/b], [b]vêtements exclus[/b], [b]pointures activées ou non[/b], [b]intensité des effets des chaussures[/b] (0 coupe ampoules, inconfort, endurance supplémentaire et pertes de chaussures), [b]coutures par patron[/b], [b]niveau de Couture des patrons de chaussures[/b].
-
-[h2]Débogage[/h2]
-
-En mode debug, ou en MP avec un rôle autorisé à éditer les objets : clic droit sur un vêtement ou une paire, [b][Debug] Taille[/b]. Le menu affiche votre taille, votre pointure, la jauge de frottement et la force d'écrasement. Il permet de fixer n'importe quelle taille ou de l'effacer pour un nouveau tirage.
-
-[h2]À savoir[/h2]
-
-[list]
-[*]En Build 42.21, le [b]RunSpeedModifier[/b] vanilla des vêtements est seulement affiché dans l'infobulle, jamais appliqué au déplacement. Seuls les sacs l'utilisent vraiment. Ce mod ralentit donc par les moyens que le moteur permet : blessures aux pieds (ampoules) et endurance.
-[*]Les courbatures aux bras après un combat viennent des [b]poussées vanilla[/b] : chaque poussée sollicite les bras. Un haut trop serré les fait seulement durer plus longtemps.
-[/list]
+Nombreuses options sandbox : niveaux et XP de couture, durée des actions, effets de taille, usure, pointures, patrons, dé à coudre, bonus, bruit et entretien des machines, rareté du butin. Liste complète et détails sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 
 [h2]Crédits[/h2]
 
-Basé sur [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], dont il reprend les sons. Réécrit et porté en Build 42.21 avec le multijoueur, puis enrichi des pointures de chaussures et des patrons de couture. Infobulles par [b]TooltipLib[/b].
+Basé sur [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b] (Workshop 3491510356), dont il reprend les sons. Réécrit et porté en Build 42.21 avec le multijoueur, puis enrichi des pointures de chaussures, des patrons de couture et des machines à coudre. Infobulles par [b]TooltipLib[/b]. Sons des machines : machine électrique de Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0) ; machine à pédale de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), découpés en boucles. Code source (MIT) sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].

@@ -8,6 +8,9 @@
 require "MyTailorIsRich/MTIR_ContextMenu"
 require "TimedActions/MTIR_TracePatternAction"
 require "TimedActions/MTIR_SewPatternAction"
+require "MyTailorIsRich/MTIR_SewingMachine"
+require "MyTailorIsRich/MTIR_Alterations"
+require "MyTailorIsRich/MTIR_WorkTable"
 
 local U = MTIR.MenuUtil
 
@@ -40,15 +43,20 @@ end
 -- Tracer
 -- ----------------------------------------------------------------------------
 
-local function queueTrace(player, item, scissors, pen, papers)
+--- Transferts, déshabillage éventuel, marche jusqu'à la table, outils en main, tracé.
+local function queueTrace(player, item, scissors, pen, papers, workTable)
     ISInventoryPaneContextMenu.transferIfNeeded(player, papers)
     if player:isEquippedClothing(item) then
         ISTimedActionQueue.add(ISUnequipAction:new(player, item, 50))
     else
         ISInventoryPaneContextMenu.transferIfNeeded(player, item)
     end
+    if not luautils.walkAdjObject(player, workTable, true, true) then
+        return
+    end
     bringToHands(player, scissors, pen)
-    ISTimedActionQueue.add(MTIR_TracePatternAction:new(player, item, scissors, pen, papers))
+    ISTimedActionQueue.add(MTIR_TracePatternAction:new(player, item, scissors, pen, papers,
+        MTIR.encodeMachinePos(workTable)))
 end
 
 local function addBlockedTrace(context, item, reasonKey)
@@ -77,10 +85,12 @@ local function addTraceOption(item, player, context)
     local tailoring = player:getPerkLevel(Perks.Tailoring)
     local requiredLevel = MTIR.getRequiredLevelToTrace(model)
     local conditionOk = MTIR.canTraceCondition(item)
+    local workTable = MTIR.findNearestWorkTable(player)
 
     local option = context:addOption(getText("IGUI_MTIR_JobType_TracePattern"), player, queueTrace,
-        item, scissors, pen, papers)
-    option.notAvailable = not (scissors and pen and papers and conditionOk and tailoring >= requiredLevel)
+        item, scissors, pen, papers, workTable)
+    option.notAvailable = not (scissors and pen and papers and workTable and conditionOk
+        and tailoring >= requiredLevel)
     local tooltip = ISInventoryPaneContextMenu.addToolTip()
     tooltip.texture = item:getTex()
     tooltip:setName(getText("IGUI_MTIR_PatternName", getItemNameFromFullType(item:getFullType())))
@@ -90,6 +100,7 @@ local function addTraceOption(item, player, context)
         .. U.needLine(pen ~= nil, getText("IGUI_MTIR_Pattern_Pen"))
         .. countLine(papers ~= nil, MTIR.getPaperType(), allPapers:size(), requiredPaper)
         .. U.needLine(conditionOk, getText("IGUI_MTIR_Pattern_GoodCondition"))
+        .. U.needLine(workTable ~= nil, getText("IGUI_MTIR_Pattern_WorkTable"))
         .. U.tailoringLine(tailoring, requiredLevel)
     option.toolTip = tooltip
 end
@@ -98,12 +109,26 @@ end
 -- Coudre
 -- ----------------------------------------------------------------------------
 
-local function queueSew(player, pattern, needle, scissors, threads, materials, size)
+--- Transferts, outils en main puis couture. machine : objet machine à coudre, ou nil (à la main).
+--- Chaussures : l'alêne et la colle (req.awl, req.glue) rejoignent l'inventaire principal.
+local function queueSew(player, pattern, req, size, machine)
     ISInventoryPaneContextMenu.transferIfNeeded(player, pattern)
-    ISInventoryPaneContextMenu.transferIfNeeded(player, threads)
-    ISInventoryPaneContextMenu.transferIfNeeded(player, materials)
-    bringToHands(player, scissors, needle)
-    ISTimedActionQueue.add(MTIR_SewPatternAction:new(player, pattern, needle, scissors, threads, materials, size))
+    ISInventoryPaneContextMenu.transferIfNeeded(player, req.threads)
+    ISInventoryPaneContextMenu.transferIfNeeded(player, req.materials)
+    local awl = req.needsAwl and req.awl or nil
+    local glue = req.needsGlue and req.glue or nil
+    if awl then
+        ISInventoryPaneContextMenu.transferIfNeeded(player, awl)
+    end
+    if glue then
+        ISInventoryPaneContextMenu.transferIfNeeded(player, glue)
+    end
+    if machine and not luautils.walkAdjObject(player, machine, true, true) then
+        return
+    end
+    bringToHands(player, req.scissors, req.needle)
+    ISTimedActionQueue.add(MTIR_SewPatternAction:new(player, pattern, req.needle, req.scissors, req.threads,
+        req.materials, size, machine and MTIR.encodeMachinePos(machine) or "", awl, glue))
 end
 
 local function materialNames(fabric)
@@ -121,25 +146,6 @@ local function materialNames(fabric)
     return table.concat(names, ", ")
 end
 
---- Outils, fil et capacités communs à toutes les tailles du patron.
-local function sewContext(player, data)
-    local inventory = player:getInventory()
-    local allThreads = inventory:getItemsFromType("Thread", true)
-    local requiredThread = MTIR.getPatternThread(data)
-    local leather = data.fabric == "Leather"
-    return {
-        needleLabel = leather and getText("IGUI_MTIR_Pattern_NeedleOrAwl") or getItemNameFromFullType("Base.Needle"),
-        cutterLabel = leather and getText("IGUI_MTIR_Pattern_ScissorsOrKnife") or getItemNameFromFullType("Base.Scissors"),
-        needle = inventory:getFirstEvalRecurse(MTIR.predicatePatternNeedle(data.fabric)),
-        scissors = inventory:getFirstEvalRecurse(MTIR.predicatePatternCutter(data.fabric)),
-        requiredThread = requiredThread,
-        remainingThread = MTIR.getRemainingThread(allThreads),
-        threads = MTIR.pickThreads(allThreads, requiredThread),
-        tailoring = player:getPerkLevel(Perks.Tailoring),
-        requiredLevel = MTIR.getRequiredLevelToSew(data),
-    }
-end
-
 local function isOwnSize(player, data, size)
     if data.kind == "shoe" then
         return tonumber(size) == MTIR.getPlayerShoeSize(player)
@@ -147,34 +153,65 @@ local function isOwnSize(player, data, size)
     return size == MTIR.getPlayerSize(player).name
 end
 
-local function addSizeOption(subMenu, player, pattern, data, size, ctx)
-    local requiredUnits = MTIR.getPatternMaterialUnits(data, size)
-    local available, materials = MTIR.pickPatternMaterials(player:getInventory(), data.fabric, requiredUnits)
+local function sizeLabel(player, data, size)
     local label = data.kind == "shoe" and getText("IGUI_MTIR_ShoeSize", size) or size
     if isOwnSize(player, data, size) then
         label = label .. " " .. getText("IGUI_MTIR_Pattern_YourSize")
     end
-    local option = subMenu:addOption(label, player, queueSew, pattern, ctx.needle, ctx.scissors, ctx.threads,
-        materials, size)
-    option.notAvailable = not (ctx.needle and ctx.scissors and ctx.threads and materials
-        and ctx.tailoring >= ctx.requiredLevel)
+    return label
+end
 
-    local success = ctx.tailoring >= ctx.requiredLevel
-        and MTIR.getSuccessChanceForChange(ctx.tailoring, ctx.requiredLevel) or 0
-    local offChance = MTIR.getPatternOffChance(data, ctx.tailoring)
+--- Chaussures : alêne et colle (champs needsAwl/awl, needsGlue/glue de MTIR.getSewRequirements).
+local function shoeToolLines(req)
+    local text = ""
+    if req.needsAwl then
+        text = text .. U.needLine(req.awl ~= nil, getItemNameFromFullType("Base.Awl"))
+    end
+    if req.needsGlue then
+        text = text .. U.needLine(req.glue ~= nil, getText("IGUI_MTIR_Pattern_Glue", tostring(req.requiredGlue)))
+    end
+    return text
+end
+
+--- Texte riche : chances puis besoins (MTIR.getSewRequirements).
+local function describeSew(data, req)
+    local shoe = data.kind == "shoe"
+    local leather = data.fabric == "Leather"
+    local needleLabel = (leather and not shoe) and getText("IGUI_MTIR_Pattern_NeedleOrAwl")
+        or getItemNameFromFullType("Base.Needle")
+    local cutterLabel = (leather or shoe) and getText("IGUI_MTIR_Pattern_ScissorsOrKnife")
+        or getItemNameFromFullType("Base.Scissors")
+    return U.chanceHeader("Tooltip_chanceSuccess", req.success)
+        .. " <LINE>" .. U.colorForPercent(1 - req.offChance * 2)
+        .. getText("IGUI_MTIR_Pattern_OffChance", tostring(math.floor(req.offChance * 100 + 0.5)))
+        .. needsHeader()
+        .. U.needLine(req.needle ~= nil, needleLabel)
+        .. shoeToolLines(req)
+        .. U.needLine(req.scissors ~= nil, cutterLabel)
+        .. countLine(req.threads ~= nil, "Base.Thread", req.remainingThread, req.requiredThread)
+        .. U.thimbleLine(req)
+        .. U.needLine(req.materials ~= nil, getText("IGUI_MTIR_Pattern_Material", materialNames(data.fabric),
+            tostring(req.availableUnits), tostring(req.requiredUnits)))
+        .. U.tailoringLine(req.effectiveLevel or req.tailoring, req.requiredLevel)
+end
+
+--- Partagé avec le panneau de la machine à coudre (MTIR_SewingMachineWindow.lua) :
+---   queueSew(player, pattern, req, size, machine|nil) : transferts (alêne et colle des
+---     chaussures compris, pris dans req), marche jusqu'à la machine (si machine),
+---     outils en main, puis MTIR_SewPatternAction ;
+---   sizeLabel(player, data, size) -> libellé de taille (« (votre taille) » compris) ;
+---   describeSew(data, req) -> texte riche (req : MTIR.getSewRequirements ; ligne du dé
+---     à coudre quand req.needsThimble ; alêne et colle quand req.needsAwl / needsGlue).
+MTIR.SewUI = { queueSew = queueSew, sizeLabel = sizeLabel, describeSew = describeSew }
+
+local function addSizeOption(subMenu, player, pattern, data, size)
+    local req = MTIR.getSewRequirements(player, data, size, MTIR.SEW_BY_HAND)
+    local option = subMenu:addOption(sizeLabel(player, data, size), player, queueSew, pattern, req, size, nil)
+    option.notAvailable = not req.ready
     local tooltip = ISInventoryPaneContextMenu.addToolTip()
     tooltip.texture = pattern:getTex()
     tooltip:setName(getItemNameFromFullType(data.fullType) .. " (" .. size .. ")")
-    tooltip.description = U.chanceHeader("Tooltip_chanceSuccess", math.min(1, success))
-        .. " <LINE>" .. U.colorForPercent(1 - offChance * 2)
-        .. getText("IGUI_MTIR_Pattern_OffChance", tostring(math.floor(offChance * 100 + 0.5)))
-        .. needsHeader()
-        .. U.needLine(ctx.needle ~= nil, ctx.needleLabel)
-        .. U.needLine(ctx.scissors ~= nil, ctx.cutterLabel)
-        .. countLine(ctx.threads ~= nil, "Base.Thread", ctx.remainingThread, ctx.requiredThread)
-        .. U.needLine(materials ~= nil, getText("IGUI_MTIR_Pattern_Material", materialNames(data.fabric),
-            tostring(available), tostring(requiredUnits)))
-        .. U.tailoringLine(ctx.tailoring, ctx.requiredLevel)
+    tooltip.description = describeSew(data, req)
     option.toolTip = tooltip
 end
 
@@ -192,9 +229,8 @@ local function addSewOption(pattern, player, context)
     end
     local subMenu = context:getNew(context)
     context:addSubMenu(option, subMenu)
-    local ctx = sewContext(player, data)
     for _, size in ipairs(MTIR.getPatternSizes(data)) do
-        addSizeOption(subMenu, player, pattern, data, size, ctx)
+        addSizeOption(subMenu, player, pattern, data, size)
     end
 end
 

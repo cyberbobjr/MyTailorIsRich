@@ -66,6 +66,10 @@ end
 
 function MTIR_CheckSizeAction:complete()
     local item, character = self.item, self.character
+    -- Le serveur n'appelle pas isValid : la possession est revérifiée ici.
+    if not MTIR.hasItem(character, item) then
+        return false
+    end
     if MTIR.canShoeHaveSize(item) then
         return completeShoe(item, character)
     end
