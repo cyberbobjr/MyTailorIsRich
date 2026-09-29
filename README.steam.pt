@@ -29,8 +29,8 @@ My Tailor Is Rich dá um tamanho a cada peça de roupa e a cada par de sapatos. 
 
 [list]
 [*]O teu tamanho depende do teu [b]peso[/b]: XS até 50 kg, S até 65, M até 75, L abaixo de 85, XL abaixo de 100, XXL a partir de 100. Muda se engordares ou emagreceres.
-[*]Não sabes o tamanho da roupa que encontras. Usa [b]Ver tamanho da roupa[/b] (clique direito) para ler a etiqueta. Com pouca Alfaiataria, a tua personagem só consegue adivinhar.
-[*]Toda a roupa de um mesmo zombie tem tamanhos coerentes.
+[*]Não sabes o tamanho da roupa que encontras. Usa [b]Ver tamanho da roupa[/b] (clique direito) para ler a etiqueta. Com pouca Alfaiataria, a tua personagem só pode adivinhar.
+[*]A roupa de um mesmo zombie tem tamanhos coerentes.
 [*]Chapéus, máscaras, luvas, joias, cintos e roupa interior são de tamanho único.
 [/list]
 
@@ -40,7 +40,7 @@ My Tailor Is Rich dá um tamanho a cada peça de roupa e a cada par de sapatos. 
 [*]Aquece menos.
 [*]As peças de cima tornam os teus ataques mais lentos.
 [*]Calças ou saias largas podem [b]cair[/b] sem cinto e com as duas mãos ocupadas.
-[*]Podes [b]tropeçar[/b] ao aterrar depois de saltar uma vedação, mesmo a andar (mais vezes a correr).
+[*]Podes [b]tropeçar[/b] ao aterrar após saltar uma vedação, mesmo a andar (mais vezes a correr).
 [/list]
 
 [h3]Demasiado pequena[/h3]
@@ -58,7 +58,7 @@ My Tailor Is Rich dá um tamanho a cada peça de roupa e a cada par de sapatos. 
 [list]
 [*][b]Ajusta[/b] uma peça um tamanho acima (com tiras de tecido) ou um tamanho abaixo (com clipes de papel), com agulha, linha e tesoura. O êxito depende da Alfaiataria e do tecido.
 [*]A roupa [b]gasta-se[/b] com sujidade, sangue, chuva e aperto. [b]Restaura-a[/b] com tiras de tecido ou com outra peça idêntica.
-[*]Quando [b]fabricas roupa[/b], escolhes o tamanho na janela de Fabrico.
+[*]Ao [b]fabricar roupa[/b], escolhes o tamanho na janela de Fabrico.
 [/list]
 
 [h2]Números de calçado (EU 35 a 47)[/h2]
@@ -75,7 +75,7 @@ My Tailor Is Rich dá um tamanho a cada peça de roupa e a cada par de sapatos. 
 [tr][td]3 ou mais números abaixo[/td][td]Não entram no pé[/td][/tr]
 [tr][td]1–2 números abaixo[/td][td][b]Desconforto[/b], [b]bolhas[/b] depois de andar algum tempo (mais cedo a correr; a personagem queixa-se antes), pés rígidos[/td][/tr]
 [tr][td]Número certo ou 1 acima[/td][td]Tudo bem[/td][/tr]
-[tr][td]2 ou mais números acima[/td][td]Cansas-te mais depressa a correr, bolhas ocasionais, [b]tropeções[/b] depois de vedações e muros, [b]pisões[/b] mais fracos em zombies caídos (tão fracos como descalço)[/td][/tr]
+[tr][td]2 ou mais números acima[/td][td]Cansas-te mais depressa a correr, bolhas ocasionais, [b]tropeções[/b] depois de vedações e muros, [b]pisões[/b] mais fracos em zombies caídos (como descalço)[/td][/tr]
 [tr][td]3 ou mais números acima[/td][td]Desconforto, e podes [b]perder um sapato[/b] ao correr, saltar, trepar ou cair (chinelos de dedo e pantufas saltam facilmente, botas atacadas aguentam melhor)[/td][/tr]
 [/table]
 
@@ -85,10 +85,10 @@ As bolhas são pequenas feridas no pé, sem infeção zombie. Como qualquer feri
 
 [list]
 [*][b]Traçar molde[/b] numa mesa, a partir de qualquer peça de roupa ou par de sapatos (tesoura, caneta, papel). O original é recortado.
-[*]Ou encontra [b]moldes de loja[/b] em retrosarias, prateleiras de costura e livrarias de moda. Para qualquer roupa, [b]incluindo a de outros mods[/b].
-[*][b]Costurar com molde[/b] no tamanho que quiseres, com o mesmo tecido do original (algodão, ganga, couro). Com pouca habilidade, a peça pode sair um tamanho acima ou abaixo. Cada molde serve 5 vezes.
+[*]Ou encontra [b]moldes de loja[/b] em retrosarias, prateleiras de costura e livrarias de moda, para qualquer roupa, [b]incluindo a de outros mods[/b].
+[*][b]Costurar com molde[/b] no tamanho que quiseres, no tecido do original (algodão, ganga, couro). Com pouca habilidade, pode sair um tamanho acima ou abaixo. Cada molde serve 5 vezes.
 [*]Coser à mão exige um [b]dedal[/b].
-[*]Os sapatos são coisa de especialista: Alfaiataria 8, agulha [b]e sovela[/b], cola e couro ou tecido. São sempre cosidos à mão. O calçado de borracha (botas de borracha, chinelos de dedo) não pode ser feito com molde.
+[*]Os sapatos são coisa de especialista: Alfaiataria 8, agulha [b]e sovela[/b], cola e couro ou tecido. Sempre cosidos à mão. O calçado de borracha (botas de borracha, chinelos de dedo) não se faz com molde.
 [/list]
 
 [h2]Máquinas de costura[/h2]
@@ -96,21 +96,26 @@ As bolhas são pequenas feridas no pé, sem infeção zombie. Como qualquer feri
 [list]
 [*][b]Máquina de Costura Elétrica[/b]: fica sobre uma mesa e precisa de eletricidade. Duas vezes mais rápida e vale +2 níveis de Alfaiataria.
 [*][b]Máquina de Costura a Pedal[/b]: um móvel pesado, sem eletricidade. 25% mais rápida, +1 nível de Alfaiataria.
-[*]Procura em retrosarias e lojas de roupa, supermercados, garagens, guarda-móveis, sótãos, barracões, roupeiros... onde quer que possa haver um kit de costura.
-[*]Clica numa máquina para costurar com molde (escolhe o tamanho e a quantidade), ajustar ou restaurar roupa.
-[*]Atenção: as máquinas são [b]barulhentas[/b] e atraem zombies (a elétrica, de muito mais longe). Também se [b]gastam[/b], partem agulhas e encravam. Mantém-nas a funcionar com uma chave de fendas e um pouco de óleo de cozinha (vegetal ou azeite).
+[*]Procura em retrosarias e lojas de roupa, supermercados, garagens, guarda-móveis, sótãos, barracões, roupeiros... onde possa haver um kit de costura.
+[*]Clica numa máquina para costurar com molde (escolhe tamanho e quantidade), ajustar ou restaurar roupa.
+[*]Atenção: as máquinas são [b]barulhentas[/b] e atraem zombies (a elétrica, de muito mais longe). Também se [b]gastam[/b], partem agulhas e encravam. Mantém-nas em ordem com uma chave de fendas e algum óleo de cozinha (vegetal ou azeite).
 [/list]
 
 [h2]Multijogador[/h2]
 
-Todos veem os mesmos tamanhos, o mesmo desgaste e os mesmos resultados de costura. Só um jogador de cada vez pode usar uma máquina de costura.
+Todos veem os mesmos tamanhos, o mesmo desgaste e os mesmos resultados de costura. Cada máquina só serve um jogador de cada vez.
 
 [h2]Opções de jogo aberto (sandbox)[/h2]
 
-Quase tudo é configurável: habilidade e EXP, velocidade das ações, severidade das penalizações por tamanho errado, desgaste da roupa, números de calçado, moldes, dedal, máquinas de costura, raridade no saque... A roupa de outros mods recebe um tamanho automaticamente, e duas listas permitem incluir ou excluir itens específicos. Todos os pormenores no [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+Quase tudo é configurável: habilidade e EXP, velocidade das ações, rigor das penalizações por tamanho errado, desgaste da roupa, números de calçado, moldes, dedal, máquinas de costura, raridade no saque... A roupa de outros mods recebe um tamanho automaticamente, e duas listas permitem incluir ou excluir itens específicos. Pormenores no [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+
+[h2]Apoia o projeto[/h2]
+
+Gostas do mod? Um café ajuda a financiar novas funcionalidades e traduções.
+[url=https://ko-fi.com/Z8Z8QJV31][img]https://storage.ko-fi.com/cdn/kofi6.png?v=6[/img][/url]
 
 [h2]Créditos[/h2]
 
-Baseado no [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], com os seus sons. Reescrito para a Build 42.21 com suporte para multijogador e alargado com números de calçado, moldes e máquinas de costura. Descrições dos itens via [b]TooltipLib[/b].
-Sons das máquinas de costura: máquina elétrica de Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0); máquina a pedal de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), cortados em ciclos.
+Baseado no [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], com os seus sons. Reescrito para a Build 42.21 com multijogador e alargado com números de calçado, moldes e máquinas de costura. Descrições dos itens via [b]TooltipLib[/b].
+Sons das máquinas: a elétrica, de Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0); a de pedal, de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), cortados em ciclos.
 Código-fonte (MIT) no [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].

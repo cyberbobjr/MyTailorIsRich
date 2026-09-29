@@ -6,7 +6,7 @@
 2. syntaxe Lua 5.1 de tous les fichiers du mod, appels à next() (absent de Kahlua) ;
 3. traductions : JSON valides, mêmes clés et mêmes paramètres que EN, pas de % seul ;
 4. descriptions Steam (README.steam*) : 8 000 octets UTF-8 au plus, BBCode équilibré,
-   mêmes liens que l'anglais, description de workshop.txt identique à README.steam ;
+   mêmes liens et images que l'anglais, description de workshop.txt identique à README.steam ;
 5. tests Lua (tests/lua/test_*.lua) sous lupa, avec l'API du jeu simulée.
 
 Dépendances : pip install lupa ; luacheck facultatif en local, exigé par la CI.
@@ -37,8 +37,9 @@ LONE_PERCENT = re.compile(r"%(?!\d)")
 # Limite de Steam pour la description d'un objet du Workshop, en octets UTF-8 (envoi
 # vérifié : 7 978 octets acceptés, 8 027 refusés avec EResult 8).
 STEAM_DESCRIPTION_MAX_BYTES = 8000
-STEAM_TAGS = ("h1", "h2", "h3", "b", "i", "u", "list", "table", "tr", "td", "url")
-STEAM_URL = re.compile(r"\[url=([^\]]+)\]")
+STEAM_TAGS = ("h1", "h2", "h3", "b", "i", "u", "list", "table", "tr", "td", "url", "img")
+# Liens et images : [url=…] et [img]…[/img].
+STEAM_URL = re.compile(r"\[url=([^\]]+)\]|\[img\]([^\[]+)\[/img\]")
 
 
 class Report:
@@ -200,7 +201,7 @@ def check_steam_descriptions(report):
             if opened != closed:
                 report.fail(f"{path.name} : [{tag}] ouvert {opened} fois, fermé {closed} fois")
         if Counter(STEAM_URL.findall(text)) != reference_urls:
-            report.fail(f"{path.name} : liens différents de README.steam")
+            report.fail(f"{path.name} : liens ou images différents de README.steam")
         if report.failures == before:
             report.ok(f"{path.name} : {size} octets")
     description = [line[len("description="):] for line in workshop if line.startswith("description=")]

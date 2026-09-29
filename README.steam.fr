@@ -9,11 +9,11 @@ My Tailor Is Rich donne une taille à chaque vêtement et une pointure à chaque
 [h2]En bref[/h2]
 
 [list]
-[*][b]Tailles de vêtements[/b] du XS au XXL, selon le poids de votre personnage.
+[*][b]Tailles de vêtements[/b] du XS au XXL, selon votre poids.
 [*][b]Pointures[/b] du 35 au 47 : gare aux ampoules, aux chutes et aux chaussures perdues.
-[*][b]Retouches[/b] : agrandissez ou rétrécissez vos vêtements grâce à la Couture.
+[*][b]Retouches[/b] : agrandissez ou rétrécissez vos vêtements.
 [*][b]Usure et remise en état[/b] : réparez vos vêtements abîmés.
-[*][b]Patrons de couture[/b] : tracez-les sur vos vêtements préférés ou trouvez-les en magasin.
+[*][b]Patrons de couture[/b] : tracez-les sur vos vêtements ou trouvez-les en magasin.
 [*][b]Machines à coudre[/b] : plus rapides, meilleurs résultats... mais bruyantes.
 [*]Compatible avec les [b]mods de vêtements[/b] et le [b]multijoueur[/b].
 [/list]
@@ -28,9 +28,9 @@ My Tailor Is Rich donne une taille à chaque vêtement et une pointure à chaque
 [h2]Des vêtements à votre taille (ou pas)[/h2]
 
 [list]
-[*]Votre taille dépend de votre [b]poids[/b] : XS jusqu'à 50 kg, S jusqu'à 65, M jusqu'à 75, L sous 85, XL sous 100, XXL à partir de 100. Elle change si vous grossissez ou maigrissez.
-[*]Taille d'un vêtement trouvé : clic droit, [b]Lire l'étiquette[/b]. Avec peu de Couture, votre personnage ne fait que deviner.
-[*]Tous les vêtements d'un même zombie ont des tailles cohérentes.
+[*]Votre taille dépend de votre [b]poids[/b] : XS ≤ 50 kg, S ≤ 65, M ≤ 75, L < 85, XL < 100, XXL ≥ 100. Elle change si vous grossissez ou maigrissez.
+[*]Taille d'un vêtement trouvé : clic droit, [b]Lire l'étiquette[/b]. Avec peu de Couture, on ne fait que deviner.
+[*]Les vêtements d'un même zombie ont des tailles cohérentes.
 [*]Chapeaux, masques, gants, bijoux, ceintures et sous-vêtements sont en taille unique.
 [/list]
 
@@ -38,7 +38,7 @@ My Tailor Is Rich donne une taille à chaque vêtement et une pointure à chaque
 
 [list]
 [*]Tient moins chaud.
-[*]Un haut trop grand ralentit vos attaques.
+[*]Un haut ralentit vos attaques.
 [*]Pantalon ou jupe : peut [b]tomber[/b] sans ceinture quand vous avez les deux mains prises.
 [*]Risque de [b]trébucher[/b] en retombant d'une clôture, même au pas (plus souvent en courant).
 [/list]
@@ -64,10 +64,10 @@ My Tailor Is Rich donne une taille à chaque vêtement et une pointure à chaque
 [h2]Pointures (35 à 47)[/h2]
 
 [list]
-[*]Votre personnage a une [b]pointure fixe[/b] : du 35 au 42 pour les femmes, du 39 au 47 pour les hommes. Elle figure dans l'écran Personnage, près du poids.
+[*]Votre personnage a une [b]pointure fixe[/b] : du 35 au 42 pour les femmes, du 39 au 47 pour les hommes. Visible dans l'écran Personnage, près du poids.
 [*]Bottes de travail, militaires et de randonnée : surtout des pointures d'homme ; chaussures à brides et habillées : surtout de femme. Les chaussures d'un zombie suivent son sexe.
 [*]La pointure est imprimée à l'intérieur : [b]Lire l'étiquette[/b] la donne sans compétence.
-[*]Les enveloppes improvisées (chiffon, jute, jean, cuir, bâche, ficelle) vont à tout le monde. Celles que vous fabriquez sont à votre pointure.
+[*]Les enveloppes improvisées (chiffon, jute, jean, cuir, bâche, ficelle) vont à tous. Celles que vous fabriquez sont à votre pointure.
 [/list]
 
 [table]
@@ -75,8 +75,8 @@ My Tailor Is Rich donne une taille à chaque vêtement et une pointure à chaque
 [tr][td]3 pointures de moins ou plus[/td][td]Impossible de les enfiler[/td][/tr]
 [tr][td]1 ou 2 pointures de moins[/td][td][b]Inconfort[/b], [b]ampoules[/b] après un moment de marche (plus vite en courant ; votre personnage prévient), courbatures aux pieds[/td][/tr]
 [tr][td]Bonne pointure ou une de plus[/td][td]Tout va bien[/td][/tr]
-[tr][td]2 pointures de plus ou davantage[/td][td]Course plus fatigante, ampoules occasionnelles, [b]chutes[/b] après une clôture ou un mur, [b]écrasements[/b] de zombies au sol plus faibles (comme pieds nus)[/td][/tr]
-[tr][td]3 pointures de plus ou davantage[/td][td]Inconfort, et vous pouvez [b]perdre une chaussure[/b] en courant, en sautant, en escaladant ou en tombant (tongs et pantoufles s'envolent facilement, bottes lacées tiennent mieux)[/td][/tr]
+[tr][td]2 pointures de plus et plus[/td][td]Course plus fatigante, ampoules occasionnelles, [b]chutes[/b] après une clôture ou un mur, [b]écrasements[/b] de zombies au sol plus faibles (comme pieds nus)[/td][/tr]
+[tr][td]3 pointures de plus et plus[/td][td]Inconfort, et vous pouvez [b]perdre une chaussure[/b] en courant, en sautant, en escaladant ou en tombant (tongs et pantoufles s'envolent facilement, bottes lacées tiennent mieux)[/td][/tr]
 [/table]
 
 Une ampoule est une petite blessure au pied, sans risque d'infection zombie. Elle vous ralentit jusqu'à guérison : pansez-la !
@@ -96,7 +96,7 @@ Une ampoule est une petite blessure au pied, sans risque d'infection zombie. Ell
 [list]
 [*][b]Machine électrique[/b] : se pose sur une table et a besoin de courant. Deux fois plus rapide, +2 niveaux de Couture.
 [*][b]Machine à pédale[/b] : lourd meuble, sans électricité. 25 % plus rapide, +1 niveau de Couture.
-[*]À chercher dans les merceries, magasins de vêtements, supermarchés, garages, box, greniers, abris de jardin, placards... partout où traîne un kit de couture.
+[*]À chercher dans les merceries, magasins de vêtements, supermarchés, garages, box, greniers, abris, placards... partout où traîne un kit de couture.
 [*]Cliquez sur une machine pour coudre d'après un patron (taille et quantité au choix), retoucher ou remettre en état.
 [*]Attention : elles sont [b]bruyantes[/b] et attirent les zombies (l'électrique de bien plus loin). Elles [b]s'usent[/b], cassent des aiguilles et se bloquent : entretenez-les au tournevis et à l'huile de cuisine (végétale ou d'olive).
 [/list]
@@ -107,10 +107,15 @@ Tout le monde voit les mêmes tailles, la même usure et les mêmes résultats d
 
 [h2]Options sandbox[/h2]
 
-Presque tout se règle : niveaux et XP de Couture, durée des actions, sévérité des mauvaises tailles, usure, pointures, patrons, dé à coudre, machines, rareté du butin... Les vêtements des autres mods ont une taille automatique, deux listes permettent d'en ajouter ou d'en exclure. Tous les détails sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+Presque tout se règle : Couture et XP, durée des actions, sévérité des mauvaises tailles, usure, pointures, patrons, dé à coudre, machines, butin... Les vêtements des autres mods ont une taille automatique, deux listes permettent d'en ajouter ou d'en exclure. Tous les détails sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+
+[h2]Soutenir le projet[/h2]
+
+Le mod vous plaît ? Un café aide à financer les prochaines fonctions et traductions.
+[url=https://ko-fi.com/Z8Z8QJV31][img]https://storage.ko-fi.com/cdn/kofi6.png?v=6[/img][/url]
 
 [h2]Crédits[/h2]
 
-Basé sur [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], dont il reprend les sons. Réécrit pour la Build 42.21 avec le multijoueur, puis enrichi des pointures, des patrons et des machines à coudre. Infobulles par [b]TooltipLib[/b].
-Sons des machines : machine électrique de Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0) ; machine à pédale de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), découpés en boucles.
+Basé sur [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], dont il reprend les sons. Réécrit pour la Build 42.21 avec le multijoueur, puis enrichi des pointures, patrons et machines à coudre. Infobulles par [b]TooltipLib[/b].
+Sons : machine électrique de Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0) ; machine à pédale de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), découpés en boucles.
 Code source (MIT) sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].

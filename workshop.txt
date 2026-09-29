@@ -112,6 +112,11 @@ description=[h2]Sandbox options[/h2]
 description=
 description=Almost everything can be tuned: skill and XP, action speed, how harsh bad fits are, clothes wear, shoe sizes, patterns, thimble, sewing machines, loot rarity... Clothes from other mods get a size automatically, and two lists let you add or exclude specific items if needed. Full details on [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 description=
+description=[h2]Support the project[/h2]
+description=
+description=Enjoying the mod? A coffee helps fund new features and translations.
+description=[url=https://ko-fi.com/Z8Z8QJV31][img]https://storage.ko-fi.com/cdn/kofi6.png?v=6[/img][/url]
+description=
 description=[h2]Credits[/h2]
 description=
 description=Based on [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] by [b]Gootube[/b], including its sounds. Rewritten for Build 42.21 with multiplayer support, then expanded with shoe sizes, sewing patterns and sewing machines. Tooltips by [b]TooltipLib[/b].
