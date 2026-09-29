@@ -29,11 +29,22 @@ local SERIES_FINISHED_DELTA = 0.9
 local SERIES_WAIT_MINUTES = 10
 -- Images d'attente avant la pièce suivante (inventaire à jour), sans horloge réelle.
 local SERIES_SETTLE_TICKS = 15
+local SIZE_COMBO_WIDTH = 150
+local QUANTITY_COMBO_WIDTH = 60
 
 -- Identifiant du dernier patron cousu, par joueur local (durée de la session).
 local lastPatternIds = {}
 
 MTIR_MachineTabPattern.ACTION_TYPES = { MTIR_SewPatternAction = true }
+
+--- Largeur minimale de l'onglet : les deux étiquettes (selon la langue et la
+--- taille de police) et les deux listes tiennent sur une ligne.
+function MTIR_MachineTabPattern.minWidth()
+    local measure = getTextManager()
+    local size = measure:MeasureStringX(UIFont.Small, getText("IGUI_MTIR_Machine_Size"))
+    local quantity = measure:MeasureStringX(UIFont.Small, getText("IGUI_MTIR_Machine_Quantity"))
+    return PAD + size + PAD + SIZE_COMBO_WIDTH + PAD * 2 + quantity + PAD + QUANTITY_COMBO_WIDTH + PAD
+end
 
 --- Patron de vêtement encore utilisable (les chaussures se cousent à la main).
 local function isMachinePattern(item)
@@ -95,15 +106,15 @@ function MTIR_MachineTabPattern:createChildren()
     local comboY = SLOT + PAD
     local comboHeight = FONT_HGT + 6
     local sizeLabel = getTextManager():MeasureStringX(UIFont.Small, self.texts.size) + PAD
-    self.sizeCombo = ISComboBox:new(PAD + sizeLabel, comboY, 150, comboHeight, self,
+    self.sizeCombo = ISComboBox:new(PAD + sizeLabel, comboY, SIZE_COMBO_WIDTH, comboHeight, self,
         MTIR_MachineTabPattern.onChoiceChanged)
     self.sizeCombo:initialise()
     self:addChild(self.sizeCombo)
 
     self.quantityLabelX = self.sizeCombo:getRight() + PAD * 2
     local quantityLabel = getTextManager():MeasureStringX(UIFont.Small, self.texts.quantity) + PAD
-    self.quantityCombo = ISComboBox:new(self.quantityLabelX + quantityLabel, comboY, 60, comboHeight, self,
-        MTIR_MachineTabPattern.onChoiceChanged)
+    self.quantityCombo = ISComboBox:new(self.quantityLabelX + quantityLabel, comboY, QUANTITY_COMBO_WIDTH,
+        comboHeight, self, MTIR_MachineTabPattern.onChoiceChanged)
     self.quantityCombo:initialise()
     self:addChild(self.quantityCombo)
 

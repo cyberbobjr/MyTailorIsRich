@@ -120,8 +120,22 @@ local function discomfortFloor(diff)
     return 0
 end
 
-MTIR.DiscomfortFloor = MTIR.DiscomfortFloor or {}
+MTIR.DiscomfortFloor = {}
 MTIR.DiscomfortCorrected = MTIR.DiscomfortCorrected or {}
+-- Nombre d'entrées de DiscomfortFloor : sans plancher, les boucles par tick s'arrêtent là.
+local floorCount = 0
+
+--- Début d'un recalcul complet (toutes les ~30 ticks) : les joueurs morts ou partis
+--- sortent de la table, et le compte ne peut pas dériver.
+function MTIR.resetDiscomfortFloors()
+    MTIR.DiscomfortFloor = {}
+    floorCount = 0
+end
+
+--- Vrai si au moins un joueur a un plancher d'inconfort à maintenir.
+function MTIR.hasDiscomfortFloors()
+    return floorCount > 0
+end
 
 --- Recalcule le plancher d'inconfort du joueur (appel peu fréquent : pointure, hachage).
 function MTIR.refreshDiscomfortFloor(player)
@@ -131,11 +145,19 @@ function MTIR.refreshDiscomfortFloor(player)
         local _, diff = wornShoe(player)
         floor = diff and discomfortFloor(diff) or 0
     end
-    MTIR.DiscomfortFloor[key] = floor > 0 and floor or nil
+    local had = MTIR.DiscomfortFloor[key] ~= nil
+    local value = floor > 0 and floor or nil
+    MTIR.DiscomfortFloor[key] = value
+    if value and not had then
+        floorCount = floorCount + 1
+    elseif had and not value then
+        floorCount = floorCount - 1
+    end
 end
 
 --- À appeler à chaque tick : vanilla (BodyDamage.UpdateDiscomfort) fait redescendre la
---- stat vers sa cible à chaque mise à jour, sans frein à la baisse. Coût minime sans plancher.
+--- stat vers sa cible à chaque mise à jour, sans frein à la baisse. Les appelants sautent
+--- la boucle entière quand hasDiscomfortFloors() est faux.
 function MTIR.enforceDiscomfortFloor(player)
     local key = MTIR.playerKey(player)
     local floor = MTIR.DiscomfortFloor[key]
@@ -259,7 +281,11 @@ end
 
 local function loseShoe(player, shoe)
     if MTIR.dropWornItem(shoe, player) then
-        MTIR.tell(player, { sound = "PutItemInBag", say = { key = "IGUI_MTIR_Say_LostShoe" .. tostring(ZombRand(2)) }, refresh = true })
+        MTIR.tell(player, {
+            sound = "PutItemInBag",
+            say = { key = "IGUI_MTIR_Say_LostShoe" .. tostring(ZombRand(2)) },
+            refresh = true,
+        })
     end
 end
 

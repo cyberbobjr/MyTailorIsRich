@@ -290,7 +290,8 @@ do
         end
         local description = option.toolTip.description or ""
         if not data.size then
-            option.toolTip.description = description .. ISInventoryPaneContextMenu.bhs .. getText("IGUI_MTIR_NoSize") .. " <LINE> "
+            option.toolTip.description = description .. ISInventoryPaneContextMenu.bhs
+                .. getText("IGUI_MTIR_NoSize") .. " <LINE> "
             option.notAvailable = true
         else
             local diff = MTIR.getItemDiff(item, MTIR.getPlayerSize(player))

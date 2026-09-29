@@ -261,7 +261,11 @@ function MTIR.removeTooTight(item, player)
     player:removeWornItem(item)
     triggerEvent("OnClothingUpdated", player)
     MTIR.updateOneClothes(item, player)
-    MTIR.tell(player, { sound = "PutItemInBag", say = { key = "IGUI_MTIR_Say_Nofit_Clothes" .. tostring(ZombRand(2)) }, refresh = true })
+    MTIR.tell(player, {
+        sound = "PutItemInBag",
+        say = { key = "IGUI_MTIR_Say_Nofit_Clothes" .. tostring(ZombRand(2)) },
+        refresh = true,
+    })
 end
 
 --- Autorité, chaque minute : tailles de la tenue de départ, chute, retrait.

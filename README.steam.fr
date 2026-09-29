@@ -2,77 +2,115 @@
 
 [b]Build 42.21 · Solo et multijoueur[/b]
 
-Les vêtements et les chaussures ont enfin une taille. Trouvez ce qui vous va, retouchez le reste, et réfléchissez avant de sprinter avec des bottes trois pointures trop grandes.
+Cette veste en cuir parfaite sur un zombie ? Elle fait peut-être deux tailles de moins que vous. Ces rangers ? Du 46, et vous chaussez du 41.
+
+My Tailor Is Rich donne une taille à chaque vêtement et une pointure à chaque paire de chaussures. Trouvez ce qui vous va, retouchez le reste, cousez vos propres habits à partir de patrons... et réfléchissez à deux fois avant de sprinter avec des bottes trois pointures trop grandes.
+
+[h2]En bref[/h2]
+
+[list]
+[*][b]Tailles de vêtements[/b] du XS au XXL, selon le poids de votre personnage.
+[*][b]Pointures[/b] du 35 au 47 : gare aux ampoules, aux chutes et aux chaussures perdues.
+[*][b]Retouches[/b] : agrandissez ou rétrécissez vos vêtements grâce à la Couture.
+[*][b]Usure et remise en état[/b] : les vêtements s'abîment, vous pouvez les réparer.
+[*][b]Patrons de couture[/b] : tracez-les sur vos vêtements préférés ou trouvez-les en magasin.
+[*][b]Machines à coudre[/b] : plus rapides, meilleurs résultats... mais bruyantes.
+[*]Compatible avec les [b]mods de vêtements[/b] et le [b]multijoueur[/b].
+[/list]
 
 [h2]Prérequis[/h2]
 
 [list]
-[*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (obligatoire) : les lignes de taille et d'usure dans les infobulles.
-[*][b]Incompatible[/b] avec [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url], dont ce mod est une réécriture complète pour la Build 42.21.
+[*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (obligatoire) : affiche la taille et l'état dans les infobulles.
+[*][b]Incompatible[/b] avec [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url], dont ce mod est une réécriture complète pour la Build 42.21 : n'activez pas les deux.
 [/list]
 
-[h2]Tailles de vêtements (XS à XXL)[/h2]
+[h2]Des vêtements à votre taille (ou pas)[/h2]
 
 [list]
-[*]La taille du personnage suit son [b]poids[/b] : XS ≤ 50 kg, S ≤ 65, M ≤ 75, L < 85, XL < 100, XXL ≥ 100.
-[*]La taille d'un vêtement trouvé est [b]inconnue[/b] : clic droit, [b]Lire l'étiquette[/b]. Il faut parfois un peu de Couture ; sinon le personnage devine seulement.
-[*]Tous les vêtements d'un même cadavre ont des tailles cohérentes.
-[*]Effets d'une mauvaise taille :
-[list]
-[*][b]trop grand[/b] : moins d'isolation, combat ralenti pour les hauts, un bas trop grand peut [b]tomber[/b] sans ceinture quand on a les deux mains prises, risque de [b]trébucher[/b] à la réception d'une clôture, même au pas (moins souvent qu'en courant) ;
-[*][b]trop petit[/b] : plus long à enfiler, peut se [b]déchirer[/b] en escaladant, risque de [b]trébucher[/b] après avoir escaladé un mur, courbatures, impossible à porter s'il est beaucoup trop petit. Si vous grossissez, les vêtements devenus trop petits s'enlèvent.
-[/list]
-[*][b]Retouche[/b] : un cran de plus (bandes de tissu) ou de moins (trombones), avec aiguille, ciseaux et fil. La réussite dépend de la Couture et du tissu.
-[*]Les [b]vêtements s'usent[/b] (saleté, sang, humidité, vêtement serré). Remettez-les en état avec des bandes de tissu ou un exemplaire de rechange.
-[*][b]Vêtements fabriqués[/b] : la taille se choisit dans la fenêtre d'artisanat.
-[*][b]Les vêtements des autres mods ont une taille automatiquement.[/b] Un emplacement connu garde son profil habituel. Tout autre vêtement, y compris sur un emplacement créé par un mod, reçoit une taille d'après ce qu'il couvre : torse, jambes, les deux, ou les pieds pour une chaussure. Les accessoires (chapeaux, masques, gants, bijoux, ceintures…), les sous-vêtements et le cosmétique restent sans taille. Deux listes sandbox règlent le reste : emplacements supplémentaires à tailler, objets à exclure.
+[*]Votre taille dépend de votre [b]poids[/b] : XS jusqu'à 50 kg, S jusqu'à 65, M jusqu'à 75, L sous 85, XL sous 100, XXL à partir de 100. Prenez ou perdez du poids, et votre taille change aussi.
+[*]Vous ne connaissez pas la taille des vêtements trouvés. Clic droit, [b]Lire l'étiquette[/b]. Avec peu de Couture, votre personnage ne peut que deviner.
+[*]Tous les vêtements d'un même zombie ont des tailles cohérentes.
+[*]Chapeaux, masques, gants, bijoux, ceintures et sous-vêtements sont en taille unique.
 [/list]
 
-[h2]Pointures de chaussures (EU 35 à 47)[/h2]
+[h3]Trop grand[/h3]
 
 [list]
-[*]Chaque personnage a une [b]pointure fixe[/b] selon son sexe : 35-42 pour les femmes, 39-47 pour les hommes. Elle s'affiche dans l'écran Personnage, après le poids.
-[*]Les chaussures trouvées suivent le porteur habituel du modèle. Bottes de travail, militaires et de randonnée : surtout des pointures d'homme. Chaussures à brides et habillées : surtout de femme. Sur un cadavre, la pointure suit le sexe du zombie.
-[*]La pointure est imprimée dans la chaussure : [b]Lire l'étiquette[/b] la donne sans compétence.
-[*]Les enveloppes improvisées (chiffon, jute, jean, cuir, bâche, ficelle) vont à tout le monde. Les chaussures fabriquées sont à la pointure de l'artisan.
+[*]Tient moins chaud.
+[*]Un haut trop grand ralentit vos attaques.
+[*]Un pantalon ou une jupe trop grand peut [b]tomber[/b] si vous n'avez pas de ceinture et les deux mains prises.
+[*]Vous pouvez [b]trébucher[/b] en retombant d'une clôture, même au pas (plus souvent en courant).
+[/list]
+
+[h3]Trop petit[/h3]
+
+[list]
+[*]Plus long à enfiler.
+[*]Peut se [b]déchirer[/b] quand vous escaladez.
+[*]Vous pouvez [b]trébucher[/b] après avoir escaladé un mur.
+[*]Donne des courbatures.
+[*]Beaucoup trop petit : impossible à porter. Si vous grossissez, les vêtements devenus trop petits s'enlèvent.
+[/list]
+
+[h2]Couture[/h2]
+
+[list]
+[*][b]Retouchez[/b] un vêtement d'une taille de plus (avec des bandes de tissu) ou de moins (avec des trombones), avec aiguille, fil et ciseaux. Vos chances dépendent de votre Couture et du tissu.
+[*]Les vêtements [b]s'usent[/b] avec la saleté, le sang, la pluie et quand ils serrent. [b]Remettez-les en état[/b] avec des bandes de tissu ou un exemplaire de rechange du même vêtement.
+[*]Quand vous [b]fabriquez un vêtement[/b], vous choisissez sa taille dans la fenêtre d'artisanat.
+[/list]
+
+[h2]Pointures (35 à 47)[/h2]
+
+[list]
+[*]Votre personnage a une [b]pointure fixe[/b] : du 35 au 42 pour les femmes, du 39 au 47 pour les hommes. Elle s'affiche dans l'écran Personnage, à côté du poids.
+[*]Les bottes de travail, militaires et de randonnée sont surtout en pointures d'homme ; les chaussures à brides et habillées surtout en pointures de femme. Les chaussures d'un zombie suivent son sexe.
+[*]La pointure est imprimée à l'intérieur : [b]Lire l'étiquette[/b] la donne sans aucune compétence.
+[*]Les enveloppes improvisées (chiffon, jute, jean, cuir, bâche, ficelle) vont à tout le monde. Les chaussures que vous fabriquez sont à votre pointure.
 [/list]
 
 [table]
-[tr][td]Ajustement[/td][td]Effets[/td][/tr]
-[tr][td]Trop petites de 3 pointures ou plus[/td][td]Impossibles à enfiler[/td][/tr]
-[tr][td]Trop petites de 1 ou 2 pointures[/td][td]Humeur [b]Inconfort[/b], [b]ampoules[/b] (une jauge de frottement monte en marchant, plus vite en courant ; le personnage prévient à mi-chemin), courbatures aux pieds[/td][/tr]
-[tr][td]Bonne pointure ou une de plus[/td][td]Rien[/td][/tr]
-[tr][td]Trop grandes de 2 pointures ou plus[/td][td]Plus d'[b]endurance[/b] dépensée en courant, ampoules rares, risque de [b]trébucher[/b] après une clôture ou un mur, [b]écrasement[/b] des zombies au sol moins puissant (jusqu'au niveau pieds nus)[/td][/tr]
-[tr][td]Trop grandes de 3 pointures ou plus[/td][td]Inconfort, et la chaussure peut [b]s'échapper[/b] en courant, en sprintant, en sautant, en escaladant ou en tombant (plus souvent avec des tongs ou des pantoufles, moins avec des bottes lacées)[/td][/tr]
+[tr][td][b]Ajustement[/b][/td][td][b]Ce qui se passe[/b][/td][/tr]
+[tr][td]3 pointures de moins ou plus[/td][td]Impossible de les enfiler[/td][/tr]
+[tr][td]1 ou 2 pointures de moins[/td][td][b]Inconfort[/b], [b]ampoules[/b] après un moment de marche (plus vite en courant, votre personnage se plaint avant), courbatures aux pieds[/td][/tr]
+[tr][td]Bonne pointure ou une de plus[/td][td]Tout va bien[/td][/tr]
+[tr][td]2 pointures de plus ou davantage[/td][td]Vous vous fatiguez plus vite en courant, ampoules occasionnelles, [b]chutes[/b] après une clôture ou un mur, [b]écrasements[/b] de zombies au sol plus faibles (comme pieds nus)[/td][/tr]
+[tr][td]3 pointures de plus ou davantage[/td][td]Inconfort, et vous pouvez [b]perdre une chaussure[/b] en courant, en sautant, en escaladant ou en tombant (les tongs et pantoufles s'envolent facilement, les bottes lacées tiennent mieux)[/td][/tr]
 [/table]
 
-Une ampoule est une petite égratignure au pied, sans infection zombie. Comme toute blessure au pied, elle ralentit tant qu'elle n'est pas guérie : pansez-la.
+Une ampoule est une petite blessure au pied qui ne peut pas vous transmettre l'infection zombie. Comme toute blessure au pied, elle vous ralentit jusqu'à guérison : pansez-la !
 
 [h2]Patrons de couture[/h2]
 
 [list]
-[*][b]Tracez un patron[/b] sur une table en découpant un vêtement ou une paire ayant une taille (ciseaux, stylo, papier ; le modèle est détruit), ou trouvez des [b]patrons du commerce[/b], tirés parmi tous les vêtements traçables, [b]mods compris[/b].
-[*][b]Cousez d'après le patron[/b] dans la taille de votre choix, avec le tissu du modèle (coton, jean, cuir). Un faible niveau peut donner une taille d'écart. Un patron sert 5 fois.
-[*]Coudre à la main demande un [b]dé à coudre[/b]. Les chaussures demandent la Couture 8, une aiguille [b]et un poinçon[/b], de la colle, et du cuir ou du tissu selon le modèle ; elles se cousent à la main. Les chaussures en caoutchouc (bottes de pluie, tongs) n'ont pas de patron.
-[*]Les patrons du commerce se trouvent dans les merceries, les rayons couture et les librairies de mode.
+[*][b]Tracez un patron[/b] sur une table à partir de n'importe quel vêtement ou paire de chaussures (ciseaux, stylo, papier). L'original est découpé au passage.
+[*]Ou trouvez des [b]patrons du commerce[/b] dans les merceries, les rayons couture et les librairies de mode. Ils peuvent concerner n'importe quel vêtement, [b]y compris ceux des autres mods[/b].
+[*][b]Cousez d'après un patron[/b] dans la taille de votre choix, avec le même tissu que l'original (coton, jean, cuir). À faible niveau, le résultat peut avoir une taille d'écart. Chaque patron sert 5 fois.
+[*]Coudre à la main demande un [b]dé à coudre[/b].
+[*]Les chaussures sont réservées aux experts : Couture 8, une aiguille [b]et un poinçon[/b], de la colle, et du cuir ou du tissu. Elles se cousent toujours à la main. Les chaussures en caoutchouc (bottes de pluie, tongs) n'ont pas de patron.
 [/list]
 
 [h2]Machines à coudre[/h2]
 
 [list]
-[*]Machines [b]électrique[/b] (sur une table, avec du courant : deux fois plus rapide, +2 niveaux de Couture) et [b]à pédale[/b] (lourd meuble, sans courant : 25 % plus rapide, +1 niveau), dans les merceries, magasins de vêtements, supermarchés, le stockage des particuliers (garages, box, greniers, abris, placards) et partout où traîne un kit de couture.
-[*]Cliquez sur une machine : onglets [b]Patron[/b] (taille, quantité à la suite, aperçu du vêtement, objets utilisés exacts), [b]Retouche[/b] et [b]Remise en état[/b], avec une barre de progression.
-[*]Les machines font du [b]bruit[/b] qui attire les zombies (l'électrique bien plus loin), [b]s'usent[/b], cassent des aiguilles et se bloquent. Leur état s'affiche dans le panneau : entretenez-les avec un tournevis et un peu d'huile de cuisine (végétale ou d'olive).
+[*][b]Machine électrique[/b] : se pose sur une table et a besoin de courant. Deux fois plus rapide, et compte comme +2 niveaux de Couture.
+[*][b]Machine à pédale[/b] : un lourd meuble, sans électricité. 25 % plus rapide, +1 niveau de Couture.
+[*]Cherchez dans les merceries, magasins de vêtements, supermarchés, garages, box de stockage, greniers, abris de jardin, placards... partout où peut traîner un kit de couture.
+[*]Cliquez sur une machine pour coudre d'après un patron (taille et quantité au choix), retoucher ou remettre en état vos vêtements.
+[*]Mais attention : les machines sont [b]bruyantes[/b] et attirent les zombies (l'électrique de bien plus loin). Elles [b]s'usent[/b] aussi, cassent des aiguilles et se bloquent. Entretenez-les avec un tournevis et un peu d'huile de cuisine (végétale ou d'olive).
 [/list]
 
 [h2]Multijoueur[/h2]
 
-Le serveur décide de tout : tailles, retouches, usure, ampoules, courbatures, chaussures perdues, coutures, machines et leur usure. Il vérifie chaque objet utilisé, puis synchronise le résultat vers les clients. Toutes les actions passent par le système réseau vanilla de la Build 42, et une machine ne sert qu'à un joueur à la fois.
+Entièrement jouable en multijoueur : tout le monde voit les mêmes tailles, la même usure et les mêmes résultats de couture. Une machine à coudre ne peut servir qu'à un joueur à la fois.
 
 [h2]Options sandbox[/h2]
 
-Nombreuses options sandbox : niveaux et XP de couture, durée des actions, effets de taille, usure, pointures, patrons, dé à coudre, bonus, bruit et entretien des machines, rareté du butin. Liste complète et détails sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+Presque tout se règle : niveaux et XP de Couture, durée des actions, sévérité des mauvaises tailles, usure, pointures, patrons, dé à coudre, machines à coudre, rareté du butin... Les vêtements des autres mods reçoivent une taille automatiquement, et deux listes permettent d'en ajouter ou d'en exclure si besoin. Tous les détails sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 
 [h2]Crédits[/h2]
 
-Basé sur [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b] (Workshop 3491510356), dont il reprend les sons. Réécrit et porté en Build 42.21 avec le multijoueur, puis enrichi des pointures de chaussures, des patrons de couture et des machines à coudre. Infobulles par [b]TooltipLib[/b]. Sons des machines : machine électrique de Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0) ; machine à pédale de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), découpés en boucles. Code source (MIT) sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+Basé sur [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], dont il reprend les sons. Réécrit pour la Build 42.21 avec le multijoueur, puis enrichi des pointures, des patrons de couture et des machines à coudre. Infobulles par [b]TooltipLib[/b].
+Sons des machines : machine électrique de Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0) ; machine à pédale de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), découpés en boucles.
+Code source (MIT) sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].

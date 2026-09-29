@@ -72,10 +72,22 @@ local function elapsedGameMinutes()
 end
 
 local syncTickCount = 0
+-- Temps écoulé du passage en cours, lu par updatePlayerPeriodic.
+local passFactor = 0
+local passMinutes = 0
+
+local function updatePlayerPeriodic(player)
+    MTIR.applyStiffness(player, passFactor)
+    MTIR.refreshDiscomfortFloor(player)
+    MTIR.applyShoeTick(player, passFactor, passMinutes)
+end
 
 local function onTick()
-    -- Plancher d'inconfort maintenu à chaque tick (le moteur le fait redescendre à chaque mise à jour).
-    forEachAuthorityPlayer(MTIR.enforceDiscomfortFloor)
+    -- Plancher d'inconfort maintenu à chaque tick (le moteur le fait redescendre à chaque
+    -- mise à jour). Sans chaussure trop petite ou trop grande nulle part : rien à faire.
+    if MTIR.hasDiscomfortFloors() then
+        forEachAuthorityPlayer(MTIR.enforceDiscomfortFloor)
+    end
 
     syncTickCount = syncTickCount + 1
     if syncTickCount >= DISCOMFORT_SYNC_TICKS then
@@ -88,15 +100,12 @@ local function onTick()
     if tickCount < STIFFNESS_TICKS then
         return
     end
-    local factor = elapsedFactor
-    local minutes = elapsedGameMinutes()
+    passFactor = elapsedFactor
+    passMinutes = elapsedGameMinutes()
     tickCount = 0
     elapsedFactor = 0
-    forEachAuthorityPlayer(function(player)
-        MTIR.applyStiffness(player, factor)
-        MTIR.refreshDiscomfortFloor(player)
-        MTIR.applyShoeTick(player, factor, minutes)
-    end)
+    MTIR.resetDiscomfortFloors()
+    forEachAuthorityPlayer(updatePlayerPeriodic)
 end
 
 --- Solo : tailles de la tenue de départ dès l'apparition du personnage.

@@ -1,0 +1,116 @@
+[h1]My Tailor Is Rich — Kleider- und Schuhgrößen[/h1]
+
+[b]Build 42.21 · Einzelspieler & Mehrspieler[/b]
+
+Die perfekte Lederjacke an diesem Zombie? Vielleicht zwei Nummern zu klein. Diese Kampfstiefel? Größe 46, und du trägst 41.
+
+My Tailor Is Rich gibt jedem Kleidungsstück und jedem Paar Schuhe eine Größe. Finde, was passt, ändere, was nicht passt, näh dir eigene Kleidung nach Schnittmustern... und überleg es dir zweimal, bevor du in drei Nummern zu großen Stiefeln lossprintest.
+
+[h2]Auf einen Blick[/h2]
+
+[list]
+[*][b]Kleidergrößen[/b] von XS bis XXL, abhängig vom Gewicht deines Charakters.
+[*][b]Schuhgrößen[/b] von 35 bis 47 (EU): Vorsicht vor Blasen, Stolpern und verlorenen Schuhen.
+[*][b]Änderungen[/b]: Mach Kleidung mit deiner Schneiderei-Fertigkeit weiter oder enger.
+[*][b]Verschleiß und Reparatur[/b]: Kleidung nutzt sich ab, und du kannst sie aufarbeiten.
+[*][b]Schnittmuster[/b]: Paus sie von deinen Lieblingsstücken ab oder finde sie in Läden.
+[*][b]Nähmaschinen[/b]: schneller und bessere Ergebnisse... aber laut.
+[*]Funktioniert mit [b]Kleidungs-Mods[/b] und im [b]Mehrspieler[/b].
+[/list]
+
+[h2]Voraussetzungen[/h2]
+
+[list]
+[*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (erforderlich): zeigt Größe und Zustand in den Tooltips.
+[*][b]Nicht kompatibel[/b] mit [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]. Dieser Mod ist eine komplette Neufassung davon für Build 42.21: Aktiviere nicht beide.
+[/list]
+
+[h2]Kleidung, die passt (oder nicht)[/h2]
+
+[list]
+[*]Deine Größe hängt von deinem [b]Gewicht[/b] ab: XS bis 50 kg, S bis 65, M bis 75, L unter 85, XL unter 100, XXL ab 100. Nimmst du zu oder ab, ändert sie sich mit.
+[*]Die Größe gefundener Kleidung kennst du nicht. Rechtsklick und [b]Kleidergröße prüfen[/b], um das Etikett zu lesen. Mit wenig Schneiderei kann dein Charakter nur schätzen.
+[*]Die Kleidung eines Zombies hat einheitliche Größen.
+[*]Hüte, Masken, Handschuhe, Schmuck, Gürtel und Unterwäsche sind Einheitsgröße.
+[/list]
+
+[h3]Zu groß[/h3]
+
+[list]
+[*]Hält weniger warm.
+[*]Oberteile verlangsamen deine Angriffe.
+[*]Weite Hosen oder Röcke können ohne Gürtel [b]herunterrutschen[/b], wenn du beide Hände voll hast.
+[*]Bei der Landung nach einem Zaun kannst du [b]stolpern[/b], selbst im Gehen (im Lauf öfter).
+[/list]
+
+[h3]Zu klein[/h3]
+
+[list]
+[*]Anziehen dauert länger.
+[*]Kann beim Klettern [b]reißen[/b].
+[*]Du kannst nach dem Erklettern einer Mauer [b]stolpern[/b].
+[*]Verursacht Muskelzerrungen.
+[*]Viel zu klein: lässt sich gar nicht tragen. Nimmst du zu, wird ausgezogen, was nicht mehr passt.
+[/list]
+
+[h2]Schneiderei[/h2]
+
+[list]
+[*][b]Ändere[/b] ein Kleidungsstück um eine Größe nach oben (mit Stoffstreifen) oder nach unten (mit Büroklammern), mit Nadel, Faden und Schere. Die Chancen hängen von Schneiderei und Stoff ab.
+[*]Kleidung [b]verschleißt[/b] durch Schmutz, Blut, Regen und enge Passform. [b]Aufarbeiten[/b] kannst du sie mit Stoffstreifen oder einem gleichen Ersatzstück.
+[*]Wenn du [b]Kleidung herstellst[/b], wählst du ihre Größe im Handwerksfenster.
+[/list]
+
+[h2]Schuhgrößen (EU 35 bis 47)[/h2]
+
+[list]
+[*]Dein Charakter hat eine [b]feste Schuhgröße[/b]: 35 bis 42 bei Frauen, 39 bis 47 bei Männern. Sie steht im Charakterfenster neben dem Gewicht.
+[*]Arbeits-, Kampf- und Wanderstiefel gibt es meist in Herrengrößen, Riemchen- und elegante Schuhe meist in Damengrößen. Die Schuhe eines Zombies passen zu seinem Geschlecht.
+[*]Die Größe steht innen drin: [b]Kleidergröße prüfen[/b] liest sie ab, ganz ohne Fertigkeit.
+[*]Improvisierte Fußwickel (Stofffetzen, Leinen, Jeans, Leder, Plane, Bindfaden) passen allen. Selbst hergestellte Schuhe haben deine Größe.
+[/list]
+
+[table]
+[tr][td][b]Passform[/b][/td][td][b]Was passiert[/b][/td][/tr]
+[tr][td]3+ Größen zu klein[/td][td]Lassen sich nicht anziehen[/td][/tr]
+[tr][td]1–2 Größen zu klein[/td][td][b]Unbequem[/b], [b]Blasen[/b] nach längerem Gehen (beim Rennen früher, dein Charakter beschwert sich vorher), Muskelzerrung in den Füßen[/td][/tr]
+[tr][td]Richtige Größe oder 1 Größe größer[/td][td]Alles gut[/td][/tr]
+[tr][td]2+ Größen zu groß[/td][td]Du ermüdest beim Rennen schneller, gelegentlich Blasen, [b]Stolpern[/b] nach Zäunen und Mauern, schwächeres [b]Stampfen[/b] auf liegende Zombies (so schwach wie barfuß)[/td][/tr]
+[tr][td]3+ Größen zu groß[/td][td]Unbequem, und du kannst beim Rennen, Springen, Klettern oder Stürzen [b]einen Schuh verlieren[/b] (Flip-Flops und Hausschuhe fliegen leicht weg, Schnürstiefel halten besser)[/td][/tr]
+[/table]
+
+Blasen sind kleine Fußwunden, die dich nicht mit der Zombie-Infektion anstecken. Wie jede Fußverletzung bremsen sie dich, bis sie verheilt sind: Verbinde sie!
+
+[h2]Schnittmuster[/h2]
+
+[list]
+[*][b]Schnittmuster abpausen[/b] geht an einem Tisch, von jedem Kleidungsstück oder Paar Schuhe (Schere, Stift, Papier). Das Original wird dabei zerschnitten.
+[*]Oder finde [b]gekaufte Schnittmuster[/b] in Nähläden, Schneiderregalen und Mode-Buchhandlungen. Sie können für jede Kleidung sein, [b]auch aus anderen Mods[/b].
+[*][b]Nach Schnittmuster nähen[/b] kannst du in der Größe deiner Wahl, mit demselben Stoff wie das Original (Baumwolle, Jeans, Leder). Mit wenig Übung kann es eine Größe danebengehen. Jedes Muster reicht für 5 Stück.
+[*]Nähen von Hand erfordert einen [b]Fingerhut[/b].
+[*]Schuhe sind was für Profis: Schneiderei 8, eine Nadel [b]und eine Ahle[/b], Kleber sowie Leder oder Stoff. Sie entstehen immer von Hand. Gummischuhe (Gummistiefel, Flip-Flops) lassen sich nicht nach Muster fertigen.
+[/list]
+
+[h2]Nähmaschinen[/h2]
+
+[list]
+[*][b]Elektrische Nähmaschine[/b]: steht auf einem Tisch und braucht Strom. Doppelt so schnell und zählt wie +2 Stufen Schneiderei.
+[*][b]Tretnähmaschine[/b]: ein schwerer Schrank, kein Strom nötig. 25 % schneller, +1 Stufe Schneiderei.
+[*]Such in Näh- und Bekleidungsgeschäften, Supermärkten, Garagen, Lagerräumen, Dachböden, Schuppen, Kleiderschränken... überall, wo ein Nähset auftauchen könnte.
+[*]Ein Klick auf die Maschine: nach Schnittmuster nähen (Größe und Anzahl wählbar), Kleidung ändern oder aufarbeiten.
+[*]Aber Vorsicht: Maschinen sind [b]laut[/b] und locken Zombies an (die elektrische aus viel größerer Entfernung). Außerdem [b]verschleißen[/b] sie, brechen Nadeln ab und klemmen. Halte sie mit einem Schraubenzieher und etwas Speiseöl (Pflanzen- oder Olivenöl) in Schuss.
+[/list]
+
+[h2]Mehrspieler[/h2]
+
+Voll spielbar im Mehrspieler: Alle sehen dieselben Größen, denselben Verschleiß und dieselben Nähergebnisse. Eine Nähmaschine kann nur ein Spieler gleichzeitig benutzen.
+
+[h2]Sandbox-Optionen[/h2]
+
+Fast alles lässt sich einstellen: Fertigkeit und XP, Aktionsdauer, Strafen bei schlechter Passform, Kleidungsverschleiß, Schuhgrößen, Schnittmuster, Fingerhut, Nähmaschinen, Seltenheit der Beute... Kleidung aus anderen Mods bekommt automatisch eine Größe, und über zwei Listen kannst du bei Bedarf bestimmte Gegenstände hinzufügen oder ausschließen. Alle Details auf [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+
+[h2]Credits[/h2]
+
+Basiert auf [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] von [b]Gootube[/b], einschließlich seiner Sounds. Für Build 42.21 mit Mehrspieler-Unterstützung neu geschrieben und um Schuhgrößen, Schnittmuster und Nähmaschinen erweitert. Tooltips von [b]TooltipLib[/b].
+Nähmaschinen-Sounds: elektrische Maschine von Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0); Tretnähmaschine von Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), zu Loops geschnitten.
+Quellcode (MIT) auf [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].

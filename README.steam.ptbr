@@ -1,0 +1,116 @@
+[h1]My Tailor Is Rich — Tamanhos de roupas e calçados[/h1]
+
+[b]Build 42.21 · Solo e multijogador[/b]
+
+Aquela jaqueta de couro perfeita no zumbi? Pode ser dois tamanhos menor que o seu. Aqueles coturnos militares? Número 46, e você calça 41.
+
+My Tailor Is Rich dá um tamanho a cada peça de roupa e a cada par de sapatos. Encontre o que serve, ajuste o que não serve, costure suas próprias roupas com moldes... e pense duas vezes antes de sair correndo com botas três números maiores.
+
+[h2]Resumo[/h2]
+
+[list]
+[*][b]Tamanhos de roupa[/b] do XS ao XXL, conforme o peso do seu personagem.
+[*][b]Números de calçado[/b] de 35 a 47 (EU): cuidado com bolhas, tropeços e sapatos perdidos.
+[*][b]Ajustes[/b]: aumente ou diminua roupas com sua habilidade de Costura.
+[*][b]Desgaste e reparo[/b]: as roupas se desgastam, e você pode restaurá-las.
+[*][b]Moldes de costura[/b]: trace a partir das suas roupas favoritas ou encontre nas lojas.
+[*][b]Máquinas de costura[/b]: mais rápidas e com resultados melhores... mas barulhentas.
+[*]Funciona com [b]mods de roupas[/b] e no [b]multijogador[/b].
+[/list]
+
+[h2]Requisitos[/h2]
+
+[list]
+[*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (obrigatório): mostra o tamanho e a condição nas dicas dos itens.
+[*][b]Incompatível[/b] com [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]. Este mod é uma reescrita completa dele para a Build 42.21: não ative os dois.
+[/list]
+
+[h2]Roupas que servem (ou não)[/h2]
+
+[list]
+[*]Seu tamanho depende do seu [b]peso[/b]: XS até 50 kg, S até 65, M até 75, L abaixo de 85, XL abaixo de 100, XXL a partir de 100. Engordou ou emagreceu? Seu tamanho muda junto.
+[*]Você não sabe o tamanho das roupas que encontra. Clique com o botão direito e escolha [b]Ver tamanho da roupa[/b] para ler a etiqueta. Com pouca habilidade em Costura, seu personagem só consegue chutar.
+[*]Todas as roupas de um mesmo zumbi têm tamanhos coerentes.
+[*]Chapéus, máscaras, luvas, joias, cintos e roupas íntimas têm tamanho único.
+[/list]
+
+[h3]Grande demais[/h3]
+
+[list]
+[*]Aquece menos.
+[*]Peças de cima deixam seus ataques mais lentos.
+[*]Calças ou saias folgadas podem [b]cair[/b] se você estiver sem cinto e com as duas mãos ocupadas.
+[*]Você pode [b]tropeçar[/b] ao aterrissar depois de pular uma cerca, mesmo andando (com mais frequência correndo).
+[/list]
+
+[h3]Pequena demais[/h3]
+
+[list]
+[*]Demora mais para vestir.
+[*]Pode [b]rasgar[/b] quando você escala.
+[*]Você pode [b]tropeçar[/b] depois de escalar um muro.
+[*]Causa rigidez muscular.
+[*]Pequena demais mesmo: nem dá para vestir. Se você engordar, as roupas que deixaram de servir saem do corpo.
+[/list]
+
+[h2]Costura[/h2]
+
+[list]
+[*][b]Ajuste[/b] uma peça um tamanho acima (com tiras de tecido) ou um tamanho abaixo (com clipes de papel), usando agulha, linha e tesoura. Suas chances dependem da sua Costura e do tecido.
+[*]As roupas se [b]desgastam[/b] com sujeira, sangue, chuva e aperto. [b]Restaure-as[/b] com tiras de tecido ou com outra peça idêntica.
+[*]Ao [b]fabricar roupas[/b], você escolhe o tamanho na janela de Fabricação.
+[/list]
+
+[h2]Números de calçado (EU 35 a 47)[/h2]
+
+[list]
+[*]Seu personagem tem um [b]número fixo[/b]: de 35 a 42 para mulheres, de 39 a 47 para homens. Ele aparece na tela do personagem, ao lado do peso.
+[*]Botas de trabalho, militares e de trilha costumam vir em números masculinos; sandálias de tiras e sapatos sociais, em femininos. Os sapatos de um zumbi combinam com o sexo dele.
+[*]O número vem impresso por dentro: [b]Ver tamanho da roupa[/b] o lê sem exigir habilidade.
+[*]Faixas improvisadas para os pés (pano, juta, jeans, couro, lona, barbante) servem em todo mundo. Os calçados que você fabrica saem no seu número.
+[/list]
+
+[table]
+[tr][td][b]Tamanho[/b][/td][td][b]O que acontece[/b][/td][/tr]
+[tr][td]3 ou mais números abaixo[/td][td]Não entram no pé[/td][/tr]
+[tr][td]1–2 números abaixo[/td][td][b]Desconforto[/b], [b]bolhas[/b] depois de andar um tempo (antes se estiver correndo; seu personagem reclama primeiro), pés rígidos[/td][/tr]
+[tr][td]Número certo ou 1 acima[/td][td]Tudo certo[/td][/tr]
+[tr][td]2 ou mais números acima[/td][td]Você cansa mais rápido correndo, bolhas ocasionais, [b]tropeços[/b] depois de cercas e muros, [b]pisões[/b] mais fracos em zumbis caídos (tão fracos quanto descalço)[/td][/tr]
+[tr][td]3 ou mais números acima[/td][td]Desconforto, e você pode [b]perder um sapato[/b] ao correr, pular, escalar ou cair (chinelos e pantufas saem voando fácil, botas amarradas seguram melhor)[/td][/tr]
+[/table]
+
+Bolhas são pequenos ferimentos no pé que não transmitem a infecção zumbi. Como qualquer ferimento no pé, deixam você mais lento até sararem: faça um curativo!
+
+[h2]Moldes de costura[/h2]
+
+[list]
+[*][b]Traçar molde[/b] numa mesa, a partir de qualquer peça de roupa ou par de sapatos (tesoura, caneta, papel). O original é recortado no processo.
+[*]Ou encontre [b]moldes de loja[/b] em armarinhos, prateleiras de costura e livrarias de moda. Podem ser de qualquer roupa, [b]inclusive de outros mods[/b].
+[*][b]Costurar com molde[/b] no tamanho que você quiser, com o mesmo tecido do original (algodão, jeans, couro). Com pouca habilidade, a peça pode sair um tamanho maior ou menor. Cada molde pode ser usado 5 vezes.
+[*]Costurar à mão exige um [b]dedal[/b].
+[*]Sapatos são coisa de especialista: Costura 8, agulha [b]e sovela[/b], cola e couro ou tecido. São sempre costurados à mão. Calçados de borracha (botas de chuva, chinelos) não podem ser feitos com molde.
+[/list]
+
+[h2]Máquinas de costura[/h2]
+
+[list]
+[*][b]Máquina de Costura Elétrica[/b]: fica sobre uma mesa e precisa de energia. Duas vezes mais rápida e vale +2 níveis de Costura.
+[*][b]Máquina de Costura a Pedal[/b]: um móvel pesado, sem energia. 25% mais rápida, +1 nível de Costura.
+[*]Procure em lojas de costura e de roupas, supermercados, garagens, guarda-móveis, sótãos, galpões, armários... em qualquer lugar onde possa aparecer um kit de costura.
+[*]Clique numa máquina para costurar com molde (escolha o tamanho e a quantidade), ajustar ou restaurar roupas.
+[*]Mas cuidado: as máquinas são [b]barulhentas[/b] e atraem zumbis (a elétrica, de muito mais longe). Elas também se [b]desgastam[/b], quebram agulhas e emperram. Mantenha-as funcionando com uma chave de fenda e um pouco de óleo de cozinha (vegetal ou azeite).
+[/list]
+
+[h2]Multijogador[/h2]
+
+Totalmente jogável no multijogador: todos veem os mesmos tamanhos, o mesmo desgaste e os mesmos resultados de costura. Só um jogador por vez pode usar uma máquina de costura.
+
+[h2]Opções de sandbox[/h2]
+
+Quase tudo é configurável: habilidade e XP, velocidade das ações, rigor das penalidades por tamanho errado, desgaste das roupas, números de calçado, moldes, dedal, máquinas de costura, raridade no saque... As roupas de outros mods recebem um tamanho automaticamente, e duas listas permitem incluir ou excluir itens específicos, se necessário. Todos os detalhes no [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+
+[h2]Créditos[/h2]
+
+Baseado no [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], incluindo seus sons. Reescrito para a Build 42.21 com suporte a multijogador, depois ampliado com números de calçado, moldes e máquinas de costura. Dicas dos itens via [b]TooltipLib[/b].
+Sons das máquinas de costura: máquina elétrica por Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0); máquina a pedal por Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), recortados em loops.
+Código-fonte (MIT) no [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].

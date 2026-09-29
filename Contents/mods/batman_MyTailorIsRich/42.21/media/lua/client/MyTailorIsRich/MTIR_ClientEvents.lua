@@ -187,23 +187,29 @@ end
 --- Client MP : plancher d'inconfort local, pour que l'humeur ne clignote pas
 --- entre deux synchronisations du serveur (qui reste l'autorité).
 local discomfortTicks = 0
+
+local function forEachLocalPlayer(callback)
+    for i = 0, getNumActivePlayers() - 1 do
+        local player = getSpecificPlayer(i)
+        if player and player:isLocalPlayer() and not player:isDead() then
+            callback(player)
+        end
+    end
+end
+
 local function onTick()
     if not isClient() then
         return
     end
     discomfortTicks = discomfortTicks + 1
-    local refresh = discomfortTicks >= DISCOMFORT_TICKS
-    if refresh then
+    if discomfortTicks >= DISCOMFORT_TICKS then
         discomfortTicks = 0
+        MTIR.resetDiscomfortFloors()
+        forEachLocalPlayer(MTIR.refreshDiscomfortFloor)
     end
-    for i = 0, getNumActivePlayers() - 1 do
-        local player = getSpecificPlayer(i)
-        if player and player:isLocalPlayer() and not player:isDead() then
-            if refresh then
-                MTIR.refreshDiscomfortFloor(player)
-            end
-            MTIR.enforceDiscomfortFloor(player)
-        end
+    -- Sans chaussure mal ajustée, la boucle par tick s'arrête là.
+    if MTIR.hasDiscomfortFloors() then
+        forEachLocalPlayer(MTIR.enforceDiscomfortFloor)
     end
 end
 

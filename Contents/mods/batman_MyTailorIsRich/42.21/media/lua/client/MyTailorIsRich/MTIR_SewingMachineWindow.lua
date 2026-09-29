@@ -28,6 +28,7 @@ MTIR_SewingMachineWindow = ISCollapsableWindow:derive("MTIR_SewingMachineWindow"
 
 local UI = MTIR.MachineUI
 local PAD, FONT_HGT = UI.PAD, UI.FONT_HGT
+-- Largeur minimale ; élargie d'après les textes (langue, taille de police), voir computeLayout.
 local WIDTH = 440
 -- Hauteur de départ, recalculée d'après l'onglet actif (MTIR_SewingMachineWindow:layout).
 local HEIGHT = 560
@@ -40,6 +41,14 @@ local ART_ELECTRIC = "media/textures/MTIR_SewingMachinePanel.png"
 local ART_BY_KIND = { electric = ART_ELECTRIC, treadle = "media/textures/MTIR_TreadleMachinePanel.png" }
 local ROW_HEIGHT = FONT_HGT + 8
 local MAINTAIN_WIDTH = 120
+-- Marge d'un bouton autour de son texte, écart entre onglets, barre d'état minimale.
+local BUTTON_TEXT_MARGIN = 16
+local TAB_GAP = 4
+local CONDITION_BAR_MIN = 80
+-- Décalage du texte de courant, après le carré témoin.
+local POWER_TEXT_OFFSET = 14
+-- Valeur la plus large mise à la place de %1 pour mesurer un texte.
+local SAMPLE_VALUE = "100"
 local REFRESH_TICKS = 30
 -- Distance de fermeture des fenêtres d'entité vanilla (ISBaseEntityWindow.panelCloseDistance,
 -- mesurée par DistToProper, sans l'étage : l'étage est testé à part).
@@ -51,8 +60,56 @@ local CLOSE_MARGIN = 1.5
 local SCREEN_MARGIN = 10
 local TAB_KEYS = { "IGUI_MTIR_Machine_TabPattern", "IGUI_MTIR_Machine_TabResize", "IGUI_MTIR_Machine_TabRecondition" }
 local MAINTENANCE_TYPES = { MTIR_MachineMaintenanceAction = true }
+-- Textes mesurés pour la mise en page : { clé, vrai si elle prend une valeur %1 }.
+local MAINTAIN_TEXTS = {
+    { "IGUI_MTIR_Machine_Maintain" }, { "IGUI_MTIR_Machine_Preparing" }, { "IGUI_MTIR_Machine_Maintaining", true },
+}
+local POWER_TEXTS = { { "IGUI_MTIR_Machine_Powered" }, { "IGUI_MTIR_Machine_Unpowered" } }
+local BONUS_TEXTS = {
+    { "IGUI_MTIR_Machine_BonusSpeedValue", true }, { "IGUI_MTIR_Machine_BonusLevelValue", true },
+    { "IGUI_MTIR_Machine_BonusPrecisionValue", true }, { "IGUI_MTIR_Machine_BonusThreadValue", true },
+    { "IGUI_MTIR_Machine_BonusNoThimble" },
+}
+local MALUS_TEXTS = { { "IGUI_MTIR_Machine_WearMalus", true } }
 
 local instances = {}
+
+-- ----------------------------------------------------------------------------
+-- Mise en page d'après les textes
+-- ----------------------------------------------------------------------------
+
+local function textWidth(text)
+    return getTextManager():MeasureStringX(UIFont.Small, text)
+end
+
+--- Largeur du plus long des textes, précédés de prefix.
+local function widest(entries, prefix)
+    local result = 0
+    for _, entry in ipairs(entries) do
+        local text = entry[2] and getText(entry[1], SAMPLE_VALUE) or getText(entry[1])
+        result = math.max(result, textWidth((prefix or "") .. text))
+    end
+    return result
+end
+
+--- Largeur de la fenêtre et du bouton d'entretien. Les textes traduits, ou une
+--- police agrandie dans les options, élargissent la fenêtre au lieu de déborder
+--- des onglets, du bandeau ou du bouton.
+local function computeLayout()
+    local maintainWidth = math.max(MAINTAIN_WIDTH, widest(MAINTAIN_TEXTS) + BUTTON_TEXT_MARGIN)
+    local tabWidth = 0
+    for _, key in ipairs(TAB_KEYS) do
+        tabWidth = math.max(tabWidth, textWidth(getText(key)) + BUTTON_TEXT_MARGIN)
+    end
+    local tabs = PAD * 2 + #TAB_KEYS * tabWidth + TAB_GAP * (#TAB_KEYS - 1)
+    local bannerText = math.max(POWER_TEXT_OFFSET + widest(POWER_TEXTS), widest(BONUS_TEXTS, "+ "),
+        widest(MALUS_TEXTS))
+    local banner = PAD + bannerText + PAD + ART_WIDTH + 2
+    local condition = PAD + textWidth(getText("IGUI_MTIR_Machine_Condition")) + PAD + CONDITION_BAR_MIN
+        + PAD + maintainWidth + PAD
+    local width = math.max(WIDTH, tabs, banner, condition, MTIR_MachineTabPattern.minWidth())
+    return math.ceil(width), maintainWidth
+end
 
 -- ----------------------------------------------------------------------------
 -- Construction
@@ -65,7 +122,7 @@ function MTIR_SewingMachineWindow:createChildren()
     local y = self:titleBarHeight() + BANNER_HEIGHT + PAD
     if MTIR.isMaintenanceEnabled() then
         self.conditionY = y
-        self.maintainButton = ISButton:new(self.width - PAD - MAINTAIN_WIDTH, y, MAINTAIN_WIDTH, ROW_HEIGHT,
+        self.maintainButton = ISButton:new(self.width - PAD - self.maintainWidth, y, self.maintainWidth, ROW_HEIGHT,
             getText("IGUI_MTIR_Machine_Maintain"), self, MTIR_SewingMachineWindow.onMaintain)
         self.maintainButton:initialise()
         self.maintainButton.prerender = UI.renderProgressBackground
@@ -90,7 +147,7 @@ function MTIR_SewingMachineWindow:createChildren()
 end
 
 function MTIR_SewingMachineWindow:createTabButtons(y)
-    local gap = 4
+    local gap = TAB_GAP
     local width = (self.width - PAD * 2 - gap * (#TAB_KEYS - 1)) / #TAB_KEYS
     self.tabButtons = {}
     for index, key in ipairs(TAB_KEYS) do
@@ -380,7 +437,7 @@ function MTIR_SewingMachineWindow:renderBanner()
     if self.kind and self.kind.needsPower then
         local power = self.powered and UI.GOOD or UI.BAD
         self:drawRect(PAD, y + (FONT_HGT - 8) / 2, 8, 8, 1, power.r, power.g, power.b)
-        self:drawText(self.powerText or "", PAD + 14, y, power.r, power.g, power.b, 1, UIFont.Small)
+        self:drawText(self.powerText or "", PAD + POWER_TEXT_OFFSET, y, power.r, power.g, power.b, 1, UIFont.Small)
         y = y + FONT_HGT + 6
     end
     for _, line in ipairs(self.bonusLines or {}) do
@@ -548,7 +605,9 @@ function MTIR_SewingMachineWindow:close()
 end
 
 function MTIR_SewingMachineWindow:new(x, y, player, machine)
-    local o = ISCollapsableWindow.new(self, x, y, WIDTH, HEIGHT)
+    local width, maintainWidth = computeLayout()
+    local o = ISCollapsableWindow.new(self, x, y, width, HEIGHT)
+    o.maintainWidth = maintainWidth
     local kind = MTIR.getMachineKind(machine)
     o.player = player
     o.playerNum = player:getPlayerNum()
@@ -590,9 +649,9 @@ function MTIR_SewingMachineWindow.open(player, machine)
         end
         current:close()
     end
-    local x = getPlayerScreenLeft(playerNum) + (getPlayerScreenWidth(playerNum) - WIDTH) / 2
     local y = getPlayerScreenTop(playerNum) + (getPlayerScreenHeight(playerNum) - HEIGHT) / 2
-    local window = MTIR_SewingMachineWindow:new(x, y, player, machine)
+    local window = MTIR_SewingMachineWindow:new(0, y, player, machine)
+    window:setX(getPlayerScreenLeft(playerNum) + (getPlayerScreenWidth(playerNum) - window:getWidth()) / 2)
     window:initialise()
     window:addToUIManager()
     instances[playerNum] = window

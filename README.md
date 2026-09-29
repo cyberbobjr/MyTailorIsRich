@@ -84,6 +84,14 @@ In debug mode, or in MP with a role allowed to edit items, right-click a garment
 - In Build 42.21 the vanilla clothing **RunSpeedModifier** is only shown in tooltips and never applied to movement. Only bags actually use it. This mod slows you down the way the engine allows: foot injuries (blisters) and endurance.
 - Arm soreness after fights comes from **vanilla shoving**: every push adds arm strain. Tight tops only make it last longer.
 
+## Languages
+
+English, French, German, Spanish, Portuguese (Brazil and Portugal), Russian and Simplified Chinese. Corrections from native speakers are welcome.
+
+## Development
+
+`python tests/run_tests.py` checks the mod without starting the game: luacheck (`.luacheckrc`), Lua 5.1 syntax (Kahlua's language) and calls to `next()`, which Kahlua lacks, the translations (valid JSON, same keys and `%1` parameters as English, no lone `%`), the Steam descriptions (`README.steam*`: at most 8,000 characters, balanced BBCode, same links as English, `workshop.txt` in sync), and Lua tests run under [lupa](https://pypi.org/project/lupa/) with a mocked game API (`tests/lua/test_*.lua`). Requirements: `pip install lupa`, and luacheck. Tests that read the vanilla loot tables need the game: set `PZ_MEDIA` to its `media` folder; they are skipped otherwise. GitHub Actions runs the same checks on every push.
+
 ## Credits
 
 Based on [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) by **Gootube** (Workshop 3491510356), including its sounds. It was rewritten and ported to Build 42.21 with multiplayer support, then expanded with shoe sizes and sewing patterns. Tooltips by **TooltipLib**.
@@ -175,6 +183,14 @@ En mode debug, ou en MP avec un rôle autorisé à éditer les objets : clic dro
 
 - En Build 42.21, le **RunSpeedModifier** vanilla des vêtements est seulement affiché dans l'infobulle, jamais appliqué au déplacement. Seuls les sacs l'utilisent vraiment. Ce mod ralentit donc par les moyens que le moteur permet : blessures aux pieds (ampoules) et endurance.
 - Les courbatures aux bras après un combat viennent des **poussées vanilla** : chaque poussée sollicite les bras. Un haut trop serré les fait seulement durer plus longtemps.
+
+## Langues
+
+Anglais, français, allemand, espagnol, portugais (Brésil et Portugal), russe et chinois simplifié. Les corrections de locuteurs natifs sont bienvenues.
+
+## Développement
+
+`python tests/run_tests.py` vérifie le mod sans lancer le jeu : luacheck (`.luacheckrc`), syntaxe Lua 5.1 (le langage de Kahlua) et appels à `next()`, absente de Kahlua, traductions (JSON valide, mêmes clés et mêmes paramètres `%1` que l'anglais, pas de `%` seul), descriptions Steam (`README.steam*` : 8 000 caractères au plus, BBCode équilibré, mêmes liens que l'anglais, `workshop.txt` synchronisé), et tests Lua exécutés sous [lupa](https://pypi.org/project/lupa/) avec l'API du jeu simulée (`tests/lua/test_*.lua`). Prérequis : `pip install lupa`, et luacheck. Les tests qui lisent les tables de butin vanilla demandent le jeu : définir `PZ_MEDIA` vers son dossier `media`, sinon ils sont ignorés. GitHub Actions lance les mêmes vérifications à chaque push.
 
 ## Crédits
 
