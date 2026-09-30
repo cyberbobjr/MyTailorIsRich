@@ -122,5 +122,5 @@ My Tailor Is Rich 给每件衣物、每双鞋都定了尺码。找到合身的�
 [h2]致谢[/h2]
 
 基于 [b]Gootube[/b] 的 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]，包括其音效。为 Build 42.21 重写并支持多人游戏，之后又加入了鞋码、缝纫图纸和缝纫机。物品提示由 [b]TooltipLib[/b] 提供。
-缝纫机音效：电动缝纫机来自 Joseph Sardin（[url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url]，CC0）；脚踏缝纫机来自 Work With Sounds / Museum of Municipal Engineering（[url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url]，[url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]），已剪辑为循环音效。
+缝纫机音效：电动缝纫机来自 Joseph Sardin（[url=https://bigsoundbank.com]BigSoundBank[/url]，CC0）；脚踏缝纫机来自 Work With Sounds / Museum of Municipal Engineering（[url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url]，[url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]），已剪辑为循环音效。
 源代码（MIT）发布于 [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url]。

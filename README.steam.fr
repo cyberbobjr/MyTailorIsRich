@@ -120,6 +120,6 @@ Le mod vous plaît ? Un café aide à financer la suite.
 
 [h2]Crédits[/h2]
 
-Basé sur [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], dont il reprend les sons. Réécrit pour la Build 42.21, multijoueur compris. Infobulles par [b]TooltipLib[/b].
-Sons : machine électrique de Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0) ; machine à pédale de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]).
+Basé sur [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], dont il reprend les sons. Infobulles par [b]TooltipLib[/b].
+Sons : machine électrique de Joseph Sardin ([url=https://bigsoundbank.com]BigSoundBank[/url], CC0) ; machine à pédale de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]).
 Code source (MIT) sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].

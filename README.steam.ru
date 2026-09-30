@@ -113,6 +113,6 @@
 
 [h2]Благодарности[/h2]
 
-Основано на [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] от [b]Gootube[/b] (включая звуки); переписано для Build 42.21. Подсказки — [b]TooltipLib[/b].
-Звуки машин: электрическая — Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0); ножная — Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]).
+Основано на [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] от [b]Gootube[/b] (включая звуки). Подсказки — [b]TooltipLib[/b].
+Звуки машин: электрическая — Joseph Sardin ([url=https://bigsoundbank.com]BigSoundBank[/url], CC0); ножная — Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]).
 Код (MIT) на [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].

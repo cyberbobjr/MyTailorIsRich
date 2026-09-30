@@ -120,6 +120,6 @@ No lo desactives sin más: la partida guarda las máquinas de coser y, en multij
 
 [h2]Créditos[/h2]
 
-Basado en [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], sonidos incluidos. Reescrito para la Build 42.21 con multijugador. Descripciones emergentes: [b]TooltipLib[/b].
-Sonidos de las máquinas: la eléctrica, de Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0); la de pedal, de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]).
+Basado en [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], sonidos incluidos. Descripciones emergentes: [b]TooltipLib[/b].
+Sonidos: máquina eléctrica de Joseph Sardin ([url=https://bigsoundbank.com]BigSoundBank[/url], CC0); máquina de pedal de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]).
 Código fuente (MIT) en [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
