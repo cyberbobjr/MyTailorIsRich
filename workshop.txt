@@ -112,6 +112,10 @@ description=[h2]Sandbox options[/h2]
 description=
 description=Almost everything can be tuned: skill and XP, action speed, how harsh bad fits are, clothes wear, shoe sizes, patterns, thimble, sewing machines, loot rarity... Clothes from other mods get a size automatically, and two lists let you add or exclude specific items if needed. Full details on [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 description=
+description=[h2]Removing the mod from a save[/h2]
+description=
+description=Don't just disable it: the save keeps a record of the sewing machines, and in multiplayer nobody can join anymore ("Missing dictionary script on client"). Replace [b]batman_MyTailorIsRich[/b] with [b]batman_MyTailorIsRich_Uninstall[/b] (included) and keep it for good: it only keeps the machines, as plain furniture. Never enable both.
+description=
 description=[h2]Support the project[/h2]
 description=
 description=Enjoying the mod? A coffee helps fund new features and translations.

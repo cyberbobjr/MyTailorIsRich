@@ -109,6 +109,10 @@ My Tailor Is Rich 给每件衣物、每双鞋都定了尺码。找到合身的�
 
 几乎一切都能调整：技能与经验、动作速度、不合身的惩罚力度、衣物磨损、鞋码、图纸、顶针、缝纫机、物资稀有度……其他模组的衣物会自动获得尺码，另有两个列表可以在需要时添加或排除特定物品。完整说明见 [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url]。
 
+[h2]从存档中移除本模组[/h2]
+
+不要直接停用：存档会记住缝纫机，多人游戏中将无人能再加入（“Missing dictionary script on client”）。请用 [b]batman_MyTailorIsRich_Uninstall[/b]（已附带）替换 [b]batman_MyTailorIsRich[/b]，并一直保留：它只把缝纫机保留为普通家具。切勿同时启用两者。
+
 [h2]支持本项目[/h2]
 
 喜欢这个模组？请我喝杯咖啡，支持后续的新功能和翻译。

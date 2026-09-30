@@ -96,7 +96,6 @@ As bolhas são pequenas feridas no pé, sem infeção zombie. Como qualquer feri
 [list]
 [*][b]Máquina de Costura Elétrica[/b]: fica sobre uma mesa e precisa de eletricidade. Duas vezes mais rápida e vale +2 níveis de Alfaiataria.
 [*][b]Máquina de Costura a Pedal[/b]: um móvel pesado, sem eletricidade. 25% mais rápida, +1 nível de Alfaiataria.
-[*]Procura em retrosarias e lojas de roupa, supermercados, garagens, guarda-móveis, sótãos, barracões, roupeiros... onde possa haver um kit de costura.
 [*]Clica numa máquina para costurar com molde (escolhe tamanho e quantidade), ajustar ou restaurar roupa.
 [*]Atenção: as máquinas são [b]barulhentas[/b] e atraem zombies (a elétrica, de muito mais longe). Também se [b]gastam[/b], partem agulhas e encravam. Mantém-nas em ordem com uma chave de fendas e algum óleo de cozinha (vegetal ou azeite).
 [/list]
@@ -109,6 +108,10 @@ Todos veem os mesmos tamanhos, o mesmo desgaste e os mesmos resultados de costur
 
 Quase tudo é configurável: habilidade e EXP, velocidade das ações, rigor das penalizações por tamanho errado, desgaste da roupa, números de calçado, moldes, dedal, máquinas de costura, raridade no saque... A roupa de outros mods recebe um tamanho automaticamente, e duas listas permitem incluir ou excluir itens específicos. Pormenores no [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 
+[h2]Remover o mod de um jogo guardado[/h2]
+
+Não o desatives simplesmente: o jogo guardado regista as máquinas e, em multijogador, ninguém consegue voltar a entrar. Substitui [b]batman_MyTailorIsRich[/b] por [b]batman_MyTailorIsRich_Uninstall[/b] (incluído) e mantém-no sempre ativo: só conserva as máquinas, como mobília. Nunca atives os dois.
+
 [h2]Apoia o projeto[/h2]
 
 Gostas do mod? Um café ajuda a financiar novas funcionalidades e traduções.
@@ -116,6 +119,6 @@ Gostas do mod? Um café ajuda a financiar novas funcionalidades e traduções.
 
 [h2]Créditos[/h2]
 
-Baseado no [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], com os seus sons. Reescrito para a Build 42.21 com multijogador e alargado com números de calçado, moldes e máquinas de costura. Descrições dos itens via [b]TooltipLib[/b].
-Sons das máquinas: a elétrica, de Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0); a de pedal, de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), cortados em ciclos.
+Baseado no [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], com os seus sons. Reescrito para a Build 42.21 com multijogador. Descrições dos itens via [b]TooltipLib[/b].
+Sons das máquinas: a elétrica, de Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0); a de pedal, de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]).
 Código-fonte (MIT) no [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].

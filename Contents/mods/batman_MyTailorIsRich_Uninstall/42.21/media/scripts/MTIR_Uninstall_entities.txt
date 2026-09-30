@@ -1,0 +1,108 @@
+module Base
+{
+    /* Bouchon de désinstallation de My Tailor Is Rich.
+       Le jeu enregistre les SpriteConfig des entités dans le WorldDictionary de la
+       sauvegarde et ne retire jamais leur marque isLoaded (ScriptsDictionary
+       $ScriptRegister.parseLoadList, 42.21). Sans script du même nom, un client MP
+       refuse de charger le monde : « Missing dictionary script on client ».
+       Ces entités gardent donc les noms et les faces de MTIR_entities.txt, sans
+       fenêtre : sans LuaWindowClass chargée, ISEntityUI.CanOpenWindowFor rend false.
+       Les machines déjà posées relisent leur UiConfig sauvegardé, sans effet non plus. */
+    xuiSkin default
+    {
+        entity ES_MTIR_SewingMachine
+        {
+            DisplayName = IGUI_MTIR_Machine_Title,
+        }
+    }
+
+    xuiSkin default
+    {
+        entity ES_MTIR_TreadleMachine
+        {
+            DisplayName = IGUI_MTIR_Treadle_Title,
+        }
+    }
+
+    entity MTIR_SewingMachine
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_MTIR_SewingMachine,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = mtir_sewing_01_0,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = mtir_sewing_01_1,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = mtir_sewing_01_2,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = mtir_sewing_01_3,
+                }
+            }
+        }
+    }
+
+    entity MTIR_TreadleMachine
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_MTIR_TreadleMachine,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = mtir_treadle_01_0,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = mtir_treadle_01_1,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = mtir_treadle_01_2,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = mtir_treadle_01_3,
+                }
+            }
+        }
+    }
+}

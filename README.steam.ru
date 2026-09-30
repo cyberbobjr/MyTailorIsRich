@@ -89,7 +89,6 @@
 [list]
 [*][b]Электрическая[/b]: на стол, от сети. ×2 скорость, +2 к Шитью.
 [*][b]Ножная[/b]: тяжёлая тумба, без тока. +25% скорости, +1 к Шитью.
-[*]Где швейные наборы: магазины, супермаркеты, гаражи, склады, чердаки, сараи, шкафы.
 [*]Клик по машине: шить по выкройке (размер, число), подогнать, восстановить.
 [*]Машины [b]шумят[/b] и манят зомби (электрическая — издалека), [b]изнашиваются[/b], ломают иглы, заклинивают. Уход: отвёртка и растительное масло.
 [/list]
@@ -100,15 +99,19 @@
 
 [h2]Настройки песочницы[/h2]
 
-Настраивается почти всё: навык, скорость, штрафы, износ, обувь, выкройки, напёрсток, машины, редкость. Одежда модов получает размер сама; списки добавляют/исключают предметы. Детали на [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+Настраивается почти всё: навык, штрафы, износ, обувь, выкройки, напёрсток, машины, редкость. Одежда модов получает размер сама; списки добавляют/исключают предметы. Детали на [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+
+[h2]Удаление мода[/h2]
+
+Не просто отключайте: сохранение помнит машины, и в мультиплеере никто не войдёт. Замените [b]batman_MyTailorIsRich[/b] на [b]batman_MyTailorIsRich_Uninstall[/b] навсегда: останутся лишь машины как мебель. Не включайте оба.
 
 [h2]Поддержать проект[/h2]
 
-Нравится мод? Чашка кофе поможет с новыми функциями и переводами.
+Нравится мод? Кофе поможет новым функциям и переводам.
 [url=https://ko-fi.com/Z8Z8QJV31][img]https://storage.ko-fi.com/cdn/kofi6.png?v=6[/img][/url]
 
 [h2]Благодарности[/h2]
 
-Основано на [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] от [b]Gootube[/b] (включая звуки); переписано для Build 42.21: мультиплеер, обувь, выкройки, машины. Подсказки — [b]TooltipLib[/b].
-Звуки машин: электрическая — Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0); ножная — Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), зациклены.
+Основано на [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] от [b]Gootube[/b] (включая звуки); переписано для Build 42.21. Подсказки — [b]TooltipLib[/b].
+Звуки машин: электрическая — Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0); ножная — Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]).
 Код (MIT) на [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].

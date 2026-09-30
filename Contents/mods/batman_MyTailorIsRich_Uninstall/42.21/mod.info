@@ -1,0 +1,12 @@
+name=batman_My Tailor Is Rich - Uninstall
+id=batman_MyTailorIsRich_Uninstall
+description=Use INSTEAD of My Tailor Is Rich to remove it from an existing save (singleplayer or multiplayer). Keeps only the two sewing machines as plain furniture, so the save still loads and players can still join. Keep it enabled for good in that save. Never enable it together with My Tailor Is Rich.
+poster=poster.png
+icon=icon.png
+versionMin=42.21
+incompatible=\batman_MyTailorIsRich
+modversion=0.3.0
+pack=mtir_sewing_01
+tiledef=mtir_sewing_01 7171
+pack=mtir_treadle_01
+tiledef=mtir_treadle_01 7172

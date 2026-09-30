@@ -3,6 +3,14 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.3.0 — 2026-09-30
+
+### New
+- **Uninstall helper**: a second mod, **batman_MyTailorIsRich_Uninstall**, is now included. Removing My Tailor Is Rich from an existing save made multiplayer worlds impossible to join ("Missing dictionary script on client: Base.MTIR_TreadleMachine"): the game keeps the sewing machines on record in the save and never lets go of them. To remove the mod, replace it with the uninstall helper in your mod list or on your server, and keep the helper enabled in that save. It only keeps the sewing machines, as plain furniture. Never enable both.
+
+### Changes
+- The Workshop description explains how to remove the mod from a save.
+
 ## 0.2.0 — 2026-09-29
 
 ### New

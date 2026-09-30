@@ -96,7 +96,6 @@ Une ampoule est une petite blessure au pied, sans risque d'infection zombie. Ell
 [list]
 [*][b]Machine électrique[/b] : se pose sur une table et a besoin de courant. Deux fois plus rapide, +2 niveaux de Couture.
 [*][b]Machine à pédale[/b] : lourd meuble, sans électricité. 25 % plus rapide, +1 niveau de Couture.
-[*]À chercher dans les merceries, magasins de vêtements, supermarchés, garages, box, greniers, abris, placards... partout où traîne un kit de couture.
 [*]Cliquez sur une machine pour coudre d'après un patron (taille et quantité au choix), retoucher ou remettre en état.
 [*]Attention : elles sont [b]bruyantes[/b] et attirent les zombies (l'électrique de bien plus loin). Elles [b]s'usent[/b], cassent des aiguilles et se bloquent : entretenez-les au tournevis et à l'huile de cuisine (végétale ou d'olive).
 [/list]
@@ -107,7 +106,11 @@ Tout le monde voit les mêmes tailles, la même usure et les mêmes résultats d
 
 [h2]Options sandbox[/h2]
 
-Presque tout se règle : Couture et XP, durée des actions, sévérité des mauvaises tailles, usure, pointures, patrons, dé à coudre, machines, butin... Les vêtements des autres mods ont une taille automatique, deux listes permettent d'en ajouter ou d'en exclure. Tous les détails sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+Presque tout se règle : Couture et XP, sévérité des mauvaises tailles, usure, pointures, patrons, dé à coudre, machines, butin... Les vêtements des autres mods ont une taille automatique, deux listes permettent d'en ajouter ou d'en exclure. Tous les détails sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+
+[h2]Retirer le mod d'une partie[/h2]
+
+Ne le désactivez pas simplement : la sauvegarde retient les machines et, en multijoueur, plus personne ne pourrait se connecter. Remplacez [b]batman_MyTailorIsRich[/b] par [b]batman_MyTailorIsRich_Uninstall[/b] (inclus) et gardez-le : il ne conserve que les machines, en simple mobilier. N'activez jamais les deux.
 
 [h2]Soutenir le projet[/h2]
 
@@ -116,6 +119,6 @@ Le mod vous plaît ? Un café aide à financer les prochaines fonctions et tradu
 
 [h2]Crédits[/h2]
 
-Basé sur [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], dont il reprend les sons. Réécrit pour la Build 42.21 avec le multijoueur, puis enrichi des pointures, patrons et machines à coudre. Infobulles par [b]TooltipLib[/b].
-Sons : machine électrique de Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0) ; machine à pédale de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), découpés en boucles.
+Basé sur [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] de [b]Gootube[/b], dont il reprend les sons. Réécrit pour la Build 42.21, multijoueur compris. Infobulles par [b]TooltipLib[/b].
+Sons : machine électrique de Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0) ; machine à pédale de Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]).
 Code source (MIT) sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].

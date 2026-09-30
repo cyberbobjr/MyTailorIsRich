@@ -1,0 +1,22 @@
+module Base
+{
+    /* Machines ramassées : mêmes objets posables que MTIR_items.txt, pour qu'une
+       machine dans un inventaire reste un meuble reposable ou démontable. */
+    item Mov_MTIR_SewingMachine
+    {
+        DisplayCategory = Furniture,
+        ItemType = base:moveable,
+        Icon = default,
+        Weight = 0.5,
+        WorldObjectSprite = mtir_sewing_01_0,
+    }
+
+    item Mov_MTIR_TreadleMachine
+    {
+        DisplayCategory = Furniture,
+        ItemType = base:moveable,
+        Icon = default,
+        Weight = 0.5,
+        WorldObjectSprite = mtir_treadle_01_0,
+    }
+}

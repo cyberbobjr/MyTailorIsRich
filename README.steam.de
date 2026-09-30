@@ -96,7 +96,6 @@ Blasen sind kleine Fußwunden ohne Zombie-Infektion. Wie jede Fußverletzung bre
 [list]
 [*][b]Elektrische Nähmaschine[/b]: auf einem Tisch, braucht Strom. Doppelt so schnell, zählt als +2 Stufen Schneiderei.
 [*][b]Tretnähmaschine[/b]: ein schwerer Schrank, kein Strom nötig. 25 % schneller, +1 Stufe Schneiderei.
-[*]Such in Näh- und Bekleidungsgeschäften, Supermärkten, Garagen, Lagerräumen, Dachböden, Schuppen, Kleiderschränken... überall, wo ein Nähset liegen könnte.
 [*]Ein Klick auf die Maschine: nach Schnittmuster nähen (Größe und Anzahl wählbar), Kleidung ändern oder aufarbeiten.
 [*]Vorsicht: Maschinen sind [b]laut[/b] und locken Zombies an (die elektrische von viel weiter her). Sie [b]verschleißen[/b], brechen Nadeln ab und klemmen: Schraubenzieher und etwas Speiseöl (Pflanzen- oder Olivenöl) halten sie in Schuss.
 [/list]
@@ -109,6 +108,10 @@ Alle sehen dieselben Größen, denselben Verschleiß und dieselben Nähergebniss
 
 Fast alles lässt sich einstellen: Fertigkeit und XP, Aktionsdauer, Strafen bei schlechter Passform, Kleidungsverschleiß, Schuhgrößen, Schnittmuster, Fingerhut, Nähmaschinen, Seltenheit der Beute... Kleidung aus anderen Mods bekommt automatisch eine Größe; zwei Listen nehmen bei Bedarf Gegenstände auf oder aus. Details auf [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 
+[h2]Mod aus einem Spielstand entfernen[/h2]
+
+Nicht einfach deaktivieren: Der Spielstand merkt sich die Nähmaschinen, und im Mehrspieler kann danach niemand mehr beitreten. Ersetze [b]batman_MyTailorIsRich[/b] durch [b]batman_MyTailorIsRich_Uninstall[/b] (enthalten) und lass es dauerhaft aktiv: Es behält nur die Maschinen als einfache Möbel. Nie beide aktivieren.
+
 [h2]Projekt unterstützen[/h2]
 
 Gefällt dir der Mod? Ein Kaffee hilft, neue Funktionen und Übersetzungen zu finanzieren.
@@ -116,6 +119,6 @@ Gefällt dir der Mod? Ein Kaffee hilft, neue Funktionen und Übersetzungen zu fi
 
 [h2]Credits[/h2]
 
-Basiert auf [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] von [b]Gootube[/b], samt seiner Sounds. Für Build 42.21 mit Mehrspieler neu geschrieben, dann um Schuhgrößen, Schnittmuster und Nähmaschinen erweitert. Tooltips von [b]TooltipLib[/b].
-Nähmaschinen-Sounds: elektrische von Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0); Tretnähmaschine von Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), zu Loops geschnitten.
+Basiert auf [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] von [b]Gootube[/b], samt seiner Sounds. Für Build 42.21 mit Mehrspieler neu geschrieben. Tooltips von [b]TooltipLib[/b].
+Nähmaschinen-Sounds: elektrische von Joseph Sardin ([url=https://bigsoundbank.com/sewing-machine-slow-speed-s1115.html]BigSoundBank[/url], CC0); Tretnähmaschine von Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]).
 Quellcode (MIT) auf [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].

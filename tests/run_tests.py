@@ -7,7 +7,9 @@
 3. traductions : JSON valides, mêmes clés et mêmes paramètres que EN, pas de % seul ;
 4. descriptions Steam (README.steam*) : 8 000 octets UTF-8 au plus, BBCode équilibré,
    mêmes liens et images que l'anglais, description de workshop.txt identique à README.steam ;
-5. tests Lua (tests/lua/test_*.lua) sous lupa, avec l'API du jeu simulée.
+5. mod de désinstallation : mêmes entités à SpriteConfig, tuiles, objets posables et
+   traductions que le mod principal ;
+6. tests Lua (tests/lua/test_*.lua) sous lupa, avec l'API du jeu simulée.
 
 Dépendances : pip install lupa ; luacheck facultatif en local, exigé par la CI.
 Les tests qui lisent les fichiers vanilla sont ignorés si le jeu est absent
@@ -211,6 +213,68 @@ def check_steam_descriptions(report):
         report.ok("workshop.txt : description identique à README.steam")
 
 
+MODS = REPO / "Contents" / "mods"
+MAIN_MOD = MODS / "batman_MyTailorIsRich"
+UNINSTALL_MOD = MODS / "batman_MyTailorIsRich_Uninstall"
+SCRIPT_BLOCK = re.compile(r"\b(entity|item)\s+(\w+)\s*\{")
+
+
+def script_blocks(mod):
+    """{(entity|item, nom): texte du bloc} des scripts de la variante 42.21, commentaires retirés."""
+    blocks = {}
+    for path in sorted((mod / "42.21" / "media" / "scripts").glob("*.txt")):
+        text = re.sub(r"/\*.*?\*/", "", path.read_text(encoding="utf-8"), flags=re.S)
+        for match in SCRIPT_BLOCK.finditer(text):
+            depth, end = 1, match.end()
+            while depth:
+                depth += {"{": 1, "}": -1}.get(text[end], 0)
+                end += 1
+            blocks[(match.group(1), match.group(2))] = text[match.end():end]
+    return blocks
+
+
+def mod_info_lines(mod, prefix):
+    lines = (mod / "42.21" / "mod.info").read_text(encoding="utf-8").splitlines()
+    return [line for line in lines if line.startswith(prefix)]
+
+
+def check_uninstall_mod(report):
+    """Le mod de désinstallation doit redéclarer, à l'identique, tout ce que la sauvegarde
+    garde de MTIR : entités à SpriteConfig (WorldDictionary), tuiles et objets posables."""
+    report.section("Mod de désinstallation")
+    before = report.failures
+    main, stub = script_blocks(MAIN_MOD), script_blocks(UNINSTALL_MOD)
+    faces = re.compile(r"row\s*=\s*([\w ]+?)\s*,")
+    for (kind, name), body in sorted(main.items()):
+        if kind == "entity" and "SpriteConfig" in body:
+            stub_body = stub.get((kind, name))
+            if stub_body is None:
+                report.fail(f"entité {name} absente du mod de désinstallation")
+            elif faces.findall(stub_body) != faces.findall(body):
+                report.fail(f"entité {name} : faces SpriteConfig différentes")
+        if kind == "item" and "WorldObjectSprite" in body and stub.get((kind, name)) != body:
+            report.fail(f"objet posable {name} absent ou différent")
+    for prefix in ("pack=", "tiledef=", "modversion="):
+        if mod_info_lines(MAIN_MOD, prefix) != mod_info_lines(UNINSTALL_MOD, prefix):
+            report.fail(f"mod.info : lignes {prefix} différentes")
+    if mod_info_lines(UNINSTALL_MOD, "incompatible=") != ["incompatible=\\batman_MyTailorIsRich"]:
+        report.fail("mod.info : incompatible=\\batman_MyTailorIsRich attendu")
+    for path in sorted((MAIN_MOD / "common").rglob("*")):
+        rel = path.relative_to(MAIN_MOD)
+        copy = UNINSTALL_MOD / rel
+        if path.is_file() and path.name != "README.txt" and (not copy.is_file() or copy.read_bytes() != path.read_bytes()):
+            report.fail(f"{rel} absent ou différent")
+    stub_translate = UNINSTALL_MOD / "42.21" / "media" / "lua" / "shared" / "Translate"
+    for path in sorted(stub_translate.rglob("*.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        reference = json.loads((TRANSLATE / path.relative_to(stub_translate)).read_text(encoding="utf-8"))
+        for key, value in data.items():
+            if reference.get(key) != value:
+                report.fail(f"{path.relative_to(REPO)} {key} : différent du mod principal")
+    if report.failures == before:
+        report.ok("entités, tuiles, objets posables et traductions identiques au mod principal")
+
+
 def check_lua_tests(report):
     report.section(f"Tests Lua ({lua_harness.LUA_VERSION})")
     for path in sorted((Path(__file__).parent / "lua").glob("test_*.lua")):
@@ -232,6 +296,7 @@ def main():
     check_kahlua(report)
     check_translations(report)
     check_steam_descriptions(report)
+    check_uninstall_mod(report)
     check_lua_tests(report)
     print()
     if report.failures:

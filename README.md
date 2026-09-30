@@ -84,6 +84,18 @@ In debug mode, or in MP with a role allowed to edit items, right-click a garment
 - In Build 42.21 the vanilla clothing **RunSpeedModifier** is only shown in tooltips and never applied to movement. Only bags actually use it. This mod slows you down the way the engine allows: foot injuries (blisters) and endurance.
 - Arm soreness after fights comes from **vanilla shoving**: every push adds arm strain. Tight tops only make it last longer.
 
+## Removing the mod from a save
+
+Don't just disable the mod in an existing save. The game records the two sewing machines (`Base.MTIR_SewingMachine`, `Base.MTIR_TreadleMachine`) in the save's `WorldDictionary.bin` and, in Build 42.21, never clears that record. Once the mod is gone, every multiplayer client, co-op host included, is refused with `[SpriteConfigs] Missing dictionary script on client: Base.MTIR_TreadleMachine`.
+
+The Workshop item ships a second mod for this: **`batman_MyTailorIsRich_Uninstall`**.
+
+1. In the save's mod list (or the server's `Mods=` line), replace `batman_MyTailorIsRich` with `batman_MyTailorIsRich_Uninstall`. Keep the Workshop item subscribed.
+2. Keep it enabled for good in that save: removing it brings the error back.
+3. Never enable both mods together (they are declared incompatible).
+
+It contains no code: only the machine tiles and entities, so placed machines stay in the world as plain furniture (no sewing panel), and picked-up machines stay valid items. Clothes keep their sizes in their data but have no effect anymore. Patterns and other items of the mod disappear, as with any removed mod.
+
 ## Languages
 
 English, French, German, Spanish, Portuguese (Brazil and Portugal), Russian and Simplified Chinese. Corrections from native speakers are welcome.
@@ -183,6 +195,18 @@ En mode debug, ou en MP avec un rôle autorisé à éditer les objets : clic dro
 
 - En Build 42.21, le **RunSpeedModifier** vanilla des vêtements est seulement affiché dans l'infobulle, jamais appliqué au déplacement. Seuls les sacs l'utilisent vraiment. Ce mod ralentit donc par les moyens que le moteur permet : blessures aux pieds (ampoules) et endurance.
 - Les courbatures aux bras après un combat viennent des **poussées vanilla** : chaque poussée sollicite les bras. Un haut trop serré les fait seulement durer plus longtemps.
+
+## Retirer le mod d'une partie
+
+Ne désactivez pas simplement le mod dans une partie existante. Le jeu inscrit les deux machines à coudre (`Base.MTIR_SewingMachine`, `Base.MTIR_TreadleMachine`) dans le `WorldDictionary.bin` de la sauvegarde et, en Build 42.21, n'efface jamais cette inscription. Une fois le mod retiré, tout client multijoueur, hôte d'une partie coopérative compris, est refusé avec `[SpriteConfigs] Missing dictionary script on client: Base.MTIR_TreadleMachine`.
+
+L'objet du Workshop contient pour cela un second mod : **`batman_MyTailorIsRich_Uninstall`**.
+
+1. Dans la liste de mods de la partie (ou la ligne `Mods=` du serveur), remplacez `batman_MyTailorIsRich` par `batman_MyTailorIsRich_Uninstall`. Restez abonné à l'objet du Workshop.
+2. Gardez-le activé définitivement dans cette partie : le retirer ramène l'erreur.
+3. N'activez jamais les deux mods ensemble (ils sont déclarés incompatibles).
+
+Il ne contient aucun code : seulement les tuiles et entités des machines. Les machines posées restent donc dans le monde comme simples meubles (sans panneau de couture), et les machines ramassées restent des objets valides. Les vêtements gardent leur taille dans leurs données, sans plus aucun effet. Les patrons et autres objets du mod disparaissent, comme pour tout mod retiré.
 
 ## Langues
 
