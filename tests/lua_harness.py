@@ -16,7 +16,9 @@ except ImportError:  # lupa sans Lua 5.1 : on garde sa version par défaut
     import lupa as lupa_module
     LUA_VERSION = "Lua par défaut de lupa"
 
-from lupa import LuaError
+# lupa.lua51 lève sa propre LuaError, distincte de lupa.LuaError : l'importer
+# depuis lupa ne rattrape pas l'échec d'un test, qui arrêtait tout le lanceur.
+LuaError = lupa_module.LuaError
 
 REPO = Path(__file__).resolve().parent.parent
 MOD_LUA = REPO / "Contents" / "mods" / "batman_MyTailorIsRich" / "42.21" / "media" / "lua"
