@@ -30,7 +30,7 @@ My Tailor Is Rich donne une taille à chaque vêtement et une pointure à chaque
 [list]
 [*]Votre taille dépend de votre [b]poids[/b] : XS ≤ 50 kg, S ≤ 65, M ≤ 75, L < 85, XL < 100, XXL ≥ 100. Elle change si vous grossissez ou maigrissez.
 [*]Taille d'un vêtement trouvé : clic droit, [b]Lire l'étiquette[/b]. Avec peu de Couture, on ne fait que deviner.
-[*]Les vêtements d'un même zombie ont des tailles cohérentes.
+[*]Sur un même zombie, les tailles varient d'un cran au plus.
 [*]Chapeaux, masques, gants, bijoux, ceintures et sous-vêtements sont en taille unique.
 [/list]
 

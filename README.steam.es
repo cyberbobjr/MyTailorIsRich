@@ -30,7 +30,7 @@ My Tailor Is Rich da una talla a cada prenda y un número a cada par de zapatos.
 [list]
 [*]Tu talla depende de tu [b]peso[/b]: XS hasta 50 kg, S hasta 65, M hasta 75, L menos de 85, XL menos de 100, XXL a partir de 100. Cambia si ganas o pierdes peso.
 [*]No sabes la talla de la ropa que encuentras: clic derecho > [b]Mirar la talla[/b] lee la etiqueta. Con poca Sastrería, tu personaje solo la adivina.
-[*]La ropa de un mismo zombi tiene tallas coherentes.
+[*]La ropa de un mismo zombi varía una talla como mucho.
 [*]Sombreros, máscaras, guantes, joyas, cinturones y ropa interior son de talla única.
 [/list]
 

@@ -17,7 +17,7 @@ Clothes and shoes finally have sizes. Loot that doesn't fit, resize it with your
 
 - Your character's size follows their **weight**: XS ≤ 50 kg, S ≤ 65, M ≤ 75, L < 85, XL < 100, XXL ≥ 100.
 - A found garment's size is **unknown**. Right-click it and choose **Check clothes size**. Reading the label may require some Tailoring; otherwise your character only guesses.
-- All clothes on the same zombie corpse have consistent sizes.
+- Clothes on the same zombie corpse are within one size of each other: each piece is rolled around one reference size (same size most of the time, otherwise one size smaller or larger).
 - Effects of a bad fit:
   - **too big**: less insulation, slower combat for tops, loose pants or skirts can **fall down** without a belt when both hands are busy, can make you **trip** when landing after a fence, even at walking pace (less often than when running);
   - **too small**: longer to put on, can **rip** when climbing, can make you **trip** after climbing a wall, muscle stiffness, and impossible to wear when far too small. If you gain weight, clothes that no longer fit come off.
@@ -129,7 +129,7 @@ Les vêtements et les chaussures ont enfin une taille. Trouvez ce qui vous va, r
 
 - La taille du personnage suit son **poids** : XS ≤ 50 kg, S ≤ 65, M ≤ 75, L < 85, XL < 100, XXL ≥ 100.
 - La taille d'un vêtement trouvé est **inconnue** : clic droit, **Lire l'étiquette**. Il faut parfois un peu de Couture ; sinon le personnage devine seulement.
-- Tous les vêtements d'un même cadavre ont des tailles cohérentes.
+- Les vêtements d'un même cadavre ont au plus une taille d'écart : chaque pièce est tirée autour d'une taille de référence (le plus souvent la même, sinon une taille en dessous ou au-dessus).
 - Effets d'une mauvaise taille :
   - **trop grand** : moins d'isolation, combat ralenti pour les hauts, un bas trop grand peut **tomber** sans ceinture quand on a les deux mains prises, risque de **trébucher** à la réception d'une clôture, même au pas (moins souvent qu'en courant) ;
   - **trop petit** : plus long à enfiler, peut se **déchirer** en escaladant, risque de **trébucher** après avoir escaladé un mur, courbatures, impossible à porter s'il est beaucoup trop petit. Si vous grossissez, les vêtements devenus trop petits s'enlèvent.
