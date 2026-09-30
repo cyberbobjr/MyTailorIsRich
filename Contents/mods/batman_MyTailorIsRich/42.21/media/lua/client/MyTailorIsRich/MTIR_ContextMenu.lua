@@ -6,6 +6,7 @@
 
 require "MyTailorIsRich/MTIR_Effects"
 require "MyTailorIsRich/MTIR_Alterations"
+require "MyTailorIsRich/MTIR_Reach"
 require "ISUI/ISInventoryPaneContextMenu"
 require "TimedActions/MTIR_CheckSizeAction"
 require "TimedActions/MTIR_ResizeAction"
@@ -115,14 +116,36 @@ local function needsCheck(item)
     return not data or not data.reveal
 end
 
-local function queueCheck(player, clothes)
-    local inventory = player:getInventory()
-    for _, item in ipairs(clothes) do
-        local container = item:getContainer()
-        if container and container ~= inventory then
-            ISTimedActionQueue.add(ISInventoryTransferUtil.newInventoryTransferAction(player, item, container, inventory))
+--- Rien à faire pour un vêtement porté sur soi ; approche d'un cadavre, meuble
+--- ou véhicule pour le lire sur place ; sinon (sol, sac posé) transfert.
+--- Faux : vêtement ignoré (conteneur inaccessible).
+local function prepareCheck(player, item, approached)
+    if MTIR.isCarried(player, item) then
+        return true
+    end
+    local container = item:getContainer()
+    if not container then
+        return false
+    end
+    if MTIR.getInPlaceContainer(item) then
+        -- walkToContainer vide la file avant de marcher : une approche par conteneur
+        -- (une sélection vient d'un seul panneau, donc d'un seul conteneur).
+        if approached[container] == nil then
+            approached[container] = luautils.walkToContainer(container, player:getPlayerNum())
         end
-        ISTimedActionQueue.add(MTIR_CheckSizeAction:new(player, item))
+        return approached[container]
+    end
+    ISTimedActionQueue.add(ISInventoryTransferUtil.newInventoryTransferAction(player, item, container,
+        player:getInventory()))
+    return true
+end
+
+local function queueCheck(player, clothes)
+    local approached = {}
+    for _, item in ipairs(clothes) do
+        if prepareCheck(player, item, approached) then
+            ISTimedActionQueue.add(MTIR_CheckSizeAction:new(player, item))
+        end
     end
 end
 

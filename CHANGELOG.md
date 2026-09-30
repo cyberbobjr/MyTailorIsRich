@@ -3,6 +3,13 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.3.2 — 2026-09-30
+
+### Improvements
+- **Check clothes size** no longer moves the garment into your inventory: clothes on a corpse, in a piece of furniture or in a vehicle within reach are checked where they are. Your character walks up to the container if needed, and walking away stops the check.
+- Clothes in a bag you carry are checked inside the bag, without moving them to your main inventory.
+- Clothes lying on the floor are still picked up before being checked, so that the size you read stays in sync in multiplayer.
+
 ## 0.3.1 — 2026-09-30
 
 ### Compatibility

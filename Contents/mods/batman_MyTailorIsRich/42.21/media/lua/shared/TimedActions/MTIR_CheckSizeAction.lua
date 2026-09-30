@@ -2,10 +2,13 @@
 -- My Tailor Is Rich — lire l'étiquette d'un vêtement
 -- Serveur (MP) ou local (solo) : complete() crée la taille si besoin, la révèle
 -- selon le niveau de Couture, donne l'XP et synchronise l'objet.
+-- Le vêtement peut rester dans un cadavre, un meuble ou un véhicule à portée
+-- (MTIR_Reach) : l'étiquette se lit sur place, sans le prendre.
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
 require "MyTailorIsRich/MTIR_Effects"
+require "MyTailorIsRich/MTIR_Reach"
 
 MTIR_CheckSizeAction = ISBaseTimedAction:derive("MTIR_CheckSizeAction")
 
@@ -13,7 +16,7 @@ function MTIR_CheckSizeAction:isValid()
     if isClient() and self.started then
         return true
     end
-    return MTIR.hasItem(self.character, self.item)
+    return MTIR.canReachItem(self.character, self.item)
 end
 
 function MTIR_CheckSizeAction:start()
@@ -24,6 +27,10 @@ function MTIR_CheckSizeAction:start()
     self:setActionAnim("Loot")
     self:setAnimVariable("LootPosition", "")
     self:setOverrideHandModels(nil, nil)
+    local container = MTIR.getInPlaceContainer(self.item)
+    if container then
+        self.character:faceThisObject(container:getParent())
+    end
     self.sound = self.character:getEmitter():playSound("MTIR_CheckSize")
 end
 
@@ -66,8 +73,8 @@ end
 
 function MTIR_CheckSizeAction:complete()
     local item, character = self.item, self.character
-    -- Le serveur n'appelle pas isValid : la possession est revérifiée ici.
-    if not MTIR.hasItem(character, item) then
+    -- Le serveur n'appelle pas isValid : la portée est revérifiée ici.
+    if not MTIR.canReachItem(character, item) then
         return false
     end
     if MTIR.canShoeHaveSize(item) then
@@ -122,7 +129,8 @@ end
 function MTIR_CheckSizeAction:new(character, item)
     local o = ISBaseTimedAction.new(self, character)
     o.item = item
-    o.stopOnWalk = false
+    -- Lecture sur place : s'éloigner du conteneur l'interrompt.
+    o.stopOnWalk = not MTIR.isCarried(character, item)
     o.stopOnRun = true
     o.started = false
     o.maxTime = o:getDuration()

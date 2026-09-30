@@ -17,7 +17,7 @@ Clothes and shoes finally have sizes. Loot that doesn't fit, resize it with your
 ## Clothing sizes (XS to XXL)
 
 - Your character's size follows their **weight**: XS ≤ 50 kg, S ≤ 65, M ≤ 75, L < 85, XL < 100, XXL ≥ 100.
-- A found garment's size is **unknown**. Right-click it and choose **Check clothes size**. Reading the label may require some Tailoring; otherwise your character only guesses.
+- A found garment's size is **unknown**. Right-click it and choose **Check clothes size**. Reading the label may require some Tailoring; otherwise your character only guesses. Clothes in a corpse, a piece of furniture or a vehicle within reach are checked in place, without taking them; clothes on the floor are picked up first.
 - Clothes on the same zombie corpse are within one size of each other: each piece is rolled around one reference size (same size most of the time, otherwise one size smaller or larger).
 - Effects of a bad fit:
   - **too big**: less insulation, slower combat for tops, loose pants or skirts can **fall down** without a belt when both hands are busy, can make you **trip** when landing after a fence, even at walking pace (less often than when running);
