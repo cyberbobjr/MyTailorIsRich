@@ -23,6 +23,7 @@ My Tailor Is Rich gibt jedem Kleidungsstück und jedem Paar Schuhe eine Größe.
 [list]
 [*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (erforderlich): zeigt Größe und Zustand in den Tooltips.
 [*][b]Nicht kompatibel[/b] mit [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]. Dieser Mod ist dessen Neufassung für Build 42.21: Aktiviere nicht beide.
+[*]Kompatibel mit [b]Immersive Weighing[/b]: Die Größe wird mit dem Gewicht ausgeblendet.
 [/list]
 
 [h2]Kleidung, die passt (oder nicht)[/h2]
@@ -106,7 +107,7 @@ Alle sehen dieselben Größen, denselben Verschleiß und dieselben Nähergebniss
 
 [h2]Sandbox-Optionen[/h2]
 
-Fast alles lässt sich einstellen: Fertigkeit und XP, Aktionsdauer, Strafen bei schlechter Passform, Kleidungsverschleiß, Schuhgrößen, Schnittmuster, Fingerhut, Nähmaschinen, Seltenheit der Beute... Kleidung aus anderen Mods bekommt automatisch eine Größe; zwei Listen nehmen bei Bedarf Gegenstände auf oder aus. Details auf [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+Fast alles lässt sich einstellen: Fertigkeit und XP, Aktionsdauer, Strafen bei schlechter Passform, Kleidungsverschleiß, Schuhgrößen, Schnittmuster, Nähmaschinen, Seltenheit der Beute... Kleidung aus anderen Mods bekommt automatisch eine Größe. Details auf [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 
 [h2]Mod aus einem Spielstand entfernen[/h2]
 
@@ -114,7 +115,7 @@ Nicht einfach deaktivieren: Der Spielstand merkt sich die Nähmaschinen, und im 
 
 [h2]Projekt unterstützen[/h2]
 
-Gefällt dir der Mod? Ein Kaffee hilft, neue Funktionen und Übersetzungen zu finanzieren.
+Gefällt dir der Mod? Ein Kaffee hilft bei der Weiterentwicklung.
 [url=https://ko-fi.com/Z8Z8QJV31][img]https://storage.ko-fi.com/cdn/kofi6.png?v=6[/img][/url]
 
 [h2]Credits[/h2]

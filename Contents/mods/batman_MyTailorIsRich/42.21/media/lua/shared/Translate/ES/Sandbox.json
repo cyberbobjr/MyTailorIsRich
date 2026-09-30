@@ -34,6 +34,8 @@
     "Sandbox_MyTailorIsRich_ListCustomClothes_tooltip": "Prendas que deben tener talla, con una dificultad opcional (1, 2 o 3), separadas por comas. <LINE> Ejemplo: Base.Clothing0,Base.Clothing1:1,Base.Clothing2:3",
     "Sandbox_MyTailorIsRich_EnableShoeSizes": "Activar números de calzado",
     "Sandbox_MyTailorIsRich_EnableShoeSizes_tooltip": "El calzado recibe un número europeo (35-47). Cada personaje tiene un número de pie fijo según su sexo. 3 números por debajo: no se puede poner. Pequeño: incomodidad, ampollas (más al correr) y fatiga muscular en los pies. 2+ números por encima: más resistencia gastada al correr, alguna ampolla, probabilidad de tropezar al saltar vallas, pisotones más débiles a zombis en el suelo; 3+ números por encima: incomodidad; un zapato 2+ números grande puede salirse al saltar, trepar o caer, y uno 3+ números grande también al correr (más probable sin cordones). Los vendajes improvisados para los pies no tienen número",
+    "Sandbox_MyTailorIsRich_ShowPlayerSize": "Mostrar tu talla",
+    "Sandbox_MyTailorIsRich_ShowPlayerSize_tooltip": "Muestra tu talla de ropa (y tu número de pie) en la pestaña Información del personaje, junto al peso. Siempre oculta si un mod oculta el peso (Immersive Weighing), ya que la talla depende del peso.",
     "Sandbox_MyTailorIsRich_ShoeEffectMultiplier": "Multiplicador de efectos del calzado",
     "Sandbox_MyTailorIsRich_ShoeEffectMultiplier_tooltip": "Ajusta las ampollas, el gasto extra de resistencia y la probabilidad de perder un calzado que no es de tu número. 0 desactiva estos efectos y la incomodidad",
     "Sandbox_MyTailorIsRich_ExtraSizedLocations": "Zonas del cuerpo con talla extra",

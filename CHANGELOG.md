@@ -3,6 +3,14 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.3.1 — 2026-09-30
+
+### Compatibility
+- **Immersive Weighing** is now supported: your weight stays hidden on the character screen, and your size (derived from your weight) is hidden along with it.
+
+### New
+- Sandbox option **Show your size**: turn off the size shown next to your weight on the character screen.
+
 ## 0.3.0 — 2026-09-30
 
 ### New

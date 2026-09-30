@@ -31,6 +31,29 @@ do
     local hasWeightIcon = false
     local savedWidth, savedX, savedY, savedFont
 
+    -- Mods qui cachent le poids de cet écran : la taille en découle, elle est cachée aussi.
+    local WEIGHT_HIDING_MODS = { ImmersiveWeighing = true }
+    local weightHiddenByMod = nil
+
+    local function isWeightHiddenByMod()
+        if weightHiddenByMod == nil then
+            weightHiddenByMod = false
+            local mods = getActivatedMods()
+            for i = 0, mods:size() - 1 do
+                local id = string.gsub(tostring(mods:get(i)), "^\\", "")
+                if WEIGHT_HIDING_MODS[id] then
+                    weightHiddenByMod = true
+                    break
+                end
+            end
+        end
+        return weightHiddenByMod
+    end
+
+    local function showSize()
+        return MTIR.opt("ShowPlayerSize") and not isWeightHiddenByMod()
+    end
+
     local function sizeLabel(screen)
         local label = MTIR.getPlayerSize(screen.char).name
         if MTIR.opt("EnableShoeSizes") then
@@ -50,17 +73,21 @@ do
         return screenDrawTextRight(self, str, x, y, ...)
     end
 
+    -- La valeur du poids passe en premier : un autre mod qui cache « le texte suivant le
+    -- libellé » doit la recevoir avant notre ajout.
     local function drawText(self, str, x, y, r, g, b, a, font, ...)
-        if hasWeightText then
-            hasWeightText = false
-            local width = getTextManager():MeasureStringX(UIFont.Small, str)
-            if hasWeightIcon then
-                savedWidth, savedX, savedY, savedFont = width, x, y, font
-            else
-                screenDrawText(self, sizeLabel(self), x + width + 2, y, 1, 1, 1, 1, font or UIFont.Small, ...)
-            end
+        if not hasWeightText then
+            return screenDrawText(self, str, x, y, r, g, b, a, font, ...)
         end
-        return screenDrawText(self, str, x, y, r, g, b, a, font, ...)
+        hasWeightText = false
+        local width = getTextManager():MeasureStringX(UIFont.Small, str)
+        local result = screenDrawText(self, str, x, y, r, g, b, a, font, ...)
+        if hasWeightIcon then
+            savedWidth, savedX, savedY, savedFont = width, x, y, font
+        else
+            screenDrawText(self, sizeLabel(self), x + width + 2, y, 1, 1, 1, 1, font or UIFont.Small, ...)
+        end
+        return result
     end
 
     local function drawTexture(self, ...)
@@ -81,6 +108,9 @@ do
     function ISCharacterScreen:render()
         if rendering then
             restore(self)
+            return screenRender(self)
+        end
+        if not showSize() then
             return screenRender(self)
         end
         hasWeightText, hasWeightIcon = false, false

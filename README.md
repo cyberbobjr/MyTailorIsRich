@@ -12,6 +12,7 @@ Clothes and shoes finally have sizes. Loot that doesn't fit, resize it with your
 
 - **[TooltipLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672)** (required): the size and wear lines in item tooltips.
 - **Incompatible** with [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356). This mod is a full rewrite of it for Build 42.21.
+- **Compatible** with [Immersive Weighing](https://steamcommunity.com/sharedfiles/filedetails/?id=3791897755): when your weight is hidden, the size shown next to it is hidden too, since it follows your weight.
 
 ## Clothing sizes (XS to XXL)
 
@@ -28,7 +29,7 @@ Clothes and shoes finally have sizes. Loot that doesn't fit, resize it with your
 
 ## Shoe sizes (EU 35 to 47)
 
-- Each character has a **fixed foot size** depending on sex: women 35–42, men 39–47. It is shown on the character screen next to your weight.
+- Each character has a **fixed foot size** depending on sex: women 35–42, men 39–47. It is shown on the character screen next to your weight, with your clothing size (sandbox option; hidden when a mod hides your weight).
 - Found shoes lean toward the usual wearer of the model. Work, army and hiking boots are mostly men's sizes; strapped and fancy shoes mostly women's. Shoes on a corpse match the zombie's sex.
 - The size is printed inside the shoe: **Check clothes size** reads it without any skill.
 - Improvised foot wraps (rags, burlap, denim, leather, tarp, twine) fit anyone. Crafted shoes are made to the crafter's size.
@@ -73,7 +74,7 @@ The server decides everything: sizes, resizing, wear, blisters, stiffness and lo
 
 ## Sandbox options
 
-Tailoring level requirement, tailoring XP, action time, rip / drop / trip / stiffness multipliers, insulation and combat penalties, clothes degrading (on/off, min/max days, failure chance, protection and resistance loss), custom clothes list, **extra sized body locations**, **excluded clothes**, **shoe sizes on/off**, **shoe fit effects intensity** (0 disables blisters, discomfort, extra endurance and lost shoes), **sewings per pattern**, **Tailoring level for shoe patterns**, **thimble for hand sewing**, **sewing machine bonus**, **machine noise**, **machine maintenance**, **sewing loot rarity**.
+Tailoring level requirement, tailoring XP, action time, rip / drop / trip / stiffness multipliers, insulation and combat penalties, clothes degrading (on/off, min/max days, failure chance, protection and resistance loss), custom clothes list, **extra sized body locations**, **excluded clothes**, **shoe sizes on/off**, **your size shown on the character screen**, **shoe fit effects intensity** (0 disables blisters, discomfort, extra endurance and lost shoes), **sewings per pattern**, **Tailoring level for shoe patterns**, **thimble for hand sewing**, **sewing machine bonus**, **machine noise**, **machine maintenance**, **sewing loot rarity**.
 
 ## Debug
 
@@ -124,6 +125,7 @@ Les vêtements et les chaussures ont enfin une taille. Trouvez ce qui vous va, r
 
 - **[TooltipLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672)** (obligatoire) : les lignes de taille et d'usure dans les infobulles.
 - **Incompatible** avec [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356), dont ce mod est une réécriture complète pour la Build 42.21.
+- **Compatible** avec [Immersive Weighing](https://steamcommunity.com/sharedfiles/filedetails/?id=3791897755) : quand le poids est caché, la taille affichée à côté l'est aussi, puisqu'elle découle du poids.
 
 ## Tailles de vêtements (XS à XXL)
 
@@ -140,7 +142,7 @@ Les vêtements et les chaussures ont enfin une taille. Trouvez ce qui vous va, r
 
 ## Pointures de chaussures (EU 35 à 47)
 
-- Chaque personnage a une **pointure fixe** selon son sexe : 35-42 pour les femmes, 39-47 pour les hommes. Elle s'affiche dans l'écran Personnage, après le poids.
+- Chaque personnage a une **pointure fixe** selon son sexe : 35-42 pour les femmes, 39-47 pour les hommes. Elle s'affiche dans l'écran Personnage, après le poids, avec la taille de vêtements (option sandbox ; masquée quand un mod cache le poids).
 - Les chaussures trouvées suivent le porteur habituel du modèle. Bottes de travail, militaires et de randonnée : surtout des pointures d'homme. Chaussures à brides et habillées : surtout de femme. Sur un cadavre, la pointure suit le sexe du zombie.
 - La pointure est imprimée dans la chaussure : **Lire l'étiquette** la donne sans compétence.
 - Les enveloppes improvisées (chiffon, jute, jean, cuir, bâche, ficelle) vont à tout le monde. Les chaussures fabriquées sont à la pointure de l'artisan.
@@ -185,7 +187,7 @@ Le serveur décide de tout : tailles, retouches, usure, ampoules, courbatures, c
 
 ## Options sandbox
 
-Niveau de couture requis, XP de couture, durée des actions, multiplicateurs de déchirure, de chute du vêtement, de chute et de raideur, pertes d'isolation et de vitesse de combat, usure (activation, jours min/max, usure en cas d'échec, pertes de protection et de résistance), liste de vêtements supplémentaires, **emplacements supplémentaires**, **vêtements exclus**, **pointures activées ou non**, **intensité des effets des chaussures** (0 coupe ampoules, inconfort, endurance supplémentaire et pertes de chaussures), **coutures par patron**, **niveau de Couture des patrons de chaussures**, **dé à coudre pour coudre à la main**, **bonus des machines**, **bruit des machines**, **entretien des machines**, **rareté du butin de couture**.
+Niveau de couture requis, XP de couture, durée des actions, multiplicateurs de déchirure, de chute du vêtement, de chute et de raideur, pertes d'isolation et de vitesse de combat, usure (activation, jours min/max, usure en cas d'échec, pertes de protection et de résistance), liste de vêtements supplémentaires, **emplacements supplémentaires**, **vêtements exclus**, **pointures activées ou non**, **taille affichée dans l'écran Personnage**, **intensité des effets des chaussures** (0 coupe ampoules, inconfort, endurance supplémentaire et pertes de chaussures), **coutures par patron**, **niveau de Couture des patrons de chaussures**, **dé à coudre pour coudre à la main**, **bonus des machines**, **bruit des machines**, **entretien des machines**, **rareté du butin de couture**.
 
 ## Débogage
 

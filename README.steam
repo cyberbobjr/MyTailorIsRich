@@ -23,6 +23,7 @@ My Tailor Is Rich gives every piece of clothing and every pair of shoes a size. 
 [list]
 [*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (required): shows size and condition in item tooltips.
 [*][b]Not compatible[/b] with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]. This mod is a full rewrite of it for Build 42.21: don't enable both.
+[*]Compatible with [b]Immersive Weighing[/b]: size hidden along with weight.
 [/list]
 
 [h2]Clothes that fit (or don't)[/h2]

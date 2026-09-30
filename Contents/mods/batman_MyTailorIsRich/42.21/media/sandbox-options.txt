@@ -102,6 +102,12 @@ option MyTailorIsRich.EnableShoeSizes
     page = MyTailorIsRich, translation = MyTailorIsRich_EnableShoeSizes,
 }
 
+option MyTailorIsRich.ShowPlayerSize
+{
+    type = boolean, default = true,
+    page = MyTailorIsRich, translation = MyTailorIsRich_ShowPlayerSize,
+}
+
 option MyTailorIsRich.ShoeEffectMultiplier
 {
     type = double, min = 0.0, max = 10.0, default = 1.0,

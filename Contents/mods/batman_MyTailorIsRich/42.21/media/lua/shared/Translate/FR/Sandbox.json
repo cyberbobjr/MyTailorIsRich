@@ -34,6 +34,8 @@
     "Sandbox_MyTailorIsRich_ListCustomClothes_tooltip": "Vêtements qui doivent avoir une taille, avec une difficulté facultative (1, 2 ou 3), séparés par des virgules. <LINE> Exemple : Base.Clothing0,Base.Clothing1:1,Base.Clothing2:3",
     "Sandbox_MyTailorIsRich_EnableShoeSizes": "Pointures de chaussures",
     "Sandbox_MyTailorIsRich_EnableShoeSizes_tooltip": "Les chaussures ont une pointure EU (35-47). Chaque personnage a une pointure fixe selon son sexe. Trop petites de 3 pointures : impossibles à enfiler. Trop petites : inconfort, ampoules (plus en courant) et raideur des pieds. Trop grandes de 2 pointures ou plus : endurance consommée en plus en courant, ampoules rares, risque de chute en sautant une clôture, écrasement des zombies au sol moins puissant ; de 3 pointures ou plus : inconfort ; une chaussure trop grande de 2 pointures ou plus peut s'échapper en sautant, en escaladant ou en tombant, et dès 3 pointures aussi en courant (plus souvent sans lacets). Les enveloppes improvisées n'ont pas de pointure",
+    "Sandbox_MyTailorIsRich_ShowPlayerSize": "Afficher votre taille",
+    "Sandbox_MyTailorIsRich_ShowPlayerSize_tooltip": "Affiche votre taille de vêtements (et votre pointure) dans l'onglet Infos du personnage, près du poids. Toujours masquée quand un mod cache le poids (Immersive Weighing), car la taille découle du poids.",
     "Sandbox_MyTailorIsRich_ShoeEffectMultiplier": "Intensité des effets des chaussures",
     "Sandbox_MyTailorIsRich_ShoeEffectMultiplier_tooltip": "Règle les ampoules, l'endurance consommée en plus et le risque de perdre une chaussure. 0 désactive ces effets et l'inconfort",
     "Sandbox_MyTailorIsRich_ExtraSizedLocations": "Emplacements supplémentaires",

@@ -34,6 +34,8 @@
     "Sandbox_MyTailorIsRich_ListCustomClothes_tooltip": "Peças de roupa que devem ter tamanho, com uma dificuldade opcional (1, 2 ou 3), separadas por vírgulas. <LINE> Exemplo: Base.Clothing0,Base.Clothing1:1,Base.Clothing2:3",
     "Sandbox_MyTailorIsRich_EnableShoeSizes": "Ativar números de calçado",
     "Sandbox_MyTailorIsRich_EnableShoeSizes_tooltip": "Os sapatos recebem um número EU (35-47). Cada personagem tem um número de pé fixo consoante o sexo. 3 números abaixo: não se pode calçar. Pequeno demais: desconforto, bolhas (mais a correr) e rigidez nos pés. 2+ números acima: mais resistência gasta a correr, bolhas raras, probabilidade de tropeçar ao saltar vedações, pisadelas mais fracas em zombies caídos; 3+ números acima: desconforto; um sapato 2+ números acima pode sair ao saltar, trepar ou cair, e 3+ números acima também a correr (mais provável sem atacadores). As faixas improvisadas para os pés não têm número",
+    "Sandbox_MyTailorIsRich_ShowPlayerSize": "Mostrar o teu tamanho",
+    "Sandbox_MyTailorIsRich_ShowPlayerSize_tooltip": "Mostra o teu tamanho de roupa (e o teu número de calçado) no separador Informação da personagem, ao lado do peso. Sempre oculto se um mod esconder o peso (Immersive Weighing), pois o tamanho depende do peso.",
     "Sandbox_MyTailorIsRich_ShoeEffectMultiplier": "Multiplicador dos efeitos do calçado",
     "Sandbox_MyTailorIsRich_ShoeEffectMultiplier_tooltip": "Ajusta as bolhas, o gasto extra de resistência e a probabilidade de perder o sapato quando o calçado não serve bem. 0 desativa estes efeitos e o desconforto",
     "Sandbox_MyTailorIsRich_ExtraSizedLocations": "Locais do corpo extras com tamanho",

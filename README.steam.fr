@@ -23,6 +23,7 @@ My Tailor Is Rich donne une taille à chaque vêtement et une pointure à chaque
 [list]
 [*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (obligatoire) : taille et état dans les infobulles.
 [*][b]Incompatible[/b] avec [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url], qu'il réécrit pour la Build 42.21 : n'activez pas les deux.
+[*]Compatible avec [b]Immersive Weighing[/b] : la taille est cachée avec le poids.
 [/list]
 
 [h2]Des vêtements à votre taille (ou pas)[/h2]
@@ -106,7 +107,7 @@ Tout le monde voit les mêmes tailles, la même usure et les mêmes résultats d
 
 [h2]Options sandbox[/h2]
 
-Presque tout se règle : Couture et XP, sévérité des mauvaises tailles, usure, pointures, patrons, dé à coudre, machines, butin... Les vêtements des autres mods ont une taille automatique, deux listes permettent d'en ajouter ou d'en exclure. Tous les détails sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+Presque tout se règle : Couture et XP, sévérité des mauvaises tailles, usure, pointures, patrons, machines, butin... Les vêtements des autres mods ont une taille automatique. Tous les détails sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 
 [h2]Retirer le mod d'une partie[/h2]
 
@@ -114,7 +115,7 @@ Ne le désactivez pas simplement : la sauvegarde retient les machines et, en mul
 
 [h2]Soutenir le projet[/h2]
 
-Le mod vous plaît ? Un café aide à financer les prochaines fonctions et traductions.
+Le mod vous plaît ? Un café aide à financer la suite.
 [url=https://ko-fi.com/Z8Z8QJV31][img]https://storage.ko-fi.com/cdn/kofi6.png?v=6[/img][/url]
 
 [h2]Crédits[/h2]

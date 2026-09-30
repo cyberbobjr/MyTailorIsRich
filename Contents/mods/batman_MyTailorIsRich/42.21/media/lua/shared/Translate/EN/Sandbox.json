@@ -34,6 +34,8 @@
     "Sandbox_MyTailorIsRich_ListCustomClothes_tooltip": "Clothing items that should have sizes, with an optional difficulty (1, 2 or 3), separated by commas. <LINE> Example: Base.Clothing0,Base.Clothing1:1,Base.Clothing2:3",
     "Sandbox_MyTailorIsRich_EnableShoeSizes": "Enable shoe sizes",
     "Sandbox_MyTailorIsRich_EnableShoeSizes_tooltip": "Shoes get an EU size (35-47). Each character has a fixed foot size depending on sex. 3 sizes too small: can't be worn. Too small: discomfort, blisters (more when running) and foot stiffness. 2+ sizes too big: more endurance used when running, rare blisters, trip chance when vaulting fences, weaker stomps on downed zombies; 3+ sizes too big: discomfort; a shoe 2+ sizes too big can come off when vaulting, climbing or falling, and 3+ sizes too big also when running (more likely without laces). Improvised foot wraps have no size",
+    "Sandbox_MyTailorIsRich_ShowPlayerSize": "Show your size",
+    "Sandbox_MyTailorIsRich_ShowPlayerSize_tooltip": "Shows your clothing size (and shoe size) on the character Info tab, next to your weight. Always hidden when a mod hides your weight (Immersive Weighing), since your size follows your weight.",
     "Sandbox_MyTailorIsRich_ShoeEffectMultiplier": "Shoe fit effects multiplier",
     "Sandbox_MyTailorIsRich_ShoeEffectMultiplier_tooltip": "Scales blisters, extra endurance use and shoe loss chance of badly fitting shoes. 0 disables these effects and the discomfort",
     "Sandbox_MyTailorIsRich_ExtraSizedLocations": "Extra sized body locations",

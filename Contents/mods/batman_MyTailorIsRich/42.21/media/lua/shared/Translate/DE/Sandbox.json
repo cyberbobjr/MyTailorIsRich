@@ -34,6 +34,8 @@
     "Sandbox_MyTailorIsRich_ListCustomClothes_tooltip": "Kleidungsstücke, die eine Größe haben sollen, mit optionaler Schwierigkeit (1, 2 oder 3), durch Kommas getrennt. <LINE> Beispiel: Base.Clothing0,Base.Clothing1:1,Base.Clothing2:3",
     "Sandbox_MyTailorIsRich_EnableShoeSizes": "Schuhgrößen aktivieren",
     "Sandbox_MyTailorIsRich_EnableShoeSizes_tooltip": "Schuhe erhalten eine EU-Größe (35-47). Jeder Charakter hat eine feste Fußgröße je nach Geschlecht. 3 Größen zu klein: nicht tragbar. Zu klein: Unwohlsein, Blasen (mehr beim Laufen) und Steifigkeit in den Füßen. 2+ Größen zu groß: mehr Ausdauerverbrauch beim Laufen, seltene Blasen, Stolpergefahr beim Überspringen von Zäunen, schwächeres Zutreten auf liegende Zombies; 3+ Größen zu groß: Unwohlsein; ein Schuh 2+ Größen zu groß kann beim Überspringen, Klettern oder Stürzen verloren gehen, 3+ Größen zu groß auch beim Laufen (eher ohne Schnürsenkel). Improvisierte Fußwickel haben keine Größe",
+    "Sandbox_MyTailorIsRich_ShowPlayerSize": "Eigene Größe anzeigen",
+    "Sandbox_MyTailorIsRich_ShowPlayerSize_tooltip": "Zeigt deine Kleidergröße (und Schuhgröße) im Info-Reiter des Charakters neben dem Gewicht. Immer ausgeblendet, wenn ein Mod das Gewicht versteckt (Immersive Weighing), da die Größe vom Gewicht abhängt.",
     "Sandbox_MyTailorIsRich_ShoeEffectMultiplier": "Multiplikator Schuh-Passform",
     "Sandbox_MyTailorIsRich_ShoeEffectMultiplier_tooltip": "Skaliert Blasen, zusätzlichen Ausdauerverbrauch und Schuhverlust bei schlecht sitzenden Schuhen. 0 deaktiviert diese Effekte und das Unwohlsein",
     "Sandbox_MyTailorIsRich_ExtraSizedLocations": "Zusätzliche Körperstellen mit Größe",

@@ -34,6 +34,8 @@
     "Sandbox_MyTailorIsRich_ListCustomClothes_tooltip": "需要有尺码的衣物, 可附带难度 (1, 2 或 3), 以逗号分隔. <LINE> 示例: Base.Clothing0,Base.Clothing1:1,Base.Clothing2:3",
     "Sandbox_MyTailorIsRich_EnableShoeSizes": "启用鞋码",
     "Sandbox_MyTailorIsRich_EnableShoeSizes_tooltip": "鞋子带有欧码 (35-47). 每个角色的脚码固定, 取决于性别. 小 3 码: 无法穿上. 偏小: 不适, 水泡 (奔跑时更多) 和脚部锻炼疲劳. 大 2 码及以上: 奔跑时消耗更多耐力, 偶尔起水泡, 翻越围栏时可能绊倒, 踩踏倒地僵尸的力度减弱; 大 3 码及以上: 不适; 大 2 码及以上的鞋在翻越, 攀爬或摔倒时可能脱落, 大 3 码及以上时奔跑也会脱落 (没有鞋带时更容易). 简易裹脚布没有尺码",
+    "Sandbox_MyTailorIsRich_ShowPlayerSize": "显示你的尺码",
+    "Sandbox_MyTailorIsRich_ShowPlayerSize_tooltip": "在角色信息页的体重旁显示你的衣服尺码（和鞋码）。若有模组隐藏体重（Immersive Weighing），尺码也始终隐藏，因为尺码取决于体重。",
     "Sandbox_MyTailorIsRich_ShoeEffectMultiplier": "鞋子合脚效果倍率",
     "Sandbox_MyTailorIsRich_ShoeEffectMultiplier_tooltip": "调整不合脚的鞋子造成的水泡, 额外耐力消耗和掉鞋几率. 0 会禁用这些效果以及不适",
     "Sandbox_MyTailorIsRich_ExtraSizedLocations": "额外的尺码穿戴部位",

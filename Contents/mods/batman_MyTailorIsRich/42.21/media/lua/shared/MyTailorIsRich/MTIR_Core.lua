@@ -49,6 +49,7 @@ local DEFAULTS = {
     ListCustomClothes = "",
     EnableShoeSizes = true,
     ShoeEffectMultiplier = 1.0,
+    ShowPlayerSize = true,
     ExtraSizedLocations = "",
     ListExcludedClothes = "",
     PatternMaxUses = 5,

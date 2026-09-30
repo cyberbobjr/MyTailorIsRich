@@ -23,6 +23,7 @@ My Tailor Is Rich dá um tamanho a cada peça de roupa e a cada par de sapatos. 
 [list]
 [*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (obrigatório): mostra tamanho e condição nas dicas dos itens.
 [*][b]Incompatível[/b] com [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]. Este mod é uma reescrita completa dele para a Build 42.21: não ative os dois.
+[*]Compatível com [b]Immersive Weighing[/b]: o tamanho fica oculto junto com o peso.
 [/list]
 
 [h2]Roupas que servem (ou não)[/h2]
@@ -106,7 +107,7 @@ Todos veem os mesmos tamanhos, o mesmo desgaste e os mesmos resultados de costur
 
 [h2]Opções de sandbox[/h2]
 
-Quase tudo é configurável: habilidade e XP, velocidade das ações, rigor das penalidades por tamanho errado, desgaste das roupas, números de calçado, moldes, dedal, máquinas de costura, raridade no saque... As roupas de outros mods recebem um tamanho automaticamente, e duas listas permitem incluir ou excluir itens específicos. Detalhes no [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+Quase tudo é configurável: habilidade e XP, velocidade das ações, rigor das penalidades por tamanho errado, desgaste das roupas, números de calçado, moldes, máquinas de costura, raridade no saque... As roupas de outros mods recebem um tamanho automaticamente. Detalhes no [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 
 [h2]Remover o mod de um save[/h2]
 
@@ -114,7 +115,7 @@ Não basta desativar: o save registra as máquinas de costura e, no multijogador
 
 [h2]Apoie o projeto[/h2]
 
-Curtiu o mod? Um café ajuda a financiar novos recursos e traduções.
+Curtiu o mod? Um café ajuda a financiar o que vem aí.
 [url=https://ko-fi.com/Z8Z8QJV31][img]https://storage.ko-fi.com/cdn/kofi6.png?v=6[/img][/url]
 
 [h2]Créditos[/h2]
