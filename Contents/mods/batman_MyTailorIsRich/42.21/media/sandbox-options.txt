@@ -138,6 +138,24 @@ option MyTailorIsRich.ShoePatternLevel
     page = MyTailorIsRich, translation = MyTailorIsRich_ShoePatternLevel,
 }
 
+option MyTailorIsRich.EnablePatternCopy
+{
+    type = boolean, default = true,
+    page = MyTailorIsRich, translation = MyTailorIsRich_EnablePatternCopy,
+}
+
+option MyTailorIsRich.PatternCopyPrecisionLoss
+{
+    type = integer, min = 0, max = 10, default = 1,
+    page = MyTailorIsRich, translation = MyTailorIsRich_PatternCopyPrecisionLoss,
+}
+
+option MyTailorIsRich.PatternBinderCapacity
+{
+    type = integer, min = 1, max = 100, default = 20,
+    page = MyTailorIsRich, translation = MyTailorIsRich_PatternBinderCapacity,
+}
+
 option MyTailorIsRich.RequireThimble
 {
     type = boolean, default = true,
@@ -166,5 +184,17 @@ option MyTailorIsRich.SewingLootMultiplier
 {
     type = double, min = 0.0, max = 10.0, default = 1.0,
     page = MyTailorIsRich, translation = MyTailorIsRich_SewingLootMultiplier,
+}
+
+option MyTailorIsRich.EnableDyeing
+{
+    type = boolean, default = true,
+    page = MyTailorIsRich, translation = MyTailorIsRich_EnableDyeing,
+}
+
+option MyTailorIsRich.EnableEmbroidery
+{
+    type = boolean, default = true,
+    page = MyTailorIsRich, translation = MyTailorIsRich_EnableEmbroidery,
 }
 

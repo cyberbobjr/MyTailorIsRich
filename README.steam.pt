@@ -4,16 +4,17 @@
 
 Aquele blusão de cabedal perfeito num zombie? Pode ser dois tamanhos abaixo do teu. Aquelas botas militares? Número 46, e tu calças o 41.
 
-My Tailor Is Rich dá um tamanho a cada peça de roupa e a cada par de sapatos. Encontra o que te serve, ajusta o que não serve, cose a tua própria roupa com moldes... e pensa duas vezes antes de desatar a correr com botas três números acima.
+Cada peça de roupa e cada par de sapatos tem agora um tamanho. Encontra o que te serve, ajusta o que não serve, cose e tinge a tua própria roupa... e pensa duas vezes antes de desatar a correr com botas três números acima.
 
 [h2]Resumo[/h2]
 
 [list]
-[*][b]Tamanhos de roupa[/b] do XS ao XXL, conforme o peso da tua personagem.
+[*][b]Tamanhos de roupa[/b] do XS ao XXL, conforme o teu peso.
 [*][b]Números de calçado[/b] de 35 a 47 (EU): cuidado com bolhas, tropeções e sapatos perdidos.
-[*][b]Ajustes[/b]: alarga ou aperta a roupa com a tua Alfaiataria.
+[*][b]Ajustes[/b]: alarga ou aperta a roupa.
 [*][b]Desgaste e reparação[/b]: a roupa gasta-se, e podes restaurá-la.
-[*][b]Moldes de costura[/b]: traça-os a partir da tua roupa preferida ou encontra-os nas lojas.
+[*][b]Moldes de costura[/b]: traça-os, encontra-os ou copia-os, guarda-os numa pasta, experimenta-os em 3D.
+[*][b]Tingimento e bordado[/b]: tinge a tua roupa, borda um nome.
 [*][b]Máquinas de costura[/b]: mais rápidas e com melhores resultados... mas barulhentas.
 [*]Funciona com [b]mods de roupa[/b] e em [b]multijogador[/b].
 [/list]
@@ -22,15 +23,15 @@ My Tailor Is Rich dá um tamanho a cada peça de roupa e a cada par de sapatos. 
 
 [list]
 [*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (obrigatório): mostra tamanho e condição nas descrições dos itens.
-[*][b]Incompatível[/b] com [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]. Este mod reescreve-o por completo para a Build 42.21: não atives os dois.
+[*][b]Incompatível[/b] com [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]. Este mod é a sua reescrita para a Build 42.21: não atives os dois.
 [*]Compatível com [b]Immersive Weighing[/b]: o tamanho fica oculto com o peso.
 [/list]
 
 [h2]Roupa que serve (ou não)[/h2]
 
 [list]
-[*]O teu tamanho depende do teu [b]peso[/b]: XS até 50 kg, S até 65, M até 75, L abaixo de 85, XL abaixo de 100, XXL a partir de 100. Muda se engordares ou emagreceres.
-[*]Não sabes o tamanho da roupa que encontras. Usa [b]Ver tamanho da roupa[/b] (clique direito) para ler a etiqueta. Com pouca Alfaiataria, a tua personagem só pode adivinhar.
+[*]O teu tamanho depende do teu [b]peso[/b]: XS até 50 kg, S até 65, M até 75, L abaixo de 85, XL abaixo de 100, XXL a partir de 100. Muda com o teu peso.
+[*]A roupa encontrada tem tamanho desconhecido: clique direito, [b]Ver tamanho da roupa[/b]. Com pouca Alfaiataria, a tua personagem só pode adivinhar.
 [*]A roupa de um mesmo zombie varia um tamanho no máximo.
 [*]Chapéus, máscaras, luvas, joias, cintos e roupa interior são de tamanho único.
 [/list]
@@ -38,26 +39,23 @@ My Tailor Is Rich dá um tamanho a cada peça de roupa e a cada par de sapatos. 
 [h3]Demasiado grande[/h3]
 
 [list]
-[*]Aquece menos.
-[*]As peças de cima tornam os teus ataques mais lentos.
+[*]Aquece menos; as peças de cima tornam os teus ataques mais lentos.
 [*]Calças ou saias largas podem [b]cair[/b] sem cinto e com as duas mãos ocupadas.
-[*]Podes [b]tropeçar[/b] ao aterrar após saltar uma vedação, mesmo a andar (mais vezes a correr).
+[*]Podes [b]tropeçar[/b] ao aterrar após saltar uma vedação (mais vezes a correr).
 [/list]
 
 [h3]Demasiado pequena[/h3]
 
 [list]
-[*]Demora mais a vestir.
-[*]Pode [b]rasgar[/b] quando trepas.
+[*]Mais lenta a vestir, pode [b]rasgar[/b] quando trepas, provoca rigidez muscular.
 [*]Podes [b]tropeçar[/b] depois de trepar um muro.
-[*]Provoca rigidez muscular.
-[*]Pequeníssima: nem sequer se veste. Se engordares, a roupa que deixou de servir sai do corpo.
+[*]Pequeníssima: não se veste. Se engordares, a roupa que deixou de servir sai do corpo.
 [/list]
 
 [h2]Alfaiataria[/h2]
 
 [list]
-[*][b]Ajusta[/b] uma peça um tamanho acima (com tiras de tecido) ou um tamanho abaixo (com clipes de papel), com agulha, linha e tesoura. O êxito depende da Alfaiataria e do tecido.
+[*][b]Ajusta[/b] uma peça um tamanho acima (tiras de tecido) ou abaixo (clipes de papel), com agulha, linha e tesoura. O êxito depende da Alfaiataria e do tecido.
 [*]A roupa [b]gasta-se[/b] com sujidade, sangue, chuva e aperto. [b]Restaura-a[/b] com tiras de tecido ou com outra peça idêntica.
 [*]Ao [b]fabricar roupa[/b], escolhes o tamanho na janela de Fabrico.
 [/list]
@@ -65,49 +63,59 @@ My Tailor Is Rich dá um tamanho a cada peça de roupa e a cada par de sapatos. 
 [h2]Números de calçado (EU 35 a 47)[/h2]
 
 [list]
-[*]A tua personagem tem um [b]número fixo[/b]: de 35 a 42 para mulheres, de 39 a 47 para homens. Aparece no ecrã da personagem, ao lado do peso.
+[*][b]Número fixo[/b]: 35 a 42 (mulheres), 39 a 47 (homens), no ecrã da personagem.
 [*]Botas de trabalho, militares e de caminhada costumam vir em números de homem; sandálias de tiras e sapatos de cerimónia, de mulher. Os sapatos de um zombie condizem com o sexo dele.
 [*]O número vem impresso por dentro: [b]Ver tamanho da roupa[/b] lê-o sem habilidade.
-[*]As faixas improvisadas para os pés (pano, serapilheira, ganga, couro, lona, fio) servem a toda a gente. O calçado que fabricas sai no teu número.
+[*]As faixas improvisadas para os pés servem a toda a gente. O calçado que fabricas sai no teu número.
 [/list]
 
 [table]
 [tr][td][b]Tamanho[/b][/td][td][b]O que acontece[/b][/td][/tr]
 [tr][td]3 ou mais números abaixo[/td][td]Não entram no pé[/td][/tr]
-[tr][td]1–2 números abaixo[/td][td][b]Desconforto[/b], [b]bolhas[/b] depois de andar algum tempo (mais cedo a correr; a personagem queixa-se antes), pés rígidos[/td][/tr]
+[tr][td]1–2 números abaixo[/td][td][b]Desconforto[/b], [b]bolhas[/b] após algum tempo (mais cedo a correr), pés rígidos[/td][/tr]
 [tr][td]Número certo ou 1 acima[/td][td]Tudo bem[/td][/tr]
-[tr][td]2 ou mais números acima[/td][td]Cansas-te mais depressa a correr, bolhas ocasionais, [b]tropeções[/b] depois de vedações e muros, [b]pisões[/b] mais fracos em zombies caídos (como descalço)[/td][/tr]
-[tr][td]3 ou mais números acima[/td][td]Desconforto, e podes [b]perder um sapato[/b] ao correr, saltar, trepar ou cair (chinelos de dedo e pantufas saltam facilmente, botas atacadas aguentam melhor)[/td][/tr]
+[tr][td]2 ou mais números acima[/td][td]Cansas-te mais depressa a correr, [b]tropeções[/b] depois de vedações e muros, [b]pisões[/b] mais fracos[/td][/tr]
+[tr][td]3 ou mais números acima[/td][td]Desconforto, e podes [b]perder um sapato[/b] ao correr, saltar, trepar ou cair[/td][/tr]
 [/table]
 
-As bolhas são pequenas feridas no pé, sem infeção zombie. Como qualquer ferida no pé, abrandam-te até sararem: põe-lhes uma ligadura!
+As bolhas não te infetam, mas abrandam-te até sararem: põe-lhes uma ligadura!
 
 [h2]Moldes de costura[/h2]
 
 [list]
 [*][b]Traçar molde[/b] numa mesa, a partir de qualquer peça de roupa ou par de sapatos (tesoura, caneta, papel). O original é recortado.
-[*]Ou encontra [b]moldes de loja[/b] em retrosarias, prateleiras de costura e livrarias de moda, para qualquer roupa, [b]incluindo a de outros mods[/b].
+[*]Ou encontra [b]moldes de loja[/b] em retrosarias e livrarias de moda, para qualquer roupa, [b]outros mods incluídos[/b].
 [*][b]Costurar com molde[/b] no tamanho que quiseres, no tecido do original (algodão, ganga, couro). Com pouca habilidade, pode sair um tamanho acima ou abaixo. Cada molde serve 5 vezes.
+[*][b]Copiar o molde[/b] para papel novo, numa mesa, sem o destruir: cada cópia é um pouco menos precisa.
+[*]Guarda até 20 moldes numa [b]Pasta de Moldes[/b] (fabricada ou achada com material de costura). As máquinas cosem diretamente a partir dela.
+[*][b]Pré-visualizar em mim[/b]: vê-te com a peça em 3D antes de a coser.
 [*]Coser à mão exige um [b]dedal[/b].
-[*]Os sapatos são coisa de especialista: Alfaiataria 8, agulha [b]e sovela[/b], cola e couro ou tecido. Sempre cosidos à mão. O calçado de borracha (botas de borracha, chinelos de dedo) não se faz com molde.
+[*]Os sapatos são coisa de especialista: Alfaiataria 8, agulha, [b]sovela[/b], cola, couro ou tecido, só à mão. O calçado de borracha não tem molde.
+[/list]
+
+[h2]Tingimento e bordado[/h2]
+
+[list]
+[*][b]Tingir[/b] a roupa com tinta industrial ou tinta para o cabelo e água. Qualquer peça feita para ser tingida pode sê-lo, [b]mods de roupa incluídos[/b]; as estampadas ou com padrões não. Sai encharcada.
+[*][b]Bordar um nome[/b] numa peça (agulha, linha, Alfaiataria 1) e descosê-lo com a tesoura.
 [/list]
 
 [h2]Máquinas de costura[/h2]
 
 [list]
-[*][b]Máquina de Costura Elétrica[/b]: fica sobre uma mesa e precisa de eletricidade. Duas vezes mais rápida e vale +2 níveis de Alfaiataria.
+[*][b]Máquina de Costura Elétrica[/b]: sobre uma mesa, com eletricidade. Duas vezes mais rápida, +2 níveis de Alfaiataria.
 [*][b]Máquina de Costura a Pedal[/b]: um móvel pesado, sem eletricidade. 25% mais rápida, +1 nível de Alfaiataria.
-[*]Clica numa máquina para costurar com molde (escolhe tamanho e quantidade), ajustar ou restaurar roupa.
-[*]Atenção: as máquinas são [b]barulhentas[/b] e atraem zombies (a elétrica, de muito mais longe). Também se [b]gastam[/b], partem agulhas e encravam. Mantém-nas em ordem com uma chave de fendas e algum óleo de cozinha (vegetal ou azeite).
+[*]Clica numa máquina para costurar com molde (tamanho e quantidade), ajustar ou restaurar roupa.
+[*]Mas são [b]barulhentas[/b] e atraem zombies. Também se [b]gastam[/b], partem agulhas e encravam: mantém-nas com uma chave de fendas e óleo de cozinha.
 [/list]
 
 [h2]Multijogador[/h2]
 
-Todos veem os mesmos tamanhos, o mesmo desgaste e os mesmos resultados de costura. Cada máquina só serve um jogador de cada vez.
+Todos veem os mesmos tamanhos, o mesmo desgaste e os mesmos resultados. Um jogador por máquina de cada vez.
 
 [h2]Opções de jogo aberto (sandbox)[/h2]
 
-Quase tudo é configurável: habilidade e EXP, velocidade das ações, rigor das penalizações por tamanho errado, desgaste da roupa, números de calçado, moldes, máquinas de costura, raridade no saque... A roupa de outros mods recebe um tamanho automaticamente. Pormenores no [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+Quase tudo é configurável: habilidade, EXP, velocidade, penalizações de tamanho, desgaste, números de calçado, moldes, tingimento, bordado, máquinas, saque... A roupa de outros mods recebe tamanho automaticamente. Pormenores no [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 
 [h2]Remover o mod de um jogo guardado[/h2]
 

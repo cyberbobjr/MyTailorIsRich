@@ -342,7 +342,7 @@ local function entryLine(entry)
 end
 
 --- Texte riche : liste exacte des objets utilisés par le travail (en cas de réussite).
---- spec = { req, fabric (couture d'après patron), pattern, spare }. Appelé seulement
+--- spec = { req, fabric (couture d'après patron), pattern ou patternName, spare }. Appelé seulement
 --- au rafraîchissement des besoins, jamais à chaque image.
 function UI.consumedText(spec)
     local req = spec.req
@@ -359,7 +359,10 @@ function UI.consumedText(spec)
     elseif materials then
         addWholeItems(list, materials)
     end
-    if spec.pattern then
+    -- Patron : objet, ou nom seul (patron rangé dans un classeur à patrons).
+    if spec.patternName then
+        addEntry(list, spec.patternName, 0, 1)
+    elseif spec.pattern then
         addEntry(list, spec.pattern:getDisplayName(), 0, 1)
     end
     if #list == 0 then

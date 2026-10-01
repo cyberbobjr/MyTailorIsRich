@@ -3,6 +3,8 @@
 -- « Tracer un patron » sur un vêtement ou une paire ; « Coudre d'après le
 -- patron » sur un patron, avec une option par taille. Lecture seule : tout
 -- passe par les actions partagées exécutées par l'autorité.
+-- Un patron rangé dans un classeur à patrons se coud de la même façon : la
+-- source est alors le classeur et l'id de l'entrée (MTIR_PatternBinder.lua).
 -- ============================================================================
 
 require "MyTailorIsRich/MTIR_ContextMenu"
@@ -11,6 +13,7 @@ require "TimedActions/MTIR_SewPatternAction"
 require "MyTailorIsRich/MTIR_SewingMachine"
 require "MyTailorIsRich/MTIR_Alterations"
 require "MyTailorIsRich/MTIR_WorkTable"
+require "MyTailorIsRich/MTIR_PatternBinder"
 
 local U = MTIR.MenuUtil
 
@@ -111,7 +114,8 @@ end
 
 --- Transferts, outils en main puis couture. machine : objet machine à coudre, ou nil (à la main).
 --- Chaussures : l'alêne et la colle (req.awl, req.glue) rejoignent l'inventaire principal.
-local function queueSew(player, pattern, req, size, machine)
+--- entryId : patron rangé dans le classeur `pattern`, ou nil.
+local function queueSew(player, pattern, req, size, machine, entryId)
     ISInventoryPaneContextMenu.transferIfNeeded(player, pattern)
     ISInventoryPaneContextMenu.transferIfNeeded(player, req.threads)
     ISInventoryPaneContextMenu.transferIfNeeded(player, req.materials)
@@ -128,7 +132,7 @@ local function queueSew(player, pattern, req, size, machine)
     end
     bringToHands(player, req.scissors, req.needle)
     ISTimedActionQueue.add(MTIR_SewPatternAction:new(player, pattern, req.needle, req.scissors, req.threads,
-        req.materials, size, machine and MTIR.encodeMachinePos(machine) or "", awl, glue))
+        req.materials, size, machine and MTIR.encodeMachinePos(machine) or "", awl, glue, entryId))
 end
 
 local function materialNames(fabric)
@@ -196,17 +200,19 @@ local function describeSew(data, req)
 end
 
 --- Partagé avec le panneau de la machine à coudre (MTIR_SewingMachineWindow.lua) :
----   queueSew(player, pattern, req, size, machine|nil) : transferts (alêne et colle des
----     chaussures compris, pris dans req), marche jusqu'à la machine (si machine),
----     outils en main, puis MTIR_SewPatternAction ;
+---   queueSew(player, pattern, req, size, machine|nil, entryId|nil) : transferts (alêne
+---     et colle des chaussures compris, pris dans req), marche jusqu'à la machine (si
+---     machine), outils en main, puis MTIR_SewPatternAction (entryId : patron rangé
+---     dans le classeur `pattern`) ;
 ---   sizeLabel(player, data, size) -> libellé de taille (« (votre taille) » compris) ;
 ---   describeSew(data, req) -> texte riche (req : MTIR.getSewRequirements ; ligne du dé
 ---     à coudre quand req.needsThimble ; alêne et colle quand req.needsAwl / needsGlue).
 MTIR.SewUI = { queueSew = queueSew, sizeLabel = sizeLabel, describeSew = describeSew }
 
-local function addSizeOption(subMenu, player, pattern, data, size)
+local function addSizeOption(subMenu, player, pattern, data, size, entryId)
     local req = MTIR.getSewRequirements(player, data, size, MTIR.SEW_BY_HAND)
-    local option = subMenu:addOption(sizeLabel(player, data, size), player, queueSew, pattern, req, size, nil)
+    local option = subMenu:addOption(sizeLabel(player, data, size), player, queueSew, pattern, req, size, nil,
+        entryId)
     option.notAvailable = not req.ready
     local tooltip = ISInventoryPaneContextMenu.addToolTip()
     tooltip.texture = pattern:getTex()
@@ -215,8 +221,10 @@ local function addSizeOption(subMenu, player, pattern, data, size)
     option.toolTip = tooltip
 end
 
-local function addSewOption(pattern, player, context)
-    local data = MTIR.getPatternData(pattern)
+--- « Coudre d'après le patron » et ses tailles. entryId : patron rangé dans le
+--- classeur `pattern` (menu du classeur), sinon nil.
+local function addSewOption(pattern, player, context, entryId)
+    local data = MTIR.getSourcePatternData(pattern, entryId)
     if not data then
         return
     end
@@ -230,9 +238,12 @@ local function addSewOption(pattern, player, context)
     local subMenu = context:getNew(context)
     context:addSubMenu(option, subMenu)
     for _, size in ipairs(MTIR.getPatternSizes(data)) do
-        addSizeOption(subMenu, player, pattern, data, size)
+        addSizeOption(subMenu, player, pattern, data, size, entryId)
     end
 end
+
+--- Pour le menu du classeur (MTIR_PatternBinderMenu.lua).
+MTIR.SewUI.addSewOption = addSewOption
 
 -- ----------------------------------------------------------------------------
 

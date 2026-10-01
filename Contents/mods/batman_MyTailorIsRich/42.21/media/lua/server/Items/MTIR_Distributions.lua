@@ -12,7 +12,8 @@
 --    SewingStoreTools (merceries), CrateTailoring (caisses de couture),
 --    GigamartBedding (rayon linge des supermarchés et magasins généraux),
 --    Antiques (machine à pédale, aussi en vitrine de prêteur sur gages),
---    TailoringLiterature, BookstoreFashion (patrons).
+--    TailoringLiterature, BookstoreFashion (patrons) ; classeurs à patrons dans
+--    TailoringLiterature et SewingStoreTools.
 --    Et partout où le jeu (ou un mod) pose un kit de couture (SewingKit :
 --    salles de bain, commodes, placards, cuisines, buanderies…) : machine
 --    électrique à SEWING_KIT_RATIO du poids du kit. Pas de machine à pédale dans
@@ -44,6 +45,7 @@
 
 require "Items/ProceduralDistributions"
 require "MyTailorIsRich/MTIR_SewingMachine"
+require "MyTailorIsRich/MTIR_PatternBinder"
 
 -- Les listes procédurales attendent le type sans module.
 local function shortType(fullType)
@@ -53,6 +55,7 @@ end
 local ELECTRIC = shortType(MTIR.MACHINE_KINDS.electric.item)
 local TREADLE = shortType(MTIR.MACHINE_KINDS.treadle.item)
 local PATTERN = shortType(MTIR.PRINTED_PATTERN_ITEM)
+local BINDER = shortType(MTIR.BINDER_ITEM)
 
 local SPAWNS = {
     { list = "TailoringTools", item = ELECTRIC, weight = 6 },
@@ -66,6 +69,8 @@ local SPAWNS = {
     { list = "TailoringLiterature", item = PATTERN, weight = 20 },
     { list = "SewingStoreTools", item = PATTERN, weight = 10 },
     { list = "BookstoreFashion", item = PATTERN, weight = 4 },
+    { list = "TailoringLiterature", item = BINDER, weight = 4 },
+    { list = "SewingStoreTools", item = BINDER, weight = 3 },
 }
 
 --- Kit de couture : une liste qui en contient reçoit une machine électrique à
@@ -111,7 +116,7 @@ local function getItems(listName)
     return entry and entry.items or nil
 end
 
-local OUR_ITEMS = { [ELECTRIC] = true, [TREADLE] = true, [PATTERN] = true }
+local OUR_ITEMS = { [ELECTRIC] = true, [TREADLE] = true, [PATTERN] = true, [BINDER] = true }
 
 --- Retire de `items` les paires (objet, poids) posées par ce fichier.
 local function removeOurEntries(items)

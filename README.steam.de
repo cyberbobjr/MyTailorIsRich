@@ -4,16 +4,17 @@
 
 Die perfekte Lederjacke an diesem Zombie? Vielleicht zwei Nummern zu klein. Diese Kampfstiefel? Größe 46, und du trägst 41.
 
-My Tailor Is Rich gibt jedem Kleidungsstück und jedem Paar Schuhe eine Größe. Finde, was passt, ändere, was nicht passt, näh dir eigene Kleidung nach Schnittmustern... und überleg zweimal, bevor du in drei Nummern zu großen Stiefeln lossprintest.
+Jedes Kleidungsstück und jedes Paar Schuhe hat jetzt eine Größe. Finde, was passt, ändere, was nicht passt, näh und färbe selbst... und überleg zweimal, bevor du in drei Nummern zu großen Stiefeln lossprintest.
 
 [h2]Auf einen Blick[/h2]
 
 [list]
-[*][b]Kleidergrößen[/b] von XS bis XXL, abhängig vom Gewicht deines Charakters.
+[*][b]Kleidergrößen[/b] von XS bis XXL, je nach Gewicht.
 [*][b]Schuhgrößen[/b] von 35 bis 47 (EU): Vorsicht vor Blasen, Stolpern und verlorenen Schuhen.
-[*][b]Änderungen[/b]: Mach Kleidung mit deiner Schneiderei-Fertigkeit weiter oder enger.
-[*][b]Verschleiß und Reparatur[/b]: Kleidung nutzt sich ab, und du kannst sie aufarbeiten.
-[*][b]Schnittmuster[/b]: Paus sie von deinen Lieblingsstücken ab oder finde sie in Läden.
+[*][b]Änderungen[/b]: Mach Kleidung weiter oder enger.
+[*][b]Verschleiß und Reparatur[/b]: Kleidung nutzt sich ab und lässt sich aufarbeiten.
+[*][b]Schnittmuster[/b]: abpausen, finden oder kopieren, in einer Mappe sammeln, in 3D an dir ansehen.
+[*][b]Färben und Sticken[/b]: Färbe deine Kleidung, stick einen Namen ein.
 [*][b]Nähmaschinen[/b]: schneller und bessere Ergebnisse... aber laut.
 [*]Funktioniert mit [b]Kleidungs-Mods[/b] und im [b]Mehrspieler[/b].
 [/list]
@@ -29,8 +30,8 @@ My Tailor Is Rich gibt jedem Kleidungsstück und jedem Paar Schuhe eine Größe.
 [h2]Kleidung, die passt (oder nicht)[/h2]
 
 [list]
-[*]Deine Größe hängt von deinem [b]Gewicht[/b] ab: XS bis 50 kg, S bis 65, M bis 75, L unter 85, XL unter 100, XXL ab 100. Nimmst du zu oder ab, ändert sie sich mit.
-[*]Die Größe gefundener Kleidung kennst du nicht. [b]Kleidergröße prüfen[/b] (Rechtsklick) liest das Etikett. Mit wenig Schneiderei bleibt es eine Schätzung.
+[*]Deine Größe hängt von deinem [b]Gewicht[/b] ab: XS bis 50 kg, S bis 65, M bis 75, L unter 85, XL unter 100, XXL ab 100. Sie ändert sich mit dem Gewicht.
+[*]Gefundene Kleidung hat eine unbekannte Größe: Rechtsklick, [b]Kleidergröße prüfen[/b]. Mit wenig Schneiderei wird nur geschätzt.
 [*]Die Kleidung eines Zombies variiert um max. eine Größe.
 [*]Hüte, Masken, Handschuhe, Schmuck, Gürtel und Unterwäsche sind Einheitsgröße.
 [/list]
@@ -38,26 +39,23 @@ My Tailor Is Rich gibt jedem Kleidungsstück und jedem Paar Schuhe eine Größe.
 [h3]Zu groß[/h3]
 
 [list]
-[*]Hält weniger warm.
-[*]Oberteile verlangsamen deine Angriffe.
-[*]Weite Hosen oder Röcke können ohne Gürtel [b]herunterrutschen[/b], wenn du beide Hände voll hast.
-[*]Nach einem Zaunsprung kannst du [b]stolpern[/b], selbst im Gehen (im Lauf öfter).
+[*]Weniger warm; Oberteile verlangsamen deine Angriffe.
+[*]Weite Hosen oder Röcke können ohne Gürtel [b]herunterrutschen[/b], wenn beide Hände voll sind.
+[*]Nach einem Zaunsprung kannst du [b]stolpern[/b] (im Lauf öfter).
 [/list]
 
 [h3]Zu klein[/h3]
 
 [list]
-[*]Anziehen dauert länger.
-[*]Kann beim Klettern [b]reißen[/b].
+[*]Langsamer anzuziehen, kann beim Klettern [b]reißen[/b], verursacht Muskelzerrungen.
 [*]Du kannst nach dem Erklettern einer Mauer [b]stolpern[/b].
-[*]Verursacht Muskelzerrungen.
 [*]Viel zu klein: nicht tragbar. Nimmst du zu, wird ausgezogen, was nicht mehr passt.
 [/list]
 
 [h2]Schneiderei[/h2]
 
 [list]
-[*][b]Ändere[/b] ein Kleidungsstück um eine Größe nach oben (mit Stoffstreifen) oder nach unten (mit Büroklammern), mit Nadel, Faden und Schere. Erfolg je nach Schneiderei und Stoff.
+[*][b]Ändere[/b] ein Kleidungsstück um eine Größe nach oben (Stoffstreifen) oder nach unten (Büroklammern), mit Nadel, Faden und Schere. Erfolg je nach Schneiderei und Stoff.
 [*]Kleidung [b]verschleißt[/b] durch Schmutz, Blut, Regen und enge Passform. [b]Aufarbeiten[/b] geht mit Stoffstreifen oder einem gleichen Ersatzstück.
 [*]Beim [b]Herstellen von Kleidung[/b] wählst du die Größe im Handwerksfenster.
 [/list]
@@ -65,31 +63,41 @@ My Tailor Is Rich gibt jedem Kleidungsstück und jedem Paar Schuhe eine Größe.
 [h2]Schuhgrößen (EU 35 bis 47)[/h2]
 
 [list]
-[*]Dein Charakter hat eine [b]feste Schuhgröße[/b]: 35 bis 42 bei Frauen, 39 bis 47 bei Männern. Sie steht im Charakterfenster neben dem Gewicht.
-[*]Arbeits-, Kampf- und Wanderstiefel gibt es meist in Herrengrößen, Riemchen- und elegante Schuhe in Damengrößen. Die Schuhe eines Zombies passen zu seinem Geschlecht.
+[*][b]Feste Schuhgröße[/b]: 35 bis 42 (Frauen), 39 bis 47 (Männer), im Charakterfenster.
+[*]Arbeits-, Kampf- und Wanderstiefel gibt es meist in Herrengrößen, Riemchen- und elegante Schuhe in Damengrößen. Ein Zombie trägt Schuhe seines Geschlechts.
 [*]Die Größe steht innen: [b]Kleidergröße prüfen[/b] liest sie ohne Fertigkeit ab.
-[*]Improvisierte Fußwickel (Stofffetzen, Leinen, Jeans, Leder, Plane, Bindfaden) passen allen. Selbstgemachte Schuhe haben deine Größe.
+[*]Improvisierte Fußwickel passen allen. Selbstgemachte Schuhe haben deine Größe.
 [/list]
 
 [table]
 [tr][td][b]Passform[/b][/td][td][b]Was passiert[/b][/td][/tr]
 [tr][td]3+ Größen zu klein[/td][td]Lassen sich nicht anziehen[/td][/tr]
-[tr][td]1–2 Größen zu klein[/td][td][b]Unbequem[/b], [b]Blasen[/b] nach längerem Gehen (beim Rennen früher; dein Charakter warnt vorher), Muskelzerrung in den Füßen[/td][/tr]
+[tr][td]1–2 Größen zu klein[/td][td][b]Unbequem[/b], [b]Blasen[/b] nach einer Weile (beim Rennen früher), Muskelzerrung in den Füßen[/td][/tr]
 [tr][td]Richtige Größe oder 1 Größe größer[/td][td]Alles gut[/td][/tr]
-[tr][td]2+ Größen zu groß[/td][td]Du ermüdest beim Rennen schneller, gelegentlich Blasen, [b]Stolpern[/b] nach Zäunen und Mauern, schwächeres [b]Stampfen[/b] auf liegende Zombies (wie barfuß)[/td][/tr]
-[tr][td]3+ Größen zu groß[/td][td]Unbequem, und du kannst beim Rennen, Springen, Klettern oder Stürzen [b]einen Schuh verlieren[/b] (Flip-Flops und Hausschuhe fliegen leicht weg, Schnürstiefel halten besser)[/td][/tr]
+[tr][td]2+ Größen zu groß[/td][td]Du ermüdest beim Rennen schneller, [b]Stolpern[/b] nach Zäunen und Mauern, schwächeres [b]Stampfen[/b][/td][/tr]
+[tr][td]3+ Größen zu groß[/td][td]Unbequem, und du kannst beim Rennen, Springen, Klettern oder Stürzen [b]einen Schuh verlieren[/b][/td][/tr]
 [/table]
 
-Blasen sind kleine Fußwunden ohne Zombie-Infektion. Wie jede Fußverletzung bremsen sie dich bis zur Heilung: Verbinde sie!
+Blasen infizieren dich nicht, bremsen dich aber bis zur Heilung: Verbinde sie!
 
 [h2]Schnittmuster[/h2]
 
 [list]
 [*][b]Schnittmuster abpausen[/b]: am Tisch, von jedem Kleidungsstück oder Paar Schuhe (Schere, Stift, Papier). Das Original wird zerschnitten.
-[*]Oder finde [b]gekaufte Schnittmuster[/b] in Nähläden, Schneiderregalen und Mode-Buchhandlungen, für jede Kleidung, [b]auch aus anderen Mods[/b].
+[*]Oder finde [b]gekaufte Schnittmuster[/b] in Nähläden und Mode-Buchhandlungen, für jede Kleidung, [b]auch aus anderen Mods[/b].
 [*][b]Nach Schnittmuster nähen[/b]: in beliebiger Größe, aus dem Stoff des Originals (Baumwolle, Jeans, Leder). Mit wenig Übung kann es eine Größe danebengehen. Jedes Muster reicht für 5 Stück.
+[*][b]Schnittmuster kopieren[/b]: am Tisch auf neues Papier, das Original bleibt. Jede Kopie ist ungenauer.
+[*]Bis zu 20 Muster in einer [b]Schnittmustermappe[/b] (herstellbar oder bei Nähzubehör). Maschinen nähen direkt daraus.
+[*][b]An mir ansehen[/b]: das Kleidungsstück vor dem Nähen in 3D an dir sehen.
 [*]Nähen von Hand erfordert einen [b]Fingerhut[/b].
-[*]Schuhe sind was für Profis: Schneiderei 8, Nadel [b]und Ahle[/b], Kleber sowie Leder oder Stoff. Immer von Hand genäht. Gummischuhe (Gummistiefel, Flip-Flops) lassen sich nicht nach Muster fertigen.
+[*]Schuhe sind was für Profis: Schneiderei 8, Nadel, [b]Ahle[/b], Kleber, Leder oder Stoff, nur von Hand. Für Gummischuhe gibt es kein Muster.
+[/list]
+
+[h2]Färben und Sticken[/h2]
+
+[list]
+[*][b]Färben[/b] mit Industriefarbe oder Haarfarbe und Wasser: jedes färbbare Kleidungsstück, [b]auch aus Mods[/b], außer bedruckten oder gemusterten. Es kommt durchnässt heraus.
+[*][b]Namen sticken[/b] auf ein Kleidungsstück (Nadel, Faden, Schneiderei 1), mit der Schere wieder auftrennen.
 [/list]
 
 [h2]Nähmaschinen[/h2]
@@ -98,16 +106,16 @@ Blasen sind kleine Fußwunden ohne Zombie-Infektion. Wie jede Fußverletzung bre
 [*][b]Elektrische Nähmaschine[/b]: auf einem Tisch, braucht Strom. Doppelt so schnell, zählt als +2 Stufen Schneiderei.
 [*][b]Tretnähmaschine[/b]: ein schwerer Schrank, kein Strom nötig. 25 % schneller, +1 Stufe Schneiderei.
 [*]Ein Klick auf die Maschine: nach Schnittmuster nähen (Größe und Anzahl wählbar), Kleidung ändern oder aufarbeiten.
-[*]Vorsicht: Maschinen sind [b]laut[/b] und locken Zombies an (die elektrische von viel weiter her). Sie [b]verschleißen[/b], brechen Nadeln ab und klemmen: Schraubenzieher und etwas Speiseöl (Pflanzen- oder Olivenöl) halten sie in Schuss.
+[*]Aber Maschinen sind [b]laut[/b], locken Zombies an, [b]verschleißen[/b], brechen Nadeln ab und klemmen: Wartung mit Schraubenzieher und Speiseöl.
 [/list]
 
 [h2]Mehrspieler[/h2]
 
-Alle sehen dieselben Größen, denselben Verschleiß und dieselben Nähergebnisse. Eine Nähmaschine nutzt immer nur ein Spieler.
+Alle sehen dieselben Größen, denselben Verschleiß und dieselben Ergebnisse. Ein Spieler pro Maschine.
 
 [h2]Sandbox-Optionen[/h2]
 
-Fast alles lässt sich einstellen: Fertigkeit und XP, Aktionsdauer, Strafen bei schlechter Passform, Kleidungsverschleiß, Schuhgrößen, Schnittmuster, Nähmaschinen, Seltenheit der Beute... Kleidung aus anderen Mods bekommt automatisch eine Größe. Details auf [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+Fast alles lässt sich einstellen: Fertigkeit, XP, Tempo, Passform-Strafen, Verschleiß, Schuhgrößen, Schnittmuster, Färben, Sticken, Maschinen, Beute... Kleidung anderer Mods bekommt automatisch eine Größe. Details auf [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 
 [h2]Mod aus einem Spielstand entfernen[/h2]
 

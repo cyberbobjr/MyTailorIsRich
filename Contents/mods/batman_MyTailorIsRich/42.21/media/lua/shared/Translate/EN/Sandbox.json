@@ -54,6 +54,16 @@
     "Sandbox_MyTailorIsRich_MachineNoiseMultiplier_tooltip": "Scales the range of the noise that attracts zombies while a machine runs. 0 = silent machines.",
     "Sandbox_MyTailorIsRich_EnableMachineMaintenance": "Sewing machine maintenance",
     "Sandbox_MyTailorIsRich_EnableMachineMaintenance_tooltip": "Machines wear out, can break needles and jam, and need a screwdriver and cooking oil to be serviced.",
+    "Sandbox_MyTailorIsRich_EnableDyeing": "Enable dyeing",
+    "Sandbox_MyTailorIsRich_EnableDyeing_tooltip": "Clothes made to be tinted (vanilla or from other mods) can be dyed with industrial dye or hair dye and water. The garment takes the color of the dye.",
+    "Sandbox_MyTailorIsRich_EnableEmbroidery": "Enable embroidery",
+    "Sandbox_MyTailorIsRich_EnableEmbroidery_tooltip": "Embroider a short name on a garment with a needle and thread (Tailoring 1 when tailoring levels are required), and unpick it with scissors.",
     "Sandbox_MyTailorIsRich_SewingLootMultiplier": "Sewing loot",
-    "Sandbox_MyTailorIsRich_SewingLootMultiplier_tooltip": "Scales how often sewing machines and store-bought patterns appear in loot. 0 = never."
+    "Sandbox_MyTailorIsRich_SewingLootMultiplier_tooltip": "Scales how often sewing machines and store-bought patterns appear in loot. 0 = never.",
+    "Sandbox_MyTailorIsRich_EnablePatternCopy": "Pattern copies",
+    "Sandbox_MyTailorIsRich_EnablePatternCopy_tooltip": "Allows copying a sewing pattern onto new sheets of paper without destroying it. The copy is less precise than the original.",
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss": "Precision lost per copy",
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "Tailoring levels taken off the precision of a pattern copy (a copy of a copy loses them again). 0: perfect copies.",
+    "Sandbox_MyTailorIsRich_PatternBinderCapacity": "Patterns per binder",
+    "Sandbox_MyTailorIsRich_PatternBinderCapacity_tooltip": "How many sewing patterns a pattern binder can hold."
 }

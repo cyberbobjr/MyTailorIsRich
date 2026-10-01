@@ -2,5 +2,6 @@
     "Base.MTIR_TailorPattern": "Traced Sewing Pattern",
     "Base.Mov_MTIR_SewingMachine": "Electric Sewing Machine",
     "Base.Mov_MTIR_TreadleMachine": "Treadle Sewing Machine",
-    "Base.MTIR_PrintedPattern": "Store-bought Sewing Pattern"
+    "Base.MTIR_PrintedPattern": "Store-bought Sewing Pattern",
+    "Base.MTIR_PatternBinder": "Pattern Binder"
 }

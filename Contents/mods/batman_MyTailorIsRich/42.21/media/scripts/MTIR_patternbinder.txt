@@ -1,0 +1,37 @@
+module Base
+{
+    /* Classeur à patrons de My Tailor Is Rich : les patrons rangés sont des
+       entrées de sa ModData "MTIR_Binder" (MTIR_PatternBinder.lua). Le poids
+       suit le contenu (0,3 + 0,1 par patron, setCustomWeight). */
+    item MTIR_PatternBinder
+    {
+        DisplayCategory = RecipeResource,
+        ItemType = base:normal,
+        Weight = 0.3,
+        Icon = Clipboard,
+        WorldStaticModel = Clipboard,
+    }
+
+    /* Couverture en tissu (chutes de coton, de jean ou de cuir) cousue sur des
+       feuilles pliées en pochettes. */
+    craftRecipe MTIR_MakePatternBinder
+    {
+        timedAction = SewingCloth,
+        time = 150,
+        Tags = AnySurfaceCraft,
+        category = Tailoring,
+        xpAward = Tailoring:5,
+        inputs
+        {
+            item 1 tags[base:scissors] mode:keep flags[SharpnessCheck;IsNotDull],
+            item 1 tags[base:sewingneedle] mode:keep,
+            item 1 tags[base:thread],
+            item 2 [Base.RippedSheets;Base.DenimStrips;Base.LeatherStrips],
+            item 2 [Base.SheetPaper2],
+        }
+        outputs
+        {
+            item 1 Base.MTIR_PatternBinder,
+        }
+    }
+}

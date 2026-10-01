@@ -54,6 +54,16 @@
     "Sandbox_MyTailorIsRich_MachineNoiseMultiplier_tooltip": "Multiplie la portée du bruit qui attire les zombies pendant qu'une machine tourne. 0 = machines silencieuses.",
     "Sandbox_MyTailorIsRich_EnableMachineMaintenance": "Entretien des machines à coudre",
     "Sandbox_MyTailorIsRich_EnableMachineMaintenance_tooltip": "Les machines s'usent, peuvent casser des aiguilles et se bloquer, et s'entretiennent avec un tournevis et de l'huile (végétale, d'olive…).",
+    "Sandbox_MyTailorIsRich_EnableDyeing": "Activer la teinture",
+    "Sandbox_MyTailorIsRich_EnableDyeing_tooltip": "Les vêtements prévus pour être teintés (vanilla ou d'autres mods) peuvent être teints avec du colorant industriel ou de la teinture pour cheveux, et de l'eau. Le vêtement prend la couleur de la teinture.",
+    "Sandbox_MyTailorIsRich_EnableEmbroidery": "Activer la broderie",
+    "Sandbox_MyTailorIsRich_EnableEmbroidery_tooltip": "Broder un nom court sur un vêtement avec une aiguille et du fil (Couture 1 quand les niveaux de couture sont exigés), et le découdre avec des ciseaux.",
     "Sandbox_MyTailorIsRich_SewingLootMultiplier": "Butin de couture",
-    "Sandbox_MyTailorIsRich_SewingLootMultiplier_tooltip": "Multiplie la fréquence des machines à coudre et des patrons du commerce dans le butin. 0 = jamais."
+    "Sandbox_MyTailorIsRich_SewingLootMultiplier_tooltip": "Multiplie la fréquence des machines à coudre et des patrons du commerce dans le butin. 0 = jamais.",
+    "Sandbox_MyTailorIsRich_EnablePatternCopy": "Copies de patrons",
+    "Sandbox_MyTailorIsRich_EnablePatternCopy_tooltip": "Permet de copier un patron sur des feuilles neuves sans le détruire. La copie est moins précise que l'original.",
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss": "Précision perdue par copie",
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "Niveaux de Couture retirés à la précision d'une copie de patron (une copie de copie en perd encore). 0 : copies parfaites.",
+    "Sandbox_MyTailorIsRich_PatternBinderCapacity": "Patrons par classeur",
+    "Sandbox_MyTailorIsRich_PatternBinderCapacity_tooltip": "Nombre de patrons de couture qu'un classeur à patrons peut contenir."
 }

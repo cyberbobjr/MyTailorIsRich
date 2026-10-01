@@ -13,10 +13,14 @@
 -- (XS..XXL ou pointure) ; `machinePos` vaut "x,y,z" sur une machine à coudre,
 -- "" à la main : l'autorité retrouve la machine et revérifie courant, état et
 -- distance (MTIR.resolveWorkMods) ; à la main, le dé à coudre (RequireThimble).
+-- `entryId` (nombre, ou nil) : le patron est rangé dans un classeur à patrons ;
+-- `pattern` désigne alors le classeur et l'usure porte sur l'entrée
+-- (MTIR_PatternBinder.lua), synchronisée avec le classeur.
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
 require "MyTailorIsRich/MTIR_Alterations"
+require "MyTailorIsRich/MTIR_PatternBinder"
 
 MTIR_SewPatternAction = ISBaseTimedAction:derive("MTIR_SewPatternAction")
 
@@ -38,7 +42,7 @@ end
 
 --- Données du patron et bonus si la couture est possible, sinon nil.
 local function canSew(self)
-    local data = MTIR.getPatternData(self.pattern)
+    local data = MTIR.getSourcePatternData(self.pattern, self.entryId)
     if not data or (data.uses or 0) <= 0 or not MTIR.patternModelExists(data) then
         return nil
     end
@@ -128,8 +132,12 @@ function MTIR_SewPatternAction:perform()
     ISBaseTimedAction.perform(self)
 end
 
---- Une couture (réussie ou non) use le patron ; usé jusqu'au bout, il disparaît.
-local function wearPattern(character, pattern, data)
+--- Une couture (réussie ou non) use le patron ; usé jusqu'au bout, il disparaît
+--- (rangé dans un classeur : son entrée est retirée du classeur).
+local function wearPattern(character, pattern, data, entryId)
+    if entryId ~= nil then
+        return MTIR.wearBinderPattern(character, pattern, entryId)
+    end
     data.uses = (data.uses or 1) - 1
     if data.uses <= 0 then
         MTIR.removeItem(pattern)
@@ -201,7 +209,7 @@ function MTIR_SewPatternAction:complete()
     if MTIR.patternNeedsGlue(data) then
         MTIR.consumeGlue(self.glue, MTIR.SHOE_GLUE_USES)
     end
-    if wearPattern(character, self.pattern, data) then
+    if wearPattern(character, self.pattern, data, self.entryId) then
         fx.say = fx.say or { key = "IGUI_MTIR_Say_PatternWornOut" }
     end
     MTIR.tell(character, fx)
@@ -212,7 +220,7 @@ function MTIR_SewPatternAction:getDuration()
     if self.character:isTimedActionInstant() then
         return 1
     end
-    local data = MTIR.getPatternData(self.pattern)
+    local data = MTIR.getSourcePatternData(self.pattern, self.entryId)
     if not data then
         return 1
     end
@@ -222,7 +230,9 @@ end
 --- machinePos : "x,y,z" d'une machine à coudre (MTIR.encodeMachinePos), ou nil/"" à la main.
 --- awl, glue : alêne et colle (chaussures seulement, nil sinon) ; en dernier pour que
 --- leur absence ne décale pas les autres paramètres réseau.
-function MTIR_SewPatternAction:new(character, pattern, needle, scissors, threads, materials, size, machinePos, awl, glue)
+--- entryId : id de l'entrée quand `pattern` est un classeur à patrons, sinon nil.
+function MTIR_SewPatternAction:new(character, pattern, needle, scissors, threads, materials, size, machinePos, awl, glue,
+                                   entryId)
     local o = ISBaseTimedAction.new(self, character)
     o.pattern = pattern
     o.needle = needle
@@ -233,6 +243,7 @@ function MTIR_SewPatternAction:new(character, pattern, needle, scissors, threads
     o.machinePos = type(machinePos) == "string" and machinePos or ""
     o.awl = awl
     o.glue = glue
+    o.entryId = tonumber(entryId)
     -- Sur une machine, s'éloigner interrompt le travail ; à la main, on coud en marchant.
     o.stopOnWalk = o.machinePos ~= ""
     o.stopOnRun = true

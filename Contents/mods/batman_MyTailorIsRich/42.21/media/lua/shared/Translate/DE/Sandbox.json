@@ -54,6 +54,16 @@
     "Sandbox_MyTailorIsRich_MachineNoiseMultiplier_tooltip": "Skaliert die Reichweite des Lärms, der Zombies anlockt, während eine Maschine läuft. 0 = lautlose Maschinen.",
     "Sandbox_MyTailorIsRich_EnableMachineMaintenance": "Nähmaschinen-Wartung",
     "Sandbox_MyTailorIsRich_EnableMachineMaintenance_tooltip": "Maschinen verschleißen, können Nadeln abbrechen und klemmen und brauchen zur Wartung einen Schraubenzieher und Speiseöl.",
+    "Sandbox_MyTailorIsRich_EnableDyeing": "Färben aktivieren",
+    "Sandbox_MyTailorIsRich_EnableDyeing_tooltip": "Kleidung, die zum Einfärben gedacht ist (Vanilla oder aus anderen Mods), kann mit Industriefarbe oder Haarfarbe und Wasser gefärbt werden. Das Kleidungsstück nimmt die Farbe an.",
+    "Sandbox_MyTailorIsRich_EnableEmbroidery": "Sticken aktivieren",
+    "Sandbox_MyTailorIsRich_EnableEmbroidery_tooltip": "Einen kurzen Namen mit Nadel und Faden auf ein Kleidungsstück sticken (Schneiderei 1, wenn Schneiderei-Stufen verlangt werden) und ihn mit einer Schere wieder auftrennen.",
     "Sandbox_MyTailorIsRich_SewingLootMultiplier": "Näh-Beute",
-    "Sandbox_MyTailorIsRich_SewingLootMultiplier_tooltip": "Skaliert, wie oft Nähmaschinen und gekaufte Schnittmuster als Beute auftauchen. 0 = nie."
+    "Sandbox_MyTailorIsRich_SewingLootMultiplier_tooltip": "Skaliert, wie oft Nähmaschinen und gekaufte Schnittmuster als Beute auftauchen. 0 = nie.",
+    "Sandbox_MyTailorIsRich_EnablePatternCopy": "Schnittmuster-Kopien",
+    "Sandbox_MyTailorIsRich_EnablePatternCopy_tooltip": "Erlaubt, ein Schnittmuster auf neue Blätter zu kopieren, ohne es zu zerstören. Die Kopie ist ungenauer als das Original.",
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss": "Genauigkeitsverlust pro Kopie",
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "Schneiderei-Stufen, die eine Schnittmuster-Kopie an Genauigkeit verliert (eine Kopie einer Kopie verliert sie erneut). 0: perfekte Kopien.",
+    "Sandbox_MyTailorIsRich_PatternBinderCapacity": "Schnittmuster pro Mappe",
+    "Sandbox_MyTailorIsRich_PatternBinderCapacity_tooltip": "Wie viele Schnittmuster eine Schnittmustermappe aufnehmen kann."
 }

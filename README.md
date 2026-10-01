@@ -56,6 +56,21 @@ A blister is a small foot scratch without zombie infection. Like any foot injury
 - Required Tailoring: garment difficulty + fabric (cotton 0, denim 1, leather 2); tracing needs one level less. **Shoes need level 8** (sandbox option), a needle **and an awl**, thread, **glue**, and leather or fabric depending on the model (trainers and slippers in cotton, the rest in leather); they are always sewn by hand. Rubber or plastic shoes (wellies, flip-flops) have no pattern.
 - No pattern for ballistic protection or items without a sewable fabric.
 
+## Pattern binder, copies and 3D preview
+
+- **Pattern Binder**: holds up to 20 patterns (sandbox option), each with its uses and precision. Craft it with **Make Pattern Binder** (Tailoring category: scissors and needle kept, 1 thread, 2 fabric strips of cotton, denim or leather, 2 sheets of paper), or find it on sewing shelves. It weighs 0.3 kg plus 0.1 kg per pattern.
+- Right-click a pattern: **Store in binder**. Right-click the binder: **Patterns (n/max)** lists each stored pattern with **Sew from pattern**, **Take out** and **Preview on me**, and **Store all patterns** files every loose pattern you carry.
+- A sewing machine's Pattern tab also lists the clothing patterns stored in your binders and sews straight from them. Shoe patterns stored in a binder are sewn by hand from the binder menu.
+- **Copy pattern**: same needs as tracing (scissors, pen or pencil, sheets of paper, a table nearby, the tracing Tailoring level). The original is kept. The copy loses 1 Tailoring level of precision (sandbox option, never below 0) and gets fresh uses; a copy of a copy loses it again. Copy a pattern after taking it out of the binder.
+- **Preview on me**: a window shows your character (sex, skin, hair, outfit) wearing the garment or shoes of the pattern, in 3D. Drag with the mouse or use the arrow keys to rotate it; **Keep my other clothes on** toggles the rest of your outfit. Clothes from other mods are supported. Nothing is actually worn: the preview is client-side only.
+
+## Dyeing and embroidery
+
+- **Dye**: right-click a garment or shoes, pick one of the dyes you carry (**industrial dye** or **hair dye**, with a color swatch). You also need water: 2, 4 or 6 L depending on the garment's size, and 0.2 to 0.75 L of dye. The garment is taken off if worn, takes the color of the dye and comes out soaked. No skill needed; a little Tailoring XP.
+- What can be dyed: any garment whose clothing model accepts a tint (`AllowRandomTint`), **vanilla or from other mods**, plus the clothes the vanilla **Dye Clothes** recipe accepts. Printed, camouflage or patterned clothes keep their texture colors, so the option is greyed out with an explanation (shown only when you carry a dye).
+- **Embroider a name** (needle, 1 thread, thimble if required, Tailoring 1): type up to 24 characters; the garment is renamed (for example `Jacket "Bob"`) and its tooltip shows the embroidery. **Unpick the embroidery** with scissors brings the old name back. Not for shoes or rigid armor.
+- In multiplayer, the server checks and applies everything. Other players see a dyed garment once it is put on.
+
 ## Sewing machines
 
 - Two placeable machines: an **electric sewing machine** that sits on any table, and a heavy **treadle sewing machine** in its cast-iron cabinet that stands on its own. Both are found in sewing workshops and fabric shops, clothing and department stores, the bedding aisle of supermarkets, people's storage (garages, detached or attached, storage units, attics, sheds, storage rooms, closets) and, more rarely, wherever a sewing kit can turn up; the treadle one also among antiques. Pick them up and place them like any furniture.
@@ -74,7 +89,7 @@ The server decides everything: sizes, resizing, wear, blisters, stiffness and lo
 
 ## Sandbox options
 
-Tailoring level requirement, tailoring XP, action time, rip / drop / trip / stiffness multipliers, insulation and combat penalties, clothes degrading (on/off, min/max days, failure chance, protection and resistance loss), custom clothes list, **extra sized body locations**, **excluded clothes**, **shoe sizes on/off**, **your size shown on the character screen**, **shoe fit effects intensity** (0 disables blisters, discomfort, extra endurance and lost shoes), **sewings per pattern**, **Tailoring level for shoe patterns**, **thimble for hand sewing**, **sewing machine bonus**, **machine noise**, **machine maintenance**, **sewing loot rarity**.
+Tailoring level requirement, tailoring XP, action time, rip / drop / trip / stiffness multipliers, insulation and combat penalties, clothes degrading (on/off, min/max days, failure chance, protection and resistance loss), custom clothes list, **extra sized body locations**, **excluded clothes**, **shoe sizes on/off**, **your size shown on the character screen**, **shoe fit effects intensity** (0 disables blisters, discomfort, extra endurance and lost shoes), **sewings per pattern**, **Tailoring level for shoe patterns**, **thimble for hand sewing**, **sewing machine bonus**, **machine noise**, **machine maintenance**, **sewing loot rarity**, **pattern copies**, **precision lost per copy**, **patterns per binder**, **enable dyeing**, **enable embroidery**.
 
 ## Debug
 
@@ -169,6 +184,21 @@ Une ampoule est une petite égratignure au pied, sans infection zombie. Comme to
 - Couture requise : difficulté du vêtement + tissu (coton 0, jean 1, cuir 2) ; le tracé demande un niveau de moins. **Les chaussures demandent le niveau 8** (option sandbox), une aiguille **et un poinçon**, du fil, **de la colle**, et du cuir ou du tissu selon le modèle (baskets et chaussons en coton, le reste en cuir) ; elles se cousent toujours à la main. Les chaussures en caoutchouc ou en plastique (bottes de pluie, tongs) n'ont pas de patron.
 - Pas de patron pour une protection balistique ni pour un objet sans tissu cousable.
 
+## Classeur à patrons, copies et aperçu 3D
+
+- **Classeur à patrons** : il range jusqu'à 20 patrons (option sandbox), chacun avec ses utilisations et sa précision. Recette **Fabriquer un classeur à patrons** (catégorie Couture : ciseaux et aiguille conservés, 1 fil, 2 bandes de tissu de coton, de jean ou de cuir, 2 feuilles de papier), ou butin des rayons couture. Il pèse 0,3 kg plus 0,1 kg par patron.
+- Clic droit sur un patron : **Ranger dans le classeur**. Clic droit sur le classeur : **Patrons (n/max)** liste chaque patron rangé avec **Coudre d'après le patron**, **Sortir** et **Aperçu sur moi** ; **Ranger tous les patrons** y range tous les patrons portés.
+- L'onglet Patron d'une machine à coudre propose aussi les patrons de vêtements rangés dans les classeurs et coud directement depuis eux. Les patrons de chaussures rangés se cousent à la main depuis le menu du classeur.
+- **Copier le patron** : mêmes besoins que le relevé (ciseaux, stylo ou crayon, feuilles, table proche, niveau de Couture du relevé). L'original est conservé. La copie perd 1 niveau de précision (option sandbox, jamais sous 0) et reçoit des utilisations neuves ; une copie de copie en perd encore. Sortir le patron du classeur avant de le copier.
+- **Aperçu sur moi** : une fenêtre montre le personnage (sexe, peau, cheveux, tenue) portant en 3D le vêtement ou les chaussures du patron. Glisser à la souris ou flèches pour le faire tourner ; **Garder mes autres vêtements** affiche ou retire le reste de la tenue. Vêtements des autres mods pris en charge. Rien n'est réellement porté : l'aperçu est purement local.
+
+## Teinture et broderie
+
+- **Teindre** : clic droit sur un vêtement ou des chaussures, choisir l'une des teintures portées (**colorant industriel** ou **teinture pour cheveux**, avec une pastille de sa couleur). Il faut aussi de l'eau : 2, 4 ou 6 L selon la taille du vêtement, et 0,2 à 0,75 L de teinture. Le vêtement est retiré s'il est porté, prend la couleur et ressort trempé. Aucune compétence requise ; un peu d'XP de Couture.
+- Ce qui se teint : tout vêtement dont le modèle accepte une teinte (`AllowRandomTint`), **vanilla ou d'un autre mod**, plus les vêtements acceptés par la recette vanilla **Teindre les vêtements**. Les vêtements imprimés, camouflés ou à motifs gardent les couleurs de leur texture : l'option est grisée avec une explication (affichée seulement si l'on porte une teinture).
+- **Broder un nom** (aiguille, 1 fil, dé à coudre si l'option l'exige, Couture 1) : jusqu'à 24 caractères ; le vêtement est renommé (par exemple `Veste « Bob »`) et son infobulle affiche la broderie. **Découdre la broderie** aux ciseaux rend l'ancien nom. Pas pour les chaussures ni les protections rigides.
+- En multijoueur, le serveur vérifie et applique tout. Les autres joueurs voient un vêtement teint une fois qu'il est enfilé.
+
 ## Machines à coudre
 
 - Deux machines posables : une **machine à coudre électrique**, qui se pose sur n'importe quelle table, et une lourde **machine à pédale** dans son meuble en fonte, autonome. On les trouve dans les ateliers de couture et les merceries, les magasins de vêtements et les grands magasins, le rayon linge des supermarchés, le stockage des particuliers (garages séparés ou attenants, box de stockage, greniers, abris de jardin, réserves, placards) et, plus rarement, partout où l'on trouve un kit de couture ; celle à pédale aussi parmi les antiquités. Elles se ramassent et se posent comme des meubles.
@@ -187,7 +217,7 @@ Le serveur décide de tout : tailles, retouches, usure, ampoules, courbatures, c
 
 ## Options sandbox
 
-Niveau de couture requis, XP de couture, durée des actions, multiplicateurs de déchirure, de chute du vêtement, de chute et de raideur, pertes d'isolation et de vitesse de combat, usure (activation, jours min/max, usure en cas d'échec, pertes de protection et de résistance), liste de vêtements supplémentaires, **emplacements supplémentaires**, **vêtements exclus**, **pointures activées ou non**, **taille affichée dans l'écran Personnage**, **intensité des effets des chaussures** (0 coupe ampoules, inconfort, endurance supplémentaire et pertes de chaussures), **coutures par patron**, **niveau de Couture des patrons de chaussures**, **dé à coudre pour coudre à la main**, **bonus des machines**, **bruit des machines**, **entretien des machines**, **rareté du butin de couture**.
+Niveau de couture requis, XP de couture, durée des actions, multiplicateurs de déchirure, de chute du vêtement, de chute et de raideur, pertes d'isolation et de vitesse de combat, usure (activation, jours min/max, usure en cas d'échec, pertes de protection et de résistance), liste de vêtements supplémentaires, **emplacements supplémentaires**, **vêtements exclus**, **pointures activées ou non**, **taille affichée dans l'écran Personnage**, **intensité des effets des chaussures** (0 coupe ampoules, inconfort, endurance supplémentaire et pertes de chaussures), **coutures par patron**, **niveau de Couture des patrons de chaussures**, **dé à coudre pour coudre à la main**, **bonus des machines**, **bruit des machines**, **entretien des machines**, **rareté du butin de couture**, **copies de patrons**, **précision perdue par copie**, **patrons par classeur**, **teinture**, **broderie**.
 
 ## Débogage
 

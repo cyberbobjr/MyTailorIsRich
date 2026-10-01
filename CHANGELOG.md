@@ -3,6 +3,16 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.0 — 2026-10-01
+
+### New
+- **Pattern Binder**: keep up to 20 sewing patterns in one binder (craft it with **Make Pattern Binder**: scissors, needle, thread, two fabric strips and two sheets of paper, or find it with sewing supplies). Store and take out patterns from the right-click menu, sew straight from a stored pattern, and pick stored patterns in the sewing machine's Pattern tab. Patterns keep their uses and precision.
+- **Copy pattern**: transfer a pattern onto new sheets of paper at a table (scissors, pen or pencil), without destroying it. Each copy is a little less precise than its original, and gets fresh uses.
+- **Preview on me**: see your character wearing the garment or shoes of a pattern in 3D, from the pattern, the binder or the sewing machine. Rotate with the mouse or the arrow keys. Clothes from other mods are supported, and nothing is actually worn.
+- **Dye**: dye clothes and shoes with industrial dye or hair dye, plus water. Pick the dye, and the garment takes its color and comes out soaked. Any garment made to be tinted can be dyed, **clothing mods included**; printed or patterned clothes can't (the option is greyed out with an explanation).
+- **Embroider a name** on a garment with a needle and thread (Tailoring 1). It shows in the item's name and tooltip. **Unpick the embroidery** with scissors to get the old name back.
+- Sandbox options: **Pattern copies**, **Precision lost per copy**, **Patterns per binder**, **Enable dyeing**, **Enable embroidery**.
+
 ## 0.3.2 — 2026-09-30
 
 ### Improvements

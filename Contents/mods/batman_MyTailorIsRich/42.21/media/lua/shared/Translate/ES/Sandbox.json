@@ -54,6 +54,16 @@
     "Sandbox_MyTailorIsRich_MachineNoiseMultiplier_tooltip": "Ajusta el alcance del ruido que atrae a los zombis mientras funciona una máquina. 0 = máquinas silenciosas.",
     "Sandbox_MyTailorIsRich_EnableMachineMaintenance": "Mantenimiento de máquinas de coser",
     "Sandbox_MyTailorIsRich_EnableMachineMaintenance_tooltip": "Las máquinas se desgastan, pueden romper agujas y atascarse, y necesitan un destornillador y aceite de cocina para su mantenimiento.",
+    "Sandbox_MyTailorIsRich_EnableDyeing": "Activar el teñido",
+    "Sandbox_MyTailorIsRich_EnableDyeing_tooltip": "La ropa pensada para teñirse (vanilla o de otros mods) se puede teñir con tinte industrial o tinte para el cabello y agua. La prenda toma el color del tinte.",
+    "Sandbox_MyTailorIsRich_EnableEmbroidery": "Activar el bordado",
+    "Sandbox_MyTailorIsRich_EnableEmbroidery_tooltip": "Bordar un nombre corto en una prenda con aguja e hilo (Sastrería 1 cuando se exigen niveles de sastrería) y descoserlo con tijeras.",
     "Sandbox_MyTailorIsRich_SewingLootMultiplier": "Botín de costura",
-    "Sandbox_MyTailorIsRich_SewingLootMultiplier_tooltip": "Ajusta la frecuencia con la que aparecen máquinas de coser y patrones de tienda en el botín. 0 = nunca."
+    "Sandbox_MyTailorIsRich_SewingLootMultiplier_tooltip": "Ajusta la frecuencia con la que aparecen máquinas de coser y patrones de tienda en el botín. 0 = nunca.",
+    "Sandbox_MyTailorIsRich_EnablePatternCopy": "Copias de patrones",
+    "Sandbox_MyTailorIsRich_EnablePatternCopy_tooltip": "Permite copiar un patrón en hojas nuevas sin destruirlo. La copia es menos precisa que el original.",
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss": "Precisión perdida por copia",
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "Niveles de Sastrería que pierde la precisión de una copia de patrón (una copia de una copia los vuelve a perder). 0: copias perfectas.",
+    "Sandbox_MyTailorIsRich_PatternBinderCapacity": "Patrones por carpeta",
+    "Sandbox_MyTailorIsRich_PatternBinderCapacity_tooltip": "Cuántos patrones de costura caben en una carpeta de patrones."
 }

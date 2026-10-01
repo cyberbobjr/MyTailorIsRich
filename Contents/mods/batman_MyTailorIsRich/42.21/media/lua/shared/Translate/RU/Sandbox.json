@@ -54,6 +54,16 @@
     "Sandbox_MyTailorIsRich_MachineNoiseMultiplier_tooltip": "Масштабирует дальность шума, который привлекает зомби, пока машина работает. 0 = бесшумные машины.",
     "Sandbox_MyTailorIsRich_EnableMachineMaintenance": "Обслуживание швейных машин",
     "Sandbox_MyTailorIsRich_EnableMachineMaintenance_tooltip": "Машины изнашиваются, могут ломать иглы и заклинивать, а для обслуживания нужны отвёртка и растительное масло.",
+    "Sandbox_MyTailorIsRich_EnableDyeing": "Включить покраску",
+    "Sandbox_MyTailorIsRich_EnableDyeing_tooltip": "Одежду, предназначенную для окраски (из игры или других модов), можно покрасить промышленной краской или краской для волос с водой. Вещь принимает цвет краски.",
+    "Sandbox_MyTailorIsRich_EnableEmbroidery": "Включить вышивку",
+    "Sandbox_MyTailorIsRich_EnableEmbroidery_tooltip": "Вышить короткое имя на одежде иглой и нитками (Шитьё 1, если требуются уровни шитья) и распороть его ножницами.",
     "Sandbox_MyTailorIsRich_SewingLootMultiplier": "Швейная добыча",
-    "Sandbox_MyTailorIsRich_SewingLootMultiplier_tooltip": "Масштабирует частоту появления швейных машин и покупных выкроек в добыче. 0 = никогда."
+    "Sandbox_MyTailorIsRich_SewingLootMultiplier_tooltip": "Масштабирует частоту появления швейных машин и покупных выкроек в добыче. 0 = никогда.",
+    "Sandbox_MyTailorIsRich_EnablePatternCopy": "Копии выкроек",
+    "Sandbox_MyTailorIsRich_EnablePatternCopy_tooltip": "Позволяет скопировать выкройку на новые листы, не уничтожая её. Копия менее точная, чем оригинал.",
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss": "Потеря точности при копировании",
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "На сколько уровней Шитья снижается точность копии выкройки (копия копии теряет их снова). 0: идеальные копии.",
+    "Sandbox_MyTailorIsRich_PatternBinderCapacity": "Выкроек в папке",
+    "Sandbox_MyTailorIsRich_PatternBinderCapacity_tooltip": "Сколько выкроек вмещает папка для выкроек."
 }

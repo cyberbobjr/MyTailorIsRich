@@ -6,12 +6,18 @@
 -- tant que le panneau reste ouvert, que le patron existe et que tout est prêt.
 -- Le dernier patron utilisé est re-sélectionné à l'ouverture (par joueur).
 -- Les objets sont suivis par identifiant (un transfert MP peut changer l'instance).
+-- Un patron rangé dans un classeur à patrons se choisit aussi (clic sur
+-- l'emplacement) : la source est alors le classeur (self.pattern) et l'id de
+-- l'entrée (self.entryId), voir MTIR_PatternBinder.lua. « Aperçu » ouvre
+-- l'aperçu 3D du vêtement sur le personnage (MTIR_PatternPreview.lua).
 -- ============================================================================
 
 require "ISUI/ISPanel"
 require "ISUI/ISComboBox"
 require "MyTailorIsRich/MTIR_MachineUIUtil"
 require "MyTailorIsRich/MTIR_PatternMenu"
+require "MyTailorIsRich/MTIR_PatternBinder"
+require "MyTailorIsRich/MTIR_PatternPreview"
 
 MTIR_MachineTabPattern = ISPanel:derive("MTIR_MachineTabPattern")
 
@@ -31,30 +37,62 @@ local SERIES_WAIT_MINUTES = 10
 local SERIES_SETTLE_TICKS = 15
 local SIZE_COMBO_WIDTH = 150
 local QUANTITY_COMBO_WIDTH = 60
+-- Marge du bouton « Aperçu » autour de son texte.
+local PREVIEW_TEXT_MARGIN = 16
 
--- Identifiant du dernier patron cousu, par joueur local (durée de la session).
-local lastPatternIds = {}
+-- Dernier patron cousu, par joueur local (durée de la session) : { id, entryId }.
+local lastPatterns = {}
 
 MTIR_MachineTabPattern.ACTION_TYPES = { MTIR_SewPatternAction = true }
 
+local function previewButtonWidth()
+    return getTextManager():MeasureStringX(UIFont.Small, getText("IGUI_MTIR_Machine_Preview")) + PREVIEW_TEXT_MARGIN
+end
+
 --- Largeur minimale de l'onglet : les deux étiquettes (selon la langue et la
---- taille de police) et les deux listes tiennent sur une ligne.
+--- taille de police), les deux listes et le bouton « Aperçu » tiennent sur une ligne.
 function MTIR_MachineTabPattern.minWidth()
     local measure = getTextManager()
     local size = measure:MeasureStringX(UIFont.Small, getText("IGUI_MTIR_Machine_Size"))
     local quantity = measure:MeasureStringX(UIFont.Small, getText("IGUI_MTIR_Machine_Quantity"))
-    return PAD + size + PAD + SIZE_COMBO_WIDTH + PAD * 2 + quantity + PAD + QUANTITY_COMBO_WIDTH + PAD
+    return PAD + size + PAD + SIZE_COMBO_WIDTH + PAD * 2 + quantity + PAD + QUANTITY_COMBO_WIDTH + PAD * 2
+        + previewButtonWidth() + PAD
 end
 
---- Patron de vêtement encore utilisable (les chaussures se cousent à la main).
+--- Données d'un patron de vêtement encore utilisable (les chaussures se cousent à la main).
+local function isMachineData(data)
+    return data ~= nil and data.kind ~= "shoe" and MTIR.isUsablePatternData(data)
+end
+
 local function isMachinePattern(item)
-    local data = MTIR.getPatternData(item)
-    return data ~= nil and data.kind ~= "shoe" and (data.uses or 0) > 0 and MTIR.patternModelExists(data)
+    return isMachineData(MTIR.getPatternData(item))
 end
 
-local function patternLabel(item)
-    local data = MTIR.getPatternData(item)
-    return item:getName() .. " (" .. (data and data.uses or 0) .. "/" .. MTIR.opt("PatternMaxUses") .. ")"
+--- Choix du menu : { item = patron } ou { item = classeur, entryId = id }.
+local function patternLabel(choice)
+    local data = MTIR.getSourcePatternData(choice.item, choice.entryId)
+    local label = MTIR.getSourcePatternName(choice.item, choice.entryId)
+        .. " (" .. (data and data.uses or 0) .. "/" .. MTIR.opt("PatternMaxUses") .. ")"
+    if choice.entryId ~= nil then
+        label = choice.item:getName() .. " - " .. label
+    end
+    return label
+end
+
+--- Patrons de l'inventaire, puis patrons des classeurs, utilisables sur la machine.
+local function collectChoices(player)
+    local choices = {}
+    for _, item in ipairs(UI.collectItems(player, isMachinePattern)) do
+        table.insert(choices, { item = item })
+    end
+    for _, binder in ipairs(UI.collectItems(player, MTIR.isBinder)) do
+        for _, entry in ipairs(MTIR.getBinderEntries(binder)) do
+            if isMachineData(MTIR.binderEntryPattern(entry)) then
+                table.insert(choices, { item = binder, entryId = entry.id })
+            end
+        end
+    end
+    return choices
 end
 
 local function gameMinutes()
@@ -82,10 +120,27 @@ function MTIR_MachineTabPattern:onPatternRemoved()
     self:setPattern(nil)
 end
 
+function MTIR_MachineTabPattern:onChoice(choice)
+    self:setPattern(choice.item, choice.entryId)
+end
+
 function MTIR_MachineTabPattern:choosePattern(box)
     local player = self.window.player
-    UI.openChooser(box, player, UI.collectItems(player, isMachinePattern), patternLabel,
-        "IGUI_MTIR_Machine_NoPattern", self, MTIR_MachineTabPattern.setPattern)
+    UI.openChooser(box, player, collectChoices(player), patternLabel,
+        "IGUI_MTIR_Machine_NoPattern", self, MTIR_MachineTabPattern.onChoice)
+end
+
+--- Données du patron choisi (patron ou entrée de classeur), ou nil.
+function MTIR_MachineTabPattern:patternData()
+    return self.pattern and MTIR.getSourcePatternData(self.pattern, self.entryId) or nil
+end
+
+--- Aperçu 3D du vêtement du patron choisi.
+function MTIR_MachineTabPattern:onPreview()
+    local data = self:patternData()
+    if data then
+        MTIR.PatternPreview.open(self.window.player, data.fullType)
+    end
 end
 
 -- ----------------------------------------------------------------------------
@@ -118,17 +173,28 @@ function MTIR_MachineTabPattern:createChildren()
     self.quantityCombo:initialise()
     self:addChild(self.quantityCombo)
 
+    local previewWidth = previewButtonWidth()
+    self.previewButton = ISButton:new(self.width - PAD - previewWidth, comboY, previewWidth, comboHeight,
+        getText("IGUI_MTIR_Machine_Preview"), self, MTIR_MachineTabPattern.onPreview)
+    self.previewButton:initialise()
+    self.previewButton.tooltip = getText("IGUI_MTIR_Preview")
+    self:addChild(self.previewButton)
+
     self.details = UI.newDetails(self, comboY + comboHeight + PAD)
     self.button = UI.newActionButton(self, self.labels.idle, MTIR_MachineTabPattern.onSew)
     self:setPattern(self:findLastPattern())
 end
 
---- Dernier patron cousu par ce joueur, s'il est encore dans l'inventaire et utilisable.
+--- Dernier patron cousu par ce joueur, s'il est encore dans l'inventaire et
+--- utilisable : objet et id d'entrée (patron rangé dans un classeur), ou nil.
 function MTIR_MachineTabPattern:findLastPattern()
     local player = self.window.player
-    local id = lastPatternIds[player:getPlayerNum()]
-    local item = id and player:getInventory():getItemById(id)
-    return item and isMachinePattern(item) and item or nil
+    local last = lastPatterns[player:getPlayerNum()]
+    local item = last and player:getInventory():getItemById(last.id)
+    if item and isMachineData(MTIR.getSourcePatternData(item, last.entryId)) then
+        return item, last.entryId
+    end
+    return nil
 end
 
 --- Bouton sous le texte des besoins ; hauteur de l'onglet ajustée. maxHeight
@@ -157,12 +223,14 @@ function MTIR_MachineTabPattern:fillQuantity(uses)
     self.quantityUses = uses
 end
 
-function MTIR_MachineTabPattern:setPattern(item)
+--- item : patron, ou classeur avec entryId (patron rangé) ; nil pour vider l'emplacement.
+function MTIR_MachineTabPattern:setPattern(item, entryId)
     self.pattern = item
+    self.entryId = item and entryId or nil
     self.slot:setStoredItem(item)
     self.sizeCombo:clear()
     self.sizeCombo.selected = 0
-    local data = item and MTIR.getPatternData(item)
+    local data = self:patternData()
     if data then
         local player = self.window.player
         for _, size in ipairs(MTIR.getPatternSizes(data)) do
@@ -195,7 +263,7 @@ function MTIR_MachineTabPattern:dropLostPattern()
         return false
     end
     local current = UI.resolveCarried(self.window.player, self.pattern)
-    if current and isMachinePattern(current) then
+    if current and isMachineData(MTIR.getSourcePatternData(current, self.entryId)) then
         if current ~= self.pattern then
             self.pattern = current
             self.slot:setStoredItem(current)
@@ -212,7 +280,7 @@ function MTIR_MachineTabPattern:refresh()
         return
     end
     local window = self.window
-    local data = self.pattern and MTIR.getPatternData(self.pattern)
+    local data = self:patternData()
     local size = data and self:selectedSize()
     -- Pendant une série, la liste reste telle quelle (pas de « 2/5 » tronqué).
     if data and data.uses ~= self.quantityUses and not self.series then
@@ -226,7 +294,8 @@ function MTIR_MachineTabPattern:refresh()
         local req = MTIR.getSewRequirements(window.player, data, size, MTIR.getMachineMods(window.machine))
         self.request = req
         text = MTIR.SewUI.describeSew(data, req)
-            .. UI.consumedText({ req = req, fabric = data.fabric, pattern = self.pattern })
+            .. UI.consumedText({ req = req, fabric = data.fabric,
+                patternName = MTIR.getSourcePatternName(self.pattern, self.entryId) })
     end
     if UI.setDetails(self.details, text) then
         window:layout()
@@ -235,6 +304,10 @@ function MTIR_MachineTabPattern:refresh()
     local problem = MTIR.getSewingMachineProblem(nil, window.machine, data)
     self.button.tooltip = problem and getText(problem) or nil
     self.canRun = self.request ~= nil and self.request.ready and problem == nil
+    local canPreview = data ~= nil and MTIR.PatternPreview.canPreview(data.fullType)
+    if self.previewButton.enable ~= canPreview then
+        self.previewButton:setEnable(canPreview)
+    end
 end
 
 -- ----------------------------------------------------------------------------
@@ -242,16 +315,18 @@ end
 -- ----------------------------------------------------------------------------
 
 function MTIR_MachineTabPattern:queueOne()
-    local data = MTIR.getPatternData(self.pattern)
+    local data = self:patternData()
     local series = self.series
     series.patternId = self.pattern:getID()
+    series.entryId = self.entryId
     series.usesBefore = data and data.uses or 0
     series.completed = false
     series.lastDelta = nil
     series.waitStart = nil
     series.settle = 0
-    lastPatternIds[self.window.player:getPlayerNum()] = series.patternId
-    MTIR.SewUI.queueSew(self.window.player, self.pattern, self.request, self:selectedSize(), self.window.machine)
+    lastPatterns[self.window.player:getPlayerNum()] = { id = series.patternId, entryId = series.entryId }
+    MTIR.SewUI.queueSew(self.window.player, self.pattern, self.request, self:selectedSize(), self.window.machine,
+        self.entryId)
 end
 
 --- Vrai si l'on peut lancer une pièce maintenant ; besoins recalculés juste avant.
@@ -283,7 +358,7 @@ local function patternWorn(player, series)
     if not pattern then
         return true
     end
-    local data = MTIR.getPatternData(pattern)
+    local data = MTIR.getSourcePatternData(pattern, series.entryId)
     return data == nil or (data.uses or 0) < series.usesBefore
 end
 
@@ -317,7 +392,7 @@ function MTIR_MachineTabPattern:queueNext(series)
     if series.settle < SERIES_SETTLE_TICKS then
         return
     end
-    if self:readyToQueue() and self.pattern:getID() == series.patternId then
+    if self:readyToQueue() and self.pattern:getID() == series.patternId and self.entryId == series.entryId then
         self:queueOne()
     else
         self:endSeries()
@@ -386,7 +461,7 @@ end
 function MTIR_MachineTabPattern:render()
     ISPanel.render(self)
     local infoX = PAD + SLOT + PAD
-    local data = self.pattern and MTIR.getPatternData(self.pattern)
+    local data = self:patternData()
     local texts = self.texts
     if not data then
         self:drawText(texts.dropHere, infoX, (SLOT - FONT_HGT) / 2, 0.7, 0.7, 0.7, 1, UIFont.Small)

@@ -4,7 +4,7 @@
 
 That perfect leather jacket on a zombie? It might be two sizes too small. Those army boots? Size 46, and you wear a 41.
 
-My Tailor Is Rich gives every piece of clothing and every pair of shoes a size. Find what fits, alter what doesn't, sew your own clothes from patterns... and think twice before sprinting in boots three sizes too big.
+Every piece of clothing and every pair of shoes now has a size. Find what fits, alter what doesn't, sew and dye your own clothes... and think twice before sprinting in boots three sizes too big.
 
 [h2]At a glance[/h2]
 
@@ -13,7 +13,8 @@ My Tailor Is Rich gives every piece of clothing and every pair of shoes a size. 
 [*][b]Shoe sizes[/b] from 35 to 47 (EU): watch out for blisters, trips and lost shoes.
 [*][b]Alterations[/b]: make clothes bigger or smaller with your Tailoring skill.
 [*][b]Wear and repair[/b]: clothes wear out, and you can recondition them.
-[*][b]Sewing patterns[/b]: trace them from your favourite clothes or find them in stores.
+[*][b]Sewing patterns[/b]: trace, find or copy them, keep them in a binder, preview them on you in 3D.
+[*][b]Dyeing and embroidery[/b]: dye your clothes, embroider a name.
 [*][b]Sewing machines[/b]: faster and better results... but noisy.
 [*]Works with [b]clothing mods[/b] and in [b]multiplayer[/b].
 [/list]
@@ -22,15 +23,15 @@ My Tailor Is Rich gives every piece of clothing and every pair of shoes a size. 
 
 [list]
 [*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (required): shows size and condition in item tooltips.
-[*][b]Not compatible[/b] with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]. This mod is a full rewrite of it for Build 42.21: don't enable both.
+[*][b]Not compatible[/b] with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]. This mod is its Build 42.21 rewrite: don't enable both.
 [*]Compatible with [b]Immersive Weighing[/b]: size hidden along with weight.
 [/list]
 
 [h2]Clothes that fit (or don't)[/h2]
 
 [list]
-[*]Your size depends on your [b]weight[/b]: XS up to 50 kg, S up to 65, M up to 75, L under 85, XL under 100, XXL 100 and above. Gain or lose weight, and your size changes too.
-[*]You don't know the size of the clothes you find. Right-click and choose [b]Check clothes size[/b] to read the label. With little Tailoring skill, your character can only guess.
+[*]Your size depends on your [b]weight[/b]: XS up to 50 kg, S up to 65, M up to 75, L under 85, XL under 100, XXL 100 and above. It changes with your weight.
+[*]Found clothes have an unknown size: right-click, [b]Check clothes size[/b]. With little Tailoring skill, your character can only guess.
 [*]Clothes on the same zombie are within one size of each other.
 [*]Hats, masks, gloves, jewelry, belts and underwear are one size fits all.
 [/list]
@@ -38,26 +39,23 @@ My Tailor Is Rich gives every piece of clothing and every pair of shoes a size. 
 [h3]Too big[/h3]
 
 [list]
-[*]Keeps you less warm.
-[*]Tops slow down your attacks.
-[*]Loose pants or skirts can [b]fall down[/b] if you have no belt and both hands are busy.
-[*]You can [b]trip[/b] when landing after a fence, even when walking (more often when running).
+[*]Less warm; tops slow down your attacks.
+[*]Loose pants or skirts can [b]fall down[/b] without a belt when both hands are busy.
+[*]You can [b]trip[/b] when landing after a fence (more often when running).
 [/list]
 
 [h3]Too small[/h3]
 
 [list]
-[*]Takes longer to put on.
-[*]Can [b]rip[/b] when you climb.
+[*]Slower to put on, can [b]rip[/b] when you climb, causes muscle stiffness.
 [*]You can [b]trip[/b] after climbing a wall.
-[*]Causes muscle stiffness.
-[*]Far too small: can't be worn at all. Put on weight, and the clothes that no longer fit come off.
+[*]Far too small: can't be worn. Put on weight, and clothes that no longer fit come off.
 [/list]
 
 [h2]Tailoring[/h2]
 
 [list]
-[*][b]Alter[/b] a garment one size up (with fabric strips) or one size down (with paperclips), using a needle, thread and scissors. Your chances depend on your Tailoring skill and the fabric.
+[*][b]Alter[/b] a garment one size up (with fabric strips) or one size down (with paperclips), with needle, thread and scissors. Success depends on Tailoring and the fabric.
 [*]Clothes [b]wear out[/b] with dirt, blood, rain and tight fits. [b]Recondition[/b] them with fabric strips or a spare copy of the same item.
 [*]When you [b]craft clothes[/b], you choose their size in the crafting window.
 [/list]
@@ -68,28 +66,38 @@ My Tailor Is Rich gives every piece of clothing and every pair of shoes a size. 
 [*]Your character has a [b]fixed shoe size[/b]: 35 to 42 for women, 39 to 47 for men. You'll find it on the character screen, next to your weight.
 [*]Work, army and hiking boots mostly come in men's sizes; strappy and dress shoes mostly in women's. A zombie's shoes match its sex.
 [*]The size is printed inside: [b]Check clothes size[/b] reads it, no skill needed.
-[*]Improvised foot wraps (rags, burlap, denim, leather, tarp, twine) fit everyone. Shoes you craft are made to your size.
+[*]Improvised foot wraps fit everyone. Shoes you craft are made to your size.
 [/list]
 
 [table]
 [tr][td][b]Fit[/b][/td][td][b]What happens[/b][/td][/tr]
 [tr][td]3+ sizes too small[/td][td]They won't go on[/td][/tr]
-[tr][td]1–2 sizes too small[/td][td][b]Discomfort[/b], [b]blisters[/b] after walking a while (sooner when running, your character complains first), stiff feet[/td][/tr]
+[tr][td]1–2 sizes too small[/td][td][b]Discomfort[/b], [b]blisters[/b] after a while (sooner when running), stiff feet[/td][/tr]
 [tr][td]Right size or 1 size bigger[/td][td]All good[/td][/tr]
-[tr][td]2+ sizes too big[/td][td]You tire faster when running, occasional blisters, [b]trips[/b] after fences and walls, weaker [b]stomps[/b] on downed zombies (as weak as barefoot)[/td][/tr]
-[tr][td]3+ sizes too big[/td][td]Discomfort, and you can [b]lose a shoe[/b] when running, vaulting, climbing or falling (flip-flops and slippers fly off easily, laced boots hold better)[/td][/tr]
+[tr][td]2+ sizes too big[/td][td]You tire faster when running, [b]trips[/b] after fences and walls, weaker [b]stomps[/b][/td][/tr]
+[tr][td]3+ sizes too big[/td][td]Discomfort, and you can [b]lose a shoe[/b] when running, vaulting, climbing or falling[/td][/tr]
 [/table]
 
-Blisters are small foot wounds that can't give you the zombie infection. Like any foot injury, they slow you down until they heal: bandage them!
+Blisters can't infect you, but they slow you down until they heal: bandage them!
 
 [h2]Sewing patterns[/h2]
 
 [list]
 [*][b]Trace a pattern[/b] at a table from any garment or pair of shoes (scissors, pen, paper). The original gets cut up in the process.
-[*]Or find [b]store-bought patterns[/b] in sewing shops, tailoring shelves and fashion bookstores. They can be for any clothes, [b]including those from other mods[/b].
+[*]Or find [b]store-bought patterns[/b] in sewing shops and fashion bookstores, for any clothes, [b]other mods included[/b].
 [*][b]Sew from a pattern[/b] in the size of your choice, with the same fabric as the original (cotton, denim, leather). At low skill, you may end up one size off. Each pattern can be used 5 times.
+[*][b]Copy a pattern[/b] onto new paper, at a table, without destroying it: each copy is a little less precise.
+[*]Keep up to 20 patterns in a [b]Pattern Binder[/b] (crafted, or found with sewing supplies). Sewing machines sew straight from it.
+[*][b]Preview on me[/b]: see your character wearing the garment in 3D before sewing it.
 [*]Sewing by hand requires a [b]thimble[/b].
-[*]Shoes are for experts: Tailoring 8, a needle [b]and an awl[/b], glue, and leather or fabric. They're always sewn by hand. Rubber shoes (wellies, flip-flops) can't be made from a pattern.
+[*]Shoes are for experts: Tailoring 8, needle, [b]awl[/b], glue, leather or fabric, by hand only. Rubber shoes have no pattern.
+[/list]
+
+[h2]Dyeing and embroidery[/h2]
+
+[list]
+[*][b]Dye[/b] clothes with industrial dye or hair dye and water. Any garment made to be tinted can be dyed, [b]clothing mods included[/b]; printed or patterned ones can't. It comes out soaked.
+[*][b]Embroider a name[/b] on a garment (needle, thread, Tailoring 1), and unpick it with scissors.
 [/list]
 
 [h2]Sewing machines[/h2]
@@ -97,18 +105,18 @@ Blisters are small foot wounds that can't give you the zombie infection. Like an
 [list]
 [*][b]Electric machine[/b]: sits on a table and needs power. Twice as fast, and counts as +2 Tailoring levels.
 [*][b]Treadle machine[/b]: a heavy cabinet, no power needed. 25% faster, +1 Tailoring level.
-[*]Look in sewing and clothing shops, supermarkets, garages, storage units, attics, sheds, closets... anywhere a sewing kit might turn up.
+[*]Found in sewing and clothing shops, supermarkets, garages, storage units, attics, sheds, closets...
 [*]Click a machine to sew from a pattern (pick the size and how many), alter or recondition clothes.
-[*]But beware: machines are [b]noisy[/b] and attract zombies (the electric one from much further away). They also [b]wear out[/b], break needles and jam. Keep them running with a screwdriver and a bit of cooking oil (vegetable or olive).
+[*]But machines are [b]noisy[/b] and attract zombies. They also [b]wear out[/b], break needles and jam: service them with a screwdriver and cooking oil.
 [/list]
 
 [h2]Multiplayer[/h2]
 
-Fully playable in multiplayer: everyone sees the same sizes, wear and sewing results. Only one player can use a sewing machine at a time.
+Fully playable in multiplayer: everyone sees the same sizes, wear and results. One player per sewing machine at a time.
 
 [h2]Sandbox options[/h2]
 
-Almost everything can be tuned: skill and XP, action speed, how harsh bad fits are, clothes wear, shoe sizes, patterns, thimble, sewing machines, loot rarity... Clothes from other mods get a size automatically, and two lists let you add or exclude specific items if needed. Full details on [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+Almost everything can be tuned: skill, XP, speed, bad-fit penalties, wear, shoe sizes, patterns, dyeing, embroidery, machines, loot... Clothes from other mods are sized automatically; two lists add or exclude items. Full details on [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 
 [h2]Removing the mod from a save[/h2]
 
@@ -121,6 +129,6 @@ Enjoying the mod? A coffee helps fund new features and translations.
 
 [h2]Credits[/h2]
 
-Based on [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] by [b]Gootube[/b], including its sounds. Rewritten for Build 42.21 with multiplayer support, then expanded with shoe sizes, sewing patterns and sewing machines. Tooltips by [b]TooltipLib[/b].
+Based on [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] by [b]Gootube[/b], including its sounds. Rewritten for Build 42.21 with multiplayer support, then expanded with shoe sizes, patterns, sewing machines, dyeing and embroidery. Tooltips by [b]TooltipLib[/b].
 Sewing machine sounds: electric machine by Joseph Sardin ([url=https://bigsoundbank.com]BigSoundBank[/url], CC0); treadle machine by Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), trimmed into loops.
 Source code (MIT) on [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].

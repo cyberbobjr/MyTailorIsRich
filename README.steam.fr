@@ -4,7 +4,7 @@
 
 Cette veste en cuir parfaite sur un zombie ? Elle fait peut-être deux tailles de moins que vous. Ces rangers ? Du 46, et vous chaussez du 41.
 
-My Tailor Is Rich donne une taille à chaque vêtement et une pointure à chaque paire de chaussures. Trouvez ce qui vous va, retouchez le reste, cousez vos habits d'après des patrons... et réfléchissez à deux fois avant de sprinter avec des bottes trois pointures trop grandes.
+Chaque vêtement a désormais une taille, chaque paire de chaussures une pointure. Trouvez ce qui vous va, retouchez le reste, cousez et teignez vos habits... et réfléchissez à deux fois avant de sprinter avec des bottes trois pointures trop grandes.
 
 [h2]En bref[/h2]
 
@@ -13,7 +13,8 @@ My Tailor Is Rich donne une taille à chaque vêtement et une pointure à chaque
 [*][b]Pointures[/b] du 35 au 47 : gare aux ampoules, aux chutes et aux chaussures perdues.
 [*][b]Retouches[/b] : agrandissez ou rétrécissez vos vêtements.
 [*][b]Usure et remise en état[/b] : réparez vos vêtements abîmés.
-[*][b]Patrons de couture[/b] : tracez-les sur vos vêtements ou trouvez-les en magasin.
+[*][b]Patrons de couture[/b] : tracés, trouvés ou copiés, rangés dans un classeur, essayés en 3D.
+[*][b]Teinture et broderie[/b] : teignez vos vêtements, brodez un nom.
 [*][b]Machines à coudre[/b] : plus rapides, meilleurs résultats... mais bruyantes.
 [*]Compatible avec les [b]mods de vêtements[/b] et le [b]multijoueur[/b].
 [/list]
@@ -29,28 +30,25 @@ My Tailor Is Rich donne une taille à chaque vêtement et une pointure à chaque
 [h2]Des vêtements à votre taille (ou pas)[/h2]
 
 [list]
-[*]Votre taille dépend de votre [b]poids[/b] : XS ≤ 50 kg, S ≤ 65, M ≤ 75, L < 85, XL < 100, XXL ≥ 100. Elle change si vous grossissez ou maigrissez.
-[*]Taille d'un vêtement trouvé : clic droit, [b]Lire l'étiquette[/b]. Avec peu de Couture, on ne fait que deviner.
+[*]Votre taille dépend de votre [b]poids[/b] : XS ≤ 50 kg, S ≤ 65, M ≤ 75, L < 85, XL < 100, XXL ≥ 100. Elle évolue avec lui.
+[*]Taille d'un vêtement trouvé : clic droit, [b]Lire l'étiquette[/b]. Avec peu de Couture, on devine.
 [*]Sur un même zombie, les tailles varient d'un cran au plus.
-[*]Chapeaux, masques, gants, bijoux, ceintures et sous-vêtements sont en taille unique.
+[*]Chapeaux, masques, gants, bijoux, ceintures et sous-vêtements : taille unique.
 [/list]
 
 [h3]Trop grand[/h3]
 
 [list]
-[*]Tient moins chaud.
-[*]Un haut ralentit vos attaques.
-[*]Pantalon ou jupe : peut [b]tomber[/b] sans ceinture quand vous avez les deux mains prises.
-[*]Risque de [b]trébucher[/b] en retombant d'une clôture, même au pas (plus souvent en courant).
+[*]Moins chaud ; un haut ralentit vos attaques.
+[*]Pantalon ou jupe : peut [b]tomber[/b] sans ceinture, les deux mains prises.
+[*]Risque de [b]trébucher[/b] en retombant d'une clôture (plus souvent en courant).
 [/list]
 
 [h3]Trop petit[/h3]
 
 [list]
-[*]Plus long à enfiler.
-[*]Peut se [b]déchirer[/b] quand vous escaladez.
+[*]Plus long à enfiler, peut se [b]déchirer[/b] quand vous escaladez, donne des courbatures.
 [*]Risque de [b]trébucher[/b] après l'escalade d'un mur.
-[*]Donne des courbatures.
 [*]Beaucoup trop petit : impossible à porter. Si vous grossissez, ce qui ne va plus s'enlève.
 [/list]
 
@@ -65,53 +63,63 @@ My Tailor Is Rich donne une taille à chaque vêtement et une pointure à chaque
 [h2]Pointures (35 à 47)[/h2]
 
 [list]
-[*]Votre personnage a une [b]pointure fixe[/b] : du 35 au 42 pour les femmes, du 39 au 47 pour les hommes. Visible dans l'écran Personnage, près du poids.
-[*]Bottes de travail, militaires et de randonnée : surtout des pointures d'homme ; chaussures à brides et habillées : surtout de femme. Les chaussures d'un zombie suivent son sexe.
+[*][b]Pointure fixe[/b] : 35 à 42 (femmes), 39 à 47 (hommes), dans l'écran Personnage.
+[*]Bottes de travail, militaires, de randonnée : surtout pointures d'homme ; chaussures à brides et habillées : de femme. Celles d'un zombie suivent son sexe.
 [*]La pointure est imprimée à l'intérieur : [b]Lire l'étiquette[/b] la donne sans compétence.
-[*]Les enveloppes improvisées (chiffon, jute, jean, cuir, bâche, ficelle) vont à tous. Celles que vous fabriquez sont à votre pointure.
+[*]Les enveloppes improvisées vont à tous. Celles que vous fabriquez sont à votre pointure.
 [/list]
 
 [table]
 [tr][td][b]Ajustement[/b][/td][td][b]Ce qui se passe[/b][/td][/tr]
 [tr][td]3 pointures de moins ou plus[/td][td]Impossible de les enfiler[/td][/tr]
-[tr][td]1 ou 2 pointures de moins[/td][td][b]Inconfort[/b], [b]ampoules[/b] après un moment de marche (plus vite en courant ; votre personnage prévient), courbatures aux pieds[/td][/tr]
+[tr][td]1 ou 2 pointures de moins[/td][td][b]Inconfort[/b], [b]ampoules[/b] après un moment (plus vite en courant), courbatures aux pieds[/td][/tr]
 [tr][td]Bonne pointure ou une de plus[/td][td]Tout va bien[/td][/tr]
-[tr][td]2 pointures de plus et plus[/td][td]Course plus fatigante, ampoules occasionnelles, [b]chutes[/b] après une clôture ou un mur, [b]écrasements[/b] de zombies au sol plus faibles (comme pieds nus)[/td][/tr]
-[tr][td]3 pointures de plus et plus[/td][td]Inconfort, et vous pouvez [b]perdre une chaussure[/b] en courant, en sautant, en escaladant ou en tombant (tongs et pantoufles s'envolent facilement, bottes lacées tiennent mieux)[/td][/tr]
+[tr][td]2 pointures de plus et plus[/td][td]Course plus fatigante, [b]chutes[/b] après une clôture ou un mur, [b]écrasements[/b] plus faibles[/td][/tr]
+[tr][td]3 pointures de plus et plus[/td][td]Inconfort, et vous pouvez [b]perdre une chaussure[/b] en courant, en sautant, en escaladant ou en tombant[/td][/tr]
 [/table]
 
-Une ampoule est une petite blessure au pied, sans risque d'infection zombie. Elle vous ralentit jusqu'à guérison : pansez-la !
+Une ampoule n'infecte pas, mais ralentit jusqu'à guérison : pansez-la !
 
 [h2]Patrons de couture[/h2]
 
 [list]
-[*][b]Tracez un patron[/b] sur une table à partir de n'importe quel vêtement ou paire de chaussures (ciseaux, stylo, papier). L'original est découpé.
-[*]Ou trouvez des [b]patrons du commerce[/b] dans les merceries, les rayons couture et les librairies de mode. Pour n'importe quel vêtement, [b]y compris ceux des autres mods[/b].
+[*][b]Tracez un patron[/b] sur une table à partir de tout vêtement ou paire de chaussures (ciseaux, stylo, papier). L'original est découpé.
+[*]Ou trouvez des [b]patrons du commerce[/b] dans les merceries et les librairies de mode, pour tout vêtement, [b]autres mods compris[/b].
 [*][b]Cousez d'après un patron[/b] dans la taille de votre choix, avec le même tissu que l'original (coton, jean, cuir). À faible niveau, une taille d'écart est possible. Chaque patron sert 5 fois.
+[*][b]Copier le patron[/b] sur papier neuf, à une table, sans l'abîmer : chaque copie perd en précision.
+[*]Jusqu'à 20 patrons dans un [b]Classeur à patrons[/b] (fabriqué ou trouvé en mercerie). Les machines y puisent directement.
+[*][b]Aperçu sur moi[/b] : voyez le vêtement sur vous en 3D avant de le coudre.
 [*]Coudre à la main demande un [b]dé à coudre[/b].
-[*]Chaussures réservées aux experts : Couture 8, une aiguille [b]et un poinçon[/b], de la colle, et du cuir ou du tissu. Toujours cousues à la main. Les chaussures en caoutchouc (bottes de pluie, tongs) n'ont pas de patron.
+[*]Chaussures réservées aux experts : Couture 8, aiguille, [b]poinçon[/b], colle, cuir ou tissu, à la main seulement. Les chaussures en caoutchouc n'ont pas de patron.
+[/list]
+
+[h2]Teinture et broderie[/h2]
+
+[list]
+[*][b]Teindre[/b] au colorant industriel ou à la teinture pour cheveux, avec de l'eau, tout vêtement teintable, [b]mods compris[/b], sauf imprimés et motifs. Il ressort trempé.
+[*][b]Broder un nom[/b] sur un vêtement (aiguille, fil, Couture 1), et le découdre aux ciseaux.
 [/list]
 
 [h2]Machines à coudre[/h2]
 
 [list]
-[*][b]Machine électrique[/b] : se pose sur une table et a besoin de courant. Deux fois plus rapide, +2 niveaux de Couture.
+[*][b]Machine électrique[/b] : sur une table, avec du courant. Deux fois plus rapide, +2 niveaux de Couture.
 [*][b]Machine à pédale[/b] : lourd meuble, sans électricité. 25 % plus rapide, +1 niveau de Couture.
-[*]Cliquez sur une machine pour coudre d'après un patron (taille et quantité au choix), retoucher ou remettre en état.
-[*]Attention : elles sont [b]bruyantes[/b] et attirent les zombies (l'électrique de bien plus loin). Elles [b]s'usent[/b], cassent des aiguilles et se bloquent : entretenez-les au tournevis et à l'huile de cuisine (végétale ou d'olive).
+[*]Cliquez sur une machine pour coudre (patron, taille, quantité), retoucher ou remettre en état.
+[*]Mais elles sont [b]bruyantes[/b] et attirent les zombies, [b]s'usent[/b], cassent des aiguilles et se bloquent : entretien au tournevis et à l'huile de cuisine.
 [/list]
 
 [h2]Multijoueur[/h2]
 
-Tout le monde voit les mêmes tailles, la même usure et les mêmes résultats de couture. Une machine sert à un seul joueur à la fois.
+Tout le monde voit les mêmes tailles, la même usure et les mêmes résultats. Un seul joueur par machine à la fois.
 
 [h2]Options sandbox[/h2]
 
-Presque tout se règle : Couture et XP, sévérité des mauvaises tailles, usure, pointures, patrons, machines, butin... Les vêtements des autres mods ont une taille automatique. Tous les détails sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+Presque tout se règle : Couture, XP, mauvaises tailles, usure, pointures, patrons, teinture, broderie, machines, butin... Les vêtements des autres mods ont une taille automatique. Tous les détails sur [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 
 [h2]Retirer le mod d'une partie[/h2]
 
-Ne le désactivez pas simplement : la sauvegarde retient les machines et, en multijoueur, plus personne ne pourrait se connecter. Remplacez [b]batman_MyTailorIsRich[/b] par [b]batman_MyTailorIsRich_Uninstall[/b] (inclus) et gardez-le : il ne conserve que les machines, en simple mobilier. N'activez jamais les deux.
+Ne le désactivez pas simplement : la sauvegarde retient les machines et, en multijoueur, plus personne ne pourrait se connecter. Remplacez [b]batman_MyTailorIsRich[/b] par [b]batman_MyTailorIsRich_Uninstall[/b] (inclus) et gardez-le : il garde les machines comme simple mobilier. N'activez jamais les deux.
 
 [h2]Soutenir le projet[/h2]
 

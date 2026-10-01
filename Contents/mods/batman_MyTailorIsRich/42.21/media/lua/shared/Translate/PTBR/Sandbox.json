@@ -54,6 +54,16 @@
     "Sandbox_MyTailorIsRich_MachineNoiseMultiplier_tooltip": "Ajusta o alcance do barulho que atrai zumbis enquanto uma máquina funciona. 0 = máquinas silenciosas.",
     "Sandbox_MyTailorIsRich_EnableMachineMaintenance": "Manutenção da máquina de costura",
     "Sandbox_MyTailorIsRich_EnableMachineMaintenance_tooltip": "As máquinas se desgastam, podem quebrar agulhas e emperrar, e precisam de uma chave de fenda e óleo de cozinha para a manutenção.",
+    "Sandbox_MyTailorIsRich_EnableDyeing": "Ativar tingimento",
+    "Sandbox_MyTailorIsRich_EnableDyeing_tooltip": "Roupas feitas para serem tingidas (vanilla ou de outros mods) podem ser tingidas com tinta industrial ou tintura de cabelo e água. A peça pega a cor da tintura.",
+    "Sandbox_MyTailorIsRich_EnableEmbroidery": "Ativar bordado",
+    "Sandbox_MyTailorIsRich_EnableEmbroidery_tooltip": "Bordar um nome curto em uma peça com agulha e linha (Alfaiataria 1 quando os níveis de alfaiataria são exigidos) e descosturá-lo com uma tesoura.",
     "Sandbox_MyTailorIsRich_SewingLootMultiplier": "Saque de costura",
-    "Sandbox_MyTailorIsRich_SewingLootMultiplier_tooltip": "Ajusta a frequência com que máquinas de costura e moldes de loja aparecem no saque. 0 = nunca."
+    "Sandbox_MyTailorIsRich_SewingLootMultiplier_tooltip": "Ajusta a frequência com que máquinas de costura e moldes de loja aparecem no saque. 0 = nunca.",
+    "Sandbox_MyTailorIsRich_EnablePatternCopy": "Cópias de moldes",
+    "Sandbox_MyTailorIsRich_EnablePatternCopy_tooltip": "Permite copiar um molde em folhas novas sem destruí-lo. A cópia é menos precisa que o original.",
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss": "Precisão perdida por cópia",
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "Níveis de Costura tirados da precisão de uma cópia de molde (uma cópia de cópia perde de novo). 0: cópias perfeitas.",
+    "Sandbox_MyTailorIsRich_PatternBinderCapacity": "Moldes por pasta",
+    "Sandbox_MyTailorIsRich_PatternBinderCapacity_tooltip": "Quantos moldes de costura cabem em uma pasta de moldes."
 }

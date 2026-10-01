@@ -141,6 +141,10 @@ TooltipLib.registerProvider({
         ctx:addKeyValue(getText("IGUI_MTIR_Pattern_Uses"), uses .. "/" .. MTIR.opt("PatternMaxUses"),
             WHITE, uses > 1 and WHITE or PATTERN_WORN)
         ctx:addKeyValue(getText("IGUI_MTIR_Pattern_Precision"), tostring(data.precision or 0), WHITE, WHITE)
+        -- Copie d'un patron (MTIR_PatternCopy.lua) : 1 = copie de l'original, 2 = copie de copie…
+        if (tonumber(data.copies) or 0) > 0 then
+            ctx:addKeyValue(getText("IGUI_MTIR_Pattern_CopyGeneration"), tostring(data.copies), WHITE, WHITE)
+        end
         ctx:addKeyValue(getText("IGUI_MTIR_Pattern_Level"), tostring(MTIR.getRequiredLevelToSew(data)), WHITE, WHITE)
     end,
 })

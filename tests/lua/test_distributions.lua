@@ -15,6 +15,7 @@ local VANILLA_FILES = {
 local ELECTRIC = "Mov_MTIR_SewingMachine"
 local TREADLE = "Mov_MTIR_TreadleMachine"
 local PATTERN = "MTIR_PrintedPattern"
+local BINDER = "MTIR_PatternBinder"
 
 function T.setup()
     Distributions = {}
@@ -25,6 +26,7 @@ function T.setup()
             treadle = { item = "Base." .. TREADLE },
         },
         PRINTED_PATTERN_ITEM = "Base." .. PATTERN,
+        BINDER_ITEM = "Base." .. BINDER,
         opt = function() return MULTIPLIER end,
     }
     isClient = function() return false end
@@ -74,6 +76,7 @@ T["machines et patrons ajoutés"] = function()
     assertTrue(listsWith(ELECTRIC) >= 20, "machine électrique dans " .. listsWith(ELECTRIC) .. " listes")
     assertTrue(listsWith(TREADLE) >= 3, "machine à pédale dans " .. listsWith(TREADLE) .. " listes")
     assertTrue(listsWith(PATTERN) >= 2, "patrons dans " .. listsWith(PATTERN) .. " listes")
+    assertEq(listsWith(BINDER), 2, "classeurs à patrons")
     assertTrue(storageSlots() >= 10, "emplacements de rangement : " .. storageSlots())
 end
 
@@ -92,6 +95,7 @@ T["rareté à 0 : tout est retiré"] = function()
     assertEq(listsWith(ELECTRIC), 0, "machine électrique")
     assertEq(listsWith(TREADLE), 0, "machine à pédale")
     assertEq(listsWith(PATTERN), 0, "patrons")
+    assertEq(listsWith(BINDER), 0, "classeurs à patrons")
     assertEq(storageSlots(), 0, "emplacements de rangement")
 end
 
