@@ -223,5 +223,16 @@
     "IGUI_MTIR_Preview_KeepClothes": "Keep my other clothes on",
     "IGUI_MTIR_Preview_Note": "Preview only: nothing is worn.",
     "IGUI_MTIR_Preview_NoModel": "No 3D model for this item.",
-    "IGUI_MTIR_Machine_Preview": "Preview"
+    "IGUI_MTIR_Machine_Preview": "Preview",
+    "IGUI_MTIR_Machine_TabEmbroider": "Embroidery",
+    "IGUI_MTIR_Machine_HelpEmbroider": "Put a garment in the slot and type up to %1 characters: the garment takes the name shown below. <LINE> You need a needle and thread. An embroidery is unpicked by hand, with scissors, from the garment's right-click menu.",
+    "IGUI_MTIR_Machine_NoEmbroiderable": "No garment to embroider in your inventory",
+    "IGUI_MTIR_Machine_EmbroiderText": "Text",
+    "IGUI_MTIR_Machine_EmbroiderResult": "New name: %1",
+    "IGUI_MTIR_Machine_EmbroiderInvalid": "Type 1 to %1 characters, without < > or %%.",
+    "IGUI_MTIR_Machine_AlreadyEmbroidered": "This garment is already embroidered: %1. <LINE> To change it, unpick the embroidery by hand with scissors (right-click the garment), then come back.",
+    "IGUI_MTIR_Machine_NotEmbroidered": "No embroidery",
+    "IGUI_MTIR_Machine_Embroider": "Embroider",
+    "IGUI_MTIR_Machine_Embroidering": "Embroidering... %1 %%",
+    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(treadle machine: straight stitch only)"
 }

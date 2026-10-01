@@ -6,8 +6,9 @@
 -- « déjà utilisée » (setUsingPlayer, synchronisé en MP).
 -- Bandeau : courant (électrique seulement), bonus réels de la machine,
 -- illustration. Puis l'état de la machine et « Entretenir » (si l'entretien est
--- activé), et trois onglets : Patron | Retouche | Remise en état
--- (MTIR_MachineTabPattern, MTIR_MachineTabAlter). Les boutons marchent jusqu'à
+-- activé), et quatre onglets : Patron | Retouche | Remise en état | Broderie
+-- (MTIR_MachineTabPattern, MTIR_MachineTabAlter, MTIR_MachineTabEmbroider ;
+-- Broderie seulement si l'option EnableEmbroidery est active). Les boutons marchent jusqu'à
 -- la machine et lancent les actions avec sa position ; l'autorité revérifie
 -- tout. Lecture seule, sauf la file d'actions.
 -- Cycle de vie calqué sur ISBaseEntityWindow : focus manette à l'ouverture,
@@ -23,6 +24,7 @@ require "MyTailorIsRich/MTIR_SewingMachine"
 require "MyTailorIsRich/MTIR_MachineUIUtil"
 require "MyTailorIsRich/MTIR_MachineTabPattern"
 require "MyTailorIsRich/MTIR_MachineTabAlter"
+require "MyTailorIsRich/MTIR_MachineTabEmbroider"
 
 MTIR_SewingMachineWindow = ISCollapsableWindow:derive("MTIR_SewingMachineWindow")
 
@@ -59,6 +61,7 @@ local CLOSE_MARGIN = 1.5
 -- Marge laissée autour de la fenêtre dans l'écran du joueur.
 local SCREEN_MARGIN = 10
 local TAB_KEYS = { "IGUI_MTIR_Machine_TabPattern", "IGUI_MTIR_Machine_TabResize", "IGUI_MTIR_Machine_TabRecondition" }
+local EMBROIDER_TAB_KEY = "IGUI_MTIR_Machine_TabEmbroider"
 local MAINTENANCE_TYPES = { MTIR_MachineMaintenanceAction = true }
 -- Textes mesurés pour la mise en page : { clé, vrai si elle prend une valeur %1 }.
 local MAINTAIN_TEXTS = {
@@ -73,6 +76,18 @@ local BONUS_TEXTS = {
 local MALUS_TEXTS = { { "IGUI_MTIR_Machine_WearMalus", true } }
 
 local instances = {}
+
+--- Titres des onglets : Broderie en dernier, si l'option la permet.
+local function tabKeys()
+    local keys = {}
+    for _, key in ipairs(TAB_KEYS) do
+        table.insert(keys, key)
+    end
+    if MTIR.isEmbroideryEnabled() then
+        table.insert(keys, EMBROIDER_TAB_KEY)
+    end
+    return keys
+end
 
 -- ----------------------------------------------------------------------------
 -- Mise en page d'après les textes
@@ -95,19 +110,22 @@ end
 --- Largeur de la fenêtre et du bouton d'entretien. Les textes traduits, ou une
 --- police agrandie dans les options, élargissent la fenêtre au lieu de déborder
 --- des onglets, du bandeau ou du bouton.
-local function computeLayout()
+local function computeLayout(keys)
     local maintainWidth = math.max(MAINTAIN_WIDTH, widest(MAINTAIN_TEXTS) + BUTTON_TEXT_MARGIN)
     local tabWidth = 0
-    for _, key in ipairs(TAB_KEYS) do
+    for _, key in ipairs(keys) do
         tabWidth = math.max(tabWidth, textWidth(getText(key)) + BUTTON_TEXT_MARGIN)
     end
-    local tabs = PAD * 2 + #TAB_KEYS * tabWidth + TAB_GAP * (#TAB_KEYS - 1)
+    local tabs = PAD * 2 + #keys * tabWidth + TAB_GAP * (#keys - 1)
     local bannerText = math.max(POWER_TEXT_OFFSET + widest(POWER_TEXTS), widest(BONUS_TEXTS, "+ "),
         widest(MALUS_TEXTS))
     local banner = PAD + bannerText + PAD + ART_WIDTH + 2
     local condition = PAD + textWidth(getText("IGUI_MTIR_Machine_Condition")) + PAD + CONDITION_BAR_MIN
         + PAD + maintainWidth + PAD
     local width = math.max(WIDTH, tabs, banner, condition, MTIR_MachineTabPattern.minWidth())
+    if #keys > #TAB_KEYS then
+        width = math.max(width, MTIR_MachineTabEmbroider.minWidth())
+    end
     return math.ceil(width), maintainWidth
 end
 
@@ -136,6 +154,9 @@ function MTIR_SewingMachineWindow:createChildren()
         MTIR_MachineTabAlter:new(0, y, self.width, self, "resize"),
         MTIR_MachineTabAlter:new(0, y, self.width, self, "recondition"),
     }
+    if #self.tabKeys > #TAB_KEYS then
+        table.insert(self.tabs, MTIR_MachineTabEmbroider:new(0, y, self.width, self))
+    end
     self.patternTab = self.tabs[1]
     for _, tab in ipairs(self.tabs) do
         tab:initialise()
@@ -148,9 +169,10 @@ end
 
 function MTIR_SewingMachineWindow:createTabButtons(y)
     local gap = TAB_GAP
-    local width = (self.width - PAD * 2 - gap * (#TAB_KEYS - 1)) / #TAB_KEYS
+    local keys = self.tabKeys
+    local width = (self.width - PAD * 2 - gap * (#keys - 1)) / #keys
     self.tabButtons = {}
-    for index, key in ipairs(TAB_KEYS) do
+    for index, key in ipairs(keys) do
         local button = ISButton:new(PAD + (index - 1) * (width + gap), y, width, ROW_HEIGHT, getText(key),
             self, MTIR_SewingMachineWindow.onTabClicked)
         button.internal = index
@@ -535,7 +557,8 @@ function MTIR_SewingMachineWindow:onJoypadDown(button)
     end
 end
 
---- Croix gauche/droite : première liste de l'onglet (taille, option) ; haut/bas : quantité.
+--- Croix gauche/droite : première liste de l'onglet (taille, option) ; haut/bas : quantité
+--- (Broderie : haut ouvre le clavier à l'écran).
 function MTIR_SewingMachineWindow:cycleTabCombo(comboName, delta)
     local tab = self.activeTab
     local combo = tab[comboName]
@@ -552,7 +575,12 @@ function MTIR_SewingMachineWindow:onJoypadDirRight()
     self:cycleTabCombo(self.activeTab.sizeCombo and "sizeCombo" or "choiceCombo", 1)
 end
 
-function MTIR_SewingMachineWindow:onJoypadDirUp()
+--- Onglet Broderie : haut ouvre le clavier à l'écran sur le champ du texte.
+function MTIR_SewingMachineWindow:onJoypadDirUp(joypadData)
+    if self.activeTab.editText then
+        self.activeTab:editText(joypadData)
+        return
+    end
     self:cycleTabCombo("quantityCombo", 1)
 end
 
@@ -590,6 +618,12 @@ function MTIR_SewingMachineWindow:close()
         return
     end
     self.closed = true
+    -- Un champ de saisie retiré avec le focus bloquerait les touches du jeu.
+    for _, tab in ipairs(self.tabs or {}) do
+        if tab.releaseFocus then
+            tab:releaseFocus()
+        end
+    end
     ISCollapsableWindow.close(self)
     local playerNum = self.playerNum
     if JoypadState.players[playerNum + 1] and isJoypadFocusOnElementOrDescendant(playerNum, self) then
@@ -605,8 +639,10 @@ function MTIR_SewingMachineWindow:close()
 end
 
 function MTIR_SewingMachineWindow:new(x, y, player, machine)
-    local width, maintainWidth = computeLayout()
+    local keys = tabKeys()
+    local width, maintainWidth = computeLayout(keys)
     local o = ISCollapsableWindow.new(self, x, y, width, HEIGHT)
+    o.tabKeys = keys
     o.maintainWidth = maintainWidth
     local kind = MTIR.getMachineKind(machine)
     o.player = player

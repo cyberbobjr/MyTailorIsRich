@@ -223,5 +223,16 @@
     "IGUI_MTIR_Preview_KeepClothes": "Garder mes autres vêtements",
     "IGUI_MTIR_Preview_Note": "Simple aperçu : rien n'est porté.",
     "IGUI_MTIR_Preview_NoModel": "Pas de modèle 3D pour cet objet.",
-    "IGUI_MTIR_Machine_Preview": "Aperçu"
+    "IGUI_MTIR_Machine_Preview": "Aperçu",
+    "IGUI_MTIR_Machine_TabEmbroider": "Broderie",
+    "IGUI_MTIR_Machine_HelpEmbroider": "Placez un vêtement et saisissez jusqu'à %1 caractères : le vêtement prend le nom affiché ci-dessous. <LINE> Il faut une aiguille et du fil. Une broderie se découd à la main, aux ciseaux, depuis le menu contextuel du vêtement.",
+    "IGUI_MTIR_Machine_NoEmbroiderable": "Aucun vêtement à broder dans l'inventaire",
+    "IGUI_MTIR_Machine_EmbroiderText": "Texte",
+    "IGUI_MTIR_Machine_EmbroiderResult": "Nom obtenu : %1",
+    "IGUI_MTIR_Machine_EmbroiderInvalid": "Saisissez de 1 à %1 caractères, sans < > ni %%.",
+    "IGUI_MTIR_Machine_AlreadyEmbroidered": "Ce vêtement est déjà brodé : %1. <LINE> Pour changer, décousez la broderie à la main avec des ciseaux (clic droit sur le vêtement), puis revenez.",
+    "IGUI_MTIR_Machine_NotEmbroidered": "Pas de broderie",
+    "IGUI_MTIR_Machine_Embroider": "Broder",
+    "IGUI_MTIR_Machine_Embroidering": "Broderie... %1 %%",
+    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(machine à pédale : point droit seulement)"
 }

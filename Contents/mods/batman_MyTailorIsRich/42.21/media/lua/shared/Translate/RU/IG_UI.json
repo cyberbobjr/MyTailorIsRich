@@ -223,5 +223,16 @@
     "IGUI_MTIR_Preview_KeepClothes": "Оставить остальную одежду",
     "IGUI_MTIR_Preview_Note": "Только просмотр: ничего не надевается.",
     "IGUI_MTIR_Preview_NoModel": "У этого предмета нет 3D-модели.",
-    "IGUI_MTIR_Machine_Preview": "Просмотр"
+    "IGUI_MTIR_Machine_Preview": "Просмотр",
+    "IGUI_MTIR_Machine_TabEmbroider": "Вышивка",
+    "IGUI_MTIR_Machine_HelpEmbroider": "Положите одежду в ячейку и введите до %1 символов: одежда получит название, показанное ниже. <LINE> Нужны игла и нитки. Вышивку распарывают вручную ножницами через контекстное меню одежды.",
+    "IGUI_MTIR_Machine_NoEmbroiderable": "В инвентаре нет одежды для вышивки",
+    "IGUI_MTIR_Machine_EmbroiderText": "Текст",
+    "IGUI_MTIR_Machine_EmbroiderResult": "Новое название: %1",
+    "IGUI_MTIR_Machine_EmbroiderInvalid": "Введите от 1 до %1 символов, без < > и %%.",
+    "IGUI_MTIR_Machine_AlreadyEmbroidered": "На этой одежде уже есть вышивка: %1. <LINE> Чтобы изменить её, распорите вышивку вручную ножницами (правый клик по одежде) и вернитесь.",
+    "IGUI_MTIR_Machine_NotEmbroidered": "Без вышивки",
+    "IGUI_MTIR_Machine_Embroider": "Вышить",
+    "IGUI_MTIR_Machine_Embroidering": "Вышивание... %1 %%",
+    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(ножная машина: только прямая строчка)"
 }

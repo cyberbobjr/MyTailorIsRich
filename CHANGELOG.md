@@ -3,6 +3,14 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.1 — 2026-10-02
+
+### New
+- **Embroidery on the sewing machines**: a fourth tab, **Embroidery**, in the panel of both machines. Drop a garment in the slot (or click to choose one), type the text (your first name to start with), see the name it will get, and embroider. Needle and one use of thread, no thimble. As with any other machine job, it makes noise, wears the machine out, can break the needle, and a worn machine can fail (the name doesn't change and half the thread is lost).
+- **Electric machine**: twice as fast as by hand, Tailoring 1 with the machine's bonus levels counted.
+- **Treadle machine**: straight stitch only, so it is harder: **Tailoring 3** (the machine's bonus does not count), 25% faster than by hand.
+- Already embroidered garments are shown as such; unpicking stays a hand job with scissors, from the right-click menu.
+
 ## 0.4.0 — 2026-10-01
 
 ### New

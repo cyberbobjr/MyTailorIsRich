@@ -7,6 +7,8 @@
 -- setCustomName(true), transmis au propriétaire par syncItemFields.
 -- La broderie est notée dans la ModData de l'objet (clé distincte des tailles)
 -- avec, si l'objet portait déjà un nom personnalisé, ce nom à rétablir.
+-- Sur machine à coudre (MTIR_MachineEmbroiderAction) : mêmes texte et nom, avec
+-- la durée, le fil et le niveau ajustés par la machine (fonctions Machine*).
 -- ============================================================================
 
 require "MyTailorIsRich/MTIR_Core"
@@ -20,6 +22,9 @@ MTIR.EMBROIDERY_MAX_CHARS = 24
 MTIR.EMBROIDERY_NAME_MAX = 64
 MTIR.EMBROIDERY_LEVEL = 1
 MTIR.EMBROIDERY_THREAD = 1
+-- Machine à pédale : point droit seulement, broder demande plus de métier.
+-- Seuil comparé au niveau réel du personnage (le bonus de la machine ne compte pas).
+MTIR.EMBROIDERY_TREADLE_LEVEL = 3
 
 function MTIR.isEmbroideryEnabled()
     return MTIR.opt("EnableEmbroidery") ~= false
@@ -95,6 +100,50 @@ end
 function MTIR.getEmbroideryDuration(text)
     local length = type(text) == "string" and #text or 0
     return math.max(1, (80 + 10 * math.min(length, MTIR.EMBROIDERY_MAX_CHARS)) * MTIR.opt("ActionTimeMultiplier"))
+end
+
+-- ----------------------------------------------------------------------------
+-- Broderie sur machine à coudre (onglet Broderie du panneau de la machine)
+-- kindName : "electric" ou "treadle" (MTIR.getMachineKindName) ; mods : bonus
+-- de la machine (MTIR.getMachineMods), ou nil à la main.
+-- ----------------------------------------------------------------------------
+
+--- Niveau de Couture requis : celui de la main, ou EMBROIDERY_TREADLE_LEVEL sur
+--- la machine à pédale ; 0 si NeedTailoringLevel est désactivée.
+function MTIR.getMachineEmbroideryRequiredLevel(kindName)
+    if not MTIR.opt("NeedTailoringLevel") then
+        return 0
+    end
+    if kindName == "treadle" then
+        return MTIR.EMBROIDERY_TREADLE_LEVEL
+    end
+    return MTIR.EMBROIDERY_LEVEL
+end
+
+--- Niveau comparé au seuil : compétence + bonus de la machine (comme les autres
+--- travaux), sauf sur la machine à pédale où seule la compétence réelle compte.
+function MTIR.getMachineEmbroideryLevel(tailoring, kindName, mods)
+    if kindName == "treadle" or not mods then
+        return tailoring
+    end
+    return tailoring + (mods.levelBonus or 0)
+end
+
+--- Fil : même formule que MTIR.applyThreadFactor (arrondi au-dessus, au moins 1).
+function MTIR.getMachineEmbroideryThread(mods)
+    local factor = mods and mods.threadFactor or 1
+    return math.max(1, math.ceil(MTIR.EMBROIDERY_THREAD * factor))
+end
+
+--- Durée de la main × durationFactor de la machine.
+function MTIR.getMachineEmbroideryDuration(text, mods)
+    local factor = mods and mods.durationFactor or 1
+    return math.max(1, MTIR.getEmbroideryDuration(text) * factor)
+end
+
+--- Chance de réussite : toujours sûre, sauf sur une machine usée (malus d'usure).
+function MTIR.getMachineEmbroiderySuccess(mods)
+    return math.max(0, math.min(1, 1 - (mods and mods.successMalus or 0)))
 end
 
 function MTIR.getUnpickDuration()

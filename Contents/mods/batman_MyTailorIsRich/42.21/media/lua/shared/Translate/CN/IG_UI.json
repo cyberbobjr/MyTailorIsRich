@@ -223,5 +223,16 @@
     "IGUI_MTIR_Preview_KeepClothes": "保留我的其他衣物",
     "IGUI_MTIR_Preview_Note": "仅为预览: 不会穿上任何东西.",
     "IGUI_MTIR_Preview_NoModel": "此物品没有 3D 模型.",
-    "IGUI_MTIR_Machine_Preview": "预览"
+    "IGUI_MTIR_Machine_Preview": "预览",
+    "IGUI_MTIR_Machine_TabEmbroider": "刺绣",
+    "IGUI_MTIR_Machine_HelpEmbroider": "把衣物放入槽位, 输入最多 %1 个字符: 衣物会改为下方显示的名称. <LINE> 需要针和线. 刺绣只能手工拆除: 用剪刀, 在衣物的右键菜单中操作.",
+    "IGUI_MTIR_Machine_NoEmbroiderable": "物品栏中没有可刺绣的衣物",
+    "IGUI_MTIR_Machine_EmbroiderText": "文字",
+    "IGUI_MTIR_Machine_EmbroiderResult": "新名称: %1",
+    "IGUI_MTIR_Machine_EmbroiderInvalid": "请输入 1 到 %1 个字符, 不能包含 < > 或 %%.",
+    "IGUI_MTIR_Machine_AlreadyEmbroidered": "这件衣物已经绣过: %1. <LINE> 如需更改, 请先用剪刀手工拆除刺绣 (右键点击衣物), 然后再回来.",
+    "IGUI_MTIR_Machine_NotEmbroidered": "无刺绣",
+    "IGUI_MTIR_Machine_Embroider": "刺绣",
+    "IGUI_MTIR_Machine_Embroidering": "刺绣中... %1 %%",
+    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(脚踏缝纫机: 只能走直线)"
 }

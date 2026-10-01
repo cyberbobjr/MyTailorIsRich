@@ -68,16 +68,17 @@ A blister is a small foot scratch without zombie infection. Like any foot injury
 
 - **Dye**: right-click a garment or shoes, pick one of the dyes you carry (**industrial dye** or **hair dye**, with a color swatch). You also need water: 2, 4 or 6 L depending on the garment's size, and 0.2 to 0.75 L of dye. The garment is taken off if worn, takes the color of the dye and comes out soaked. No skill needed; a little Tailoring XP.
 - What can be dyed: any garment whose clothing model accepts a tint (`AllowRandomTint`), **vanilla or from other mods**, plus the clothes the vanilla **Dye Clothes** recipe accepts. Printed, camouflage or patterned clothes keep their texture colors, so the option is greyed out with an explanation (shown only when you carry a dye).
-- **Embroider a name** (needle, 1 thread, thimble if required, Tailoring 1): type up to 24 characters; the garment is renamed (for example `Jacket "Bob"`) and its tooltip shows the embroidery. **Unpick the embroidery** with scissors brings the old name back. Not for shoes or rigid armor.
+- **Embroider a name** (needle, 1 thread, thimble if required, Tailoring 1): type up to 24 characters; the garment is renamed (for example `Jacket "Bob"`) and its tooltip shows the embroidery. **Unpick the embroidery** with scissors brings the old name back. Not for shoes or rigid armor. You can also embroider on a sewing machine (**Embroidery** tab, see below); unpicking is always done by hand.
 - In multiplayer, the server checks and applies everything. Other players see a dyed garment once it is put on.
 
 ## Sewing machines
 
 - Two placeable machines: an **electric sewing machine** that sits on any table, and a heavy **treadle sewing machine** in its cast-iron cabinet that stands on its own. Both are found in sewing workshops and fabric shops, clothing and department stores, the bedding aisle of supermarkets, people's storage (garages, detached or attached, storage units, attics, sheds, storage rooms, closets) and, more rarely, wherever a sewing kit can turn up; the treadle one also among antiques. Pick them up and place them like any furniture.
-- Click a machine (or right-click it) to open its panel, with three tabs:
+- Click a machine (or right-click it) to open its panel, with four tabs:
   - **Pattern**: drag a clothing pattern into the slot (or click the slot to choose one), pick the size and the **quantity** to sew in a row. The panel shows the garment that will come out and the exact list of items used, and remembers the last pattern you used.
   - **Resize**: let out or take in a garment.
   - **Recondition**: repair a worn garment with fabric strips or a spare one.
+  - **Embroidery**: drag a garment into the slot (or click to choose one), type the text (your character's first name to start with, up to 24 characters) and check the name it will get. Needle and thread, no thimble. **Electric**: twice as fast as by hand, Tailoring 1 counting the machine's bonus levels. **Treadle**: straight stitch only, so it takes real skill: **Tailoring 3** (the machine's bonus does not count), 25% faster than by hand. One use of thread either way. A garment that is already embroidered is shown as such: unpick it by hand with scissors first. This tab is hidden when embroidery is disabled in the sandbox options.
 - The button shows the progress ("Sewing 2/5… 45%"). Your character walks to the machine and works facing it.
 - **Electric**: needs **power** (the grid indoors, or a generator); twice as fast, +2 Tailoring levels, more precise size, 30% less thread. **Treadle**: no power needed; 25% faster, +1 level, 15% less thread.
 - **Noise**: a running machine can be heard by zombies (the electric one much further than the treadle one).
@@ -196,16 +197,17 @@ Une ampoule est une petite égratignure au pied, sans infection zombie. Comme to
 
 - **Teindre** : clic droit sur un vêtement ou des chaussures, choisir l'une des teintures portées (**colorant industriel** ou **teinture pour cheveux**, avec une pastille de sa couleur). Il faut aussi de l'eau : 2, 4 ou 6 L selon la taille du vêtement, et 0,2 à 0,75 L de teinture. Le vêtement est retiré s'il est porté, prend la couleur et ressort trempé. Aucune compétence requise ; un peu d'XP de Couture.
 - Ce qui se teint : tout vêtement dont le modèle accepte une teinte (`AllowRandomTint`), **vanilla ou d'un autre mod**, plus les vêtements acceptés par la recette vanilla **Teindre les vêtements**. Les vêtements imprimés, camouflés ou à motifs gardent les couleurs de leur texture : l'option est grisée avec une explication (affichée seulement si l'on porte une teinture).
-- **Broder un nom** (aiguille, 1 fil, dé à coudre si l'option l'exige, Couture 1) : jusqu'à 24 caractères ; le vêtement est renommé (par exemple `Veste « Bob »`) et son infobulle affiche la broderie. **Découdre la broderie** aux ciseaux rend l'ancien nom. Pas pour les chaussures ni les protections rigides.
+- **Broder un nom** (aiguille, 1 fil, dé à coudre si l'option l'exige, Couture 1) : jusqu'à 24 caractères ; le vêtement est renommé (par exemple `Veste « Bob »`) et son infobulle affiche la broderie. **Découdre la broderie** aux ciseaux rend l'ancien nom. Pas pour les chaussures ni les protections rigides. On peut aussi broder sur une machine à coudre (onglet **Broderie**, voir plus bas) ; le décousage se fait toujours à la main.
 - En multijoueur, le serveur vérifie et applique tout. Les autres joueurs voient un vêtement teint une fois qu'il est enfilé.
 
 ## Machines à coudre
 
 - Deux machines posables : une **machine à coudre électrique**, qui se pose sur n'importe quelle table, et une lourde **machine à pédale** dans son meuble en fonte, autonome. On les trouve dans les ateliers de couture et les merceries, les magasins de vêtements et les grands magasins, le rayon linge des supermarchés, le stockage des particuliers (garages séparés ou attenants, box de stockage, greniers, abris de jardin, réserves, placards) et, plus rarement, partout où l'on trouve un kit de couture ; celle à pédale aussi parmi les antiquités. Elles se ramassent et se posent comme des meubles.
-- Cliquez sur une machine (ou clic droit) pour ouvrir son panneau à trois onglets :
+- Cliquez sur une machine (ou clic droit) pour ouvrir son panneau à quatre onglets :
   - **Patron** : glissez un patron de vêtement dans l'emplacement (ou cliquez dessus pour en choisir un), choisissez la taille et la **quantité** à coudre à la suite. Le panneau montre le vêtement produit et la liste exacte des objets utilisés, et se souvient du dernier patron utilisé.
   - **Retouche** : agrandir ou rétrécir un vêtement.
   - **Remise en état** : réparer un vêtement usé avec des bandes de tissu ou un exemplaire de rechange.
+  - **Broderie** : glissez un vêtement dans l'emplacement (ou cliquez pour en choisir un), saisissez le texte (prérempli avec le prénom du personnage, 24 caractères au plus) et vérifiez le nom obtenu. Aiguille et fil, sans dé à coudre. **Électrique** : deux fois plus rapide qu'à la main, Couture 1 en comptant les niveaux de bonus de la machine. **À pédale** : point droit seulement, il faut donc du métier : **Couture 3** (le bonus de la machine ne compte pas), 25 % plus rapide qu'à la main. Une utilisation de fil dans les deux cas. Un vêtement déjà brodé est signalé : découdre d'abord à la main, aux ciseaux. L'onglet est masqué si la broderie est désactivée dans les options sandbox.
 - Le bouton affiche la progression (« Couture 2/5… 45 % »). Le personnage se rend à la machine et travaille face à elle.
 - **Électrique** : demande du **courant** (réseau à l'intérieur, ou groupe électrogène) ; deux fois plus rapide, +2 niveaux de Couture, taille plus précise, 30 % de fil en moins. **À pédale** : sans courant ; 25 % plus rapide, +1 niveau, 15 % de fil en moins.
 - **Bruit** : une machine en marche s'entend par les zombies (l'électrique bien plus loin que celle à pédale).

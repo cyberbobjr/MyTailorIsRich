@@ -223,5 +223,16 @@
     "IGUI_MTIR_Preview_KeepClothes": "Meine übrige Kleidung anbehalten",
     "IGUI_MTIR_Preview_Note": "Nur eine Vorschau: Nichts wird angezogen.",
     "IGUI_MTIR_Preview_NoModel": "Kein 3D-Modell für diesen Gegenstand.",
-    "IGUI_MTIR_Machine_Preview": "Vorschau"
+    "IGUI_MTIR_Machine_Preview": "Vorschau",
+    "IGUI_MTIR_Machine_TabEmbroider": "Stickerei",
+    "IGUI_MTIR_Machine_HelpEmbroider": "Leg ein Kleidungsstück in das Feld und gib bis zu %1 Zeichen ein: Das Kleidungsstück erhält den unten angezeigten Namen. <LINE> Du brauchst eine Nadel und Faden. Eine Stickerei wird von Hand mit einer Schere über das Kontextmenü des Kleidungsstücks aufgetrennt.",
+    "IGUI_MTIR_Machine_NoEmbroiderable": "Kein bestickbares Kleidungsstück im Inventar",
+    "IGUI_MTIR_Machine_EmbroiderText": "Text",
+    "IGUI_MTIR_Machine_EmbroiderResult": "Neuer Name: %1",
+    "IGUI_MTIR_Machine_EmbroiderInvalid": "Gib 1 bis %1 Zeichen ein, ohne < > oder %%.",
+    "IGUI_MTIR_Machine_AlreadyEmbroidered": "Dieses Kleidungsstück ist bereits bestickt: %1. <LINE> Um es zu ändern, trenne die Stickerei von Hand mit einer Schere auf (Rechtsklick auf das Kleidungsstück) und komm dann zurück.",
+    "IGUI_MTIR_Machine_NotEmbroidered": "Keine Stickerei",
+    "IGUI_MTIR_Machine_Embroider": "Sticken",
+    "IGUI_MTIR_Machine_Embroidering": "Sticken... %1 %%",
+    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(Tretnähmaschine: nur Geradstich)"
 }

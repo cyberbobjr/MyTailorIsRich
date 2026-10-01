@@ -412,6 +412,7 @@ end
 ---   queueResize(player, item, req, upsize, machine|nil)
 ---   queueRecondition(player, item, req, spareItem|nil, machine|nil)
 ---   queueMaintenance(player, machine)           -> vrai si l'entretien a été mis en file
+---   bringToWork(player, item, machine|nil)      -> faux si la machine est inaccessible
 --- machine = nil : travail à la main ; sinon marche jusqu'à la machine avant l'action.
 MTIR.AlterUI = {
     describeResize = describeResize,
@@ -421,6 +422,7 @@ MTIR.AlterUI = {
     queueRecondition = queueRecondition,
     queueMaintenance = queueMaintenance,
     spareDisplayName = spareDisplayName,
+    bringToWork = bringToWork,
 }
 
 -- ----------------------------------------------------------------------------

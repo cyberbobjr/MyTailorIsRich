@@ -223,5 +223,16 @@
     "IGUI_MTIR_Preview_KeepClothes": "Manter a minha outra roupa",
     "IGUI_MTIR_Preview_Note": "Apenas pré-visualização: nada é vestido.",
     "IGUI_MTIR_Preview_NoModel": "Sem modelo 3D para este objeto.",
-    "IGUI_MTIR_Machine_Preview": "Pré-visualizar"
+    "IGUI_MTIR_Machine_Preview": "Pré-visualizar",
+    "IGUI_MTIR_Machine_TabEmbroider": "Bordado",
+    "IGUI_MTIR_Machine_HelpEmbroider": "Coloca uma peça no espaço e escreve até %1 caracteres: a peça fica com o nome mostrado abaixo. <LINE> Precisas de uma agulha e linha. Um bordado descose-se à mão, com uma tesoura, no menu de contexto da peça.",
+    "IGUI_MTIR_Machine_NoEmbroiderable": "Nenhuma roupa para bordar no inventário",
+    "IGUI_MTIR_Machine_EmbroiderText": "Texto",
+    "IGUI_MTIR_Machine_EmbroiderResult": "Novo nome: %1",
+    "IGUI_MTIR_Machine_EmbroiderInvalid": "Escreve de 1 a %1 caracteres, sem < > nem %%.",
+    "IGUI_MTIR_Machine_AlreadyEmbroidered": "Esta peça já está bordada: %1. <LINE> Para mudar, descose o bordado à mão com uma tesoura (clique direito na peça) e volta depois.",
+    "IGUI_MTIR_Machine_NotEmbroidered": "Sem bordado",
+    "IGUI_MTIR_Machine_Embroider": "Bordar",
+    "IGUI_MTIR_Machine_Embroidering": "A bordar... %1 %%",
+    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(máquina a pedal: só ponto reto)"
 }

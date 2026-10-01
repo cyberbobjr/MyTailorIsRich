@@ -185,6 +185,9 @@ local function composeName(item, text)
     return MTIR.cleanEmbroideryText(name, MTIR.EMBROIDERY_NAME_MAX) or text
 end
 
+-- Partagé avec l'onglet Broderie de la machine à coudre (MTIR_MachineTabEmbroider.lua).
+MTIR.EmbroideryUI = { composeName = composeName }
+
 local function onEmbroiderClick(_, button, player, item)
     if button.internal ~= "OK" then
         return
