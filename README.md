@@ -18,6 +18,7 @@ Clothes and shoes finally have sizes. Loot that doesn't fit, resize it with your
 
 - Your character's size follows their **weight**: XS ≤ 50 kg, S ≤ 65, M ≤ 75, L < 85, XL < 100, XXL ≥ 100.
 - A found garment's size is **unknown**. Right-click it and choose **Check clothes size**. Reading the label may require some Tailoring; otherwise your character only guesses. Clothes in a corpse, a piece of furniture or a vehicle within reach are checked in place, without taking them; clothes on the floor are picked up first.
+- **Check clothes size** has options for the selection, all clothes on the selected corpse, and all clothes on nearby accessible corpses. Shoes are included. Corpse checks never move you or take the clothes: each label takes its usual time. Items removed by another player before their turn are skipped. Group checks skip known sizes and hints you cannot yet improve with your current Tailoring level.
 - Clothes on the same zombie corpse are within one size of each other: each piece is rolled around one reference size (same size most of the time, otherwise one size smaller or larger).
 - Effects of a bad fit:
   - **too big**: less insulation, slower combat for tops, loose pants or skirts can **fall down** without a belt when both hands are busy, can make you **trip** when landing after a fence, even at walking pace (less often than when running);
@@ -147,6 +148,7 @@ Les vêtements et les chaussures ont enfin une taille. Trouvez ce qui vous va, r
 
 - La taille du personnage suit son **poids** : XS ≤ 50 kg, S ≤ 65, M ≤ 75, L < 85, XL < 100, XXL ≥ 100.
 - La taille d'un vêtement trouvé est **inconnue** : clic droit, **Lire l'étiquette**. Il faut parfois un peu de Couture ; sinon le personnage devine seulement.
+- **Lire l'étiquette** propose la sélection, tous les vêtements du cadavre sélectionné et ceux des cadavres accessibles à proximité, chaussures comprises. Les lectures sur cadavre ne déplacent ni le personnage ni les vêtements ; chaque étiquette conserve sa durée habituelle. Un vêtement retiré avant son tour est ignoré. Les lectures groupées ignorent les tailles connues et les indices que le niveau de Couture actuel ne permet pas encore de préciser.
 - Les vêtements d'un même cadavre ont au plus une taille d'écart : chaque pièce est tirée autour d'une taille de référence (le plus souvent la même, sinon une taille en dessous ou au-dessus).
 - Effets d'une mauvaise taille :
   - **trop grand** : moins d'isolation, combat ralenti pour les hauts, un bas trop grand peut **tomber** sans ceinture quand on a les deux mains prises, risque de **trébucher** à la réception d'une clôture, même au pas (moins souvent qu'en courant) ;

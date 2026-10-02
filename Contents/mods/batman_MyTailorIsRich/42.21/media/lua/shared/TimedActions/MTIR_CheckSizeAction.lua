@@ -9,8 +9,36 @@
 require "TimedActions/ISBaseTimedAction"
 require "MyTailorIsRich/MTIR_Effects"
 require "MyTailorIsRich/MTIR_Reach"
+require "MyTailorIsRich/MTIR_LabelCheck"
 
 MTIR_CheckSizeAction = ISBaseTimedAction:derive("MTIR_CheckSizeAction")
+
+function MTIR_CheckSizeAction:canBeginCheck()
+    self.item = MTIR.resolveItem(self.character, self.item)
+    if not self.item then return false end
+    if self.corpseCheck and (not self.corpseContainer or self.item:getContainer() ~= self.corpseContainer
+            or not self.corpseContainer:getItems():contains(self.item)
+            or not MTIR.canCheckCorpse(self.character, self.corpseContainer)) then
+        return false
+    end
+    return MTIR.canReachItem(self.character, self.item)
+        and MTIR.needsSizeCheck(self.item, self.character, self.corpseCheck)
+end
+
+function MTIR_CheckSizeAction:begin()
+    if not self:canBeginCheck() then
+        local queue = ISTimedActionQueue.getTimedActionQueue(self.character)
+        -- Écarter aussi les lectures invalides suivantes sans récursion sur un tas de corps.
+        local following = queue.queue[2]
+        while following and following.Type == self.Type and not following:canBeginCheck() do
+            queue:removeFromQueue(following)
+            following = queue.queue[2]
+        end
+        queue:onCompleted(self)
+        return
+    end
+    ISBaseTimedAction.begin(self)
+end
 
 function MTIR_CheckSizeAction:isValid()
     if isClient() and self.started then
@@ -77,6 +105,11 @@ function MTIR_CheckSizeAction:complete()
     if not MTIR.canReachItem(character, item) then
         return false
     end
+    if self.corpseCheck and (not self.corpseContainer or item:getContainer() ~= self.corpseContainer
+            or not self.corpseContainer:getItems():contains(item)
+            or not MTIR.canCheckCorpse(character, self.corpseContainer)) then
+        return false
+    end
     if MTIR.canShoeHaveSize(item) then
         return completeShoe(item, character)
     end
@@ -126,9 +159,12 @@ function MTIR_CheckSizeAction:getDuration()
     return MTIR.getCheckDuration(self.item)
 end
 
-function MTIR_CheckSizeAction:new(character, item)
+function MTIR_CheckSizeAction:new(character, item, corpseContainer)
     local o = ISBaseTimedAction.new(self, character)
     o.item = item
+    o.corpseContainer = corpseContainer
+    -- Le booléen reste présent même si le conteneur ne peut plus être résolu en MP.
+    o.corpseCheck = corpseContainer ~= nil
     -- Lecture sur place : s'éloigner du conteneur l'interrompt.
     o.stopOnWalk = not MTIR.isCarried(character, item)
     o.stopOnRun = true

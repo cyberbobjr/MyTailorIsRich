@@ -4,7 +4,7 @@
 
 Cette veste en cuir parfaite sur un zombie ? Elle fait peut-être deux tailles de moins que vous. Ces rangers ? Du 46, et vous chaussez du 41.
 
-Chaque vêtement a désormais une taille, chaque paire de chaussures une pointure. Trouvez ce qui vous va, retouchez le reste, cousez et teignez vos habits... et réfléchissez à deux fois avant de sprinter avec des bottes trois pointures trop grandes.
+Vêtements et chaussures ont une taille. Trouvez ce qui vous va, retouchez, cousez et teignez le reste.
 
 [h2]En bref[/h2]
 
@@ -31,7 +31,7 @@ Chaque vêtement a désormais une taille, chaque paire de chaussures une pointur
 
 [list]
 [*]Votre taille dépend de votre [b]poids[/b] : XS ≤ 50 kg, S ≤ 65, M ≤ 75, L < 85, XL < 100, XXL ≥ 100. Elle évolue avec lui.
-[*]Taille d'un vêtement trouvé : clic droit, [b]Lire l'étiquette[/b]. Avec peu de Couture, on devine.
+[*][b]Lire l'étiquette[/b] → Les vêtements sélectionnés, Tous les vêtements de ce cadavre ou Tous les vêtements des cadavres à proximité. Sur cadavre : sans ramassage ni déplacement, durée habituelle. Peu de Couture : indice.
 [*]Sur un même zombie, les tailles varient d'un cran au plus.
 [*]Chapeaux, masques, gants, bijoux, ceintures et sous-vêtements : taille unique.
 [/list]

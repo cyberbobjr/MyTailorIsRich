@@ -9,6 +9,7 @@ require "MyTailorIsRich/MTIR_Alterations"
 require "MyTailorIsRich/MTIR_Reach"
 require "ISUI/ISInventoryPaneContextMenu"
 require "TimedActions/MTIR_CheckSizeAction"
+require "MyTailorIsRich/MTIR_CheckSizeMenu"
 require "TimedActions/MTIR_ResizeAction"
 require "TimedActions/MTIR_ReconditionAction"
 require "TimedActions/MTIR_MachineMaintenanceAction"
@@ -104,18 +105,6 @@ end
 -- Lire l'étiquette
 -- ----------------------------------------------------------------------------
 
-local function needsCheck(item)
-    if MTIR.canShoeHaveSize(item) then
-        local shoeData = MTIR.getShoeData(item)
-        return not shoeData or not shoeData.reveal
-    end
-    if not MTIR.canClothesHaveSize(item) then
-        return false
-    end
-    local data = MTIR.getData(item)
-    return not data or not data.reveal
-end
-
 --- Rien à faire pour un vêtement porté sur soi ; approche d'un cadavre, meuble
 --- ou véhicule pour le lire sur place ; sinon (sol, sac posé) transfert.
 --- Faux : vêtement ignoré (conteneur inaccessible).
@@ -150,10 +139,10 @@ local function queueCheck(player, clothes)
 end
 
 local function addCheckSizeOption(items, player, context)
-    local clothes = collectItems(items, needsCheck)
-    if #clothes > 0 then
-        context:addOption(getText("IGUI_MTIR_JobType_CheckClothesSize"), player, queueCheck, clothes)
-    end
+    local clothes = collectItems(items, function(item)
+        return MTIR.canClothesHaveSize(item) or MTIR.canShoeHaveSize(item)
+    end)
+    MTIR.CheckSizeMenu.addOptions(clothes, player, context, queueCheck)
 end
 
 -- ----------------------------------------------------------------------------

@@ -3,6 +3,14 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.2 — 2026-10-02
+
+### Improvements
+- **Check clothes size** now has three submenu options: **Selected clothes**, **All clothes on this corpse**, and **All clothes on nearby corpses**. Shoes are included; the corpse option appears when the selected clothing is on a corpse.
+- Group checks only cover accessible corpses within reach. Clothes stay on the bodies, without moving your character. Each label keeps its usual duration, Tailoring requirements and XP.
+- Clothes removed or already checked by another player before their turn are skipped without cancelling the remaining checks.
+- Group checks skip known sizes and hints your current Tailoring level cannot yet improve. You can check those hints again after gaining the required level, or inspect them manually from **Selected clothes**.
+
 ## 0.4.1 — 2026-10-02
 
 ### New

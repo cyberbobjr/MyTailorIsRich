@@ -4,7 +4,7 @@
 
 ¿Esa chaqueta de cuero perfecta de un zombi? Quizá dos tallas más pequeña que la tuya. ¿Esas botas militares? Un 46, y tú calzas un 41.
 
-Ahora cada prenda tiene una talla y cada par de zapatos un número. Encuentra lo que te vale, arregla lo que no, cose y tiñe tu propia ropa... y piénsatelo dos veces antes de esprintar con botas tres números más grandes.
+Ropa y zapatos tienen talla. Encuentra lo que te vale, arregla, cose y tiñe el resto.
 
 [h2]De un vistazo[/h2]
 
@@ -31,7 +31,7 @@ Ahora cada prenda tiene una talla y cada par de zapatos un número. Encuentra lo
 
 [list]
 [*]Tu talla depende de tu [b]peso[/b]: XS hasta 50 kg, S hasta 65, M hasta 75, L menos de 85, XL menos de 100, XXL a partir de 100. Cambia con tu peso.
-[*]La ropa encontrada tiene talla desconocida: clic derecho, [b]Mirar la talla[/b]. Con poca Sastrería, tu personaje solo la adivina.
+[*][b]Mirar la talla[/b] → Ropa seleccionada, Toda la ropa de este cadáver o Toda la ropa de los cadáveres cercanos. En cadáveres: sin recoger ni moverse; tiempo habitual. Poca Sastrería: estimación.
 [*]La ropa de un mismo zombi varía una talla como mucho.
 [*]Sombreros, máscaras, guantes, joyas, cinturones y ropa interior son de talla única.
 [/list]
