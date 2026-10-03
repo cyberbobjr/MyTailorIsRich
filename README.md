@@ -116,7 +116,7 @@ It contains no code: only the machine tiles and entities, so placed machines sta
 
 ## Languages
 
-English, French, German, Spanish, Portuguese (Brazil and Portugal), Russian and Simplified Chinese. Corrections from native speakers are welcome.
+English, French, German, Spanish, Portuguese (Brazil and Portugal), Russian, Simplified Chinese and Turkish. Corrections from native speakers are welcome.
 
 ## Development
 
@@ -246,7 +246,7 @@ Il ne contient aucun code : seulement les tuiles et entités des machines. Les m
 
 ## Langues
 
-Anglais, français, allemand, espagnol, portugais (Brésil et Portugal), russe et chinois simplifié. Les corrections de locuteurs natifs sont bienvenues.
+Anglais, français, allemand, espagnol, portugais (Brésil et Portugal), russe, chinois simplifié et turc. Les corrections de locuteurs natifs sont bienvenues.
 
 ## Développement
 

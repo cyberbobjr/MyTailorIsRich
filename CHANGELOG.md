@@ -3,6 +3,12 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.3 — 2026-10-03
+
+### Translations
+- **Turkish** is now available in game: menus, tooltips, character speech, sewing machines, items, recipes and Sandbox options, including the uninstall helper.
+- The Steam Workshop description is now available in Turkish.
+
 ## 0.4.2 — 2026-10-02
 
 ### Improvements

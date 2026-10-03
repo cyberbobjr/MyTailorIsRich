@@ -1,0 +1,132 @@
+[h1]My Tailor Is Rich — Kıyafet Bedenleri ve Ayakkabı Numaraları[/h1]
+
+[b]Build 42.21 · Tek oyunculu ve çok oyunculu[/b]
+
+Zombinin ceketi iki beden küçük; botları 46 numara, sen 41 giyiyorsun.
+
+Her kıyafetin ve ayakkabının bir ölçüsü var. Uyanları bul, kalanları tadilatla, dikerek ve boyayarak değerlendir.
+
+[h2]Bir bakışta[/h2]
+
+[list]
+[*]Karakterinin kilosuna göre XS–XXL [b]kıyafet bedenleri[/b].
+[*]35–47 (AB) [b]ayakkabı numaraları[/b]: su toplamasına, düşmeye ve ayakkabını kaybetmeye dikkat.
+[*][b]Tadilat[/b]: Terzilik becerinle kıyafetleri genişlet veya daralt.
+[*][b]Yıpranma ve onarım[/b]: kıyafetler yıpranır, onları yenileyebilirsin.
+[*][b]Dikiş kalıpları[/b]: çıkar, bul veya kopyala; klasörde sakla, üzerinde 3B önizle.
+[*][b]Boyama ve işleme[/b]: kıyafetlerini boya, bir isim işle.
+[*][b]Dikiş makineleri[/b]: daha hızlı ve daha iyi sonuçlar... ama gürültülü.
+[*][b]Kıyafet modlarıyla[/b] ve [b]çok oyunculuda[/b] çalışır.
+[/list]
+
+[h2]Gereksinimler[/h2]
+
+[list]
+[*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (gerekli): eşya bilgi kutularında beden ve durum gösterir.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] ile [b]uyumsuzdur[/b]. Build 42.21 için yeniden yazıldı: ikisini birlikte açma.
+[*][b]Immersive Weighing[/b] ile uyumlu: kilo gizlenince beden de gizlenir.
+[/list]
+
+[h2]Kıyafet uyumu[/h2]
+
+[list]
+[*]Bedenin [b]kilona[/b] bağlıdır: 50 kg'a kadar XS, 65'e kadar S, 75'e kadar M, 85'in altında L, 100'ün altında XL, 100 ve üzeri XXL. Kilonla birlikte değişir.
+[*][b]Kıyafet bedenini kontrol et[/b] → Seçili kıyafetler, Bu cesetteki tüm kıyafetler veya Yakındaki cesetlerdeki tüm kıyafetler. Cesetlerde almadan ve hareket etmeden, normal sürede okunur. Düşük Terzilikte tahmin edilir.
+[*]Aynı zombinin kıyafetleri arasında en fazla bir beden fark vardır.
+[*]Şapka, maske, eldiven, takı, kemer ve iç çamaşırları tek bedendir.
+[/list]
+
+[h3]Çok büyük[/h3]
+
+[list]
+[*]Daha az sıcak tutar; üst kıyafetler saldırılarını yavaşlatır.
+[*]İki elin de doluyken kemersiz bol pantolon veya etekler [b]düşebilir[/b].
+[*]Çit aştıktan sonra yere inerken [b]takılıp düşebilirsin[/b] (koşarken daha sık).
+[/list]
+
+[h3]Çok küçük[/h3]
+
+[list]
+[*]Daha yavaş giyilir, tırmanırken [b]yırtılabilir[/b], kas tutulmasına neden olur.
+[*]Duvar aştıktan sonra [b]takılıp düşebilirsin[/b].
+[*]Aşırı küçükse giyilemez. Kilo alırsan artık uymayan kıyafetler üzerinden çıkar.
+[/list]
+
+[h2]Terzilik[/h2]
+
+[list]
+[*]İğne, iplik ve makasla bir beden [b]genişlet[/b] (kumaş şeritleri) veya [b]daralt[/b] (ataşlar). Başarı Terzilik ve kumaşa bağlıdır.
+[*]Kıyafetler kir, kan, yağmur ve dar beden yüzünden [b]yıpranır[/b]. Kumaş şeritleri veya aynı türden bir kıyafetin parçalarıyla [b]Yenile[/b].
+[/list]
+
+[h2]Ayakkabı numaraları[/h2]
+
+[list]
+[*]İş, askerî ve yürüyüş botları çoğunlukla erkek; bantlı ve şık ayakkabılar kadın numaralarında. Zombinin ayakkabısı cinsiyetine uyar.
+[*]Numara içine yazılmıştır: [b]Kıyafet bedenini kontrol et[/b] ile okunur, beceri gerekmez.
+[*]Geçici ayak sargıları herkese uyar. Ürettiğin ayakkabılar kendi numaranda olur.
+[/list]
+
+[table]
+[tr][td][b]Uyum[/b][/td][td][b]Sonuç[/b][/td][/tr]
+[tr][td]3+ numara küçük[/td][td]Giyilemez[/td][/tr]
+[tr][td]1–2 numara küçük[/td][td][b]Rahatsızlık[/b], zamanla [b]su toplaması[/b] (koşarken daha erken), ayaklarda tutulma[/td][/tr]
+[tr][td]Doğru numara veya 1 numara büyük[/td][td]Sorun yok[/td][/tr]
+[tr][td]2+ numara büyük[/td][td]Koşarken daha hızlı yorulma, çit ve duvar sonrası [b]düşme[/b], daha zayıf [b]ezme[/b][/td][/tr]
+[tr][td]3+ numara büyük[/td][td]Rahatsızlık; koşarken, çit aşarken, tırmanırken veya düşerken [b]ayakkabını kaybedebilirsin[/b][/td][/tr]
+[/table]
+
+Su toplamaları enfeksiyon yapmaz ama iyileşene kadar seni yavaşlatır: bandajla!
+
+[h2]Dikiş kalıpları[/h2]
+
+[list]
+[*]Kıyafet veya ayakkabıdan masada [b]Kalıp çıkar[/b] (makas, kalem, kâğıt). Orijinal kesilip yok edilir.
+[*]Dikiş dükkânları ve moda kitapçılarında tüm kıyafetler için [b]hazır kalıplar[/b] bul, [b]diğer modlar dâhil[/b].
+[*]İstediğin bedende, aynı kumaştan (pamuk, kot, deri) [b]Kalıptan dik[/b]. Düşük seviyede bir beden sapabilir. Her kalıp 5 kez kullanılır.
+[*]Masada yeni kâğıda [b]Kalıbı kopyala[/b], orijinal korunur: her kopya biraz daha az hassastır.
+[*][b]Kalıp Klasörü[/b] içinde 20 kalıp sakla (üret veya dikiş malzemelerinde bul). Makineler doğrudan klasörden diker.
+[*][b]Üzerimde önizle[/b]: dikmeden önce kıyafeti karakterinin üzerinde 3B gör.
+[*]Elde dikiş için [b]yüksük[/b] gerekir.
+[*]Ayakkabı uzman işidir: Terzilik 8, iğne, [b]biz iğnesi[/b], yapıştırıcı, deri veya kumaş; yalnızca elde dikilir. Kauçuk ayakkabının kalıbı olmaz.
+[/list]
+
+[h2]Boyama ve işleme[/h2]
+
+[list]
+[*]Endüstriyel boya veya saç boyası ve suyla [b]Boya[/b]. Renklendirilebilir kıyafetler boyanır, [b]kıyafet modları dâhil[/b]; baskılı veya desenliler boyanmaz. Kıyafet sırılsıklam olur.
+[*]Bir kıyafete [b]İsim işle[/b] (iğne, iplik, Terzilik 1), makasla sök.
+[/list]
+
+[h2]Dikiş makineleri[/h2]
+
+[list]
+[*][b]Elektrikli makine[/b]: masaya konur, elektrik gerekir. İki kat hızlıdır ve +2 Terzilik seviyesi sağlar.
+[*][b]Pedallı makine[/b]: ağır bir dolaptır, elektrik gerekmez. %25 daha hızlıdır, +1 Terzilik seviyesi sağlar.
+[*]Dikiş ve kıyafet dükkânları, marketler, garajlar, depolar, tavan araları, kulübeler, dolaplar...
+[*]Kalıptan dikmek (beden ve adet seç), tadilat yapmak veya kıyafet yenilemek için makineye tıkla.
+[*]Makineler [b]gürültülüdür[/b], zombileri çeker. Ayrıca [b]yıpranır[/b], iğneleri kırar ve sıkışır: tornavida ve yemeklik yağla bakım yap.
+[/list]
+
+[h2]Çok oyunculu[/h2]
+
+Herkes aynı bedenleri, yıpranmayı ve sonuçları görür. Makine başına aynı anda bir oyuncu.
+
+[h2]Sandbox seçenekleri[/h2]
+
+Beceri, deneyim, hız, uyumsuz beden cezaları, yıpranma, ayakkabı numaraları, kalıplar, boyama, işleme, makineler, ganimet... Hepsi ayarlanabilir. Mod kıyafetleri otomatik beden alır; iki listeyle eklenir veya hariç tutulur. Ayrıntılar [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url]'da.
+
+[h2]Modu bir kayıttan kaldırma[/h2]
+
+Doğrudan kapatma: kayıt dikiş makinelerini hatırlar, çok oyunculuda kimse katılamaz ("Missing dictionary script on client"). [b]batman_MyTailorIsRich[/b] yerine paketteki [b]batman_MyTailorIsRich_Uninstall[/b] modunu aç ve kalıcı olarak etkin tut: makineleri yalnızca sıradan mobilya olarak korur. İkisini birlikte asla açma.
+
+[h2]Projeye destek ol[/h2]
+
+Modu beğendin mi? Bir kahve, yeni özellik ve çevirilere destek olur.
+[url=https://ko-fi.com/Z8Z8QJV31][img]https://storage.ko-fi.com/cdn/kofi6.png?v=6[/img][/url]
+
+[h2]Katkıda bulunanlar[/h2]
+
+[b]Gootube[/b]'un [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] modu ve sesleri temel alındı. Build 42.21 ve çok oyunculu için yeniden yazıldı; ayakkabı numaraları, kalıplar, makineler, boyama ve işleme eklendi. Bilgi kutuları: [b]TooltipLib[/b].
+Dikiş makinesi sesleri: elektrikli makine Joseph Sardin ([url=https://bigsoundbank.com]BigSoundBank[/url], CC0); pedallı makine Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), döngüler hâlinde kesildi.
+Kaynak kodu (MIT): [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
