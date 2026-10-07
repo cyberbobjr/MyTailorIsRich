@@ -10,7 +10,7 @@ require "MyTailorIsRich/MTIR_Patterns"
 require "TooltipLib/Core"
 
 if not TooltipLib or type(TooltipLib.registerProvider) ~= "function" then
-    print("[MTIR] TooltipLib absent : pas de ligne de taille dans les infobulles")
+    print("[MTIR] TooltipLib missing: no size line in tooltips")
     return
 end
 

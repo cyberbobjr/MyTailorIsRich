@@ -3,6 +3,11 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.4 — 2026-10-07
+
+### Improvements
+- Console log messages are now all in English, so server admins can read and share them more easily. Nothing changes in game.
+
 ## 0.4.3 — 2026-10-03
 
 ### Translations

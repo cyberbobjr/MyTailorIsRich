@@ -96,7 +96,7 @@ function MTIR.getPrintableGarments()
     if garments == nil or garmentsKey ~= key then
         garments = buildGarments()
         garmentsKey = key
-        print("[MTIR] patrons du commerce : " .. tostring(#garments) .. " vetements possibles")
+        print("[MTIR] store-bought patterns: " .. tostring(#garments) .. " eligible garments")
     end
     return garments
 end
@@ -142,7 +142,7 @@ function MTIR.onCreatePrintedPattern(item)
     end
     local garment = pickGarment()
     if not garment then
-        print("[MTIR] patron du commerce : aucun vetement imprimable")
+        print("[MTIR] store-bought pattern: no printable garment")
         return
     end
     modData[MTIR.PATTERN_DATA_KEY] = {

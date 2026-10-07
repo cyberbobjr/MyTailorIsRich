@@ -168,13 +168,13 @@ local function applySpawns(multiplier)
         end
     end
     if multiplier > 0 then
-        print("[MTIR] machines à coudre ajoutées à " .. applySewingKitSpawns(multiplier)
-            .. " listes à kit de couture")
+        print("[MTIR] sewing machines added to " .. applySewingKitSpawns(multiplier)
+            .. " sewing kit loot lists")
     end
     for _, spawn in ipairs(SPAWNS) do
         local items = getItems(spawn.list)
         if not items then
-            print("[MTIR] liste de butin absente : " .. spawn.list)
+            print("[MTIR] missing loot list: " .. spawn.list)
         elseif multiplier > 0 then
             table.insert(items, spawn.item)
             table.insert(items, spawn.weight * multiplier)
@@ -210,7 +210,7 @@ local function applyStorageSlots(multiplier)
     for _, slot in ipairs(STORAGE_SLOTS) do
         local procList = getProcList(slot.room, slot.container)
         if not procList then
-            print("[MTIR] conteneur procédural absent : " .. slot.room .. "." .. slot.container)
+            print("[MTIR] missing procedural container: " .. slot.room .. "." .. slot.container)
         else
             for i = #procList, 1, -1 do
                 if type(procList[i]) == "table" and procList[i].name == STORAGE_LIST then
@@ -248,7 +248,7 @@ local function onInitGlobalModData()
     applyStorageSlots(multiplier)
     appliedMultiplier = multiplier
     ItemPickerJava.Parse()
-    print("[MTIR] butin de couture : multiplicateur " .. tostring(multiplier))
+    print("[MTIR] sewing loot multiplier: " .. tostring(multiplier))
 end
 
 -- ----------------------------------------------------------------------------
