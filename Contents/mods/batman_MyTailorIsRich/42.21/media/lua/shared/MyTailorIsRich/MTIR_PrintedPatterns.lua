@@ -154,7 +154,7 @@ function MTIR.onCreatePrintedPattern(item)
         uses = MTIR.opt("PatternMaxUses"),
     }
     -- Nom enregistré dans l'objet (langue de l'autorité, comme MTIR.createPattern).
-    item:setName(getText("IGUI_MTIR_PrintedPatternName", getItemNameFromFullType(garment.fullType)))
+    item:setName(MTIR.composePatternName("IGUI_MTIR_PrintedPatternName", garment.fullType))
     item:setCustomName(true)
 end
 

@@ -51,6 +51,12 @@ function T.setup()
         local data = item:getModData()[MTIR.PATTERN_DATA_KEY]
         return data and data.fullType and data.kind and data or nil
     end
+    -- Noms (MTIR_Patterns.lua, testés dans test_pattern_names.lua).
+    function MTIR.isRawPatternName(name)
+        return type(name) == "string" and string.sub(name, 1, 10) == "IGUI_MTIR_"
+    end
+    function MTIR.repairPatternNames() return false end
+    function MTIR.getPatternNameFor(itemType, data) return itemType .. ":" .. data.fullType end
     function MTIR.removeItem(item)
         local container = item.container
         if container then

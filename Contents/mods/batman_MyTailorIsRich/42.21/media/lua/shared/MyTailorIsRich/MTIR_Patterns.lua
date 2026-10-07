@@ -93,6 +93,97 @@ function MTIR.getPatternData(item)
     return data
 end
 
+-- ----------------------------------------------------------------------------
+-- Nom d'un patron
+--
+-- Le nom est enregistré dans l'objet, dans la langue de l'autorité (celle du
+-- serveur en MP). Un serveur MP ne charge les traductions des mods qu'après
+-- MTIR_ServerTranslations.lua ; avant la 0.4.5, getText y rendait la clé
+-- brute (« IGUI_MTIR_PatternName »), enregistrée telle quelle : ces noms sont
+-- recalculés par MTIR.repairPatternNames.
+-- ----------------------------------------------------------------------------
+
+local RAW_NAME_PREFIX = "IGUI_MTIR_"
+
+--- Nom composé avec `key` ; sans traduction du mod, le nom du vêtement plutôt
+--- qu'une clé brute.
+function MTIR.composePatternName(key, fullType)
+    local garment = getItemNameFromFullType(fullType) or tostring(fullType)
+    return getTextOrNull(key, garment) or garment
+end
+
+--- Clé du nom d'un patron selon son type d'objet et ses données.
+function MTIR.getPatternNameKey(itemType, data)
+    if itemType == MTIR.PRINTED_PATTERN_ITEM then
+        return "IGUI_MTIR_PrintedPatternName"
+    end
+    if type(data) == "table" and (tonumber(data.copies) or 0) > 0 then
+        return "IGUI_MTIR_PatternCopyName"
+    end
+    return "IGUI_MTIR_PatternName"
+end
+
+--- Nom d'un patron d'après son type d'objet et ses données (ModData "MTIR_Pattern").
+function MTIR.getPatternNameFor(itemType, data)
+    return MTIR.composePatternName(MTIR.getPatternNameKey(itemType, data), data.fullType)
+end
+
+--- Nom enregistré qui n'est qu'une clé de traduction du mod.
+function MTIR.isRawPatternName(name)
+    return type(name) == "string" and string.sub(name, 1, #RAW_NAME_PREFIX) == RAW_NAME_PREFIX
+end
+
+--- Le nom ne se recalcule que si la traduction est disponible : sinon, garder la
+--- clé (repli d'affichage chez le client, MTIR.getSourcePatternName) plutôt que
+--- d'enregistrer pour toujours un nom sans « Patron : ».
+local function canRepairName(itemType, data)
+    return getTextOrNull(MTIR.getPatternNameKey(itemType, data), "") ~= nil
+end
+
+--- Autorité : recalcule le nom d'un patron (objet) ou des entrées d'un classeur
+--- dont le nom enregistré est une clé brute. Vrai si quelque chose a changé
+--- (à synchroniser par l'appelant).
+function MTIR.repairPatternNames(item)
+    if item == nil then
+        return false
+    end
+    local changed = false
+    local data = MTIR.getPatternData(item)
+    if data and MTIR.isRawPatternName(item:getName()) and canRepairName(item:getFullType(), data) then
+        item:setName(MTIR.getPatternNameFor(item:getFullType(), data))
+        item:setCustomName(true)
+        changed = true
+    end
+    if MTIR.isBinder and MTIR.isBinder(item) then
+        for _, entry in ipairs(MTIR.getBinderEntries(item)) do
+            local entryData = MTIR.binderEntryPattern(entry)
+            if entryData and MTIR.isRawPatternName(entry.name) and canRepairName(entry.type, entryData) then
+                entry.name = MTIR.getPatternNameFor(entry.type, entryData)
+                changed = true
+            end
+        end
+    end
+    return changed
+end
+
+--- L'objet a-t-il un nom de patron à recalculer (objet ou entrée de classeur) ?
+function MTIR.hasRawPatternName(item)
+    if item == nil then
+        return false
+    end
+    if MTIR.getPatternData(item) and MTIR.isRawPatternName(item:getName()) then
+        return true
+    end
+    if MTIR.isBinder and MTIR.isBinder(item) then
+        for _, entry in ipairs(MTIR.getBinderEntries(item)) do
+            if MTIR.isRawPatternName(entry.name) then
+                return true
+            end
+        end
+    end
+    return false
+end
+
 --- Le modèle existe-t-il encore (mod désinstallé depuis le tracé) ?
 function MTIR.patternModelExists(data)
     return data ~= nil and ScriptManager.instance:getItem(data.fullType) ~= nil
@@ -231,7 +322,7 @@ function MTIR.createPattern(character, item, model)
         uses = MTIR.opt("PatternMaxUses"),
     }
     -- Nom enregistré dans l'objet (langue de l'autorité : celle du serveur en MP).
-    pattern:setName(getText("IGUI_MTIR_PatternName", getItemNameFromFullType(item:getFullType())))
+    pattern:setName(MTIR.composePatternName("IGUI_MTIR_PatternName", item:getFullType()))
     pattern:setCustomName(true)
     local inventory = character:getInventory()
     inventory:AddItem(pattern)

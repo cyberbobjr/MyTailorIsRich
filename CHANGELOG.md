@@ -3,6 +3,12 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.5 — 2026-10-07
+
+### Fixes
+- **Multiplayer: pattern names.** Traced patterns, pattern copies and store-bought patterns no longer show a technical name like `IGUI_MTIR_PatternName`: the garment's name is back, in the server's language. Patterns already affected, in your inventory or in a Pattern Binder, are renamed automatically within a few in-game minutes (patterns left in containers once you pick them up).
+- **Multiplayer: shoes three sizes too small** (and clothes far too small, or whose size is still to be chosen) can no longer be put on. Your character says why, as in singleplayer.
+
 ## 0.4.4 — 2026-10-07
 
 ### Improvements

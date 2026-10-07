@@ -70,7 +70,7 @@ function MTIR.createPatternCopy(character, data)
     pattern:getModData()[MTIR.PATTERN_DATA_KEY] = MTIR.makePatternCopyData(data, MTIR.getPatternCopyLoss(),
         MTIR.opt("PatternMaxUses"))
     -- Nom enregistré dans l'objet (langue de l'autorité, comme MTIR.createPattern).
-    pattern:setName(getText("IGUI_MTIR_PatternCopyName", getItemNameFromFullType(data.fullType)))
+    pattern:setName(MTIR.composePatternName("IGUI_MTIR_PatternCopyName", data.fullType))
     pattern:setCustomName(true)
     local inventory = character:getInventory()
     inventory:AddItem(pattern)

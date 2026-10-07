@@ -191,16 +191,23 @@ function MTIR.getSourcePatternData(item, entryId)
 end
 
 --- Nom affiché d'une source de patron (nom enregistré dans l'entrée ou l'objet).
+--- Un nom enregistré en clé brute (serveur MP sans traductions, avant la 0.4.5)
+--- est recalculé dans la langue de cette machine, sans écriture.
 function MTIR.getSourcePatternName(item, entryId)
     if entryId ~= nil then
         local _, entry = MTIR.getBinderEntryData(item, entryId)
-        if entry and entry.name and entry.name ~= "" then
+        if entry and entry.name and entry.name ~= "" and not MTIR.isRawPatternName(entry.name) then
             return entry.name
         end
         local data = entry and MTIR.binderEntryPattern(entry)
-        return data and getText("IGUI_MTIR_PatternName", getItemNameFromFullType(data.fullType)) or ""
+        return data and MTIR.getPatternNameFor(entry.type, data) or ""
     end
-    return item and item:getName() or ""
+    if not item then
+        return ""
+    end
+    local name = item:getName()
+    local data = MTIR.isRawPatternName(name) and MTIR.getPatternData(item) or nil
+    return data and MTIR.getPatternNameFor(item:getFullType(), data) or name or ""
 end
 
 --- Patron encore utilisable (utilisations restantes, modèle chargé).
@@ -243,6 +250,8 @@ function MTIR.storePatternInBinder(character, binder, pattern)
     if not MTIR.getPatternData(pattern) or MTIR.isBinderFull(binder) then
         return false
     end
+    -- Nom en clé brute (avant la 0.4.5) : recalculé avant d'être recopié.
+    MTIR.repairPatternNames(pattern)
     local data = ensureBinderData(binder)
     local id = MTIR.binderAddEntry(data, {
         type = pattern:getFullType(),
@@ -284,6 +293,8 @@ function MTIR.takePatternFromBinder(character, binder, entryId)
     if not MTIR.binderEntryPattern(entry) then
         return nil
     end
+    -- Noms en clé brute (avant la 0.4.5) : recalculés avant de recréer l'objet.
+    MTIR.repairPatternNames(binder)
     local item = instancePattern(entry)
     if not item then
         return nil

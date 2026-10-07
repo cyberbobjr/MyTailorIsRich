@@ -3,7 +3,8 @@
 --
 -- En 42.21, complete() fait le vrai travail (serveur en MP, local en solo)
 -- et s'exécute après perform() quoi qu'il arrive : refuser un vêtement se
--- fait dans isValid(), pas dans perform().
+-- fait dans isValid(), pas dans perform(). Le serveur MP n'appelle jamais
+-- isValid : le même refus est refait au début de complete().
 -- ============================================================================
 
 require "MyTailorIsRich/MTIR_Effects"
@@ -34,7 +35,8 @@ local function refuseWear(action, fx)
 end
 
 --- Chaussure trop petite de 3 pointures ou plus : impossible à enfiler.
-local function isValidShoe(action)
+--- Rend l'effet du refus, ou nil si elle peut être enfilée.
+local function shoeRefusal(action)
     local item = action.item
     local data = MTIR.getShoeData(item)
     if not data and MTIR.isAuthority() then
@@ -42,7 +44,7 @@ local function isValidShoe(action)
         MTIR.syncItem(action.character, item)
     end
     if not data then
-        return true
+        return nil
     end
     local diff = MTIR.getShoeDiff(item, MTIR.getPlayerShoeSize(action.character))
     if diff and diff <= MTIR.SHOE_TOO_TIGHT then
@@ -50,10 +52,50 @@ local function isValidShoe(action)
             data.hint = true
             MTIR.syncItem(action.character, item)
         end
-        refuseWear(action, { say = MTIR.pickShoeHintSay(diff), refresh = true })
-        return false
+        return { say = MTIR.pickShoeHintSay(diff), refresh = true }
     end
-    return true
+    return nil
+end
+
+--- Vêtement sans taille choisie, ou trop petit de plus de deux tailles.
+--- Rend l'effet du refus, ou nil s'il peut être enfilé.
+local function clothesRefusal(action)
+    local item = action.item
+    local data = MTIR.getData(item)
+    if not data and MTIR.isAuthority() then
+        data = MTIR.ensureData(item)
+        MTIR.syncItem(action.character, item)
+    end
+    if not data then
+        -- Client MP sans taille connue : le serveur tranchera (complete).
+        return nil
+    end
+
+    if not data.size then
+        return { say = { key = "IGUI_MTIR_Say_Unchosen_Clothes_Size" } }
+    end
+
+    local diff = MTIR.getItemDiff(item, MTIR.getPlayerSize(action.character))
+    if diff and diff < -2 then
+        if MTIR.isAuthority() and not data.hint then
+            data.hint = true
+            MTIR.syncItem(action.character, item)
+        end
+        return { say = MTIR.pickHintSay(diff), refresh = true }
+    end
+    return nil
+end
+
+--- Effet du refus d'enfiler l'objet de `action`, ou nil.
+local function wearRefusal(action)
+    local item = action.item
+    if MTIR.canShoeHaveSize(item) then
+        return shoeRefusal(action)
+    end
+    if MTIR.canClothesHaveSize(item) then
+        return clothesRefusal(action)
+    end
+    return nil
 end
 
 local wearIsValid = ISWearClothing.isValid
@@ -61,36 +103,9 @@ function ISWearClothing:isValid()
     if not wearIsValid(self) then
         return false
     end
-    local item = self.item
-    if MTIR.canShoeHaveSize(item) then
-        return isValidShoe(self)
-    end
-    if not MTIR.canClothesHaveSize(item) then
-        return true
-    end
-
-    local data = MTIR.getData(item)
-    if not data and MTIR.isAuthority() then
-        data = MTIR.ensureData(item)
-        MTIR.syncItem(self.character, item)
-    end
-    if not data then
-        -- Client MP sans taille connue : le serveur tranchera.
-        return true
-    end
-
-    if not data.size then
-        refuseWear(self, { say = { key = "IGUI_MTIR_Say_Unchosen_Clothes_Size" } })
-        return false
-    end
-
-    local diff = MTIR.getItemDiff(item, MTIR.getPlayerSize(self.character))
-    if diff and diff < -2 then
-        if MTIR.isAuthority() and not data.hint then
-            data.hint = true
-            MTIR.syncItem(self.character, item)
-        end
-        refuseWear(self, { say = MTIR.pickHintSay(diff), refresh = true })
+    local fx = wearRefusal(self)
+    if fx then
+        refuseWear(self, fx)
         return false
     end
     return true
@@ -127,6 +142,16 @@ end
 
 local wearComplete = ISWearClothing.complete
 function ISWearClothing:complete()
+    -- Le serveur MP n'appelle jamais isValid (NetTimedAction) : le refus est
+    -- refait ici, avant que le vanilla n'enfile quoi que ce soit (setWornItem).
+    -- Rendre false comme le vanilla pour un objet déjà porté : rien n'est enfilé.
+    if self.item and MTIR.isAuthority() and not self:isAlreadyEquipped(self.item) then
+        local fx = wearRefusal(self)
+        if fx then
+            refuseWear(self, fx)
+            return false
+        end
+    end
     local result = wearComplete(self)
     local item, character = self.item, self.character
     if not result or not item then

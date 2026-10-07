@@ -27,6 +27,8 @@ function T.setup()
     }
     getText = function(key, arg) return key .. ":" .. tostring(arg) end
     getItemNameFromFullType = function(fullType) return fullType end
+    -- MTIR_Patterns.lua (repli sans traduction : test_pattern_names.lua).
+    MTIR.composePatternName = function(key, fullType) return getText(key, getItemNameFromFullType(fullType)) end
     local function newItem(fullType)
         local item = { fullType = fullType, modData = {} }
         function item:getFullType() return self.fullType end
