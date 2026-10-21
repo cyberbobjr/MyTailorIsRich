@@ -74,8 +74,8 @@ Vêtements et chaussures ont une taille. Trouvez ce qui vous va, retouchez, cous
 [tr][td]3 pointures de moins ou plus[/td][td]Impossible de les enfiler[/td][/tr]
 [tr][td]1 ou 2 pointures de moins[/td][td][b]Inconfort[/b], [b]ampoules[/b] après un moment (plus vite en courant), courbatures aux pieds[/td][/tr]
 [tr][td]Bonne pointure ou une de plus[/td][td]Tout va bien[/td][/tr]
-[tr][td]2 pointures de plus et plus[/td][td]Course plus fatigante, [b]chutes[/b] après une clôture ou un mur, [b]écrasements[/b] plus faibles[/td][/tr]
-[tr][td]3 pointures de plus et plus[/td][td]Inconfort, et vous pouvez [b]perdre une chaussure[/b] en courant, en sautant, en escaladant ou en tombant[/td][/tr]
+[tr][td]2 pointures de plus et plus[/td][td]Course plus fatigante, [b]chutes[/b] après une clôture ou un mur, [b]écrasements[/b] plus faibles, [b]chaussure perdue[/b] en sautant, en escaladant ou en tombant[/td][/tr]
+[tr][td]3 pointures de plus et plus[/td][td]Inconfort, perte aussi en course ou en sprint[/td][/tr]
 [/table]
 
 Une ampoule n'infecte pas, mais ralentit jusqu'à guérison : pansez-la !

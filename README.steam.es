@@ -74,8 +74,8 @@ Ropa y zapatos tienen talla. Encuentra lo que te vale, arregla, cose y tiñe el 
 [tr][td]3+ números menos[/td][td]No te entran[/td][/tr]
 [tr][td]1–2 números menos[/td][td][b]Incomodidad[/b], [b]ampollas[/b] tras un rato (antes si corres), fatiga muscular en los pies[/td][/tr]
 [tr][td]Tu número o uno más[/td][td]Todo bien[/td][/tr]
-[tr][td]2+ números más[/td][td]Te cansas antes al correr, [b]tropiezos[/b] tras vallas y muros, [b]pisotones[/b] más flojos[/td][/tr]
-[tr][td]3+ números más[/td][td]Incomodidad, y puedes [b]perder un zapato[/b] al correr, saltar, trepar o caer[/td][/tr]
+[tr][td]2+ números más[/td][td]Te cansas antes al correr, [b]tropiezos[/b] tras vallas y muros, [b]pisotones[/b] más flojos, puedes [b]perder un zapato[/b] al saltar, trepar o caer[/td][/tr]
+[tr][td]3+ números más[/td][td]Incomodidad, y también al correr o esprintar[/td][/tr]
 [/table]
 
 Las ampollas no te infectan, pero te ralentizan hasta curarse: ¡véndalas!

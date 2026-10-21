@@ -40,8 +40,8 @@ Clothes and shoes finally have sizes. Loot that doesn't fit, resize it with your
 | 3+ sizes too small | Can't be worn |
 | 1–2 sizes too small | **Discomfort** moodle, **blisters** (a friction gauge fills while walking, faster when running; your character warns you halfway), foot stiffness |
 | Right size or 1 size bigger | Nothing |
-| 2+ sizes too big | More **endurance** used when running, rare blisters, can make you **trip** after a fence or a wall, weaker **stomps** on downed zombies (down to barefoot level) |
-| 3+ sizes too big | Discomfort, and you can **lose a shoe** when running, sprinting, vaulting, climbing or falling (more often with flip-flops and slippers, less with laced boots) |
+| 2+ sizes too big | More **endurance** used when running, rare blisters, can make you **trip** after a fence or a wall, weaker **stomps** on downed zombies (down to barefoot level), and you can **lose a shoe** when vaulting, climbing or falling (more often with flip-flops and slippers, less with laced boots) |
+| 3+ sizes too big | Discomfort, and you can also **lose a shoe** when running or sprinting |
 
 A blister is a small foot scratch without zombie infection. Like any foot injury it slows you down until it heals, so bandage it.
 
@@ -170,8 +170,8 @@ Les vêtements et les chaussures ont enfin une taille. Trouvez ce qui vous va, r
 | Trop petites de 3 pointures ou plus | Impossibles à enfiler |
 | Trop petites de 1 ou 2 pointures | Humeur **Inconfort**, **ampoules** (une jauge de frottement monte en marchant, plus vite en courant ; le personnage prévient à mi-chemin), courbatures aux pieds |
 | Bonne pointure ou une de plus | Rien |
-| Trop grandes de 2 pointures ou plus | Plus d'**endurance** dépensée en courant, ampoules rares, risque de **trébucher** après une clôture ou un mur, **écrasement** des zombies au sol moins puissant (jusqu'au niveau pieds nus) |
-| Trop grandes de 3 pointures ou plus | Inconfort, et la chaussure peut **s'échapper** en courant, en sprintant, en sautant, en escaladant ou en tombant (plus souvent avec des tongs ou des pantoufles, moins avec des bottes lacées) |
+| Trop grandes de 2 pointures ou plus | Plus d'**endurance** dépensée en courant, ampoules rares, risque de **trébucher** après une clôture ou un mur, **écrasement** des zombies au sol moins puissant (jusqu'au niveau pieds nus), et la chaussure peut **s'échapper** en sautant, en escaladant ou en tombant (plus souvent avec des tongs ou des pantoufles, moins avec des bottes lacées) |
+| Trop grandes de 3 pointures ou plus | Inconfort, et la chaussure peut aussi **s'échapper** en courant ou en sprintant |
 
 Une ampoule est une petite égratignure au pied, sans infection zombie. Comme toute blessure au pied, elle ralentit tant qu'elle n'est pas guérie : pansez-la.
 
