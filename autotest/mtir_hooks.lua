@@ -488,8 +488,13 @@ local function clientChecks(player)
     else
         rec(false, "client: dyed garment received")
     end
-    rec(dyed ~= nil and MTIR.getEmbroidery(dyed) ~= nil and md.PZAT_MTIR_name == dyed:getDisplayName(),
-        "client: embroidery ModData and name synced", dyed and dyed:getDisplayName())
+    -- The dye soaks the garment: the client display name may carry the vanilla state suffix
+    -- (" (Soaked)" / " (trempé)") after the embroidered name, so compare the name prefix.
+    local shown = dyed and dyed:getDisplayName() or ""
+    local expected = md.PZAT_MTIR_name
+    rec(dyed ~= nil and MTIR.getEmbroidery(dyed) ~= nil and expected ~= nil
+        and shown:sub(1, #expected) == expected,
+        "client: embroidery ModData and name synced", shown)
 end
 
 -------------------------------------------------------------------------------
