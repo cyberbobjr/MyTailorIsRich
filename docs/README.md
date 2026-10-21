@@ -14,7 +14,7 @@ La présentation publique du mod est le [README du dépôt](../README.md) (angla
 | [ameliorations-et-idees.md](ameliorations-et-idees.md) | Améliorations de code proposées et idées de fonctionnalités (propositions, aucune implémentation sans validation). |
 | [wiki/](wiki/) | Source des pages du wiki GitHub : guides joueur et administrateur, en anglais ([wiki/en/Home.md](wiki/en/Home.md)) et en français ([wiki/fr/Home.md](wiki/fr/Home.md)). |
 | [images/](images/) | Images de la documentation. [images/screenshots/](images/screenshots/) : captures en jeu `shot1.png` à `shot6.png`. |
-| [annexes/](annexes/) | Documents annexes rangés par thème. [annexes/communication/kofi-post.md](annexes/communication/kofi-post.md) : billet Ko-fi de lancement. |
+| [annexes/](annexes/) | Documents annexes rangés par thème. [annexes/communication/kofi-post.md](annexes/communication/kofi-post.md) : billet Ko-fi de lancement. [annexes/tests/autotest.md](annexes/tests/autotest.md) : test en jeu automatique du parcours nominal (pz-autotest). |
 
 ## Captures disponibles
 

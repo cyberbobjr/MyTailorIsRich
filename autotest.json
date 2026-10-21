@@ -1,0 +1,40 @@
+// pz-autotest configuration of My Tailor Is Rich (.claude/tools/pz-autotest/README.md,
+// docs/annexes/tests/autotest.md):
+//   python .claude/tools/pz-autotest/pz_autotest.py sp MyTailorIsRich --wait-idle 3600
+//   python .claude/tools/pz-autotest/pz_autotest.py mp MyTailorIsRich --clients 1 --client-run --wait-idle 3600
+{
+  "name": "MyTailorIsRich",
+  "gameVersion": "42.21",
+  "mods": [
+    {"workshop": "3694097672", "id": "TooltipLib"},
+    {"path": "Contents/mods/batman_MyTailorIsRich"}
+  ],
+  "hooks": "autotest/mtir_hooks.lua",
+  "params": {"clientWaitSec": "180"},
+  "sp": {
+    "save": "20*",
+    "gameMode": "Sandbox",
+    "saveMods": "replace",
+    "timeoutSec": 900,
+    "startDelaySec": 5
+  },
+  "server": {
+    "serverName": "mtirtest_pzat",
+    "port": 17481,
+    "timeoutSec": 600,
+    "xmx": "3072m",
+    "ini": {"Map": "Muldraugh, KY", "MaxPlayers": 4}
+  },
+  "mp": {
+    "serverName": "mtirtest_pzat_mp",
+    "port": 17491,
+    "spawn": "10656,10137,0",
+    "clients": 1,
+    "clientXmx": "4096m",
+    "serverRun": true,
+    "clientRun": true,
+    "timeoutSec": 1800,
+    "joinTimeoutSec": 600,
+    "ini": {"Map": "Muldraugh, KY", "MaxPlayers": 4}
+  }
+}
