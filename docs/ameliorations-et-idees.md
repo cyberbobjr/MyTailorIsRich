@@ -27,10 +27,10 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 | ID | Sujet | Risque principal | Priorité | Effort | Statut |
 |---|---|---|---|---|---|
-| C01 | Feuilles écrites et objets favoris consommés comme matériaux | Bug / perte de données joueur | Haute | S | confirmé statiquement |
-| C02 | Fil cherché par type `Thread` ou par tag selon l'action | Bug / compatibilité | Moyenne | S | confirmé statiquement |
-| C03 | Usure estimée figée dans l'infobulle d'un client MP | Bug MP | Moyenne | S | confirmé statiquement |
-| C04 | Effets continus des chaussures limités à l'emplacement `shoes` | Bug / compatibilité mods | Moyenne | S | confirmé statiquement |
+| C01 | Feuilles écrites et objets favoris consommés comme matériaux | Bug / perte de données joueur | Haute | S | corrigé (00cd2e7), à vérifier en jeu |
+| C02 | Fil cherché par type `Thread` ou par tag selon l'action | Bug / compatibilité | Moyenne | S | corrigé (00cd2e7), à vérifier en jeu |
+| C03 | Usure estimée figée dans l'infobulle d'un client MP | Bug MP | Moyenne | S | corrigé (00cd2e7), à vérifier en jeu |
+| C04 | Effets continus des chaussures limités à l'emplacement `shoes` | Bug / compatibilité mods | Moyenne | S | corrigé (00cd2e7), à vérifier en jeu |
 | C05 | Copie de patron sans coût pour l'original | Équilibre | Moyenne | S | confirmé statiquement (choix à valider) |
 | C06 | Infobulle « Enfiler » qui révèle l'ajustement | Cohérence gameplay | Moyenne | S | confirmé statiquement (choix à valider) |
 | C07 | Clé joueur serveur = compte seul (écran partagé) | MP | Basse | S | confirmé statiquement |
@@ -59,7 +59,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Risque** : perte d'une note du joueur, ou d'un document d'un autre mod fondé sur `SheetPaper2` (papier nommé, carnet de quête). Le joueur ne choisit pas les feuilles.
 - **Correction** : un prédicat `MTIR.isBlankPaper(item)` qui écarte les favoris, les noms personnalisés (`isCustomName`, ou `getDisplayName() ~= getScriptItem():getDisplayName()`, méthode de la base moteur) et les pages écrites ; l'utiliser dans les menus et dans `validate` côté autorité. Écarter aussi les favoris dans `pickItems` et `pickPatternMaterials`. Accepter `Base.GraphPaper` vierge en plus de `SheetPaper2`.
 - **Priorité** : haute. **Effort** : S.
-- **Statut** : confirmé statiquement pour la consommation ; nom exact de l'accesseur des pages écrites d'une `Literature` en 42.21 à vérifier dans le Java.
+- **Statut : corrigé (commit 00cd2e7), à vérifier en jeu**. Page écrite détectée par `Literature.isEmptyPages()` (`zombie/inventory/types/Literature.java:465`, 42.21.0), plus `getLockedBy()`, `isCustomName()`, nom affiché ≠ nom du script et ModData présente (`MTIR.isBlankSheet`, contrôlé aussi par `validate` sur l'autorité). Favoris écartés par `pickItems`, `pickPatternMaterials` et les contrôles des actions. `Base.GraphPaper` non ajouté (nouvelle fonctionnalité, à décider).
 
 ### C02 — Fil : type `Thread` pour la couture, tag `base:thread` pour la broderie
 
@@ -72,7 +72,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Risque** : fil aramide ou tendon invisible pour l'interface des retouches et des patrons, alors qu'il sert à broder. Le fil d'un mod qui n'utilise que le tag n'est pas reconnu. Le libellé du besoin est toujours « Fil » (`client/MyTailorIsRich/MTIR_ContextMenu.lua:169-170`).
 - **Correction** : une seule collecte, `MTIR.collectThreads(inventory)`, qui place les bobines `Thread` en tête puis les autres objets du tag, dans l'ordre du vanilla (`ISInventoryPaneContextMenu.lua:1489`, cité dans la base moteur). Décider s'il faut exclure le fil de pêche et le fil dentaire pour les vêtements, et le faire dans le prédicat partagé.
 - **Priorité** : moyenne. **Effort** : S.
-- **Statut** : confirmé statiquement.
+- **Statut : corrigé (commit 00cd2e7), à vérifier en jeu**. Collecte unique `MTIR.collectThreads` (type `Thread` puis tag) ; fil de pêche et fil dentaire toujours acceptés, comme pour la broderie (choix inchangé).
 
 ### C03 — Infobulle d'usure figée chez un client MP
 
@@ -81,7 +81,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Risque** : sur un client MP, « jours restants » et couleur ne bougent plus après le premier affichage, même si le vêtement devient sale, mouillé ou ensanglanté. La table grandit aussi d'une entrée par objet survolé pendant toute la session.
 - **Correction** : côté client, recalculer à chaque affichage (le calcul est léger) ou garder un cache horodaté par `getTimestampMs`, vidé toutes les quelques secondes. Garder le cache horaire sur l'autorité.
 - **Priorité** : moyenne. **Effort** : S.
-- **Statut** : confirmé statiquement.
+- **Statut : corrigé (commit 00cd2e7), à vérifier en jeu**. Le client MP recalcule à chaque affichage et ne garde rien en cache.
 
 ### C04 — Inconfort, ampoules, endurance et perte limités à l'emplacement `shoes`
 
@@ -93,7 +93,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Risque** : une botte de mod hors `shoes` a une pointure, raidit les pieds et réduit l'écrasement, mais ne donne ni inconfort, ni ampoule, ni endurance, ni perte de chaussure. Le README promet ces effets pour les mods.
 - **Correction** : `wornShoe` parcourt `getWornItems()` et rend la première pièce `canShoeHaveSize`, avec un raccourci sur `SHOES`. Ajouter un test lupa avec un emplacement de mod.
 - **Priorité** : moyenne. **Effort** : S.
-- **Statut** : confirmé statiquement.
+- **Statut : corrigé (commit 00cd2e7), à vérifier en jeu**. `wornShoe` cherche ensuite dans toute la tenue ; test lupa ajouté.
 
 ### C05 — Copier un patron ne coûte rien à l'original
 
