@@ -12,7 +12,7 @@
   "hooks": "autotest/mtir_hooks.lua",
   "params": {"clientWaitSec": "180"},
   "sp": {
-    "save": "20*",
+    "save": "2026-10-17_17-50-04",
     "gameMode": "Sandbox",
     "saveMods": "replace",
     "timeoutSec": 900,
