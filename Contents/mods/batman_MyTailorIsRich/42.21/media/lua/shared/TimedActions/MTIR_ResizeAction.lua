@@ -24,7 +24,8 @@ local function materialsOk(self)
         return false
     end
     for i = 0, self.materials:size() - 1 do
-        if self.materials:get(i):getFullType() ~= materialType then
+        local material = self.materials:get(i)
+        if material:getFullType() ~= materialType or not MTIR.isPickable(material) then
             return false
         end
     end

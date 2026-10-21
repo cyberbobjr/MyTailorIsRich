@@ -79,10 +79,22 @@ local function statMask(stat)
     return SyncPlayerStatsPacket.getBitMaskForStat(stat)
 end
 
---- Chaussure portée et son écart, ou nil.
+--- Chaussure portée et son écart, ou nil. Emplacement vanilla `shoes` d'abord, puis
+--- toute la tenue : une chaussure de mod peut être portée ailleurs (MTIR_Sizing).
 local function wornShoe(player)
     local shoe = player:getWornItem(ItemBodyLocation.SHOES)
     if not shoe or not MTIR.canShoeHaveSize(shoe) then
+        shoe = nil
+        local worn = player:getWornItems()
+        for i = 0, worn:size() - 1 do
+            local item = worn:getItemByIndex(i)
+            if item and MTIR.canShoeHaveSize(item) then
+                shoe = item
+                break
+            end
+        end
+    end
+    if not shoe then
         return nil, nil
     end
     return shoe, MTIR.getShoeDiff(shoe, MTIR.getPlayerShoeSize(player))

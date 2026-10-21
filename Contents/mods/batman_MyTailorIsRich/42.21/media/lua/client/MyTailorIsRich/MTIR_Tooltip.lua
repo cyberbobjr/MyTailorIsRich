@@ -84,7 +84,15 @@ local function degradeLine(item, player)
     if params.minDays >= params.maxDays then
         return nil
     end
-    local chance = MTIR.DegradingChance[item:getID()] or MTIR.calcDegradeChance(item, player)
+    -- Le cache horaire n'est vidé que sur l'autorité : un client MP recalcule à
+    -- chaque affichage (saleté, sang, humidité à jour) et ne garde rien.
+    local chance
+    if isClient() then
+        chance = MTIR.calcDegradeChance(item, player)
+        MTIR.DegradingChance[item:getID()] = nil
+    else
+        chance = MTIR.DegradingChance[item:getID()] or MTIR.calcDegradeChance(item, player)
+    end
     if not chance or chance <= 0 then
         return nil
     end

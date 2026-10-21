@@ -88,7 +88,7 @@ end
 
 --- Fil : utilisations requises, restantes et liste suffisante (ArrayList ou nil).
 local function collectThreads(inventory, required)
-    local allThreads = inventory:getItemsFromType("Thread", true)
+    local allThreads = MTIR.collectThreads(inventory)
     return MTIR.getRemainingThread(allThreads), MTIR.pickThreads(allThreads, required)
 end
 
@@ -141,7 +141,7 @@ function MTIR.getResizeRequirements(player, item, upsize, mods)
     local allMaterials = materialType and player:getInventory():getItemsFromFullType(materialType, true) or nil
     req.materialType = materialType
     req.requiredMaterial = requiredMaterial
-    req.availableMaterial = allMaterials and allMaterials:size() or 0
+    req.availableMaterial = allMaterials and MTIR.countPickable(allMaterials) or 0
     req.materials = allMaterials and MTIR.pickItems(allMaterials, requiredMaterial) or nil
     req.requiredLevel = MTIR.getRequiredLevelToChange(item, upsize)
     req.targetSize = MTIR.getResizeTarget(item, upsize)
@@ -162,7 +162,7 @@ local function stripRequirements(player, item, req)
     local allStrips = stripType and player:getInventory():getItemsFromFullType(stripType, true) or nil
     req.materialType = stripType
     req.requiredMaterial = MTIR.getRequiredStripToRecondition(item)
-    req.availableMaterial = allStrips and allStrips:size() or 0
+    req.availableMaterial = allStrips and MTIR.countPickable(allStrips) or 0
     req.materials = allStrips and MTIR.pickItems(allStrips, req.requiredMaterial) or nil
     req.potential = math.max(0, math.min(1, MTIR.getPotentialRepairForRecondition(item, player, req.mods.levelBonus)))
     req.success = MTIR.applySuccessMalus(MTIR.getSuccessChanceForRecondition(item, player, req.mods.levelBonus), req.mods)

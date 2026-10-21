@@ -3,6 +3,14 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## Unreleased
+
+### Fixes
+- **Patterns no longer use your notes.** Tracing or copying a pattern only takes blank sheets of paper: written, renamed or favorited sheets (and documents from other mods) are left alone. Favorited fabric strips, paperclips and materials are never used either.
+- **Any thread works for sewing.** Alterations, reconditioning and sewing from a pattern now accept the same threads as embroidery (aramid thread, sinew and modded threads), using plain spools first.
+- **Multiplayer: wear estimate in tooltips stays current.** The "days left" line of a worn garment now updates when it gets dirty, wet or bloody.
+- **Modded shoes worn outside the shoe slot** now give discomfort, blisters, stamina loss and can slip off like vanilla shoes when their size is wrong.
+
 ## 0.4.5 — 2026-10-07
 
 ### Fixes

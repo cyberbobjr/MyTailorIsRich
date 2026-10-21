@@ -32,7 +32,7 @@ Dans la fenêtre d'artisanat, une recette qui produit un vêtement affiche un ch
 ## Retouches et usure
 
 ### F07 — Retoucher (agrandir ou rétrécir)
-Une seule retouche par vêtement, d'une taille, sur un vêtement de taille connue et en tissu reconnu (coton, jean, cuir). Agrandir consomme des bandes du tissu ; rétrécir, des trombones ; les deux, aiguille, ciseaux et fil (et un dé à coudre à la main, F25). Niveau requis : difficulté du vêtement + difficulté du tissu (+1 pour agrandir) ; réussite 50 % au niveau requis, +25 % par niveau au-dessus. Un échec peut user le vêtement (option `ChanceToDegradeOnFailure`).
+Une seule retouche par vêtement, d'une taille, sur un vêtement de taille connue et en tissu reconnu (coton, jean, cuir). Agrandir consomme des bandes du tissu ; rétrécir, des trombones ; les deux, aiguille, ciseaux et fil (bobines de fil d'abord, puis tout fil du tag `base:thread` : aramide, tendon… ; matériaux favoris jamais pris) (et un dé à coudre à la main, F25). Niveau requis : difficulté du vêtement + difficulté du tissu (+1 pour agrandir) ; réussite 50 % au niveau requis, +25 % par niveau au-dessus. Un échec peut user le vêtement (option `ChanceToDegradeOnFailure`).
 
 ![Retouche sur machine à pédale](images/screenshots/shot2.png)
 
@@ -63,7 +63,7 @@ Une ampoule est une petite égratignure au pied, sans infection zombie ; comme t
 ## Patrons de couture
 
 ### F12 — Tracer un patron
-**Trace a pattern** sur un vêtement ou une paire taillés : ciseaux, stylo ou crayon, feuilles de papier (plus pour un vêtement complexe), une table, un bureau, un comptoir, un établi ou la machine à pédale à proximité (le personnage s'y rend). Le modèle doit être en bon état (50 % ou plus) et **est détruit**. Niveau requis : un de moins que pour coudre. La précision du patron est le niveau de Couture du traceur. Aucun patron pour les protections balistiques, les objets sans tissu cousable, ni les chaussures en caoutchouc ou plastique.
+**Trace a pattern** sur un vêtement ou une paire taillés : ciseaux, stylo ou crayon, feuilles de papier vierges (plus pour un vêtement complexe ; une feuille écrite, renommée ou favorite n'est jamais prise), une table, un bureau, un comptoir, un établi ou la machine à pédale à proximité (le personnage s'y rend). Le modèle doit être en bon état (50 % ou plus) et **est détruit**. Niveau requis : un de moins que pour coudre. La précision du patron est le niveau de Couture du traceur. Aucun patron pour les protections balistiques, les objets sans tissu cousable, ni les chaussures en caoutchouc ou plastique.
 
 ![Tracer un patron](images/screenshots/shot3.png)
 

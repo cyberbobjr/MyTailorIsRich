@@ -6,7 +6,7 @@ Un patron permet de coudre un vêtement ou une paire de chaussures dans **n'impo
 
 Clic droit sur un vêtement ou une paire de chaussures taillés : **Tracer un patron**.
 
-- Ciseaux, stylo ou crayon, feuilles de papier (plus pour un vêtement complexe).
+- Ciseaux, stylo ou crayon, feuilles de papier vierges (plus pour un vêtement complexe). Une feuille écrite, renommée ou favorite n'est jamais utilisée.
 - Une table, un bureau, un comptoir ou un établi à proximité (ou une machine à pédale) : le personnage s'y rend.
 - Le modèle doit être en bon état (**50 % ou plus**) et **est détruit** : il est décousu et découpé.
 - Couture : un niveau de moins que pour le coudre.

@@ -6,7 +6,7 @@ Patterns let you sew a garment or a pair of shoes in **any size**.
 
 Right-click a sized garment or pair of shoes: **Trace a pattern**.
 
-- Scissors, a pen or pencil, sheets of paper (more for complex clothes).
+- Scissors, a pen or pencil, blank sheets of paper (more for complex clothes). Written, renamed or favorited sheets are never used.
 - A table, desk, counter or workbench nearby (or a treadle sewing machine): your character walks to it.
 - The model must be in good condition (**50% or more**) and **is destroyed**: it is unpicked and cut up.
 - Tailoring: one level less than needed to sew it.

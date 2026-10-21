@@ -62,7 +62,7 @@ local function embroideryRequirements(player, machine)
     local mods = MTIR.getMachineMods(machine)
     local kindName = MTIR.getMachineKindName(machine)
     local inventory = player:getInventory()
-    local allThreads = inventory:getAllEvalRecurse(MTIR.predicateThread)
+    local allThreads = MTIR.collectThreads(inventory)
     local requiredThread = MTIR.getMachineEmbroideryThread(mods)
     local tailoring = player:getPerkLevel(Perks.Tailoring)
     local req = {

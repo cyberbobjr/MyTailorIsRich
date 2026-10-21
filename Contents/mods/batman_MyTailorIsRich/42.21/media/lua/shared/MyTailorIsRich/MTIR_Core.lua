@@ -632,6 +632,22 @@ function MTIR.predicateThread(item)
     return item:getType() == "Thread" or item:hasTag(ItemTag.THREAD)
 end
 
+--- Bobines de l'inventaire (sacs compris) : type Thread d'abord, puis les autres
+--- objets du tag base:thread, comme le vanilla (ISInventoryPaneContextMenu).
+function MTIR.collectThreads(inventory)
+    local found = inventory:getAllEvalRecurse(MTIR.predicateThread)
+    local ordered = ArrayList.new()
+    for pass = 1, 2 do
+        for i = 0, found:size() - 1 do
+            local thread = found:get(i)
+            if (thread:getType() == "Thread") == (pass == 1) then
+                ordered:add(thread)
+            end
+        end
+    end
+    return ordered
+end
+
 function MTIR.getRemainingThread(threads)
     local total = 0
     for i = 0, threads:size() - 1 do
@@ -657,14 +673,53 @@ function MTIR.pickThreads(threads, required)
     return nil
 end
 
---- `required` premiers objets de la liste, ou nil.
-function MTIR.pickItems(items, required)
-    if items:size() < required then
-        return nil
+--- Feuille vierge que l'on peut consommer : ni favorite, ni renommée, ni écrite
+--- (Literature.isEmptyPages, 42.21), ni verrouillée, sans ModData (document d'un mod).
+--- Le nom affiché comparé à celui du script couvre un renommage sans setCustomName.
+function MTIR.isBlankSheet(item)
+    if item:isFavorite() or item:isCustomName() or item:hasModData() then
+        return false
     end
+    local script = item:getScriptItem()
+    if script and item:getDisplayName() ~= script:getDisplayName() then
+        return false
+    end
+    if instanceof(item, "Literature") then
+        return item:isEmptyPages() and item:getLockedBy() == nil
+    end
+    return true
+end
+
+--- Matériau que pickItems peut prendre : tout objet non favori.
+function MTIR.isPickable(item)
+    return not item:isFavorite()
+end
+
+--- Nombre d'objets de la liste que pickItems peut prendre.
+function MTIR.countPickable(items)
+    local count = 0
+    for i = 0, items:size() - 1 do
+        if MTIR.isPickable(items:get(i)) then
+            count = count + 1
+        end
+    end
+    return count
+end
+
+--- `required` premiers objets non favoris de la liste, ou nil.
+function MTIR.pickItems(items, required)
     local picked = ArrayList.new()
-    for i = 0, required - 1 do
-        picked:add(items:get(i))
+    for i = 0, items:size() - 1 do
+        if picked:size() >= required then
+            break
+        end
+        local item = items:get(i)
+        if MTIR.isPickable(item) then
+            picked:add(item)
+        end
+    end
+    if picked:size() < required then
+        return nil
     end
     return picked
 end

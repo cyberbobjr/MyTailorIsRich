@@ -24,7 +24,20 @@ local function newPlayer(key, diff)
     if diff then
         player.shoe = { diff = diff }
     end
-    function player:getWornItem() return self.shoe end
+    -- Chaussure à l'emplacement vanilla `shoes`, sauf shoeLocation (mod).
+    function player:getWornItem(location)
+        if self.shoe and location == (self.shoeLocation or ItemBodyLocation.SHOES) then
+            return self.shoe
+        end
+        return nil
+    end
+    function player:getWornItems()
+        local shoe = self.shoe
+        return {
+            size = function() return shoe and 1 or 0 end,
+            getItemByIndex = function() return shoe end,
+        }
+    end
     function player:hasTrait(trait) return self.traits[trait] == true end
     function player:getStats()
         local owner = self
@@ -65,6 +78,15 @@ T["très grandes (+3) : plancher léger"] = function()
     refreshAll({ player })
     MTIR.enforceDiscomfortFloor(player)
     assertEq(player.discomfort, 25, "plancher très grandes")
+end
+
+T["chaussure de mod hors de l'emplacement shoes : plancher aussi"] = function()
+    local player = newPlayer("a", -2)
+    player.shoeLocation = "mod:boots"
+    refreshAll({ player })
+    assertEq(MTIR.hasDiscomfortFloors(), true, "plancher actif")
+    MTIR.enforceDiscomfortFloor(player)
+    assertEq(player.discomfort, 45, "inconfort relevé au plancher")
 end
 
 T["le compte suit les changements de chaussures"] = function()

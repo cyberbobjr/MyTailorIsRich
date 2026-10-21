@@ -153,7 +153,7 @@ end
 --- Aiguille, fil (1 utilisation), dé (couture à la main) et niveau.
 local function embroideryRequirements(player)
     local inventory = player:getInventory()
-    local allThreads = inventory:getAllEvalRecurse(MTIR.predicateThread)
+    local allThreads = MTIR.collectThreads(inventory)
     local needsThimble = MTIR.needsThimble(nil)
     local req = {
         needle = inventory:getFirstEvalRecurse(MTIR.predicateNeedle),

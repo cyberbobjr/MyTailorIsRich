@@ -293,8 +293,9 @@ function MTIR.getTraceXp(model)
     return patternLevel(model) * 2 * MTIR.opt("TailoringXpMultiplier")
 end
 
+--- Feuille consommable : type attendu et vierge (MTIR.isBlankSheet).
 function MTIR.predicatePaper(item)
-    return item:getFullType() == PAPER_TYPE
+    return item:getFullType() == PAPER_TYPE and MTIR.isBlankSheet(item)
 end
 
 function MTIR.getPaperType()
@@ -422,7 +423,7 @@ end
 function MTIR.getSewRequirements(player, data, size, mods)
     mods = mods or MTIR.SEW_BY_HAND
     local inventory = player:getInventory()
-    local allThreads = inventory:getItemsFromType("Thread", true)
+    local allThreads = MTIR.collectThreads(inventory)
     local requiredThread = MTIR.getPatternThread(data, mods)
     local requiredUnits = MTIR.getPatternMaterialUnits(data, size)
     local available, materials = MTIR.pickPatternMaterials(inventory, data.fabric, requiredUnits)
@@ -492,7 +493,8 @@ end
 function MTIR.countMaterialUnits(fabric, items)
     local total = 0
     for i = 0, items:size() - 1 do
-        total = total + unitsOf(fabric, items:get(i))
+        local item = items:get(i)
+        total = total + (MTIR.isPickable(item) and unitsOf(fabric, item) or 0)
     end
     return total
 end
@@ -506,7 +508,7 @@ function MTIR.pickPatternMaterials(inventory, fabric, required)
         local items = inventory:getItemsFromFullType(entry.type, true)
         for i = 0, items:size() - 1 do
             local item = items:get(i)
-            local units = unitsOf(fabric, item)
+            local units = MTIR.isPickable(item) and unitsOf(fabric, item) or 0
             available = available + units
             if pickedUnits < required and units > 0 then
                 picked:add(item)

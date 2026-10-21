@@ -134,7 +134,7 @@ local function stripsOk(self)
         return false
     end
     for i = 0, strips:size() - 1 do
-        if strips:get(i):getFullType() ~= stripType then
+        if strips:get(i):getFullType() ~= stripType or not MTIR.isPickable(strips:get(i)) then
             return false
         end
     end
