@@ -22,7 +22,7 @@ L'autorité (client solo, ou serveur dédié en MP sur le premier joueur connect
 
 1. **Étiquette et pointure** : `MTIR_CheckSizeAction` sur un vêtement taillé (taille révélée) et sur des chaussures (pointure révélée).
 2. **Retouche à la main** : `MTIR_ResizeAction` (trombones pour rétrécir, bandes pour agrandir si la taille est déjà la plus petite) ; nouvelle taille et `resized` vérifiés.
-3. **Machine à pédale** posée sur une case libre voisine (objet de tuile `mtir_treadle_01_0`, sans passer par l'objet d'inventaire) : reconnue par `machineFromPos`, utilisable, et table de travail.
+3. **Machine à pédale** posée sur une case libre à une ou deux cases du joueur par le chemin du joueur : `ISMoveableSpriteProps:instanceItem` puis `placeMoveableInternal(nil, case, objet, "mtir_treadle_01_0")` (bonne classe, entité B42 du `SpriteConfig`, envoi aux clients). Lignes `INFO` : case du joueur, case visée, objet d'inventaire, objet créé ; en échec, la raison de chaque case rejetée. Reconnue par `machineFromPos`, utilisable, et table de travail.
 4. **Patron tracé** (`MTIR_TracePatternAction`) avec la même sélection de feuilles que le menu ; une feuille **écrite**, une **renommée** et une **favorite** sont présentes : `predicatePaper` doit les refuser, l'autorité doit refuser un tracé qui liste la feuille écrite, et les trois feuilles doivent rester intactes (C01).
 5. **Copie du patron** (`MTIR_CopyPatternAction`) : original gardé, copie `copies = 1`.
 6. **Couture sur la machine** (`MTIR_SewPatternAction` avec `machinePos`) depuis la copie, à la taille du personnage : vêtement créé ; usure de la machine si l'entretien est activé. Une aiguille cassée (tirage de la machine) relance jusqu'à 4 essais.
@@ -32,11 +32,14 @@ Chaque objet de test porte la marque ModData `PZAT_MTIR` (rôle) et est envoyé 
 
 ## Contrôles côté client (MP, `--client-run`)
 
-Le client 1 attend (180 s, paramètre `clientWaitSec`) de recevoir tous les objets marqués, puis vérifie sur sa propre copie : pointure révélée, taille et retouche, feuilles protégées toujours possédées, données des patrons et de la copie, taille du vêtement cousu, couleur personnalisée, nom et ModData de broderie. La **teinte du visuel** d'un vêtement non porté est notée `WARN` sans échec : `syncItemFields` transmet la couleur personnalisée, pas la teinte du visuel (base moteur, `clothing-tint.md`) ; les autres joueurs la reçoivent à l'enfilage.
+**Synchronisation (MP).** Le « go » de l'outil arrive dès `OnGameStart` du client, avant que son chargement soit fini : le 2026-10-21 le serveur a joué le scénario environ 4 s avant que le client soit prêt, sans case voisine utilisable pour la machine, et les objets envoyés pendant le chargement n'ont jamais atteint le client. Désormais le client envoie `ready` (commande `PZAT_MTIR`) toutes les 2 s jusqu'à la réponse `started` ; le serveur attend ce message (60 s au plus, sinon `WARN` et départ) et que la case du joueur soit chargée (90 s, sinon `FAIL`). À la fin, le serveur envoie `done` avec les rôles réellement préparés, le résumé et le premier échec.
+
+Le client 1 attend le message `done` (180 s, paramètre `clientWaitSec`), puis au plus 30 s les objets des rôles annoncés, et vérifie sur sa propre copie : pointure révélée, taille et retouche, feuilles protégées toujours possédées, données des patrons et de la copie, taille du vêtement cousu, couleur personnalisée, nom et ModData de broderie. La **teinte du visuel** d'un vêtement non porté est notée `WARN` sans échec : `syncItemFields` transmet la couleur personnalisée, pas la teinte du visuel (base moteur, `clothing-tint.md`) ; les autres joueurs la reçoivent à l'enfilage.
 
 ## Limites
 
 - Les actions sont complétées sans leur durée, leur animation ni leur son ; les menus, le panneau de la machine et l'infobulle ne sont pas ouverts. Le rendu reste à vérifier à l'œil.
 - La machine électrique (courant) et la broderie à la machine ne sont pas couvertes.
 - Les contrôles C01 échouent tant que la correction de C01 (`MTIR.isBlankSheet`, `predicatePaper`) n'est pas dans le mod chargé.
-- Écrit le 2026-10-21 ; `check` et luacheck passent. **Aucun passage `sp` ni `mp` n'a encore été lancé.**
+- Écrit le 2026-10-21. Premier passage `mp` (2026-10-21) : 5 PASS serveur puis échec de la pose de la machine (aucune case trouvée, scénario lancé avant la fin du chargement du client) ; client en attente 180 s. Corrigé par la synchronisation ci-dessus et la pose par `placeMoveableInternal` ; **à relancer**.
+- Un échec côté serveur apparaît chez le client comme `FAIL client: server scenario completed` ; seuls les objets réellement préparés sont contrôlés.

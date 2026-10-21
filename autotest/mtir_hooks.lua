@@ -13,10 +13,15 @@
 -- Every test item is marked in ModData (PZAT_MTIR) and synced to its owner.
 -- In mp, client 1 (--client-run) then checks what its own copy received:
 -- ModData (size, label, pattern, embroidery), custom colour and visual tint.
+-- Handshake (mp): the client sends "ready" until the server answers "started";
+-- the server waits for it (and for the player's square to be loaded on the
+-- server), runs the scenario, then sends "done" with the roles it prepared, so
+-- the client only checks what was really done and fails fast after an abort.
 local H = { client = {}, server = {} }
 
 local MARK = "PZAT_MTIR"
-local S = { lines = {}, ok = true, finished = false, failures = 0, passes = 0 }
+local CMD = "PZAT_MTIR" -- module of the hook's network commands
+local S = { lines = {}, ok = true, finished = false, failures = 0, passes = 0, roles = {} }
 
 local function rec(ok, name, detail)
     if ok then
@@ -30,6 +35,12 @@ end
 
 local function warn(name, detail)
     S.lines[#S.lines + 1] = "WARN " .. name .. (detail and (" - " .. tostring(detail)) or "")
+end
+
+local function info(name, detail)
+    local line = "INFO " .. name .. (detail and (" - " .. tostring(detail)) or "")
+    S.lines[#S.lines + 1] = line
+    print("[MTIR autotest] " .. line)
 end
 
 local function check(name, fn)
@@ -63,6 +74,9 @@ end
 local function mark(item, role, extra)
     local md = item:getModData()
     md[MARK] = role
+    local known = false
+    for _, r in ipairs(S.roles) do known = known or r == role end
+    if not known then S.roles[#S.roles + 1] = role end
     if extra then
         for k, v in pairs(extra) do md[k] = v end
     end
@@ -101,30 +115,69 @@ local SHIRTS = { "Base.Tshirt_DefaultTEXTURE_TINT", "Base.Tshirt_White", "Base.S
     "Base.Tshirt_DefaultDECAL_TINT", "Base.Trousers_WhiteTINT" }
 local SHOES = { "Base.Shoes_TrainerTINT", "Base.Shoes_Black", "Base.Shoes_BlackBoots", "Base.Shoes_Brown" }
 
--- Free floor square next to the player (same level), for the machine.
+-- Free floor square near the player (same level, ring 1 then ring 2), for the
+-- machine. Returns the square, or nil and the reason of each rejected square.
+local NEAR = { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 }, { 1, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 },
+    { 2, 0 }, { 0, 2 }, { -2, 0 }, { 0, -2 }, { 2, 1 }, { 1, 2 }, { -2, -1 }, { -1, -2 } }
+
 local function freeSquareNearPlayer()
     local sq0 = P:getCurrentSquare()
-    if not sq0 then return nil end
+    if not sq0 then
+        return nil, string.format("player square nil at %.1f,%.1f,%.1f", P:getX(), P:getY(), P:getZ())
+    end
     local cell = getCell()
-    for _, d in ipairs({ { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 }, { 1, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 } }) do
+    local why = {}
+    for _, d in ipairs(NEAR) do
         local sq = cell:getGridSquare(sq0:getX() + d[1], sq0:getY() + d[2], sq0:getZ())
-        if sq and sq:isSolidFloor() and sq:isFree(false) and not sq:HasStairs()
-            and not MTIR.findSewingMachine(sq) and not MTIR.findWorkTable(sq) then
+        local reason
+        if not sq then
+            reason = "not loaded"
+        elseif not sq:isSolidFloor() then
+            reason = "no floor"
+        elseif not sq:isFree(false) then
+            reason = "not free"
+        elseif sq:HasStairs() then
+            reason = "stairs"
+        elseif MTIR.findSewingMachine(sq) or MTIR.findWorkTable(sq) then
+            reason = "furniture"
+        else
             return sq
         end
+        why[#why + 1] = d[1] .. "," .. d[2] .. "=" .. reason
     end
-    return nil
+    return nil, table.concat(why, " ")
 end
 
 local machine, machineSq
+local MACHINE_SPRITE = "mtir_treadle_01_0"
+local MACHINE_ITEM = "Base.Mov_MTIR_TreadleMachine"
 
+-- Same path as a player placing the furniture item (ISMoveablesAction:complete
+-- -> placeMoveableInternal, four arguments, no character): right class, B42
+-- entity created from the SpriteConfig, sent to the clients on a server.
 local function placeMachine()
-    machineSq = freeSquareNearPlayer()
-    if not machineSq then return nil end
-    machine = IsoObject.new(getCell(), machineSq, "mtir_treadle_01_0")
-    machineSq:AddTileObject(machine)
-    if isServer() then machine:transmitCompleteItemToClients() end
-    return machine
+    local sq, why = freeSquareNearPlayer()
+    local sq0 = P:getCurrentSquare()
+    info("machine: player square", sq0 and (sq0:getX() .. "," .. sq0:getY() .. "," .. sq0:getZ()) or "nil")
+    if not sq then return nil, "no free square (" .. tostring(why) .. ")" end
+    machineSq = sq
+    info("machine: target square", sq:getX() .. "," .. sq:getY() .. "," .. sq:getZ())
+    local sprite = getSprite(MACHINE_SPRITE)
+    if not sprite or sprite:getName() ~= MACHINE_SPRITE then
+        return nil, "sprite " .. MACHINE_SPRITE .. " not loaded on this side"
+    end
+    local props = ISMoveableSpriteProps.new(sprite)
+    if not props.isMoveable then return nil, "sprite " .. MACHINE_SPRITE .. " has no IsMoveAble" end
+    local item = props:instanceItem(MACHINE_SPRITE) or instanceItem(MACHINE_ITEM)
+    if not item then return nil, "no inventory item for " .. MACHINE_SPRITE end
+    info("machine: inventory item", item:getFullType())
+    local obj = props:placeMoveableInternal(nil, sq, item, MACHINE_SPRITE)
+    if not obj or obj:getObjectIndex() == -1 then return nil, "placeMoveableInternal placed nothing" end
+    machine = obj
+    info("machine: object created", tostring(obj:getObjectName()) .. " sprite="
+        .. tostring(obj:getSprite() and obj:getSprite():getName()) .. " thumpable="
+        .. tostring(instanceof(obj, "IsoThumpable")) .. " recognised=" .. tostring(MTIR.isSewingMachine(obj)))
+    return obj
 end
 
 local function removeMachine()
@@ -191,8 +244,9 @@ local function scenario()
     mark(shirtA, "resized")
 
     -- 3. Machine (also the work table: the treadle machine is sewing furniture) --
-    local m = placeMachine()
-    rec(m ~= nil, "treadle machine placed next to the player", machineSq and (machineSq:getX() .. "," .. machineSq:getY()))
+    local placedOk, m, why = pcall(placeMachine)
+    if not placedOk then m, why = nil, "error: " .. tostring(m) end
+    rec(m ~= nil, "treadle machine placed next to the player", m and MTIR.encodeMachinePos(m) or why)
     if not m then return end
     local pos = MTIR.encodeMachinePos(m)
     check("machine detected, usable, and a work table", function()
@@ -350,7 +404,7 @@ end
 -------------------------------------------------------------------------------
 -- MP client: checks its own copy of the marked items
 -------------------------------------------------------------------------------
-local C = { deadline = 0, checked = false }
+local C = { deadline = 0, serverDone = false, started = false, nextReady = 0, grace = 0, expected = nil }
 
 local function findMarked(player, role)
     local items = player:getInventory():getAllEvalRecurse(function(i)
@@ -361,30 +415,58 @@ end
 
 local CLIENT_ROLES = { "shoe", "resized", "written", "renamed", "favourite", "traced", "copy", "sewn", "dyed" }
 
-local function clientReady(player)
+-- Roles to check: those the server reported as prepared, or all of them.
+local function expectedRoles()
+    if C.expected then return C.expected end
+    local set = {}
+    for _, r in ipairs(CLIENT_ROLES) do set[r] = true end
+    return set
+end
+
+local function missingRoles(player)
+    local want, missing = expectedRoles(), {}
     for _, role in ipairs(CLIENT_ROLES) do
-        if not findMarked(player, role) then return false end
+        if want[role] and not findMarked(player, role) then missing[#missing + 1] = role end
     end
+    return missing
+end
+
+local function clientReady(player)
+    if #missingRoles(player) > 0 then return false end
     -- The last item is marked after embroidery: wait until its name arrives too.
     local dyed = findMarked(player, "dyed")
-    return MTIR.getEmbroidery(dyed) ~= nil
+    return not dyed or not dyed:getModData().PZAT_MTIR_name or MTIR.getEmbroidery(dyed) ~= nil
 end
 
 local function clientChecks(player)
+    local want = expectedRoles()
     local function has(role)
         return findMarked(player, role) ~= nil
     end
-    rec(has("shoe") and (MTIR.getShoeData(findMarked(player, "shoe")) or {}).reveal == true,
-        "client: shoe size revealed (ModData synced)")
-    local resized = findMarked(player, "resized")
-    local rd = resized and MTIR.getData(resized)
-    rec(rd ~= nil and rd.reveal == true and rd.resized ~= 0, "client: altered garment ModData synced",
-        rd and ("size=" .. tostring(rd.size)))
-    rec(has("written") and has("renamed") and has("favourite"), "client: C01 protected sheets still owned")
-    rec(has("traced") and MTIR.getPatternData(findMarked(player, "traced")) ~= nil, "client: traced pattern data")
-    local copy = findMarked(player, "copy")
-    rec(copy ~= nil and (MTIR.getPatternData(copy) or {}).copies == 1, "client: pattern copy data")
-    rec(has("sewn") and MTIR.getData(findMarked(player, "sewn")) ~= nil, "client: sewn garment has a size")
+    if want.shoe then
+        rec(has("shoe") and (MTIR.getShoeData(findMarked(player, "shoe")) or {}).reveal == true,
+            "client: shoe size revealed (ModData synced)")
+    end
+    if want.resized then
+        local resized = findMarked(player, "resized")
+        local rd = resized and MTIR.getData(resized)
+        rec(rd ~= nil and rd.reveal == true and rd.resized ~= 0, "client: altered garment ModData synced",
+            rd and ("size=" .. tostring(rd.size)))
+    end
+    if want.written or want.renamed or want.favourite then
+        rec(has("written") and has("renamed") and has("favourite"), "client: C01 protected sheets still owned")
+    end
+    if want.traced then
+        rec(has("traced") and MTIR.getPatternData(findMarked(player, "traced")) ~= nil, "client: traced pattern data")
+    end
+    if want.copy then
+        local copy = findMarked(player, "copy")
+        rec(copy ~= nil and (MTIR.getPatternData(copy) or {}).copies == 1, "client: pattern copy data")
+    end
+    if want.sewn then
+        rec(has("sewn") and MTIR.getData(findMarked(player, "sewn")) ~= nil, "client: sewn garment has a size")
+    end
+    if not want.dyed then return end
     local dyed = findMarked(player, "dyed")
     local md = dyed and dyed:getModData()
     local col = md and md.PZAT_MTIR_color
@@ -424,6 +506,23 @@ local function result()
     return { ok = S.ok, summary = S.passes .. " pass, " .. S.failures .. " fail", lines = S.lines }
 end
 
+-- MP client ----------------------------------------------------------------------
+local function onServerCommand(module, command, args)
+    if module ~= CMD then return end
+    if command == "started" then
+        C.started = true
+    elseif command == "done" and not C.serverDone then
+        C.serverDone, C.started = true, true
+        C.grace = getTimestampMs() + 30000
+        C.expected = {}
+        for role in string.gmatch(tostring(args and args.roles or ""), "[^,]+") do C.expected[role] = true end
+        if not (args and args.ok) then
+            rec(false, "client: server scenario completed", tostring(args and args.summary) .. " - "
+                .. tostring(args and args.firstFail))
+        end
+    end
+end
+
 function H.client.start(ctx)
     if ctx.role == "sp" then
         P = getPlayer()
@@ -431,38 +530,95 @@ function H.client.start(ctx)
         runAuthority()
         return true
     end
-    -- mpclient: wait for the server scenario, then check the local copies.
+    -- mpclient: announce readiness, wait for the server scenario, then check the local copies.
     C.deadline = getTimestampMs() + (tonumber(ctx.params.clientWaitSec) or 180) * 1000
+    Events.OnServerCommand.Add(onServerCommand)
+    return true
+end
+
+local function clientFinish(player)
+    Events.OnServerCommand.Remove(onServerCommand)
+    if player then clientChecks(player) end
     return true
 end
 
 function H.client.done(ctx)
     if ctx.role == "sp" then return S.finished end
     local player = getPlayer()
-    if player and clientReady(player) then
-        clientChecks(player)
-        return true
+    local now = getTimestampMs()
+    if player and not C.started and now >= C.nextReady then
+        sendClientCommand(player, CMD, "ready", {})
+        C.nextReady = now + 2000
     end
-    if getTimestampMs() > C.deadline then
-        rec(false, "client: marked items received before the deadline")
-        if player then clientChecks(player) end
-        return true
+    if C.serverDone then
+        if player and clientReady(player) then return clientFinish(player) end
+        if now > C.grace then
+            rec(false, "client: prepared items received within 30 s of the server result",
+                player and ("missing " .. table.concat(missingRoles(player), ",")) or "no player")
+            return clientFinish(player)
+        end
+        return false
+    end
+    if now > C.deadline then
+        rec(false, "client: server result received before the deadline",
+            C.started and "server started" or "server never answered ready")
+        return clientFinish(player)
     end
     return false
 end
 
 H.client.result = result
 
+-- Server -------------------------------------------------------------------------
+local W = { since = 0, clientReady = false, sent = false }
+local READY_WAIT_MS = 60000 -- without a "ready" (mp without --client-run), run anyway after this
+local SQUARE_WAIT_MS = 90000
+
+local function onClientCommand(module, command, player)
+    if module ~= CMD or command ~= "ready" then return end
+    if not W.clientReady then info("server: client ready", player and player:getUsername()) end
+    W.clientReady = true
+    sendServerCommand(player, CMD, "started", {})
+end
+
+local function sendDone()
+    if W.sent or not P then return end
+    W.sent = true
+    local firstFail
+    for _, line in ipairs(S.lines) do
+        if not firstFail and line:sub(1, 5) == "FAIL " then firstFail = line end
+    end
+    sendServerCommand(P, CMD, "done", { ok = S.ok, summary = S.passes .. " pass, " .. S.failures .. " fail",
+        roles = table.concat(S.roles, ","), firstFail = firstFail or "" })
+end
+
 function H.server.start(ctx)
     local players = ctx.players()
     P = players and players[1]
     if not P then return false, "no online player" end
-    runAuthority()
+    W.since = getTimestampMs()
+    Events.OnClientCommand.Add(onClientCommand)
     return true
 end
 
 function H.server.done()
-    return S.finished
+    if S.finished then return true end
+    local waited = getTimestampMs() - W.since
+    local squareLoaded = P:getCurrentSquare() ~= nil
+    if not squareLoaded and waited > SQUARE_WAIT_MS then
+        rec(false, "player square loaded on the server",
+            string.format("%.1f,%.1f,%.1f", P:getX(), P:getY(), P:getZ()))
+        S.finished = true
+    elseif squareLoaded and (W.clientReady or waited > READY_WAIT_MS) then
+        if not W.clientReady then warn("server: no client ready message, running anyway") end
+        info("server: scenario start", "waited " .. waited .. " ms")
+        runAuthority()
+    else
+        return false
+    end
+    sendDone()
+    Events.OnClientCommand.Remove(onClientCommand)
+    return true
 end
 
 H.server.result = result
