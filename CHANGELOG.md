@@ -3,7 +3,7 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
-## Unreleased
+## 0.4.6 — 2026-10-21
 
 ### Fixes
 - **Patterns no longer use your notes.** Tracing or copying a pattern only takes blank sheets of paper: written, renamed or favorited sheets (and documents from other mods) are left alone. Favorited fabric strips, paperclips and materials are never used either.
