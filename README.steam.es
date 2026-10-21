@@ -125,6 +125,7 @@ No lo desactives sin más: la partida guarda las máquinas de coser y, en multij
 
 ¿Te gusta el mod? Un café ayuda a financiar lo que viene.
 [url=https://ko-fi.com/Z8Z8QJV31][img]https://storage.ko-fi.com/cdn/kofi6.png?v=6[/img][/url]
+[url=https://discord.gg/QEsBya7hUA]Discord[/url]
 
 [h2]Créditos[/h2]
 

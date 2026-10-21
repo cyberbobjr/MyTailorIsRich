@@ -119,12 +119,13 @@ Presque tout se règle : Couture, XP, mauvaises tailles, usure, pointures, patro
 
 [h2]Retirer le mod d'une partie[/h2]
 
-Ne le désactivez pas simplement : la sauvegarde retient les machines et, en multijoueur, plus personne ne pourrait se connecter. Remplacez [b]batman_MyTailorIsRich[/b] par [b]batman_MyTailorIsRich_Uninstall[/b] (inclus) et gardez-le : il garde les machines comme simple mobilier. N'activez jamais les deux.
+Ne le désactivez pas : la sauvegarde retient les machines et, en multijoueur, plus personne ne pourrait se connecter. Remplacez [b]batman_MyTailorIsRich[/b] par [b]batman_MyTailorIsRich_Uninstall[/b] (inclus) et gardez-le : il garde les machines comme simple mobilier. N'activez jamais les deux.
 
 [h2]Soutenir le projet[/h2]
 
-Le mod vous plaît ? Un café aide à financer la suite.
+Un café aide à financer la suite.
 [url=https://ko-fi.com/Z8Z8QJV31][img]https://storage.ko-fi.com/cdn/kofi6.png?v=6[/img][/url]
+[url=https://discord.gg/QEsBya7hUA]Discord[/url]
 
 [h2]Crédits[/h2]
 

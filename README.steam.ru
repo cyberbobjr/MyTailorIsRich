@@ -120,6 +120,7 @@
 
 Нравится мод? Кофе поможет развитию.
 [url=https://ko-fi.com/Z8Z8QJV31][img]https://storage.ko-fi.com/cdn/kofi6.png?v=6[/img][/url]
+[url=https://discord.gg/QEsBya7hUA]Discord[/url]
 
 [h2]Благодарности[/h2]
 

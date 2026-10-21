@@ -119,12 +119,13 @@ Fast alles lässt sich einstellen: Fertigkeit, XP, Tempo, Passform-Strafen, Vers
 
 [h2]Mod aus einem Spielstand entfernen[/h2]
 
-Nicht einfach deaktivieren: Der Spielstand merkt sich die Nähmaschinen, und im Mehrspieler kann danach niemand mehr beitreten. Ersetze [b]batman_MyTailorIsRich[/b] durch [b]batman_MyTailorIsRich_Uninstall[/b] (enthalten) und lass es dauerhaft aktiv: Es behält nur die Maschinen als einfache Möbel. Nie beide aktivieren.
+Nicht deaktivieren: Der Spielstand merkt sich die Nähmaschinen, und im Mehrspieler kann danach niemand mehr beitreten. Ersetze [b]batman_MyTailorIsRich[/b] durch [b]batman_MyTailorIsRich_Uninstall[/b] (enthalten) und lass es dauerhaft aktiv: Es behält nur die Maschinen als einfache Möbel. Nie beide aktivieren.
 
 [h2]Projekt unterstützen[/h2]
 
-Gefällt dir der Mod? Ein Kaffee hilft bei der Weiterentwicklung.
+Ein Kaffee hilft bei der Weiterentwicklung.
 [url=https://ko-fi.com/Z8Z8QJV31][img]https://storage.ko-fi.com/cdn/kofi6.png?v=6[/img][/url]
+[url=https://discord.gg/QEsBya7hUA]Discord[/url]
 
 [h2]Credits[/h2]
 

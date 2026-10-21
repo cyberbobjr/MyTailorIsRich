@@ -129,6 +129,7 @@ description=[h2]Support the project[/h2]
 description=
 description=Enjoying the mod? A coffee helps fund new features and translations.
 description=[url=https://ko-fi.com/Z8Z8QJV31][img]https://storage.ko-fi.com/cdn/kofi6.png?v=6[/img][/url]
+description=[url=https://discord.gg/QEsBya7hUA]Discord[/url]
 description=
 description=[h2]Credits[/h2]
 description=
