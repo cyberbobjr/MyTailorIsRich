@@ -7,8 +7,8 @@
 | Workshop | 3810122988 |
 | Version analysée | 0.4.5 (`mod.info`, `CHANGELOG.md`), variante `Contents/mods/batman_MyTailorIsRich/42.21` |
 | Build cible | 42.21 (`versionMin=42.21`) ; sources consultées : Lua vanilla installé, Java décompilé `E:\pz-decompiled\42.21.0` |
-| Date | 2026-10-21 |
-| Périmètre | Lecture statique de tout le Lua (`shared`, `client`, `server`), des scripts (`MTIR_items.txt`, `MTIR_entities.txt`, `MTIR_patternbinder.txt`, `MTIR_sounds.txt`), de `sandbox-options.txt`, des traductions EN, du `README.md`, du `CHANGELOG.md`, des descriptions Steam, des tests (`tests/`) et de la CI. Rien n'a été testé en jeu pour ce document. |
+| Date | 2026-10-21 ; **avancement mis à jour le 2026-10-23** (version publiée : 0.4.6, tag `v0.4.6`, commit `83e4ce5`) |
+| Périmètre | Lecture statique de tout le Lua (`shared`, `client`, `server`), des scripts (`MTIR_items.txt`, `MTIR_entities.txt`, `MTIR_patternbinder.txt`, `MTIR_sounds.txt`), de `sandbox-options.txt`, des traductions EN, du `README.md`, du `CHANGELOG.md`, des descriptions Steam, des tests (`tests/`) et de la CI. Rien n'a été testé en jeu pour l'analyse initiale (voir le tableau de bord pour les vérifications faites depuis). |
 
 Statut des constats :
 
@@ -21,30 +21,86 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 ---
 
+## Tableau de bord — ce qui est fait et ce qui reste
+
+**Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
+
+**Bilan** : améliorations de code **4 faites, 0 en partie, 14 à faire** (sur 18, dont 2 choix de conception à trancher : C05, C06) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
+
+### Améliorations de code
+
+| ID | Sujet | État | Testé | Publié | Commit | Ce qui reste |
+|---|---|---|---|---|---|---|
+| C01 | Feuilles écrites et favoris consommés comme matériaux | ✅ Corrigé | hors jeu (lupa) ; pz-autotest solo et MP du 2026-10-21 (contrôles C01 verts) | 0.4.6 | `00cd2e7` | Vérifier les menus à l'œil (tracé, copie) ; `Base.GraphPaper` non ajouté (à décider) |
+| C02 | Fil cherché par type ou par tag selon l'action | ✅ Corrigé | hors jeu (lupa) | 0.4.6 | `00cd2e7` | Vérifier en jeu (fil aramide en retouche ou couture) |
+| C03 | Usure estimée figée dans l'infobulle d'un client MP | ✅ Corrigé | — | 0.4.6 | `00cd2e7` | Vérifier en jeu sur un client MP |
+| C04 | Effets des chaussures limités à l'emplacement `shoes` | ✅ Corrigé | hors jeu (lupa) | 0.4.6 | `00cd2e7` | Vérifier en jeu avec une chaussure de mod |
+| C05 | Copie de patron sans coût pour l'original | ⬜ À décider | — | — | — | Choix de conception de l'auteur, puis correction |
+| C06 | Infobulle « Enfiler » qui révèle l'ajustement | ⬜ À décider | — | — | — | Choix de conception de l'auteur, puis correction |
+| C07 | Clé joueur serveur = compte seul (écran partagé) | ⬜ À faire | — | — | — | Tout |
+| C08 | Tables par joueur jamais purgées | ⬜ À faire | — | — | — | Tout |
+| C09 | Usure comptée par événement horaire | ⬜ À faire | — | — | — | Mesurer en jeu, puis corriger |
+| C10 | Noms de patrons dans la langue du serveur | ⬜ À faire | — | — | — | Tout |
+| C11 | Taille d'artisanat : envoi unique, voies non couvertes | ⬜ À faire | — | — | — | Vérifier en jeu, puis corriger |
+| C12 | `instanceItem` pour lire les stats d'origine | ⬜ À faire | — | — | — | Relevé des getters 42.21, puis correction |
+| C13 | Stats non rétablies quand une option passe à 0 | ⬜ À faire | — | — | — | Tout |
+| C14 | Deux analyseurs de listes sandbox | ⬜ À faire | — | — | — | Tout |
+| C15 | Peau entière consommée pour une unité | ⬜ À faire | — | — | — | Tout |
+| C16 | Portée machine / table sans test de mur | ⬜ À faire | — | — | — | Tout |
+| C17 | Duplications, incohérences d'actions, trous de tests | ⬜ À faire | — | — | — | Tout |
+| C18 | Descriptions Steam proches de 8 000 octets | ⬜ À faire | — | — | — | Tout |
+
+### Idées de fonctionnalités
+
+| ID | Idée | État | Remarque |
+|---|---|---|---|
+| I01 | Mètre ruban vanilla | ⬜ Proposée | Rang 5 de la priorisation |
+| I02 | Couture sur mesure pour un autre joueur | ⬜ Proposée | Dépend de I01 |
+| I03 | Patron qui garde l'apparence du modèle | ⬜ Proposée | |
+| I04 | Garnir une chaussure trop grande | ⬜ Proposée | |
+| I05 | Chaussettes épaisses | ⬜ Proposée | |
+| I06 | Alerte de changement de taille | ⬜ Proposée | |
+| I07 | Panneau « Garde-robe » | ⬜ Proposée | Prérequis C03 fait |
+| I08 | Pastille d'ajustement dans l'inventaire | ⬜ Proposée | |
+| I09 | Blanchir à la javel | ⬜ Proposée | |
+| I10 | Teintures naturelles | ⬜ Proposée | |
+| I11 | Rétrécir au lavage | ⬜ Proposée | |
+| I12 | Retouche temporaire aux trombones | ⬜ Proposée | |
+| I13 | Série de travaux sur machine | ⬜ Proposée | |
+| I14 | Effilochage des vêtements très usés | ⬜ Proposée | |
+| I15 | Écussons et insignes brodés | ⬜ Proposée | |
+| I16 | Pièces d'usure des machines | ⬜ Proposée | |
+| I17 | Surjeteuse ou machine industrielle | ⬜ Proposée | |
+| I18 | Magazines de patronage | ⬜ Proposée | |
+| I19 | API publique pour les autres mods | ⬜ Proposée | |
+| I20 | Mannequins de vitrine taillés | ⬜ Proposée | |
+
+---
+
 ## Partie 1 — Améliorations de code
 
 ### Vue d'ensemble
 
-| ID | Sujet | Risque principal | Priorité | Effort | Statut |
-|---|---|---|---|---|---|
-| C01 | Feuilles écrites et objets favoris consommés comme matériaux | Bug / perte de données joueur | Haute | S | corrigé (00cd2e7), à vérifier en jeu |
-| C02 | Fil cherché par type `Thread` ou par tag selon l'action | Bug / compatibilité | Moyenne | S | corrigé (00cd2e7), à vérifier en jeu |
-| C03 | Usure estimée figée dans l'infobulle d'un client MP | Bug MP | Moyenne | S | corrigé (00cd2e7), à vérifier en jeu |
-| C04 | Effets continus des chaussures limités à l'emplacement `shoes` | Bug / compatibilité mods | Moyenne | S | corrigé (00cd2e7), à vérifier en jeu |
-| C05 | Copie de patron sans coût pour l'original | Équilibre | Moyenne | S | confirmé statiquement (choix à valider) |
-| C06 | Infobulle « Enfiler » qui révèle l'ajustement | Cohérence gameplay | Moyenne | S | confirmé statiquement (choix à valider) |
-| C07 | Clé joueur serveur = compte seul (écran partagé) | MP | Basse | S | confirmé statiquement |
-| C08 | Tables par joueur jamais purgées, jauge héritée après la mort | MP / persistance | Basse | S | confirmé statiquement |
-| C09 | Usure comptée par événement horaire | Simulation | Basse | M | à vérifier en jeu |
-| C10 | Noms de patrons figés dans la langue du serveur | Traduction MP | Moyenne | M | confirmé statiquement |
-| C11 | Taille d'artisanat : envoi unique, voies de fabrication non couvertes | MP / compatibilité | Basse | M | à vérifier en jeu |
-| C12 | `instanceItem` pour lire les stats d'origine | Compatibilité / effets de bord | Basse | S-M | à vérifier en jeu |
-| C13 | Stats dérivées non rétablies quand une option passe à 0 | Bug mineur | Basse | S | confirmé statiquement |
-| C14 | Deux analyseurs de listes sandbox, règles différentes | Maintenabilité | Basse | S | confirmé statiquement |
-| C15 | Peau entière consommée pour une unité | Gameplay | Basse | S | confirmé statiquement |
-| C16 | Portée machine / table sans test de mur | Autorité serveur | Basse | S | à vérifier en jeu |
-| C17 | Duplications, incohérences d'actions, trous de tests | Maintenabilité | Basse | M | confirmé statiquement |
-| C18 | Descriptions Steam presque à la limite de 8 000 octets | Maintenabilité / traduction | Basse | S | confirmé statiquement |
+| ID | Sujet | Risque principal | Priorité | Effort | Statut | Avancement |
+|---|---|---|---|---|---|---|
+| C01 | Feuilles écrites et objets favoris consommés comme matériaux | Bug / perte de données joueur | Haute | S | confirmé statiquement | ✅ 0.4.6 |
+| C02 | Fil cherché par type `Thread` ou par tag selon l'action | Bug / compatibilité | Moyenne | S | confirmé statiquement | ✅ 0.4.6 |
+| C03 | Usure estimée figée dans l'infobulle d'un client MP | Bug MP | Moyenne | S | confirmé statiquement | ✅ 0.4.6 |
+| C04 | Effets continus des chaussures limités à l'emplacement `shoes` | Bug / compatibilité mods | Moyenne | S | confirmé statiquement | ✅ 0.4.6 |
+| C05 | Copie de patron sans coût pour l'original | Équilibre | Moyenne | S | confirmé statiquement (choix à valider) | ⬜ à décider |
+| C06 | Infobulle « Enfiler » qui révèle l'ajustement | Cohérence gameplay | Moyenne | S | confirmé statiquement (choix à valider) | ⬜ à décider |
+| C07 | Clé joueur serveur = compte seul (écran partagé) | MP | Basse | S | confirmé statiquement | ⬜ |
+| C08 | Tables par joueur jamais purgées, jauge héritée après la mort | MP / persistance | Basse | S | confirmé statiquement | ⬜ |
+| C09 | Usure comptée par événement horaire | Simulation | Basse | M | à vérifier en jeu | ⬜ |
+| C10 | Noms de patrons figés dans la langue du serveur | Traduction MP | Moyenne | M | confirmé statiquement | ⬜ |
+| C11 | Taille d'artisanat : envoi unique, voies de fabrication non couvertes | MP / compatibilité | Basse | M | à vérifier en jeu | ⬜ |
+| C12 | `instanceItem` pour lire les stats d'origine | Compatibilité / effets de bord | Basse | S-M | à vérifier en jeu | ⬜ |
+| C13 | Stats dérivées non rétablies quand une option passe à 0 | Bug mineur | Basse | S | confirmé statiquement | ⬜ |
+| C14 | Deux analyseurs de listes sandbox, règles différentes | Maintenabilité | Basse | S | confirmé statiquement | ⬜ |
+| C15 | Peau entière consommée pour une unité | Gameplay | Basse | S | confirmé statiquement | ⬜ |
+| C16 | Portée machine / table sans test de mur | Autorité serveur | Basse | S | à vérifier en jeu | ⬜ |
+| C17 | Duplications, incohérences d'actions, trous de tests | Maintenabilité | Basse | M | confirmé statiquement | ⬜ |
+| C18 | Descriptions Steam presque à la limite de 8 000 octets | Maintenabilité / traduction | Basse | S | confirmé statiquement | ⬜ |
 
 ---
 
@@ -59,7 +115,8 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Risque** : perte d'une note du joueur, ou d'un document d'un autre mod fondé sur `SheetPaper2` (papier nommé, carnet de quête). Le joueur ne choisit pas les feuilles.
 - **Correction** : un prédicat `MTIR.isBlankPaper(item)` qui écarte les favoris, les noms personnalisés (`isCustomName`, ou `getDisplayName() ~= getScriptItem():getDisplayName()`, méthode de la base moteur) et les pages écrites ; l'utiliser dans les menus et dans `validate` côté autorité. Écarter aussi les favoris dans `pickItems` et `pickPatternMaterials`. Accepter `Base.GraphPaper` vierge en plus de `SheetPaper2`.
 - **Priorité** : haute. **Effort** : S.
-- **Statut : corrigé (commit 00cd2e7), à vérifier en jeu**. Page écrite détectée par `Literature.isEmptyPages()` (`zombie/inventory/types/Literature.java:465`, 42.21.0), plus `getLockedBy()`, `isCustomName()`, nom affiché ≠ nom du script et ModData présente (`MTIR.isBlankSheet`, contrôlé aussi par `validate` sur l'autorité). Favoris écartés par `pickItems`, `pickPatternMaterials` et les contrôles des actions. `Base.GraphPaper` non ajouté (nouvelle fonctionnalité, à décider).
+- **Statut** : confirmé statiquement pour la consommation ; nom exact de l'accesseur des pages écrites d'une `Literature` en 42.21 à vérifier dans le Java.
+- **Avancement : ✅ corrigé, publié en 0.4.6 (commit 00cd2e7), testé hors jeu et par pz-autotest en solo et en MP (2026-10-21)** — Page écrite détectée par `Literature.isEmptyPages()` (`zombie/inventory/types/Literature.java:465`, 42.21.0), plus `getLockedBy()`, `isCustomName()`, nom affiché ≠ nom du script et ModData présente (`MTIR.isBlankSheet`, contrôlé aussi par `validate` sur l'autorité). Favoris écartés par `pickItems`, `pickPatternMaterials` et les contrôles des actions. `Base.GraphPaper` non ajouté (nouvelle fonctionnalité, à décider).
 
 ### C02 — Fil : type `Thread` pour la couture, tag `base:thread` pour la broderie
 
@@ -72,7 +129,8 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Risque** : fil aramide ou tendon invisible pour l'interface des retouches et des patrons, alors qu'il sert à broder. Le fil d'un mod qui n'utilise que le tag n'est pas reconnu. Le libellé du besoin est toujours « Fil » (`client/MyTailorIsRich/MTIR_ContextMenu.lua:169-170`).
 - **Correction** : une seule collecte, `MTIR.collectThreads(inventory)`, qui place les bobines `Thread` en tête puis les autres objets du tag, dans l'ordre du vanilla (`ISInventoryPaneContextMenu.lua:1489`, cité dans la base moteur). Décider s'il faut exclure le fil de pêche et le fil dentaire pour les vêtements, et le faire dans le prédicat partagé.
 - **Priorité** : moyenne. **Effort** : S.
-- **Statut : corrigé (commit 00cd2e7), à vérifier en jeu**. Collecte unique `MTIR.collectThreads` (type `Thread` puis tag) ; fil de pêche et fil dentaire toujours acceptés, comme pour la broderie (choix inchangé).
+- **Statut** : confirmé statiquement.
+- **Avancement : ✅ corrigé, publié en 0.4.6 (commit 00cd2e7), testé hors jeu, à vérifier en jeu** — Collecte unique `MTIR.collectThreads` (type `Thread` puis tag) ; fil de pêche et fil dentaire toujours acceptés, comme pour la broderie (choix inchangé).
 
 ### C03 — Infobulle d'usure figée chez un client MP
 
@@ -81,7 +139,8 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Risque** : sur un client MP, « jours restants » et couleur ne bougent plus après le premier affichage, même si le vêtement devient sale, mouillé ou ensanglanté. La table grandit aussi d'une entrée par objet survolé pendant toute la session.
 - **Correction** : côté client, recalculer à chaque affichage (le calcul est léger) ou garder un cache horodaté par `getTimestampMs`, vidé toutes les quelques secondes. Garder le cache horaire sur l'autorité.
 - **Priorité** : moyenne. **Effort** : S.
-- **Statut : corrigé (commit 00cd2e7), à vérifier en jeu**. Le client MP recalcule à chaque affichage et ne garde rien en cache.
+- **Statut** : confirmé statiquement.
+- **Avancement : ✅ corrigé, publié en 0.4.6 (commit 00cd2e7), à vérifier en jeu sur un client MP** — Le client MP recalcule à chaque affichage et ne garde rien en cache.
 
 ### C04 — Inconfort, ampoules, endurance et perte limités à l'emplacement `shoes`
 
@@ -93,7 +152,8 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Risque** : une botte de mod hors `shoes` a une pointure, raidit les pieds et réduit l'écrasement, mais ne donne ni inconfort, ni ampoule, ni endurance, ni perte de chaussure. Le README promet ces effets pour les mods.
 - **Correction** : `wornShoe` parcourt `getWornItems()` et rend la première pièce `canShoeHaveSize`, avec un raccourci sur `SHOES`. Ajouter un test lupa avec un emplacement de mod.
 - **Priorité** : moyenne. **Effort** : S.
-- **Statut : corrigé (commit 00cd2e7), à vérifier en jeu**. `wornShoe` cherche ensuite dans toute la tenue ; test lupa ajouté.
+- **Statut** : confirmé statiquement.
+- **Avancement : ✅ corrigé, publié en 0.4.6 (commit 00cd2e7), testé hors jeu, à vérifier en jeu** — `wornShoe` cherche ensuite dans toute la tenue ; test lupa ajouté.
 
 ### C05 — Copier un patron ne coûte rien à l'original
 
@@ -103,6 +163,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** (à valider) : au choix, copier retire une utilisation de l'original ; la copie reçoit les utilisations restantes de l'original au lieu du maximum ; ou une option sandbox `PatternCopyUsesOriginal`.
 - **Priorité** : moyenne. **Effort** : S.
 - **Statut** : comportement confirmé statiquement ; le caractère voulu reste à confirmer par l'auteur.
+- **Avancement : ⬜ à décider** — choix de conception de l'auteur attendu ; rien de modifié.
 
 ### C06 — L'infobulle « Enfiler » donne l'ajustement avant toute lecture
 
@@ -112,6 +173,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : n'afficher l'indice qu'avec `hint` ou `reveal`, sinon une ligne « Taille inconnue ».
 - **Priorité** : moyenne. **Effort** : S.
 - **Statut** : confirmé statiquement ; intention de conception à valider.
+- **Avancement : ⬜ à décider** — choix de conception de l'auteur attendu ; rien de modifié.
 
 ### C07 — Clé joueur côté serveur : le compte seul
 
@@ -121,6 +183,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : `"u" .. username .. "#" .. player:getPlayerNum()` sur le serveur ; passer le joueur du widget d'artisanat (`widget.player`) à `setUICraftSize`.
 - **Priorité** : basse (cas rare). **Effort** : S.
 - **Statut** : confirmé statiquement.
+- **Avancement : ⬜ à faire.**
 
 ### C08 — Tables par joueur jamais purgées ; jauge héritée après la mort
 
@@ -130,6 +193,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : vider les entrées du joueur sur `OnCharacterDeath` côté serveur (événement disponible sur un serveur dédié, contrairement à `OnPlayerDeath`, base moteur) et en solo sur `OnCreatePlayer`.
 - **Priorité** : basse. **Effort** : S.
 - **Statut** : confirmé statiquement.
+- **Avancement : ⬜ à faire.**
 
 ### C09 — Usure et effets « par minute » comptés par événement
 
@@ -139,6 +203,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : compter les heures entières écoulées avec `getWorldAgeHours()` et tirer l'usure autant de fois (borné), comme pour les minutes du tick.
 - **Priorité** : basse. **Effort** : M.
 - **Statut** : à vérifier en jeu (ampleur réelle pendant le sommeil et en vitesse ×3).
+- **Avancement : ⬜ à faire.**
 
 ### C10 — Noms de patrons dans la langue du serveur
 
@@ -148,6 +213,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : recomposer le nom sur le client à l'affichage, avec la technique déjà employée pour les tailles (remplacement temporaire de `getName` pendant le rendu, `client/MyTailorIsRich/MTIR_ClientUI.lua:136-187`) et dans l'infobulle. La clé se déduit déjà du type et des données (`MTIR.getPatternNameKey`). Le nom enregistré reste le repli pour les autres mods.
 - **Priorité** : moyenne. **Effort** : M.
 - **Statut** : confirmé statiquement.
+- **Avancement : ⬜ à faire.**
 
 ### C11 — Taille d'artisanat : envoi unique et voies non couvertes
 
@@ -158,6 +224,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : renvoyer la taille courante au début de l'action côté client (enveloppe de `ISHandcraftAction:start`) ; envelopper aussi `ISCraftAction:complete` si cette voie sert encore en 42.21 ; garder `MTIR_ChooseSizeAction` comme filet.
 - **Priorité** : basse. **Effort** : M.
 - **Statut** : à vérifier en jeu (fréquence de la course, usage réel d'`ISCraftAction`).
+- **Avancement : ⬜ à faire.**
 
 ### C12 — `instanceItem` pour lire les valeurs d'origine
 
@@ -167,6 +234,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : lire sur le script (`ScriptManager.instance:getItem(t)`) chaque valeur dont le getter existe en 42.21 ; garder l'instance pour les seules valeurs non exposées, en commentant pourquoi.
 - **Priorité** : basse. **Effort** : S à M (relevé des getters `Item` à faire).
 - **Statut** : à vérifier (liste des getters du script Item 42.21).
+- **Avancement : ⬜ à faire.**
 
 ### C13 — Valeurs dérivées non rétablies quand une option passe à 0
 
@@ -175,6 +243,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : écrire toujours les valeurs (d'origine si la perte vaut 0).
 - **Priorité** : basse. **Effort** : S.
 - **Statut** : confirmé statiquement.
+- **Avancement : ⬜ à faire.**
 
 ### C14 — Deux analyseurs pour les listes sandbox
 
@@ -184,6 +253,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : un seul analyseur pour les trois options, et un `print` en anglais pour chaque type inconnu, une fois par valeur d'option.
 - **Priorité** : basse. **Effort** : S.
 - **Statut** : confirmé statiquement.
+- **Avancement : ⬜ à faire.**
 
 ### C15 — Une peau entière consommée pour une unité de cuir
 
@@ -193,6 +263,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : sur l'autorité, trier les matériaux du plus petit au plus grand et rendre le reliquat en `Base.LeatherStrips` (`AddItems` + `sendAddItemsToContainer`).
 - **Priorité** : basse. **Effort** : S.
 - **Statut** : confirmé statiquement.
+- **Avancement : ⬜ à faire.**
 
 ### C16 — Portée d'une machine ou d'une table sans test de mur
 
@@ -202,6 +273,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : ajouter `current == square or current:canReachTo(square)` au test, sur l'autorité comme sur le client.
 - **Priorité** : basse (serveur entre amis, anti-triche secondaire). **Effort** : S.
 - **Statut** : à vérifier en jeu.
+- **Avancement : ⬜ à faire.**
 
 ### C17 — Duplications, incohérences entre actions, trous de tests
 
@@ -214,6 +286,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : un module `MTIR_ActionBase.lua` (validation commune, barre de progression, sons) et un `MTIR.findLocalPlayer` partagé ; tests ciblés sur les modules listés, en commençant par `Sizing` et `ShoeEffects`, qui touchent les mods tiers.
 - **Priorité** : basse. **Effort** : M.
 - **Statut** : confirmé statiquement.
+- **Avancement : ⬜ à faire.**
 
 ### C18 — Descriptions Steam presque à la limite
 
@@ -222,6 +295,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : garder sur Steam un résumé et un tableau des effets, et renvoyer le détail vers une page de documentation (le dossier `docs/` est en cours de réorganisation).
 - **Priorité** : basse. **Effort** : S.
 - **Statut** : confirmé statiquement.
+- **Avancement : ⬜ à faire.**
 
 ---
 
@@ -258,6 +332,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **MP** : le serveur fait la mesure (distance, cible vivante) et rend le résultat par `MTIR.tell` ; rien de nouveau n'est stocké.
 - **Dépendances** : aucune ; base de I02.
 - **Effort** : S.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I02 — Couture sur mesure pour un autre joueur
 
@@ -267,6 +342,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **MP** : contrôle d'autorité nécessaire ; en solo, le choix ne sert qu'en écran partagé.
 - **Dépendances** : I01.
 - **Effort** : M.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I03 — Patron qui garde l'apparence du modèle
 
@@ -276,6 +352,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **MP** : `syncItemFields` transmet la couleur personnalisée ; les autres joueurs voient la teinte quand le vêtement est enfilé (`SyncClothing`, base moteur `clothing-tint.md`). Textures choisies : transmission à vérifier.
 - **Dépendances** : aucune ; données de patron à étendre sans casser les patrons existants (champs facultatifs).
 - **Effort** : M.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I04 — Garnir une chaussure trop grande
 
@@ -284,6 +361,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : ModData `MTIR_Shoe.padding` et décalage dans `MTIR.getShoeEffectDiff` (`shared/MyTailorIsRich/MTIR_Shoes.lua:212-223`) ; usure par `applyShoeTick`.
 - **MP** : action chronométrée partagée, `syncItemFields`.
 - **Effort** : S.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I05 — Chaussettes épaisses
 
@@ -292,6 +370,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : emplacement `socks` (déjà connu de `MTIR_Sizing.lua:30`) ; facteur dans `updateFriction` (`shared/MyTailorIsRich/MTIR_ShoeEffects.lua:223-250`) et dans `getShoeEffectDiff`. `getWetness()` est déjà employé pour l'usure.
 - **MP** : calcul d'autorité existant ; rien à transmettre en plus.
 - **Effort** : S.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I06 — Alerte de changement de taille
 
@@ -300,6 +379,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : comparaison du poids à chaque passage de minute (`server/MyTailorIsRich/MTIR_Server.lua:48-55`), seuils de `MTIR.SIZES`, réplique par `MTIR.tell`.
 - **MP** : dernier seuil retenu côté serveur par joueur (voir C07 pour la clé).
 - **Effort** : S.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I07 — Panneau « Garde-robe »
 
@@ -309,6 +389,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **MP** : client seulement.
 - **Dépendances** : C03 pour une estimation d'usure à jour.
 - **Effort** : M.
+- **Avancement : ⬜ proposée, pas commencée.** Prérequis C03 fait (0.4.6).
 
 ### I08 — Pastille d'ajustement dans l'inventaire
 
@@ -317,6 +398,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : `ISInventoryPane.renderdetails` est déjà enveloppé (`client/MyTailorIsRich/MTIR_ClientUI.lua:184-186`) ; dessiner après l'original avec `drawTexture`. Cache de l'ajustement par identifiant d'objet, invalidé à chaque `OnClothingUpdated`.
 - **MP** : client seulement.
 - **Effort** : M.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I09 — Blanchir à la javel
 
@@ -325,6 +407,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : même chemin que `MTIR_DyeAction` (`shared/TimedActions/MTIR_DyeAction.lua`) ; couleur blanche par `MTIR.applyDyeColor(item, 1, 1, 1)` ; contrôle du fluide comme `MTIR.getDyeKind`.
 - **MP** : `syncItemFields` + `sendItemStats` comme la teinture.
 - **Effort** : S.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I10 — Teintures naturelles
 
@@ -333,6 +416,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : `craftRecipe` avec sortie dans un récipient à fluide ; la couleur d'un fluide `Dye` vient du mélange (`getFluidContainer():getColor()`). Créer un fluide de mod ou fixer la couleur à la création reste **à vérifier** en 42.21.
 - **MP** : recette vanilla, autorité du moteur.
 - **Effort** : L (fluides, recettes, traductions).
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I11 — Rétrécir au lavage
 
@@ -341,6 +425,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : le lavage à la main est une action Lua (`media/lua/shared/TimedActions/ISWashClothing.lua`), facile à envelopper. Le lave-linge est en Java (`zombie/iso/objects/ClothingWasherLogic.java`, sans événement Lua) : le couvrir demande un sondage du conteneur. **Hypothèse** à vérifier.
 - **MP** : décision sur l'autorité dans `complete`.
 - **Effort** : M.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I12 — Retouche temporaire aux trombones
 
@@ -349,6 +434,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : ModData `MTIR.tempResize` avec échéance en heures de monde ; lecture dans `MTIR.getItemDiff` ; échéance vérifiée au passage de minute.
 - **MP** : autorité et `syncItemFields`.
 - **Effort** : S.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I13 — Série de travaux sur machine
 
@@ -357,6 +443,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : réutiliser la logique de série de `client/MyTailorIsRich/MTIR_MachineTabPattern.lua` ; rapiéçage par l'action vanilla `ISRepairClothing` par trou, déjà enveloppée (`shared/MyTailorIsRich/MTIR_VanillaHooks.lua:214-229`).
 - **MP** : actions chronométrées existantes.
 - **Effort** : M.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I14 — Effilochage des vêtements très usés
 
@@ -365,6 +452,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : `MTIR.ripClothes` existe (`shared/MyTailorIsRich/MTIR_Effects.lua:390-414`) ; appel depuis `degradeWornClothes` ; `syncVisuals` comme pour les déchirures.
 - **MP** : déjà traité par `ripClothes` (`syncItemFields`, `syncVisuals`).
 - **Effort** : S.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I15 — Écussons et insignes brodés
 
@@ -373,6 +461,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : réutiliser `MTIR_Embroidery`. Une faction n'a pas d'identifiant stable (base moteur, `multiplayer.md`) : n'enregistrer que le texte. Un dessin sur le modèle 3D n'est pas faisable sans modèles ni textures dédiés.
 - **MP** : comme la broderie actuelle.
 - **Effort** : S.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I16 — Pièces d'usure des machines
 
@@ -382,6 +471,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **MP** : autorité existante.
 - **Dépendances** : traductions en neuf langues ; le mod de désinstallation n'a pas besoin de ces objets (ce ne sont pas des entités).
 - **Effort** : M.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I17 — Surjeteuse ou machine industrielle
 
@@ -390,6 +480,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : nouvelle tuile, entité `SpriteConfig` et `tiledef` (skill `pz-blender-assets`), entrée dans `MTIR.MACHINE_KINDS`.
 - **MP** : toute nouvelle entité doit aussi entrer dans `batman_MyTailorIsRich_Uninstall`, sinon le monde devient injoignable après désinstallation (`README.md`, « Removing the mod from a save ») ; la CI le contrôle déjà.
 - **Effort** : L.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I18 — Magazines de patronage
 
@@ -398,6 +489,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : objet `literature` ; marque apprise dans la ModData du joueur, écrite par le serveur (sauvegardée côté serveur et renvoyée aux clients proches, base moteur). Une écriture côté client ne serait pas synchronisée.
 - **MP** : écriture d'autorité à la fin de la lecture (`ISReadABook:complete`).
 - **Effort** : M.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I19 — API publique pour les autres mods
 
@@ -406,6 +498,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : fonctions déjà présentes (`MTIR.getSizing`, `MTIR.SHOE_MALE_SHARE`). D'après la base moteur, `triggerEvent` déclare un événement inconnu, et un événement reste local à chaque machine : le documenter.
 - **MP** : aucun changement de protocole.
 - **Effort** : S.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ### I20 — Mannequins de vitrine taillés
 
@@ -414,6 +507,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : `IsoMannequin` expose `isFemale()` et `getWornItems()` (`zombie/iso/objects/IsoMannequin.java:142, 936`). Le conteneur et sa détection dans `MTIR.ensureData` restent **à vérifier**.
 - **MP** : tailles créées sur l'autorité, comme pour les cadavres.
 - **Effort** : M.
+- **Avancement : ⬜ proposée, pas commencée.**
 
 ---
 
@@ -421,16 +515,20 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 | Rang | Action | Pourquoi |
 |---|---|---|
-| 1 | **C01** — ne plus consommer les feuilles écrites ni les favoris | Seul risque de perte de données joueur trouvé ; correction courte et locale. |
-| 2 | **C04** — effets continus des chaussures pour tous les emplacements | Tient la promesse « mods compris » du README ; une fonction à changer et un test. |
-| 3 | **C02** — collecte du fil unifiée | Supprime une incohérence visible entre broderie et couture ; reconnaît les fils vanilla et de mods. |
-| 4 | **C03** — infobulle d'usure à jour en MP | Bug MP silencieux, correction de quelques lignes côté client. |
-| 5 | **I01** — mètre ruban | Plus grand gain joueur pour un effort S : objet vanilla déjà dans le butin, action existante à réutiliser, base de I02. |
+| 1 | ✅ **C01** — ne plus consommer les feuilles écrites ni les favoris | Seul risque de perte de données joueur trouvé ; correction courte et locale. |
+| 2 | ✅ **C04** — effets continus des chaussures pour tous les emplacements | Tient la promesse « mods compris » du README ; une fonction à changer et un test. |
+| 3 | ✅ **C02** — collecte du fil unifiée | Supprime une incohérence visible entre broderie et couture ; reconnaît les fils vanilla et de mods. |
+| 4 | ✅ **C03** — infobulle d'usure à jour en MP | Bug MP silencieux, correction de quelques lignes côté client. |
+| 5 | ⬜ **I01** — mètre ruban | Plus grand gain joueur pour un effort S : objet vanilla déjà dans le butin, action existante à réutiliser, base de I02. |
 
-À trancher ensuite par l'auteur, car ce sont des choix de conception : **C05** (coût de la copie) et **C06** (infobulle « Enfiler »).
+**Avancement (2026-10-23)** : rangs 1 à 4 faits et publiés en 0.4.6 (commit `00cd2e7`) ; rang 5 (I01) pas commencé.
+
+À trancher ensuite par l'auteur, car ce sont des choix de conception : ⬜ **C05** (coût de la copie) et ⬜ **C06** (infobulle « Enfiler »).
 
 ---
 
 ## Note finale
 
 Ce document est une **proposition**. Il ne modifie aucun fichier du mod. Aucune correction ni fonctionnalité ne doit être implémentée sans validation explicite de l'auteur, et chaque changement retenu devra être vérifié en jeu (solo puis MP) avant publication.
+
+**Mise à jour du 2026-10-23** : C01 à C04 ont été retenus, corrigés (commit `00cd2e7`) et publiés en 0.4.6 ; C01 est couvert par le parcours `pz-autotest` solo et MP, C02 à C04 restent à vérifier en jeu. Les autres points et toutes les idées sont encore des propositions.
