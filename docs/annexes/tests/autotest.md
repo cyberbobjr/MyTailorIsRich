@@ -40,6 +40,17 @@ Le client 1 attend le message `done` (180 s, paramètre `clientWaitSec`), puis a
 
 - Les actions sont complétées sans leur durée, leur animation ni leur son ; les menus, le panneau de la machine et l'infobulle ne sont pas ouverts. Le rendu reste à vérifier à l'œil.
 - La machine électrique (courant) et la broderie à la machine ne sont pas couvertes.
-- Les contrôles C01 échouent tant que la correction de C01 (`MTIR.isBlankSheet`, `predicatePaper`) n'est pas dans le mod chargé.
-- Écrit le 2026-10-21. Premier passage `mp` (2026-10-21) : 5 PASS serveur puis échec de la pose de la machine (aucune case trouvée, scénario lancé avant la fin du chargement du client) ; client en attente 180 s. Corrigé par la synchronisation ci-dessus et la pose par `placeMoveableInternal` ; **à relancer**.
+- Les contrôles C01 supposent la correction de C01 (`MTIR.isBlankSheet`, `predicatePaper`), présente depuis la 0.4.6.
+- Écrit le 2026-10-21. Premier passage `mp` (`runs/20261021-161320-mp-70b8a05b75af`) : 5 PASS serveur puis échec de la pose de la machine (aucune case trouvée, scénario lancé avant la fin du chargement du client) ; client 0/9. Corrigé par la synchronisation ci-dessus et la pose par `placeMoveableInternal` (`f11ee94`). Passage suivant (`…164655-mp-a9af45a5d6f9`) : serveur 15/15, client 7/8, nom brodé suivi du suffixe vanilla d'humidité (« (trempé) », le vêtement sort de la teinture) ; contrôle corrigé pour accepter ce suffixe (`834facc`), sans défaut du mod.
+
+## Résultats
+
+Dernière campagne verte le 2026-10-21, sur le mod publié en 0.4.6 (code de sortie 0, aucune erreur Lua) :
+
+| Mode | Passage | Résultat |
+|---|---|---|
+| `sp` | `runs/20261021-164228-sp-76732312ac75` | 15 PASS, 0 FAIL |
+| `mp` (1 client) | `runs/20261021-170004-mp-776a550dfea3` | serveur 15 PASS ; client 8 PASS, 1 `WARN` attendu (teinte du visuel d'un vêtement non porté) |
+
+Le premier passage `sp` (`…155749-sp-4e8b08d9e37f`) n'a pas démarré : la sauvegarde la plus récente exigeait une carte absente ; la configuration utilise depuis la sauvegarde Sandbox partagée (`0d069c8`).
 - Un échec côté serveur apparaît chez le client comme `FAIL client: server scenario completed` ; seuls les objets réellement préparés sont contrôlés.
