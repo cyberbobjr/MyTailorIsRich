@@ -674,15 +674,24 @@ function MTIR.pickThreads(threads, required)
 end
 
 --- Feuille vierge que l'on peut consommer : ni favorite, ni renommée, ni écrite
---- (Literature.isEmptyPages, 42.21), ni verrouillée, sans ModData (document d'un mod).
+--- (Literature.isEmptyPages, 42.21), ni verrouillée, sans données de document.
 --- Le nom affiché comparé à celui du script couvre un renommage sans setCustomName.
 function MTIR.isBlankSheet(item)
-    if item:isFavorite() or item:isCustomName() or item:hasModData() then
+    if item:isFavorite() or item:isCustomName() then
         return false
     end
     local script = item:getScriptItem()
     if script and item:getDisplayName() ~= script:getDisplayName() then
         return false
+    end
+    if item:hasModData() then
+        -- Vanilla setCustomName(false) leaves a customName entry. A sheet with
+        -- its ordinary name is still blank; all other metadata stays protected.
+        for key, value in pairs(item:getModData()) do
+            if key ~= "customName" or value ~= item:getDisplayName() then
+                return false
+            end
+        end
     end
     if instanceof(item, "Literature") then
         return item:isEmptyPages() and item:getLockedBy() == nil

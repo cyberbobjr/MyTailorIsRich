@@ -205,6 +205,12 @@ end
 -- API
 -- ----------------------------------------------------------------------------
 
+--- Explicit exclusions also apply to patterns for accessories without sizes.
+function MTIR.isExcludedClothing(scriptItem)
+    refreshOptions()
+    return scriptItem:isCosmetic() or excluded[scriptItem:getFullName()] ~= nil
+end
+
 --- { kind = "clothes", slot } ou { kind = "shoe" } ; nil si pas de taille.
 --- source : InventoryItem ou script Item (sortie de recette).
 function MTIR.getSizing(source)

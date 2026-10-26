@@ -236,7 +236,7 @@ function MTIR_MachineTabPattern:setPattern(item, entryId)
         for _, size in ipairs(MTIR.getPatternSizes(data)) do
             self.sizeCombo:addOptionWithData(MTIR.SewUI.sizeLabel(player, data, size), size)
         end
-        self.sizeCombo:selectData(MTIR.getPlayerSize(player).name)
+        self.sizeCombo:selectData(data.kind == "glove" and MTIR.GLOVE_PATTERN_SIZE or MTIR.getPlayerSize(player).name)
     end
     self:fillQuantity(data and data.uses or 1)
     self:refresh()

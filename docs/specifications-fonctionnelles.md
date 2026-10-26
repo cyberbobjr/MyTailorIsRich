@@ -1,6 +1,6 @@
 # Spécifications fonctionnelles — My Tailor Is Rich
 
-Ce que fait le mod (version 0.4.5, Build 42.21) du point de vue du joueur et de l'administrateur. Chaque fonctionnalité a un identifiant stable. Les valeurs exactes, noms d'options et formats sont dans [specifications-techniques.md](specifications-techniques.md) ; l'organisation du code dans [architecture.md](architecture.md).
+Ce que fait le mod (version 0.4.7, Build 42.21) du point de vue du joueur et de l'administrateur. Chaque fonctionnalité a un identifiant stable. Les valeurs exactes, noms d'options et formats sont dans [specifications-techniques.md](specifications-techniques.md) ; l'organisation du code dans [architecture.md](architecture.md).
 
 Prérequis : TooltipLib. Incompatible : Realistic Clothes (dont ce mod est une réécriture pour 42.21).
 
@@ -69,6 +69,8 @@ Une ampoule est une petite égratignure au pied, sans infection zombie ; comme t
 
 ### F13 — Patrons du commerce
 Des patrons imprimés se trouvent dans les merceries, les étagères des ateliers de couture et les librairies de mode. Chacun représente un vêtement ou une paire tirés parmi tout ce qui peut être tracé, **mods compris**, avec une précision de 5 à 8.
+
+Les gants cousables font aussi partie des modèles traçables et des patrons du commerce. Ils restent en **taille unique** : coton, jean ou cuir selon le matériau du modèle. Les mitaines vanilla dont le matériau manque dans le script disposent d'une correspondance explicite ; les gants en caoutchouc, chirurgicaux, métalliques ou à matériau inconnu ne sont pas reproduits. Le gant modèle est détruit au tracé, comme un vêtement.
 
 ### F14 — Coudre d'après un patron
 **Sew from pattern**, puis n'importe quelle taille (XS–XXL, ou EU 35–47 pour des chaussures). L'objet sort avec sa taille connue. Matériaux selon le tissu du modèle : coton (draps déchirés, rouleau de coton), jean (bandes, rouleaux), cuir (bandes, cuir tanné) ; plus de tissu pour les grandes tailles. Le cuir accepte aussi une alêne et un couteau tranchant. Niveau requis : difficulté du vêtement + tissu (coton 0, jean 1, cuir 2). Risque d'une taille de décalage : 50 % moins 5 % par niveau cumulé du traceur (précision) et du couturier, nul à 10 niveaux. Un patron sert 5 fois (option `PatternMaxUses`), réussite ou échec, puis tombe en morceaux.

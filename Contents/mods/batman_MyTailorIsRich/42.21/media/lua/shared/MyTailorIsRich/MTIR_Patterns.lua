@@ -34,6 +34,17 @@ MTIR.SHOE_GLUE_USES = 1
 local MAX_OFF_CHANCE = 0.5
 local OFF_CHANCE_PER_LEVEL = 0.05
 local MIN_TRACE_CONDITION = 0.5
+MTIR.GLOVE_PATTERN_DIFFICULTY = 1
+MTIR.GLOVE_PATTERN_SIZE = "OneSize"
+
+-- These vanilla fingerless gloves omit FabricType in 42.21. Unknown materials
+-- are never guessed: rubber, surgical, chainmail and armoured gloves stay out.
+local GLOVE_FABRIC_FALLBACK = {
+    ["Base.Gloves_FingerlessGloves"] = "Cotton",
+    ["Base.Gloves_FingerlessLeatherGloves"] = "Leather",
+    ["Base.Gloves_FingerlessLeatherGloves_Black"] = "Leather",
+    ["Base.Gloves_FingerlessLeatherGloves_Brown"] = "Leather",
+}
 
 -- Matériaux par tissu : unités apportées par objet (rouleau : une par utilisation).
 -- L'ordre est celui du prélèvement : chutes d'abord, grandes peaux en dernier.
@@ -222,17 +233,40 @@ function MTIR.getShoeMaterial(scriptItem)
     return containsAny(text, SHOE_FABRIC_KEYS) and "Cotton" or "Leather"
 end
 
---- Genre du modèle traçable, ou nil et une clé de raison (nil si pas de taille du tout).
+--- Gloves are pattern models independently of the clothing size system.
+function MTIR.isGloveModel(scriptItem)
+    if not scriptItem or scriptItem:getItemType() ~= ItemType.CLOTHING
+        or MTIR.isExcludedClothing(scriptItem) then
+        return false
+    end
+    local key = MTIR.locKey(scriptItem)
+    return key == "hands" or key == "handsleft" or key == "handsright"
+end
+
+--- Prefer the declared fabric; only known vanilla omissions have a fallback.
+function MTIR.getGloveMaterial(scriptItem)
+    local fabric = scriptItem:getFabricType()
+    if fabric and fabric ~= "" then
+        return MTIR.FABRIC_DIFFICULTY[fabric] ~= nil and fabric or nil
+    end
+    return GLOVE_FABRIC_FALLBACK[scriptItem:getFullName()]
+end
+
+--- Traceable model kind, or nil and an optional reason key.
 function MTIR.getTraceKind(item)
     if not item or not instanceof(item, "Clothing") then
         return nil, nil
     end
-    local kind = MTIR.canShoeHaveSize(item) and "shoe" or (MTIR.canClothesHaveSize(item) and "clothes" or nil)
+    local kind = MTIR.isGloveModel(item:getScriptItem()) and "glove"
+        or (MTIR.canShoeHaveSize(item) and "shoe" or (MTIR.canClothesHaveSize(item) and "clothes" or nil))
     if not kind then
         return nil, nil
     end
     if item:getBulletDefense() > 0 then
         return nil, "IGUI_MTIR_Pattern_NoBallistic"
+    end
+    if kind == "glove" and not MTIR.getGloveMaterial(item:getScriptItem()) then
+        return nil, "IGUI_MTIR_Pattern_NoFabric"
     end
     if kind == "clothes" and not MTIR.getClothesFabricType(item) then
         return nil, "IGUI_MTIR_Pattern_NoFabric"
@@ -248,6 +282,10 @@ function MTIR.describeModel(item)
     local kind = MTIR.getTraceKind(item)
     if not kind then
         return nil
+    end
+    if kind == "glove" then
+        return { kind = kind, fabric = MTIR.getGloveMaterial(item:getScriptItem()),
+            difficulty = MTIR.GLOVE_PATTERN_DIFFICULTY }
     end
     if kind == "shoe" then
         local fabric = MTIR.getShoeMaterial(item:getScriptItem())
@@ -275,6 +313,9 @@ function MTIR.getRequiredLevelToSew(model)
 end
 
 function MTIR.getRequiredPaper(model)
+    if model.kind == "glove" then
+        return 1
+    end
     if model.kind == "shoe" then
         return SHOE_PAPER
     end
@@ -338,6 +379,9 @@ end
 --- Tailles proposées : noms XS..XXL ou pointures (texte, comme les paramètres réseau).
 function MTIR.getPatternSizes(data)
     local sizes = {}
+    if data.kind == "glove" then
+        return { MTIR.GLOVE_PATTERN_SIZE }
+    end
     if data.kind == "shoe" then
         for size = MTIR.SHOE_MIN, MTIR.SHOE_MAX do
             table.insert(sizes, tostring(size))
@@ -351,6 +395,9 @@ function MTIR.getPatternSizes(data)
 end
 
 function MTIR.isValidPatternSize(data, size)
+    if data.kind == "glove" then
+        return size == MTIR.GLOVE_PATTERN_SIZE
+    end
     if data.kind == "shoe" then
         local number = tonumber(size)
         return number ~= nil and number >= MTIR.SHOE_MIN and number <= MTIR.SHOE_MAX
@@ -359,6 +406,9 @@ function MTIR.isValidPatternSize(data, size)
 end
 
 function MTIR.getPatternMaterialUnits(data, size)
+    if data.kind == "glove" then
+        return 2
+    end
     if data.kind == "shoe" then
         return SHOE_MATERIAL_UNITS
     end
@@ -384,6 +434,9 @@ end
 
 --- Risque d'un écart d'une taille : 50 % sans compétence, nul à 10 niveaux cumulés.
 function MTIR.getPatternOffChance(data, tailoring)
+    if data.kind == "glove" then
+        return 0
+    end
     local chance = MAX_OFF_CHANCE - OFF_CHANCE_PER_LEVEL * ((data.precision or 0) + tailoring)
     return math.max(0, math.min(MAX_OFF_CHANCE, chance))
 end
@@ -597,7 +650,7 @@ function MTIR.createFromPattern(character, data, size, margin)
     end
     if data.kind == "shoe" then
         item:getModData()[MTIR.SHOE_DATA_KEY] = { size = tonumber(size), reveal = true, hint = true }
-    else
+    elseif data.kind ~= "glove" then
         item:getModData()[MTIR.DATA_KEY] = { size = size, reveal = true, hint = true, resized = 0 }
     end
     local ratio = math.min(1, 0.7 + 0.1 * math.max(0, margin))

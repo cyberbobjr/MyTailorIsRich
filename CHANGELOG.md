@@ -3,6 +3,15 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.7 — 2026-10-26
+
+### New features
+- **Glove sewing patterns.** Trace a pattern from sewable gloves, then make the same model by hand or on either sewing machine. Gloves use one size and require the model's material: cotton, denim or leather. Known vanilla fingerless gloves without a declared fabric are supported; gloves with unknown or unsupported materials cannot be traced.
+- Glove patterns also work with store-bought patterns, copying, pattern binders and the 3D preview. Sewing requires Tailoring 1 for cotton, 2 for denim or 3 for leather before machine bonuses and Sandbox settings. Tracing requires one level less.
+
+### Fixes
+- **Blank paper is recognized correctly.** Tracing and copying now accept blank sheets that retain a vanilla name entry matching their ordinary name. Written, renamed, locked and favorited sheets, and sheets with other mod data, remain protected.
+
 ## 0.4.6 — 2026-10-21
 
 ### Fixes

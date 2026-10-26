@@ -1,6 +1,6 @@
 # Architecture — My Tailor Is Rich
 
-Build 42.21, version du mod 0.4.5. Les contrats détaillés (arguments, clés, options) sont dans [specifications-techniques.md](specifications-techniques.md) ; ce document décrit l'organisation du code.
+Build 42.21, version du mod 0.4.7. Les contrats détaillés (arguments, clés, options) sont dans [specifications-techniques.md](specifications-techniques.md) ; ce document décrit l'organisation du code.
 
 ## Vue d'ensemble
 
@@ -51,7 +51,7 @@ Contents/mods/
 | `require` | `\TooltipLib` | — |
 | `incompatible` | `\RealisticClothes` | `\batman_MyTailorIsRich` |
 | `versionMin` | `42.21` | `42.21` |
-| `modversion` | `0.4.5` | `0.4.5` |
+| `modversion` | `0.4.7` | `0.4.7` |
 | `pack` / `tiledef` | `mtir_sewing_01` 7171, `mtir_treadle_01` 7172 | identiques |
 
 Aucun `loadModAfter` / `loadModBefore`. Objet Workshop : 3810122988 (les deux mods sont livrés ensemble).
@@ -72,7 +72,7 @@ Tous les modules remplissent la table globale `MTIR` (définie dans `MTIR_Core.l
 | `MTIR_VanillaHooks` | Enveloppes d'actions vanilla : `ISWearClothing` (refus, durée, effets), `ISUnequipAction`, `ISRepairClothing`/`ISRemovePatch` (état conservé), `ISFitnessAction` (raideur), `ISHandcraftAction.performRecipe` (taille des vêtements fabriqués) ; `OnClothingUpdated`. | Effects |
 | `MTIR_Reach`, `MTIR_LabelCheck` | Lecture d'étiquette sur place (cadavre, meuble, véhicule) et filtres des lectures groupées. | Core / Effects |
 | `MTIR_Alterations` | Besoins et formules des retouches et remises en état, à la main ou sur machine ; logique commune « travail sur machine » (`MachineWork`) ; besoins de l'entretien. | SewingMachine, MachineSound |
-| `MTIR_Patterns` | Patrons : ModData `MTIR_Pattern`, modèle traçable, tissus et matériaux, besoins, risque de taille décalée, nom du patron. | Sizing, Effects |
+| `MTIR_Patterns` | Patrons : ModData `MTIR_Pattern`, modèle traçable (vêtement, chaussure, gant), tissus et matériaux, besoins, risque de taille décalée, nom du patron. Gants en taille unique, indépendants du système de tailles. | Sizing, Effects |
 | `MTIR_PrintedPatterns` | Patron du commerce : `OnCreate` qui tire un vêtement traçable parmi tous les scripts chargés. | Patterns, Shoes |
 | `MTIR_PatternBinder` | Classeur : ModData `MTIR_Binder`, entrées à identifiant stable, poids. | Patterns |
 | `MTIR_PatternCopy` | Copie d'un patron (précision réduite, utilisations neuves). | Patterns, PatternBinder |

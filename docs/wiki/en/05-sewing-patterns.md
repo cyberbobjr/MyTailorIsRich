@@ -2,6 +2,10 @@
 
 Patterns let you sew a garment or a pair of shoes in **any size**.
 
+You can also trace and sew **gloves in one size**, by hand or on a sewing machine. The pattern keeps the exact glove model and its material: cotton, denim or leather. Gloves from other mods work when they use a standard hand slot and declare a supported fabric. Known vanilla fingerless gloves without a declared fabric are handled explicitly. Rubber, surgical, metal and unknown-material gloves cannot be traced.
+
+A glove pattern takes one blank sheet to trace, and two units of the matching material plus three thread uses to sew by hand (machines can reduce thread use). Tailoring required to sew: 1 for cotton, 2 for denim, 3 for leather, before machine bonuses and Sandbox settings. There is no size-offset risk. Glove patterns also work with copying, binders, previews and store-bought patterns. Tracing destroys the original gloves.
+
 ## Tracing a pattern
 
 Right-click a sized garment or pair of shoes: **Trace a pattern**.

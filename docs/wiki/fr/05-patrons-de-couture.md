@@ -2,6 +2,10 @@
 
 Un patron permet de coudre un vêtement ou une paire de chaussures dans **n'importe quelle taille**.
 
+On peut aussi tracer et coudre des **gants en taille unique**, à la main ou sur une machine à coudre. Le patron conserve le modèle exact et sa matière : coton, jean ou cuir. Les gants d'autres mods sont pris en charge s'ils utilisent un emplacement standard des mains et déclarent un tissu compatible. Une correspondance explicite couvre les mitaines vanilla sans tissu déclaré. Les gants en caoutchouc, chirurgicaux, métalliques ou à matière inconnue sont exclus.
+
+Un patron de gants demande une feuille vierge au tracé, puis deux unités du matériau correspondant et trois utilisations de fil pour une couture à la main (une machine peut réduire le fil). Niveau de Couture requis : 1 pour le coton, 2 pour le jean, 3 pour le cuir, avant bonus de machine et options sandbox. Aucun risque de taille décalée. Copie, classeurs, aperçu et patrons du commerce prennent aussi les gants en charge. Le tracé détruit les gants d'origine.
+
 ## Tracer un patron
 
 Clic droit sur un vêtement ou une paire de chaussures taillés : **Tracer un patron**.

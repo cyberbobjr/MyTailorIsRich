@@ -37,6 +37,10 @@ function MTIR.describeScriptModel(scriptItem)
     if not scriptItem or scriptItem:isHidden() or scriptItem:getObsolete() then
         return nil
     end
+    if MTIR.isGloveModel(scriptItem) then
+        local fabric = MTIR.getGloveMaterial(scriptItem)
+        return fabric and { kind = "glove", fabric = fabric, difficulty = MTIR.GLOVE_PATTERN_DIFFICULTY } or nil
+    end
     local sizing = MTIR.getSizing(scriptItem)
     if not sizing or isBulletLocation(scriptItem) then
         return nil

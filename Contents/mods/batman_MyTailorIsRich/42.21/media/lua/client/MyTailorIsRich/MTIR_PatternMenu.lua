@@ -158,6 +158,9 @@ local function isOwnSize(player, data, size)
 end
 
 local function sizeLabel(player, data, size)
+    if data.kind == "glove" then
+        return getText("IGUI_MTIR_Pattern_OneSize")
+    end
     local label = data.kind == "shoe" and getText("IGUI_MTIR_ShoeSize", size) or size
     if isOwnSize(player, data, size) then
         label = label .. " " .. getText("IGUI_MTIR_Pattern_YourSize")
@@ -185,9 +188,12 @@ local function describeSew(data, req)
         or getItemNameFromFullType("Base.Needle")
     local cutterLabel = (leather or shoe) and getText("IGUI_MTIR_Pattern_ScissorsOrKnife")
         or getItemNameFromFullType("Base.Scissors")
-    return U.chanceHeader("Tooltip_chanceSuccess", req.success)
-        .. " <LINE>" .. U.colorForPercent(1 - req.offChance * 2)
-        .. getText("IGUI_MTIR_Pattern_OffChance", tostring(math.floor(req.offChance * 100 + 0.5)))
+    local offLine = ""
+    if data.kind ~= "glove" then
+        offLine = " <LINE>" .. U.colorForPercent(1 - req.offChance * 2)
+            .. getText("IGUI_MTIR_Pattern_OffChance", tostring(math.floor(req.offChance * 100 + 0.5)))
+    end
+    return U.chanceHeader("Tooltip_chanceSuccess", req.success) .. offLine
         .. needsHeader()
         .. U.needLine(req.needle ~= nil, needleLabel)
         .. shoeToolLines(req)
@@ -216,7 +222,8 @@ local function addSizeOption(subMenu, player, pattern, data, size, entryId)
     option.notAvailable = not req.ready
     local tooltip = ISInventoryPaneContextMenu.addToolTip()
     tooltip.texture = pattern:getTex()
-    tooltip:setName(getItemNameFromFullType(data.fullType) .. " (" .. size .. ")")
+    local label = data.kind == "glove" and getText("IGUI_MTIR_Pattern_OneSize") or size
+    tooltip:setName(getItemNameFromFullType(data.fullType) .. " (" .. label .. ")")
     tooltip.description = describeSew(data, req)
     option.toolTip = tooltip
 end
