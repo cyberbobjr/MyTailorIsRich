@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **5 faites, 0 en partie, 9 à faire, 4 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
+**Bilan** : améliorations de code **5 faites, 0 en partie, 8 à faire, 5 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09 et C10 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
 
 ### Améliorations de code
 
@@ -40,7 +40,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C07 | Clé joueur serveur = compte seul (écran partagé) | ❌ Annulé | — | — | — | Rien : aucun jeu en écran partagé (décision du 2026-10-27) |
 | C08 | Tables par joueur jamais purgées | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | `58d56f4` | Vérifier en jeu : mourir, revenir, jauge d'ampoules à zéro |
 | C09 | Usure comptée par événement horaire | ❌ Annulé | — | — | — | Rien : aucune heure ne peut être sautée (décision du 2026-10-28) |
-| C10 | Noms de patrons dans la langue du serveur | ⬜ À faire | — | — | — | Tout |
+| C10 | Noms de patrons dans la langue du serveur | ❌ Annulé | — | — | — | Rien : serveur et joueurs dans la même langue (décision du 2026-10-28) |
 | C11 | Taille d'artisanat : envoi unique, voies non couvertes | ⬜ À faire | — | — | — | Vérifier en jeu, puis corriger |
 | C12 | `instanceItem` pour lire les stats d'origine | ⬜ À faire | — | — | — | Relevé des getters 42.21, puis correction |
 | C13 | Stats non rétablies quand une option passe à 0 | ⬜ À faire | — | — | — | Tout |
@@ -92,7 +92,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C07 | Clé joueur serveur = compte seul (écran partagé) | MP | — | — | confirmé statiquement (hors périmètre) | ❌ annulé |
 | C08 | Tables par joueur jamais purgées, jauge héritée après la mort | MP / persistance | Basse | S | confirmé statiquement | ✅ non publié |
 | C09 | Usure comptée par événement horaire | Simulation | — | — | infondé, confirmé statiquement | ❌ annulé |
-| C10 | Noms de patrons figés dans la langue du serveur | Traduction MP | Moyenne | M | confirmé statiquement | ⬜ |
+| C10 | Noms de patrons figés dans la langue du serveur | Traduction MP | — | — | confirmé statiquement (sans gêne constatée) | ❌ annulé |
 | C11 | Taille d'artisanat : envoi unique, voies de fabrication non couvertes | MP / compatibilité | Basse | M | à vérifier en jeu | ⬜ |
 | C12 | `instanceItem` pour lire les stats d'origine | Compatibilité / effets de bord | Basse | S-M | à vérifier en jeu | ⬜ |
 | C13 | Stats dérivées non rétablies quand une option passe à 0 | Bug mineur | Basse | S | confirmé statiquement | ⬜ |
@@ -203,15 +203,14 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Statut** : fait moteur juste (`EveryHours` ne rattrape pas les heures sautées), mais **sans effet ici** ; arithmétique confirmée statiquement sur le Java 42.21.
 - **Avancement : ❌ annulé (2026-10-28)** — décision de l'auteur : rien à corriger, le cas chiffré ne se produit pas.
 
-### C10 — Noms de patrons dans la langue du serveur
+### C10 — Noms de patrons dans la langue du serveur — ❌ annulé
 
-- **Problème** : le nom d'un patron est composé et enregistré par l'autorité. En MP, un joueur d'une autre langue voit la langue du serveur. La 0.4.5 a corrigé les clés brutes, pas ce point.
+- **Comportement** : le nom d'un patron est composé et enregistré par l'autorité. En MP, un joueur d'une autre langue voit la langue du serveur. La 0.4.5 a corrigé les clés brutes, pas ce point.
 - **Preuves** : `shared/MyTailorIsRich/MTIR_Patterns.lua:99-113, 325-326` ; `shared/MyTailorIsRich/MTIR_PatternCopy.lua:73` ; `shared/MyTailorIsRich/MTIR_PrintedPatterns.lua:157` ; repli client limité aux clés brutes : `shared/MyTailorIsRich/MTIR_PatternBinder.lua:196-211`.
-- **Risque** : traduction incomplète sur un serveur multilingue.
-- **Correction** : recomposer le nom sur le client à l'affichage, avec la technique déjà employée pour les tailles (remplacement temporaire de `getName` pendant le rendu, `client/MyTailorIsRich/MTIR_ClientUI.lua:136-187`) et dans l'infobulle. La clé se déduit déjà du type et des données (`MTIR.getPatternNameKey`). Le nom enregistré reste le repli pour les autres mods.
-- **Priorité** : moyenne. **Effort** : M.
-- **Statut** : confirmé statiquement.
-- **Avancement : ⬜ à faire.**
+- **Conséquence** : sur un serveur dont la langue diffère de celle d'un joueur, ce joueur lit le préfixe (« Patron : ») **et** le nom du vêtement dans la langue du serveur. Invisible quand serveur et joueurs partagent la même langue.
+- **Piste écartée** : recomposer le nom sur le client à l'affichage, avec la technique déjà employée pour les tailles (remplacement temporaire de `getName` pendant le rendu, `client/MyTailorIsRich/MTIR_ClientUI.lua:136-187`) et dans l'infobulle. La clé se déduit déjà du type et des données (`MTIR.getPatternNameKey`). Le nom enregistré reste le repli pour les autres mods.
+- **Statut** : confirmé statiquement ; sans gêne constatée en jeu.
+- **Avancement : ❌ annulé (2026-10-28)** — décision de l'auteur : le serveur et ses joueurs partagent la même langue, le défaut ne se voit pas. À reprendre tel quel si un serveur multilingue devient un usage réel (la clé se déduit déjà des données du patron, le travail est uniquement dans les chemins d'affichage).
 
 ### C11 — Taille d'artisanat : envoi unique et voies non couvertes
 
