@@ -59,6 +59,10 @@ Clothes on the same zombie are close in size: same size most of the time, otherw
 
 If you gain weight, clothes that no longer fit come off. Your character says why.
 
+You are warned before that happens: within a kilo of the next size, your character says their
+clothes are starting to feel tight (or loose), and the tooltip of what they wear says the same.
+When the size actually changes, they announce the new one.
+
 ## Next steps
 
 - Make a garment fit: [Alterations and wear](04-alterations-and-wear.md).

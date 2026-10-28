@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **9 faites, 0 en partie, 0 à faire, 9 annulées** — la partie 1 est entièrement tranchée. Faites : C01 à C04 (publiées en 0.4.6), C08, C11, C14, C16 et C17 (sur `main`, non publiées). Annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13, C15 et C18 le 2026-10-28. Idées de fonctionnalités : **1 faite, 0 en partie, 19 à faire** (sur 20) — I01 faite le 2026-10-28, non publiée.
+**Bilan** : améliorations de code **9 faites, 0 en partie, 0 à faire, 9 annulées** — la partie 1 est entièrement tranchée. Faites : C01 à C04 (publiées en 0.4.6), C08, C11, C14, C16 et C17 (sur `main`, non publiées). Annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13, C15 et C18 le 2026-10-28. Idées de fonctionnalités : **2 faites, 0 en partie, 18 à faire** (sur 20) — I01 et I06 faites le 2026-10-28, non publiées.
 
 ### Améliorations de code
 
@@ -59,7 +59,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | I03 | Patron qui garde l'apparence du modèle | ⬜ Proposée | |
 | I04 | Garnir une chaussure trop grande | ⬜ Proposée | |
 | I05 | Chaussettes épaisses | ⬜ Proposée | |
-| I06 | Alerte de changement de taille | ⬜ Proposée | |
+| I06 | Alerte de changement de taille | ✅ Faite | Non publiée ; réplique à l'approche et au franchissement, ligne d'infobulle |
 | I07 | Panneau « Garde-robe » | ⬜ Proposée | Prérequis C03 fait |
 | I08 | Pastille d'ajustement dans l'inventaire | ⬜ Proposée | |
 | I09 | Blanchir à la javel | ⬜ Proposée | |
@@ -383,6 +383,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : comparaison du poids à chaque passage de minute (`server/MyTailorIsRich/MTIR_Server.lua:48-55`), seuils de `MTIR.SIZES`, réplique par `MTIR.tell`.
 - **MP** : dernier seuil retenu côté serveur par joueur (clé = compte, voir C07).
 - **Effort** : S.
+- **Avancement : ✅ faite le 2026-10-28, sur `main`, non publiée, testée hors jeu (lupa + luacheck), à vérifier en jeu** — Bornes de poids explicites (`min`/`max`) sur `MTIR.SIZES` et `MTIR.getSizeDrift(poids)` ; `MTIR.checkSizeDrift(joueur)` appelé chaque minute par l'autorité (`updatePlayerClothes`), état par joueur dans `MTIR.SizeWatch`, purgé par `MTIR.forgetPlayerEffects` (C08). Une seule réplique tant que le joueur reste dans la marge d'un kilo, une autre au franchissement avec la nouvelle taille ; première passe silencieuse. Ligne d'infobulle pour un vêtement porté (`MTIR.getSizeWarning`, calculée côté client). Six clés de traduction dans les neuf langues. Tests : `tests/lua/test_size_drift.lua` (8 cas).
 - **Avancement : ⬜ proposée, pas commencée.**
 
 ### I07 — Panneau « Garde-robe »

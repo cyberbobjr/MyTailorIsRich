@@ -155,14 +155,19 @@ end
 -- Tailles
 -- ----------------------------------------------------------------------------
 
+-- `min` et `max` : bornes de poids en kilos (nil aux extrémités). Elles servent à
+-- prévenir le joueur avant un changement de taille ; `includes` reste la référence.
 MTIR.SIZES = {
-    XS = { name = "XS", chance = 5, includes = function(x) return x <= 50 end },
-    S = { name = "S", chance = 10, includes = function(x) return x > 50 and x <= 65 end },
-    M = { name = "M", chance = 25, includes = function(x) return x > 65 and x <= 75 end },
-    L = { name = "L", chance = 35, includes = function(x) return x > 75 and x < 85 end },
-    XL = { name = "XL", chance = 15, includes = function(x) return x >= 85 and x < 100 end },
-    XXL = { name = "XXL", chance = 10, includes = function(x) return x >= 100 end },
+    XS = { name = "XS", chance = 5, max = 50, includes = function(x) return x <= 50 end },
+    S = { name = "S", chance = 10, min = 50, max = 65, includes = function(x) return x > 50 and x <= 65 end },
+    M = { name = "M", chance = 25, min = 65, max = 75, includes = function(x) return x > 65 and x <= 75 end },
+    L = { name = "L", chance = 35, min = 75, max = 85, includes = function(x) return x > 75 and x < 85 end },
+    XL = { name = "XL", chance = 15, min = 85, max = 100, includes = function(x) return x >= 85 and x < 100 end },
+    XXL = { name = "XXL", chance = 10, min = 100, includes = function(x) return x >= 100 end },
 }
+
+--- Marge d'alerte avant un changement de taille, en kilos.
+MTIR.SIZE_WARNING_MARGIN = 1
 
 MTIR.SIZE_LIST = {
     MTIR.SIZES.XS, MTIR.SIZES.S, MTIR.SIZES.M,
@@ -196,6 +201,23 @@ end
 
 function MTIR.getClothesSizeFromName(name)
     return MTIR.SIZES[name] or MTIR.SIZES.L
+end
+
+--- Poids restant avant de changer de taille : `up` en grossissant, `down` en
+--- maigrissant (nil du côté où il n'y a plus de taille).
+function MTIR.getSizeDrift(weight)
+    local size = MTIR.SIZES.L
+    for _, candidate in ipairs(MTIR.SIZE_LIST) do
+        if candidate.includes(weight) then
+            size = candidate
+            break
+        end
+    end
+    return {
+        size = size,
+        up = size.max and math.max(0, size.max - weight) or nil,
+        down = size.min and math.max(0, weight - size.min) or nil,
+    }
 end
 
 --- Taille du personnage déduite de son poids.

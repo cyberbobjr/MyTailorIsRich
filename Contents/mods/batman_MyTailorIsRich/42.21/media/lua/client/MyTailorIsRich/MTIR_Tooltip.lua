@@ -16,6 +16,7 @@ end
 
 local WHITE = { 1, 1, 1, 1 }
 local UNCHOSEN = { 0.9, 0.8, 0.4, 1 }
+local DRIFT = { 0.9, 0.8, 0.4, 1 }
 
 local DEGRADE_BUCKETS = {
     { limit = 0.2, key = "IGUI_MTIR_RapidDegrading" },
@@ -103,6 +104,20 @@ local function degradeLine(item, player)
     return degradeText(item, player, days, maintained), { color:getR(), color:getG(), color:getB(), 1 }
 end
 
+--- Vêtement porté alors que le poids approche d'une borne de taille : prévenir avant
+--- qu'il ne serre (ou ne flotte), plutôt que de le retirer sans un mot.
+local function driftLine(item, player)
+    if not player:isEquippedClothing(item) then
+        return nil
+    end
+    local warning = MTIR.getSizeWarning(player)
+    if not warning then
+        return nil
+    end
+    local key = warning == "up" and "IGUI_MTIR_Tooltip_SizeNearUp" or "IGUI_MTIR_Tooltip_SizeNearDown"
+    return getText(key), DRIFT
+end
+
 TooltipLib.registerProvider({
     id = "MTIR_Clothing",
     target = "item",
@@ -125,6 +140,10 @@ TooltipLib.registerProvider({
             ctx:addLabel(sizeText, sizeColor)
         elseif wearText then
             ctx:addLabel(wearText, wearColor)
+        end
+        local driftText, driftColor = driftLine(item, player)
+        if driftText then
+            ctx:addLabel(driftText, driftColor)
         end
     end,
 })

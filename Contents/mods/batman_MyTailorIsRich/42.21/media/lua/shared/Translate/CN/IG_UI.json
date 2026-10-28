@@ -244,5 +244,11 @@
     "IGUI_MTIR_Measure_Person_Menu": "量尺寸",
     "IGUI_MTIR_Measure_Person_Self": "我自己",
     "IGUI_MTIR_Say_Measured_Self": "尺码 %1，鞋码 %2",
-    "IGUI_MTIR_Say_Measured_Other": "%1 的尺码是 %2，鞋码 %3"
+    "IGUI_MTIR_Say_Measured_Other": "%1 的尺码是 %2，鞋码 %3",
+    "IGUI_MTIR_Say_SizeUp": "衣服开始紧了，我现在穿 %1 码",
+    "IGUI_MTIR_Say_SizeDown": "衣服松松垮垮的，我现在穿 %1 码",
+    "IGUI_MTIR_Say_SizeNearUp": "开始有点紧了",
+    "IGUI_MTIR_Say_SizeNearDown": "开始有点松了",
+    "IGUI_MTIR_Tooltip_SizeNearUp": "开始紧了",
+    "IGUI_MTIR_Tooltip_SizeNearDown": "开始松了"
 }

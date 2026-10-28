@@ -65,6 +65,7 @@ local function forEachAuthorityPlayer(callback)
 end
 
 local function updatePlayerClothes(player)
+    MTIR.checkSizeDrift(player)
     MTIR.applyAuthorityWornEffects(player)
     MTIR.applyDerivedStats(player)
 end

@@ -13,6 +13,7 @@ require "MyTailorIsRich/MTIR_Shoes"
 require "TimedActions/ISTransferAction"
 
 MTIR.BodyDiffs = MTIR.BodyDiffs or {}
+MTIR.SizeWatch = MTIR.SizeWatch or {}
 MTIR.DegradingChance = MTIR.DegradingChance or {}
 MTIR.ServerCraftSize = MTIR.ServerCraftSize or {}
 
@@ -39,6 +40,51 @@ function MTIR.forgetPlayerEffects(player)
     local key = MTIR.playerKey(player)
     MTIR.BodyDiffs[key] = nil
     MTIR.ServerCraftSize[key] = nil
+    MTIR.SizeWatch[key] = nil
+end
+
+-- ----------------------------------------------------------------------------
+-- Changement de taille annoncé
+--
+-- Un vêtement devenu trop petit de plus de deux tailles est retiré sans un mot
+-- (MTIR.removeTooTight) : l'autorité suit le poids et fait parler le personnage
+-- quand il approche d'une borne, puis quand il la franchit.
+-- ----------------------------------------------------------------------------
+
+--- Surveille le poids du joueur et le prévient. Appelé chaque minute par l'autorité.
+function MTIR.checkSizeDrift(player)
+    local key = MTIR.playerKey(player)
+    local drift = MTIR.getSizeDrift(player:getNutrition():getWeight())
+    local state = MTIR.SizeWatch[key]
+    if not state then
+        -- Première passe : on retient la taille sans rien dire.
+        MTIR.SizeWatch[key] = { size = drift.size.name }
+        return
+    end
+
+    if state.size ~= drift.size.name then
+        local grew = (MTIR.getSizeIndex(drift.size.name) or 0) > (MTIR.getSizeIndex(state.size) or 0)
+        MTIR.SizeWatch[key] = { size = drift.size.name }
+        MTIR.tell(player, {
+            say = { key = grew and "IGUI_MTIR_Say_SizeUp" or "IGUI_MTIR_Say_SizeDown",
+                arg = drift.size.name },
+            refresh = true,
+        })
+        return
+    end
+
+    local margin = MTIR.SIZE_WARNING_MARGIN
+    local near = (drift.up and drift.up <= margin and "up")
+        or (drift.down and drift.down <= margin and "down") or nil
+    if near ~= state.near then
+        state.near = near
+        if near then
+            MTIR.tell(player, {
+                say = { key = near == "up" and "IGUI_MTIR_Say_SizeNearUp"
+                    or "IGUI_MTIR_Say_SizeNearDown" },
+            })
+        end
+    end
 end
 
 --- Effets côté client : fx = { say = {key, arg}, sound, halo = {itemType, good}, refresh, resetModel }.
@@ -191,6 +237,20 @@ function MTIR.updateOneClothes(item, player)
     if MTIR.canClothesDegrade(item) then
         MTIR.updateClothesStats(item, player)
     end
+end
+
+--- Vrai si le joueur est à moins d'un kilo de changer de taille, avec le sens.
+--- Lu par l'infobulle, côté client comme côté autorité.
+function MTIR.getSizeWarning(player)
+    local drift = MTIR.getSizeDrift(player:getNutrition():getWeight())
+    local margin = MTIR.SIZE_WARNING_MARGIN
+    if drift.up and drift.up <= margin then
+        return "up"
+    end
+    if drift.down and drift.down <= margin then
+        return "down"
+    end
+    return nil
 end
 
 --- Recalcule tous les vêtements portés et les zones serrées du joueur.

@@ -244,5 +244,11 @@
     "IGUI_MTIR_Measure_Person_Menu": "Снять мерки",
     "IGUI_MTIR_Measure_Person_Self": "С себя",
     "IGUI_MTIR_Say_Measured_Self": "Размер %1, обувь %2",
-    "IGUI_MTIR_Say_Measured_Other": "%1: размер %2, обувь %3"
+    "IGUI_MTIR_Say_Measured_Other": "%1: размер %2, обувь %3",
+    "IGUI_MTIR_Say_SizeUp": "Одежда жмёт, теперь у меня размер %1",
+    "IGUI_MTIR_Say_SizeDown": "Одежда висит на мне, теперь у меня размер %1",
+    "IGUI_MTIR_Say_SizeNearUp": "Начинает жать",
+    "IGUI_MTIR_Say_SizeNearDown": "Начинает болтаться",
+    "IGUI_MTIR_Tooltip_SizeNearUp": "Начинает жать",
+    "IGUI_MTIR_Tooltip_SizeNearDown": "Начинает болтаться"
 }

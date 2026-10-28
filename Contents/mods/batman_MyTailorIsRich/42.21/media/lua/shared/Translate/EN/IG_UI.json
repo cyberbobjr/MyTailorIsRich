@@ -244,5 +244,11 @@
     "IGUI_MTIR_Measure_Person_Menu": "Take measurements",
     "IGUI_MTIR_Measure_Person_Self": "Myself",
     "IGUI_MTIR_Say_Measured_Self": "Size %1, and size %2 shoes",
-    "IGUI_MTIR_Say_Measured_Other": "%1 is a size %2, size %3 shoes"
+    "IGUI_MTIR_Say_Measured_Other": "%1 is a size %2, size %3 shoes",
+    "IGUI_MTIR_Say_SizeUp": "My clothes are getting tight, I'm a size %1 now",
+    "IGUI_MTIR_Say_SizeDown": "My clothes are hanging off me, I'm a size %1 now",
+    "IGUI_MTIR_Say_SizeNearUp": "My clothes are starting to feel tight",
+    "IGUI_MTIR_Say_SizeNearDown": "My clothes are starting to feel loose",
+    "IGUI_MTIR_Tooltip_SizeNearUp": "Starting to feel tight",
+    "IGUI_MTIR_Tooltip_SizeNearDown": "Starting to feel loose"
 }
