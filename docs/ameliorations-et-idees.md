@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **9 faites, 0 en partie, 0 à faire, 9 annulées** — la partie 1 est entièrement tranchée. Faites : C01 à C04 (publiées en 0.4.6), C08, C11, C14, C16 et C17 (sur `main`, non publiées). Annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13, C15 et C18 le 2026-10-28. Idées de fonctionnalités : **3 faites, 0 en partie, 17 à faire** (sur 20) — I01, I05 et I06 faites le 2026-10-28, non publiées.
+**Bilan** : améliorations de code **9 faites, 0 en partie, 0 à faire, 9 annulées** — la partie 1 est entièrement tranchée. Faites : C01 à C04 (publiées en 0.4.6), C08, C11, C14, C16 et C17 (sur `main`, non publiées). Annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13, C15 et C18 le 2026-10-28. Idées de fonctionnalités : **3 faites, 0 en partie, 16 à faire, 1 écartée** (sur 20) — I01, I05 et I06 faites le 2026-10-28, non publiées ; I07 écartée le 2026-10-28.
 
 ### Améliorations de code
 
@@ -60,7 +60,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | I04 | Garnir une chaussure trop grande | ⬜ Proposée | |
 | I05 | Chaussettes épaisses | ✅ Faite | Non publiée ; frottement selon l'épaisseur et l'humidité, une pointure comblée |
 | I06 | Alerte de changement de taille | ✅ Faite | Non publiée ; réplique à l'approche et au franchissement, ligne d'infobulle |
-| I07 | Panneau « Garde-robe » | ⬜ Proposée | Prérequis C03 fait |
+| I07 | Panneau « Garde-robe » | ❌ Écartée | Non retenue le 2026-10-28 : panneau d'interface refusé par l'auteur |
 | I08 | Pastille d'ajustement dans l'inventaire | ⬜ Proposée | |
 | I09 | Blanchir à la javel | ⬜ Proposée | |
 | I10 | Teintures naturelles | ⬜ Proposée | |
@@ -313,7 +313,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | I04 | Garnir une chaussure trop grande | Sauver une paire à +2 | S | Faible |
 | I05 | Chaussettes épaisses | Choix d'équipement utile | S | Faible |
 | I06 | Alerte de changement de taille | Éviter la surprise du vêtement retiré | S | Faible |
-| I07 | Panneau « Garde-robe » | Vue d'ensemble de la tenue | M | Nul (client) |
+| I07 | Panneau « Garde-robe » ❌ | Vue d'ensemble de la tenue | M | Nul (client) |
 | I08 | Pastille d'ajustement dans l'inventaire | Tri rapide du butin | M | Nul (client) |
 | I09 | Blanchir à la javel | Teindre en couleur claire | S | Faible |
 | I10 | Teintures naturelles | Couleurs sans magasin | L | Moyen |
@@ -386,8 +386,9 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Avancement : ✅ faite le 2026-10-28, sur `main`, non publiée, testée hors jeu (lupa + luacheck), à vérifier en jeu** — Bornes de poids explicites (`min`/`max`) sur `MTIR.SIZES` et `MTIR.getSizeDrift(poids)` ; `MTIR.checkSizeDrift(joueur)` appelé chaque heure de jeu par l'autorité (`onEveryHours`, choix de l'auteur : une passe par minute était inutile pour un poids qui bouge de quelques centaines de grammes par jour), état par joueur dans `MTIR.SizeWatch`, purgé par `MTIR.forgetPlayerEffects` (C08). Une seule réplique tant que le joueur reste dans la marge d'un kilo, une autre au franchissement avec la nouvelle taille ; première passe silencieuse. Ligne d'infobulle pour un vêtement porté (`MTIR.getSizeWarning`, calculée côté client). Six clés de traduction dans les neuf langues. Tests : `tests/lua/test_size_drift.lua` (8 cas).
 - **Avancement : ⬜ proposée, pas commencée.**
 
-### I07 — Panneau « Garde-robe »
+### I07 — Panneau « Garde-robe » — ❌ écartée
 
+- **Décision du 2026-10-28** : non retenue par l'auteur, après une proposition détaillée (tableau des vêtements portés et transportés avec taille, ajustement, état, durée restante et retouche possible ; ouverture depuis l'écran Personnage et le menu contextuel ; trois niveaux d'ambition de la simple liste au suivi des conteneurs voisins). Le besoin « trier d'un coup d'œil » reste couvert par les infobulles, et I08 (pastille d'ajustement dans l'inventaire) reste proposée.
 - **Description** : une fenêtre liste les vêtements portés et transportés : taille connue, ajustement, état, jours d'usure estimés, retouche possible. Tri par colonne.
 - **Intérêt** : vue d'ensemble pour décider quoi retoucher ou jeter.
 - **Faisabilité** : `ISScrollingListBox` avec colonnes (base moteur, `ui-windows.md` : en-têtes sans tri, à faire soi-même) ; données en lecture seule déjà calculées (`MTIR_Tooltip.lua`).
