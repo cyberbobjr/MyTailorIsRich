@@ -7,7 +7,7 @@
 | Workshop | 3810122988 |
 | Version analysée | 0.4.5 (`mod.info`, `CHANGELOG.md`), variante `Contents/mods/batman_MyTailorIsRich/42.21` |
 | Build cible | 42.21 (`versionMin=42.21`) ; sources consultées : Lua vanilla installé, Java décompilé `E:\pz-decompiled\42.21.0` |
-| Date | 2026-10-21 ; **avancement mis à jour le 2026-10-23** (version publiée : 0.4.6, tag `v0.4.6`, commit `83e4ce5`) |
+| Date | 2026-10-21 ; **avancement mis à jour le 2026-10-28** : les 18 améliorations de code sont toutes tranchées (9 corrigées, 9 annulées). Version publiée : 0.4.7, tag `v0.4.7` ; les corrections des 27 et 28 octobre sont sur `main`, non publiées. |
 | Périmètre | Lecture statique de tout le Lua (`shared`, `client`, `server`), des scripts (`MTIR_items.txt`, `MTIR_entities.txt`, `MTIR_patternbinder.txt`, `MTIR_sounds.txt`), de `sandbox-options.txt`, des traductions EN, du `README.md`, du `CHANGELOG.md`, des descriptions Steam, des tests (`tests/`) et de la CI. Rien n'a été testé en jeu pour l'analyse initiale (voir le tableau de bord pour les vérifications faites depuis). |
 
 Statut des constats :
@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **9 faites, 0 en partie, 1 à faire, 8 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13 et C15 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
+**Bilan** : améliorations de code **9 faites, 0 en partie, 0 à faire, 9 annulées** — la partie 1 est entièrement tranchée. Faites : C01 à C04 (publiées en 0.4.6), C08, C11, C14, C16 et C17 (sur `main`, non publiées). Annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13, C15 et C18 le 2026-10-28. Idées de fonctionnalités : **0 faite, 0 en partie, 20 à faire** (sur 20).
 
 ### Améliorations de code
 
@@ -48,7 +48,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C15 | Peau entière consommée pour une unité | ❌ Annulé | — | — | — | Rien : comportement vanilla, recette « couper en deux » (décision du 2026-10-28) |
 | C16 | Portée machine / table sans test de mur | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Vérifier en jeu : machine contre une cloison |
 | C17 | Duplications, incohérences d'actions, trous de tests | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Vérifier en jeu : outils en main pendant une remise en état, actions inchangées |
-| C18 | Descriptions Steam proches de 8 000 octets | ⬜ À faire | — | — | — | Tout |
+| C18 | Descriptions Steam proches de 8 000 octets | ❌ Annulé | — | — | — | Rien pour l'instant : le test bloque un dépassement (décision du 2026-10-28) |
 
 ### Idées de fonctionnalités
 
@@ -100,7 +100,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C15 | Peau entière consommée pour une unité | Gameplay | — | — | conforme au vanilla, confirmé statiquement | ❌ annulé |
 | C16 | Portée machine / table sans test de mur | Autorité serveur | Basse | S | confirmé statiquement | ✅ non publié |
 | C17 | Duplications, incohérences d'actions, trous de tests | Maintenabilité | Basse | M | confirmé statiquement | ✅ non publié |
-| C18 | Descriptions Steam presque à la limite de 8 000 octets | Maintenabilité / traduction | Basse | S | confirmé statiquement | ⬜ |
+| C18 | Descriptions Steam presque à la limite de 8 000 octets | Maintenabilité / traduction | — | — | confirmé statiquement | ❌ annulé |
 
 ---
 
@@ -293,14 +293,13 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
   5. **Tests des cinq zones sans couverture** : `test_sizing_deduction.lua` (9 cas), `test_shoe_effects.lua` (10), `test_craft_sizing.lua` (7), `test_alteration_formulas.lua` (7), `test_degrade_chance.lua` (6).
 - **Trouvé en écrivant les tests** : la part « état du vêtement » de la formule d'usure est presque inerte. Saleté et humidité se lisent de 0 à 100, la formule les divise par 7 puis retire un seuil de 0,25 : un vêtement couvert de boue (1/7) ne change rien, trempé de pluie (2/7) à peine, seul le sang (4/7) pèse (+4 %), et il faut les trois à la fois pour +50 %. Formule d'origine conservée telle quelle ; à revoir si l'usure doit vraiment dépendre de la saleté.
 
-### C18 — Descriptions Steam presque à la limite
+### C18 — Descriptions Steam presque à la limite — ❌ annulé
 
-- **Constat** : les neuf `README.steam*` pèsent de 7 724 à 7 898 octets pour une limite de 8 000 (`tests/run_tests.py`, `STEAM_DESCRIPTION_MAX_BYTES`).
-- **Risque** : chaque nouvelle fonctionnalité impose de réécrire et de raccourcir neuf langues.
-- **Correction** : garder sur Steam un résumé et un tableau des effets, et renvoyer le détail vers une page de documentation (le dossier `docs/` est en cours de réorganisation).
-- **Priorité** : basse. **Effort** : S.
+- **Constat** : les neuf `README.steam*` pèsent de 7 758 (CN) à 7 905 octets (EN, DE) pour une limite de 8 000 (`tests/run_tests.py`, `STEAM_DESCRIPTION_MAX_BYTES`) — relevé du 2026-10-28, soit 95 à 242 octets de marge.
+- **Conséquence** : chaque nouvelle fonctionnalité annoncée sur la page Steam impose de raccourcir neuf langues d'abord. Aucun risque de publication ratée : le test refuse un dépassement avant l'envoi.
+- **Piste écartée** : garder sur Steam un résumé et un tableau des effets, et renvoyer le détail vers une page de documentation.
 - **Statut** : confirmé statiquement.
-- **Avancement : ⬜ à faire.**
+- **Avancement : ❌ annulé (2026-10-28)** — décision de l'auteur : rien à annoncer dans l'immédiat, le test garde le filet. À reprendre le jour où une nouveauté ne rentre plus.
 
 ---
 
@@ -528,7 +527,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Avancement (2026-10-23)** : rangs 1 à 4 faits et publiés en 0.4.6 (commit `00cd2e7`) ; rang 5 (I01) pas commencé.
 
-Les deux choix de conception ont été tranchés le 2026-10-27, tous deux **annulés** : ❌ **C05** (coût de la copie) — équilibrage voulu, pas un bug ; ❌ **C06** (infobulle « Enfiler ») — confort voulu, aucune gêne constatée en jeu. Le prochain point utile est donc le rang 5, ⬜ **I01** (mètre ruban).
+**Avancement (2026-10-28)** : la partie 1 est entièrement tranchée. Le prochain point utile de cette priorisation est donc le rang 5, ⬜ **I01** (mètre ruban), premier des idées de la partie 2.
 
 ---
 
@@ -536,4 +535,6 @@ Les deux choix de conception ont été tranchés le 2026-10-27, tous deux **annu
 
 Ce document est une **proposition**. Il ne modifie aucun fichier du mod. Aucune correction ni fonctionnalité ne doit être implémentée sans validation explicite de l'auteur, et chaque changement retenu devra être vérifié en jeu (solo puis MP) avant publication.
 
-**Mise à jour du 2026-10-23** : C01 à C04 ont été retenus, corrigés (commit `00cd2e7`) et publiés en 0.4.6 ; C01 est couvert par le parcours `pz-autotest` solo et MP, C02 à C04 restent à vérifier en jeu. Les autres points et toutes les idées sont encore des propositions.
+**Mise à jour du 2026-10-23** : C01 à C04 ont été retenus, corrigés (commit `00cd2e7`) et publiés en 0.4.6 ; C01 est couvert par le parcours `pz-autotest` solo et MP, C02 à C04 restent à vérifier en jeu.
+
+**Mise à jour des 2026-10-27 et 2026-10-28** : la partie 1 a été passée en revue point par point avec l'auteur. Neuf points sont **annulés** (C05, C06, C07, C09, C10, C12, C13, C15, C18), chacun avec son motif dans sa fiche : comportement voulu, hors périmètre d'usage, infondé après vérification du moteur, conforme au vanilla, ou sans portée réelle. Cinq points ont été **corrigés** sur `main` sans être publiés (C08, C11, C14, C16, C17), tous testés hors jeu (lupa + luacheck) et **aucun vérifié en jeu** : c'est le travail qui reste avant une version. Les idées de la partie 2 sont toujours des propositions.
