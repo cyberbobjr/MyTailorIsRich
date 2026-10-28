@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **5 faites, 0 en partie, 10 à faire, 3 annulées** (sur 18 ; annulées le 2026-10-27 : C05, C06, C07) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
+**Bilan** : améliorations de code **5 faites, 0 en partie, 9 à faire, 4 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
 
 ### Améliorations de code
 
@@ -39,7 +39,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C06 | Infobulle « Enfiler » qui révèle l'ajustement | ❌ Annulé | — | — | — | Rien : confort voulu, aucune gêne constatée en jeu (décision du 2026-10-27) |
 | C07 | Clé joueur serveur = compte seul (écran partagé) | ❌ Annulé | — | — | — | Rien : aucun jeu en écran partagé (décision du 2026-10-27) |
 | C08 | Tables par joueur jamais purgées | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | `58d56f4` | Vérifier en jeu : mourir, revenir, jauge d'ampoules à zéro |
-| C09 | Usure comptée par événement horaire | ⬜ À faire | — | — | — | Mesurer en jeu, puis corriger |
+| C09 | Usure comptée par événement horaire | ❌ Annulé | — | — | — | Rien : aucune heure ne peut être sautée (décision du 2026-10-28) |
 | C10 | Noms de patrons dans la langue du serveur | ⬜ À faire | — | — | — | Tout |
 | C11 | Taille d'artisanat : envoi unique, voies non couvertes | ⬜ À faire | — | — | — | Vérifier en jeu, puis corriger |
 | C12 | `instanceItem` pour lire les stats d'origine | ⬜ À faire | — | — | — | Relevé des getters 42.21, puis correction |
@@ -91,7 +91,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C06 | Infobulle « Enfiler » qui révèle l'ajustement | Cohérence gameplay | — | — | confirmé statiquement (comportement voulu) | ❌ annulé |
 | C07 | Clé joueur serveur = compte seul (écran partagé) | MP | — | — | confirmé statiquement (hors périmètre) | ❌ annulé |
 | C08 | Tables par joueur jamais purgées, jauge héritée après la mort | MP / persistance | Basse | S | confirmé statiquement | ✅ non publié |
-| C09 | Usure comptée par événement horaire | Simulation | Basse | M | à vérifier en jeu | ⬜ |
+| C09 | Usure comptée par événement horaire | Simulation | — | — | infondé, confirmé statiquement | ❌ annulé |
 | C10 | Noms de patrons figés dans la langue du serveur | Traduction MP | Moyenne | M | confirmé statiquement | ⬜ |
 | C11 | Taille d'artisanat : envoi unique, voies de fabrication non couvertes | MP / compatibilité | Basse | M | à vérifier en jeu | ⬜ |
 | C12 | `instanceItem` pour lire les stats d'origine | Compatibilité / effets de bord | Basse | S-M | à vérifier en jeu | ⬜ |
@@ -192,15 +192,16 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Statut** : confirmé statiquement.
 - **Avancement : ✅ corrigé le 2026-10-28 (commit `58d56f4`), sur `main`, non publié, testé hors jeu (lupa + luacheck), à vérifier en jeu** — Deux purges partagées, `MTIR.forgetPlayerEffects` (zones serrées, taille d'artisanat d'autorité) et `MTIR.forgetPlayerShoeState` (jauge de frottement, inconfort à corriger) ; le plancher d'inconfort n'est pas concerné, il est reconstruit à chaque recalcul complet. Côté autorité, `forgetPlayerState` de `MTIR_Server.lua` les appelle et vide aussi ses trois tables de délais (`lastClimb`, `lastFall`, `lastMachineSound`), sur `OnCharacterDeath` (zombies et animaux écartés par `instanceof(IsoPlayer)` et `isAnimal()`) et, en solo, sur `OnCreatePlayer`. Côté client, les tailles choisies dans les fenêtres d'artisanat sont oubliées au personnage neuf (`MTIR.forgetUICraftSizes`, seulement pour le joueur local 0 : la table est commune aux joueurs locaux). Preuves : `Events.OnCharacterDeath` déclenché aussi sur un serveur dédié (`IsoPlayer.OnDeath` appelle `super.OnDeath()` avant le retour `GameServer.server`, `IsoPlayer.java:6093-6097`) et pour tout personnage (`IsoGameCharacter.DoDeath`, `:1812-1815`) ; tests `tests/lua/test_forget_player_state.lua` (5 cas). Reste à faire : une déconnexion ne purge rien (quelques centaines d'octets par compte pour la durée du serveur, volontairement laissés).
 
-### C09 — Usure et effets « par minute » comptés par événement
+### C09 — Usure et effets « par minute » comptés par événement — ❌ annulé
 
-- **Problème** : l'usure horaire et les effets d'autorité de la minute reposent sur `EveryHours` et `EveryOneMinute`. D'après la base moteur (`api-42-21.md`, « `EveryHours` : déclenchement, heures sautées »), ces événements partent une fois par mise à jour, même si plusieurs heures ont passé.
+- **Constat de départ** : l'usure horaire et les effets d'autorité de la minute reposent sur `EveryHours` et `EveryOneMinute`. D'après la base moteur (`api-42-21.md`, « `EveryHours` : déclenchement, heures sautées »), ces événements partent une fois par mise à jour, même si plusieurs heures ont passé.
 - **Preuves** : `server/MyTailorIsRich/MTIR_Server.lua:53-60, 232-233`. Le même fichier sait déjà compter le temps écoulé (`elapsedGameMinutes`, `:66-72`).
-- **Risque** : usure sous-estimée au temps accéléré ; pas de rattrapage après une pause.
-- **Correction** : compter les heures entières écoulées avec `getWorldAgeHours()` et tirer l'usure autant de fois (borné), comme pour les minutes du tick.
-- **Priorité** : basse. **Effort** : M.
-- **Statut** : à vérifier en jeu (ampleur réelle pendant le sommeil et en vitesse ×3).
-- **Avancement : ⬜ à faire.**
+- **Risque supposé** : usure sous-estimée au temps accéléré ; pas de rattrapage après une pause.
+- **Pourquoi c'est infondé** : le moteur avance `1 / durée_du_jour_en_minutes / 60 × multiplicateur / 2` heure par mise à jour (`GameTime.java:480`), et le plus gros multiplicateur du jeu est celui du sommeil, `200 × (30 / FPS verrouillés)`, soit 100 à 60 FPS (`GameTime.java:891-893`). Avec la durée de jour par défaut (60 minutes réelles), une mise à jour avance 0,007 minute de jeu en vitesse normale, 0,27 au bouton ×40 et **0,83 en dormant** : sauter une heure demanderait un multiplicateur d'environ 7 200. Aucune heure n'est donc jamais sautée, et l'usure horaire est tirée une fois par heure de jeu, comme prévu.
+- **Reste, en théorie** : la **minute** peut sauter si la durée du jour est raccourcie dans le bac à sable (1,7 minute par mise à jour en dormant à 30 minutes par jour, 3,3 à 15). Le seul tirage par minute est la chance qu'un vêtement trop grand tombe (`shared/MyTailorIsRich/MTIR_Effects.lua:300-302`) : l'effet est que les vêtements trop grands tombent moins souvent pendant le sommeil, ce qui est souhaitable.
+- **Piste écartée** : compter les heures entières écoulées avec `getWorldAgeHours()` et tirer l'usure autant de fois (borné), comme pour les minutes du tick.
+- **Statut** : fait moteur juste (`EveryHours` ne rattrape pas les heures sautées), mais **sans effet ici** ; arithmétique confirmée statiquement sur le Java 42.21.
+- **Avancement : ❌ annulé (2026-10-28)** — décision de l'auteur : rien à corriger, le cas chiffré ne se produit pas.
 
 ### C10 — Noms de patrons dans la langue du serveur
 
