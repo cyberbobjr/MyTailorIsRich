@@ -7,7 +7,7 @@
 | Workshop | 3810122988 |
 | Version analysée | 0.4.5 (`mod.info`, `CHANGELOG.md`), variante `Contents/mods/batman_MyTailorIsRich/42.21` |
 | Build cible | 42.21 (`versionMin=42.21`) ; sources consultées : Lua vanilla installé, Java décompilé `E:\pz-decompiled\42.21.0` |
-| Date | 2026-10-21 ; **avancement mis à jour le 2026-10-28** : les 18 améliorations de code sont toutes tranchées (9 corrigées, 9 annulées). Version publiée : 0.4.7, tag `v0.4.7` ; les corrections des 27 et 28 octobre sont sur `main`, non publiées. |
+| Date | 2026-10-21 ; **avancement mis à jour le 2026-10-28** : les 18 améliorations de code sont toutes tranchées (9 corrigées, 9 annulées), toutes publiées en 0.4.8. |
 | Périmètre | Lecture statique de tout le Lua (`shared`, `client`, `server`), des scripts (`MTIR_items.txt`, `MTIR_entities.txt`, `MTIR_patternbinder.txt`, `MTIR_sounds.txt`), de `sandbox-options.txt`, des traductions EN, du `README.md`, du `CHANGELOG.md`, des descriptions Steam, des tests (`tests/`) et de la CI. Rien n'a été testé en jeu pour l'analyse initiale (voir le tableau de bord pour les vérifications faites depuis). |
 
 Statut des constats :
@@ -38,16 +38,16 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C05 | Copie de patron sans coût pour l'original | ❌ Annulé | — | — | — | Rien : équilibrage voulu, pas un bug (décision du 2026-10-27) |
 | C06 | Infobulle « Enfiler » qui révèle l'ajustement | ❌ Annulé | — | — | — | Rien : confort voulu, aucune gêne constatée en jeu (décision du 2026-10-27) |
 | C07 | Clé joueur serveur = compte seul (écran partagé) | ❌ Annulé | — | — | — | Rien : aucun jeu en écran partagé (décision du 2026-10-27) |
-| C08 | Tables par joueur jamais purgées | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | `58d56f4` | Vérifier en jeu : mourir, revenir, jauge d'ampoules à zéro |
+| C08 | Tables par joueur jamais purgées | ✅ Corrigé | hors jeu (lupa, luacheck) | 0.4.8 | `58d56f4` | Vérifier en jeu : mourir, revenir, jauge d'ampoules à zéro |
 | C09 | Usure comptée par événement horaire | ❌ Annulé | — | — | — | Rien : aucune heure ne peut être sautée (décision du 2026-10-28) |
 | C10 | Noms de patrons dans la langue du serveur | ❌ Annulé | — | — | — | Rien : serveur et joueurs dans la même langue (décision du 2026-10-28) |
-| C11 | Taille d'artisanat : envoi unique, voies non couvertes | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | `6805c3d` | Vérifier en jeu en MP (changer de taille puis coudre aussitôt) |
+| C11 | Taille d'artisanat : envoi unique, voies non couvertes | ✅ Corrigé | hors jeu (lupa, luacheck) | 0.4.8 | `6805c3d` | Vérifier en jeu en MP (changer de taille puis coudre aussitôt) |
 | C12 | `instanceItem` pour lire les stats d'origine | ❌ Annulé | — | — | — | Rien : aucun getter sur le script en 42.21 (décision du 2026-10-28) |
 | C13 | Stats non rétablies quand une option passe à 0 | ❌ Annulé | — | — | — | Rien : effacé au redémarrage (décision du 2026-10-28) |
-| C14 | Deux analyseurs de listes sandbox | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | `4e23261` | Infobulles toujours « séparés par des virgules » pour deux listes (volontaire) |
+| C14 | Deux analyseurs de listes sandbox | ✅ Corrigé | hors jeu (lupa, luacheck) | 0.4.8 | `4e23261` | Infobulles toujours « séparés par des virgules » pour deux listes (volontaire) |
 | C15 | Peau entière consommée pour une unité | ❌ Annulé | — | — | — | Rien : comportement vanilla, recette « couper en deux » (décision du 2026-10-28) |
-| C16 | Portée machine / table sans test de mur | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | `9cc6590` | Vérifier en jeu : machine contre une cloison |
-| C17 | Duplications, incohérences d'actions, trous de tests | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | `e0c5420` à `68a7e42` | Vérifier en jeu : outils en main pendant une remise en état, actions inchangées |
+| C16 | Portée machine / table sans test de mur | ✅ Corrigé | hors jeu (lupa, luacheck) | 0.4.8 | `9cc6590` | Vérifier en jeu : machine contre une cloison |
+| C17 | Duplications, incohérences d'actions, trous de tests | ✅ Corrigé | hors jeu (lupa, luacheck) | 0.4.8 | `e0c5420` à `68a7e42` | Vérifier en jeu : outils en main pendant une remise en état, actions inchangées |
 | C18 | Descriptions Steam proches de 8 000 octets | ❌ Annulé | — | — | — | Rien pour l'instant : le test bloque un dépassement (décision du 2026-10-28) |
 
 ### Idées de fonctionnalités
@@ -537,4 +537,4 @@ Ce document est une **proposition**. Il ne modifie aucun fichier du mod. Aucune 
 
 **Mise à jour du 2026-10-23** : C01 à C04 ont été retenus, corrigés (commit `00cd2e7`) et publiés en 0.4.6 ; C01 est couvert par le parcours `pz-autotest` solo et MP, C02 à C04 restent à vérifier en jeu.
 
-**Mise à jour des 2026-10-27 et 2026-10-28** : la partie 1 a été passée en revue point par point avec l'auteur. Neuf points sont **annulés** (C05, C06, C07, C09, C10, C12, C13, C15, C18), chacun avec son motif dans sa fiche : comportement voulu, hors périmètre d'usage, infondé après vérification du moteur, conforme au vanilla, ou sans portée réelle. Cinq points ont été **corrigés** sur `main` sans être publiés (C08, C11, C14, C16, C17), tous testés hors jeu (lupa + luacheck) et **aucun vérifié en jeu** : c'est le travail qui reste avant une version. Les idées de la partie 2 sont toujours des propositions.
+**Mise à jour des 2026-10-27 et 2026-10-28** : la partie 1 a été passée en revue point par point avec l'auteur. Neuf points sont **annulés** (C05, C06, C07, C09, C10, C12, C13, C15, C18), chacun avec son motif dans sa fiche : comportement voulu, hors périmètre d'usage, infondé après vérification du moteur, conforme au vanilla, ou sans portée réelle. Cinq points ont été **corrigés** et publiés en 0.4.8 (C08, C11, C14, C16, C17), tous testés hors jeu (lupa + luacheck) ; **aucun n'a été vérifié en jeu**, contrairement à la correction de l'orientation des machines posées, publiée dans la même version et validée en jeu par l'auteur. Les vérifications en jeu de ces cinq points restent donc à faire. Les idées de la partie 2 sont toujours des propositions.

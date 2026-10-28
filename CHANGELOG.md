@@ -3,6 +3,16 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.8 — 2026-10-28
+
+### Fixes
+- **Sewing machines face the way you place them.** Both the electric machine and the treadle machine kept a single orientation whatever facing you picked: they now follow the direction you choose, and machines already placed can be turned with the Rotate mode.
+- **No more sewing through a wall.** A sewing machine or a work table on the other side of a partition can no longer be used: you have to be able to reach it, like reading a label on a corpse.
+- **Multiplayer: the size you pick is the size you sew.** Changing the crafting size and starting to sew right away could still produce the previous size.
+- **A new character starts fresh.** Sore feet and the crafting size of your previous character are no longer inherited after a death.
+- **Needle and scissors are visible while reconditioning a garment**, as they already were while altering one.
+- **Sandbox clothing lists are more forgiving.** The three lists (custom clothes, excluded clothes, extra body locations) all accept commas and semicolons, and an entry that names no clothing item is now reported in the server console instead of being silently ignored.
+
 ## 0.4.7 — 2026-10-26
 
 ### New features
