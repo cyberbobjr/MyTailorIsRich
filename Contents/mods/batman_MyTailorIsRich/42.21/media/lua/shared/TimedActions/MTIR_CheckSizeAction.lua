@@ -4,6 +4,8 @@
 -- selon le niveau de Couture, donne l'XP et synchronise l'objet.
 -- Le vêtement peut rester dans un cadavre, un meuble ou un véhicule à portée
 -- (MTIR_Reach) : l'étiquette se lit sur place, sans le prendre.
+-- Avec un mètre ruban dans l'inventaire (`withTape`), la taille se mesure deux fois
+-- plus vite et sans niveau de Couture ; l'autorité revérifie la présence du ruban.
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
@@ -23,7 +25,7 @@ function MTIR_CheckSizeAction:canBeginCheck()
         return false
     end
     return MTIR.canReachItem(self.character, self.item)
-        and MTIR.needsSizeCheck(self.item, self.character, self.corpseCheck)
+        and MTIR.needsSizeCheck(self.item, self.character, self.corpseCheck, self.withTape)
 end
 
 function MTIR_CheckSizeAction:begin()
@@ -120,7 +122,8 @@ function MTIR_CheckSizeAction:complete()
     local clothesSize = MTIR.getClothesSizeFromName(data.size)
     local diff = MTIR.getSizeDiff(clothesSize, MTIR.getPlayerSize(character))
     local level = character:getPerkLevel(Perks.Tailoring)
-    local canRead = data.reveal or not MTIR.opt("NeedTailoringLevel")
+    local measured = self.withTape and MTIR.findMeasuringTape(character) ~= nil
+    local canRead = data.reveal or measured or not MTIR.opt("NeedTailoringLevel")
         or level >= MTIR.getRequiredLevelToCheck(item)
 
     local say
@@ -145,15 +148,18 @@ function MTIR_CheckSizeAction:getDuration()
     if self.character:isTimedActionInstant() then
         return 1
     end
-    if MTIR.canShoeHaveSize(self.item) then
-        return MTIR.getShoeCheckDuration()
+    local base = MTIR.canShoeHaveSize(self.item) and MTIR.getShoeCheckDuration()
+        or MTIR.getCheckDuration(self.item)
+    if self.withTape then
+        return math.max(1, base * MTIR.MEASURE_DURATION_FACTOR)
     end
-    return MTIR.getCheckDuration(self.item)
+    return base
 end
 
-function MTIR_CheckSizeAction:new(character, item, corpseContainer)
+function MTIR_CheckSizeAction:new(character, item, corpseContainer, withTape)
     local o = ISBaseTimedAction.new(self, character)
     o.item = item
+    o.withTape = withTape == true
     o.corpseContainer = corpseContainer
     -- Le booléen reste présent même si le conteneur ne peut plus être résolu en MP.
     o.corpseCheck = corpseContainer ~= nil

@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **9 faites, 0 en partie, 0 à faire, 9 annulées** — la partie 1 est entièrement tranchée. Faites : C01 à C04 (publiées en 0.4.6), C08, C11, C14, C16 et C17 (sur `main`, non publiées). Annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13, C15 et C18 le 2026-10-28. Idées de fonctionnalités : **0 faite, 0 en partie, 20 à faire** (sur 20).
+**Bilan** : améliorations de code **9 faites, 0 en partie, 0 à faire, 9 annulées** — la partie 1 est entièrement tranchée. Faites : C01 à C04 (publiées en 0.4.6), C08, C11, C14, C16 et C17 (sur `main`, non publiées). Annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13, C15 et C18 le 2026-10-28. Idées de fonctionnalités : **1 faite, 0 en partie, 19 à faire** (sur 20) — I01 faite le 2026-10-28, non publiée.
 
 ### Améliorations de code
 
@@ -54,7 +54,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 | ID | Idée | État | Remarque |
 |---|---|---|---|
-| I01 | Mètre ruban vanilla | ⬜ Proposée | Rang 5 de la priorisation |
+| I01 | Mètre ruban vanilla | ✅ Faite | Non publiée ; mesure informative, la couture reste libre |
 | I02 | Couture sur mesure pour un autre joueur | ⬜ Proposée | Dépend de I01 |
 | I03 | Patron qui garde l'apparence du modèle | ⬜ Proposée | |
 | I04 | Garnir une chaussure trop grande | ⬜ Proposée | |
@@ -336,7 +336,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **MP** : le serveur fait la mesure (distance, cible vivante) et rend le résultat par `MTIR.tell` ; rien de nouveau n'est stocké.
 - **Dépendances** : aucune ; base de I02.
 - **Effort** : S.
-- **Avancement : ⬜ proposée, pas commencée.**
+- **Avancement : ✅ faite le 2026-10-28, sur `main`, non publiée, testée hors jeu (lupa + luacheck), à vérifier en jeu** — Choix de l'auteur : le ruban **informe seulement**, la couture reste libre (pas de taille à débloquer). Lecture d'étiquette : quatrième paramètre `withTape` de `MTIR_CheckSizeAction`, condition de niveau levée et durée × 0,5, ruban revérifié par l'autorité dans `complete`. Mesure d'un personnage : `MTIR_MeasurePersonAction` (soi-même ou un joueur à deux cases, vivant, même étage), résultat dit par `MTIR.tell` ; `resolveSay` accepte trois paramètres. Menu du ruban dans l'inventaire. Six clés de traduction dans les neuf langues. Tests : `tests/lua/test_measure_person.lua` (6 cas) et trois cas ajoutés à `test_check_size_batch.lua`.
 
 ### I02 — Couture sur mesure pour un autre joueur
 
@@ -523,7 +523,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | 2 | ✅ **C04** — effets continus des chaussures pour tous les emplacements | Tient la promesse « mods compris » du README ; une fonction à changer et un test. |
 | 3 | ✅ **C02** — collecte du fil unifiée | Supprime une incohérence visible entre broderie et couture ; reconnaît les fils vanilla et de mods. |
 | 4 | ✅ **C03** — infobulle d'usure à jour en MP | Bug MP silencieux, correction de quelques lignes côté client. |
-| 5 | ⬜ **I01** — mètre ruban | Plus grand gain joueur pour un effort S : objet vanilla déjà dans le butin, action existante à réutiliser, base de I02. |
+| 5 | ✅ **I01** — mètre ruban | Plus grand gain joueur pour un effort S : objet vanilla déjà dans le butin, action existante à réutiliser, base de I02. |
 
 **Avancement (2026-10-23)** : rangs 1 à 4 faits et publiés en 0.4.6 (commit `00cd2e7`) ; rang 5 (I01) pas commencé.
 

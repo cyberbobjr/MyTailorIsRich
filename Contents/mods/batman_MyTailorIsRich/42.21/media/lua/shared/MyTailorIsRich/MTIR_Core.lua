@@ -502,6 +502,13 @@ function MTIR.getRequiredLevelToCheck(item)
     return math.max(MTIR.getClothesDifficulty(item) - 1, 0)
 end
 
+--- Mesure au mètre ruban : deux fois plus rapide qu'une lecture d'étiquette.
+MTIR.MEASURE_DURATION_FACTOR = 0.5
+--- Durée d'une prise de mesures sur un personnage (ticks, avant le multiplicateur).
+MTIR.MEASURE_PERSON_DURATION = 60
+--- Portée d'une prise de mesures, en cases.
+MTIR.MEASURE_REACH = 2
+
 function MTIR.getCheckDuration(item)
     return math.max(1, MTIR.getClothesDifficulty(item) * 50 * MTIR.opt("ActionTimeMultiplier"))
 end
@@ -640,6 +647,18 @@ end
 function MTIR.predicateNeedle(item)
     if item:isBroken() then return false end
     return item:hasTag(ItemTag.SEWING_NEEDLE) or item:getType() == "Needle"
+end
+
+--- Mètre ruban vanilla (`Base.MeasuringTape`) : mesurer remplace la lecture
+--- d'étiquette, sans niveau de Couture.
+function MTIR.predicateMeasuringTape(item)
+    return item:getType() == "MeasuringTape"
+end
+
+--- Mètre ruban de l'inventaire du personnage, ou nil.
+function MTIR.findMeasuringTape(character)
+    local inventory = character and character:getInventory()
+    return inventory and inventory:getFirstEvalRecurse(MTIR.predicateMeasuringTape) or nil
 end
 
 function MTIR.predicateScissors(item)

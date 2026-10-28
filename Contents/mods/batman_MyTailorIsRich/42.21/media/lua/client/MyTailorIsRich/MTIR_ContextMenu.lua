@@ -15,6 +15,7 @@ require "TimedActions/MTIR_ReconditionAction"
 require "TimedActions/MTIR_MachineMaintenanceAction"
 require "TimedActions/MTIR_ChooseSizeAction"
 require "TimedActions/MTIR_DebugSizeAction"
+require "TimedActions/MTIR_MeasurePersonAction"
 require "MyTailorIsRich/MTIR_ShoeEffects"
 
 -- ----------------------------------------------------------------------------
@@ -129,12 +130,60 @@ local function prepareCheck(player, item, approached)
     return true
 end
 
-local function queueCheck(player, clothes)
+local function queueCheck(player, clothes, withTape)
     local approached = {}
     for _, item in ipairs(clothes) do
         if prepareCheck(player, item, approached) then
-            ISTimedActionQueue.add(MTIR_CheckSizeAction:new(player, item))
+            ISTimedActionQueue.add(MTIR_CheckSizeAction:new(player, item, nil, withTape))
         end
+    end
+end
+
+-- ----------------------------------------------------------------------------
+-- Prendre les mesures d'un personnage (mètre ruban)
+-- ----------------------------------------------------------------------------
+
+local function queueMeasure(player, tape, target)
+    ISTimedActionQueue.add(MTIR_MeasurePersonAction:new(player, tape, target))
+end
+
+--- Joueurs mesurables autour de soi : vivants, même étage, à portée de bras.
+local function nearbyPlayers(player)
+    local found = {}
+    local online = (isClient() or isServer()) and getOnlinePlayers() or nil
+    local count = online and online:size() or getNumActivePlayers()
+    for i = 0, count - 1 do
+        local other = online and online:get(i) or getSpecificPlayer(i)
+        if other and other ~= player and not other:isDead()
+                and math.abs(other:getZ() - player:getZ()) < 1 then
+            local dx, dy = other:getX() - player:getX(), other:getY() - player:getY()
+            if dx * dx + dy * dy <= MTIR.MEASURE_REACH * MTIR.MEASURE_REACH then
+                found[#found + 1] = other
+            end
+        end
+    end
+    return found
+end
+
+--- Menu du mètre ruban cliqué : se mesurer, ou mesurer un joueur voisin.
+local function addMeasureOption(items, player, context)
+    local tape = nil
+    for _, entry in ipairs(items) do
+        local item = type(entry) == "table" and entry.items and entry.items[1] or entry
+        if item and MTIR.predicateMeasuringTape(item) then
+            tape = item
+            break
+        end
+    end
+    if not tape then
+        return
+    end
+    local option = context:addOption(getText("IGUI_MTIR_Measure_Person_Menu"))
+    local subMenu = context:getNew(context)
+    context:addSubMenu(option, subMenu)
+    subMenu:addOption(getText("IGUI_MTIR_Measure_Person_Self"), player, queueMeasure, tape, player)
+    for _, other in ipairs(nearbyPlayers(player)) do
+        subMenu:addOption(other:getDisplayName(), player, queueMeasure, tape, other)
     end
 end
 
@@ -534,6 +583,7 @@ local function onFillInventoryObjectContextMenu(playerNum, context, items)
     end
     addCheckSizeOption(items, player, context)
     addChooseSizeOption(items, player, context)
+    addMeasureOption(items, player, context)
 end
 
 Events.OnFillInventoryObjectContextMenu.Add(onFillInventoryObjectContextMenu)

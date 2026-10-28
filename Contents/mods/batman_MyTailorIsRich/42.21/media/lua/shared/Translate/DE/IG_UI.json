@@ -238,5 +238,11 @@
     "IGUI_MTIR_Machine_NotEmbroidered": "Keine Stickerei",
     "IGUI_MTIR_Machine_Embroider": "Sticken",
     "IGUI_MTIR_Machine_Embroidering": "Sticken... %1 %%",
-    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(Tretnähmaschine: nur Geradstich)"
+    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(Tretnähmaschine: nur Geradstich)",
+    "IGUI_MTIR_JobType_Measure": "Maß nehmen",
+    "IGUI_MTIR_Measure_Clothes": "Mit Maßband messen",
+    "IGUI_MTIR_Measure_Person_Menu": "Maß nehmen",
+    "IGUI_MTIR_Measure_Person_Self": "Mich selbst",
+    "IGUI_MTIR_Say_Measured_Self": "Größe %1, und Schuhgröße %2",
+    "IGUI_MTIR_Say_Measured_Other": "%1 hat Größe %2, Schuhgröße %3"
 }

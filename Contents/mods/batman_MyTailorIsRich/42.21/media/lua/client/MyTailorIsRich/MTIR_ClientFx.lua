@@ -11,6 +11,14 @@ local function resolveSay(say)
     if type(say) ~= "table" or type(say.key) ~= "string" then
         return nil
     end
+    -- Jusqu'à trois paramètres (%1 à %3) : une mesure donne un nom, une taille et une
+    -- pointure. Kahlua n'a pas d'appel à nombre d'arguments variable.
+    if say.arg3 ~= nil then
+        return getText(say.key, tostring(say.arg), tostring(say.arg2), tostring(say.arg3))
+    end
+    if say.arg2 ~= nil then
+        return getText(say.key, tostring(say.arg), tostring(say.arg2))
+    end
     if say.arg ~= nil then
         return getText(say.key, tostring(say.arg))
     end

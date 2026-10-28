@@ -33,6 +33,16 @@ On a corpse, the submenu offers **Selected clothes**, **All clothes on this corp
 
 ![Check clothes size on a corpse](../../images/screenshots/shot6.png)
 
+### With a tape measure
+
+Carry a **Tape Measure** (the vanilla tool) and the option becomes **Measure with tape**: the exact
+size is read whatever your Tailoring level, and twice as fast. Group checks then include the
+garments you could only guess at before.
+
+Right-click the tape measure itself for **Take measurements**: on yourself, or on a player standing
+next to you. Your character says their clothing size and shoe size out loud. Nothing is written
+down, and you can still sew any size you like: the tape only tells you what to aim for.
+
 A known size is added to the item's name in the inventory and shown in its tooltip, with how it fits you:
 
 ![Size in the tooltip](../../images/screenshots/shot1.png)

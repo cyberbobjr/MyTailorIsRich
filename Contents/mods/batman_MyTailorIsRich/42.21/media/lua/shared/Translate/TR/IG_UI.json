@@ -238,5 +238,11 @@
     "IGUI_MTIR_Machine_NotEmbroidered": "İşleme yok",
     "IGUI_MTIR_Machine_Embroider": "İşle",
     "IGUI_MTIR_Machine_Embroidering": "İşleniyor... %1 %%",
-    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(pedallı makine: yalnızca düz dikiş)"
+    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(pedallı makine: yalnızca düz dikiş)",
+    "IGUI_MTIR_JobType_Measure": "Ölçü alınıyor",
+    "IGUI_MTIR_Measure_Clothes": "Mezurayla ölç",
+    "IGUI_MTIR_Measure_Person_Menu": "Ölçü al",
+    "IGUI_MTIR_Measure_Person_Self": "Kendimden",
+    "IGUI_MTIR_Say_Measured_Self": "%1 beden, %2 numara ayakkabı",
+    "IGUI_MTIR_Say_Measured_Other": "%1: %2 beden, %3 numara ayakkabı"
 }

@@ -18,6 +18,8 @@ Un vêtement trouvé reçoit sa taille au premier besoin, selon une répartition
 ### F04 — Lire la taille (« Check clothes size »)
 La taille d'un vêtement trouvé est inconnue. L'option **Check clothes size** lit l'étiquette : avec un niveau de Couture suffisant (difficulté du vêtement − 1, option `NeedTailoringLevel`), la taille exacte ; sinon un indice (« un peu serré », « très ample »…) que le personnage dit à voix haute. Un vêtement dans un cadavre, un meuble ou un coffre de véhicule à portée est lu sur place, sans être pris ; au sol, il est d'abord ramassé. Sous-menu : sélection, tous les vêtements de ce cadavre, tous les vêtements des cadavres accessibles proches (chaussures comprises). Les lectures groupées sautent les tailles connues et les indices qu'on ne peut pas améliorer avec le niveau actuel ; un objet retiré entre-temps par un autre joueur est ignoré. Une taille connue s'affiche dans le nom en inventaire et dans l'infobulle.
 
+**Mètre ruban** (`Base.MeasuringTape`, outil vanilla). Dans l'inventaire, il change la lecture d'étiquette en **Mesurer au ruban** : taille exacte sans condition de niveau et durée divisée par deux, y compris dans les lectures groupées (un indice qu'on ne pouvait pas améliorer redevient mesurable). Un clic droit sur le ruban ouvre **Prendre les mesures** : sur soi, ou sur un joueur à deux cases au plus, vivant et au même étage ; le personnage dit la taille de vêtement et la pointure de la cible. Rien n'est enregistré et la taille cousue reste libre : le ruban informe seulement.
+
 ![Taille dans l'infobulle](images/screenshots/shot1.png)
 
 ### F05 — Effets d'un vêtement mal ajusté

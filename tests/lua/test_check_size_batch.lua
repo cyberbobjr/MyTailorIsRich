@@ -72,7 +72,13 @@ local function context()
     return ctx
 end
 
+local TAPE
+-- Mode « actions instantanées » du debug : vrai par défaut dans ce banc.
+local INSTANT
+
 function T.setup()
+    TAPE = nil
+    INSTANT = true
     SQUARES, NEXT_ID, CLIENT, SERVER, XP, SYNCS, TELLS = {}, 0, false, false, 0, 0, 0
     OPTIONS = { NeedTailoringLevel = true, TailoringXpMultiplier = 1 }
     Perks = { Tailoring = "Tailoring" }
@@ -95,7 +101,7 @@ function T.setup()
     function PLAYER:getCurrentSquare() return self.square end
     function PLAYER:canAccessContainer(c) return c.accessible end
     function PLAYER:getPerkLevel() return self.level end
-    function PLAYER:isTimedActionInstant() return true end
+    function PLAYER:isTimedActionInstant() return INSTANT end
     function PLAYER:isAsleep() return false end
     function PLAYER:isLocalPlayer() return false end
     function PLAYER:isFarming() return false end
@@ -127,6 +133,12 @@ function T.setup()
         pickLabelSay = function() return {} end,
         pickHintSay = function() return {} end,
         pickShoeLabelSay = function() return {} end,
+        -- Mètre ruban : présent ou non selon TAPE.
+        predicateMeasuringTape = function(item) return item ~= nil and item.tape == true end,
+        findMeasuringTape = function() return TAPE end,
+        MEASURE_DURATION_FACTOR = 0.5,
+        getShoeCheckDuration = function() return 30 end,
+        getCheckDuration = function() return 100 end,
     }
     ISBaseObject = {}
     function ISBaseObject:derive(name)
@@ -383,6 +395,39 @@ T["complétion : règles de taille, première XP, indice et pointure conservés"
     assertTrue(MTIR_CheckSizeAction:new(PLAYER, shoes, c):complete())
     assertTrue(shoes.data.reveal)
     assertEq(XP, 0.5, "chaussures sans XP")
+end
+
+T["mètre ruban : lecture possible sans le niveau, et groupe non écarté"] = function()
+    local c = corpse(PLAYER.square)
+    local item = garment(c, { size = "M", hint = true })
+    item.requiredLevel = 2
+    assertEq(#MTIR.CheckSizeMenu.collectCorpseItems(PLAYER, { c }), 0, "sans ruban : écarté du lot")
+    TAPE = { tape = true }
+    assertEq(#MTIR.CheckSizeMenu.collectCorpseItems(PLAYER, { c }, true), 1, "avec ruban : proposé")
+
+    assertTrue(MTIR_CheckSizeAction:new(PLAYER, item, c, true):complete(), "mesure faite")
+    assertTrue(item.data.reveal, "taille lue sans le niveau requis")
+end
+
+T["mètre ruban : deux fois plus rapide, et sans ruban rien ne change"] = function()
+    local c = corpse(PLAYER.square)
+    local item = garment(c)
+    INSTANT = false
+    assertEq(MTIR_CheckSizeAction:new(PLAYER, item, c):getDuration(), 100, "lecture d'étiquette")
+    assertEq(MTIR_CheckSizeAction:new(PLAYER, item, c, true):getDuration(), 50, "mesure au ruban")
+    local shoes = garment(c, nil, true)
+    assertEq(MTIR_CheckSizeAction:new(PLAYER, shoes, c, true):getDuration(), 15, "pointure mesurée")
+end
+
+T["mètre ruban perdu avant la fin : l'autorité retombe sur le niveau"] = function()
+    local c = corpse(PLAYER.square)
+    local item = garment(c, { size = "M", hint = true })
+    item.requiredLevel = 2
+    local action = MTIR_CheckSizeAction:new(PLAYER, item, c, true)
+    TAPE = nil
+    assertTrue(action:complete(), "action menée à bien")
+    assertTrue(not item.data.reveal, "sans ruban en main, pas de révélation")
+    assertTrue(item.data.hint, "seulement un indice")
 end
 
 return T

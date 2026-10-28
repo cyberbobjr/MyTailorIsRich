@@ -238,5 +238,11 @@
     "IGUI_MTIR_Machine_NotEmbroidered": "No embroidery",
     "IGUI_MTIR_Machine_Embroider": "Embroider",
     "IGUI_MTIR_Machine_Embroidering": "Embroidering... %1 %%",
-    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(treadle machine: straight stitch only)"
+    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(treadle machine: straight stitch only)",
+    "IGUI_MTIR_JobType_Measure": "Taking measurements",
+    "IGUI_MTIR_Measure_Clothes": "Measure with tape",
+    "IGUI_MTIR_Measure_Person_Menu": "Take measurements",
+    "IGUI_MTIR_Measure_Person_Self": "Myself",
+    "IGUI_MTIR_Say_Measured_Self": "Size %1, and size %2 shoes",
+    "IGUI_MTIR_Say_Measured_Other": "%1 is a size %2, size %3 shoes"
 }

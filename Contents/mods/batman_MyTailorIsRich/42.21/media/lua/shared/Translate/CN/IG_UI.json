@@ -238,5 +238,11 @@
     "IGUI_MTIR_Machine_NotEmbroidered": "无刺绣",
     "IGUI_MTIR_Machine_Embroider": "刺绣",
     "IGUI_MTIR_Machine_Embroidering": "刺绣中... %1 %%",
-    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(脚踏缝纫机: 只能走直线)"
+    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(脚踏缝纫机: 只能走直线)",
+    "IGUI_MTIR_JobType_Measure": "量尺寸中",
+    "IGUI_MTIR_Measure_Clothes": "用卷尺测量",
+    "IGUI_MTIR_Measure_Person_Menu": "量尺寸",
+    "IGUI_MTIR_Measure_Person_Self": "我自己",
+    "IGUI_MTIR_Say_Measured_Self": "尺码 %1，鞋码 %2",
+    "IGUI_MTIR_Say_Measured_Other": "%1 的尺码是 %2，鞋码 %3"
 }

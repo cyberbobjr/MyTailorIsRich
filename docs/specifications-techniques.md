@@ -37,6 +37,10 @@ curseur de pose garde alors le sprite de l'objet d'inventaire quelle que soit la
 `Facing` : `source/fix_tile_facings.py` complète les `.tiles` après chaque génération, et
 `tests/run_tests.py` vérifie les douze décalages de chaque tuile à quatre faces.
 
+### Mètre ruban
+
+`MTIR.predicateMeasuringTape` / `MTIR.findMeasuringTape` (type `MeasuringTape`, recherche récursive dans l'inventaire). `MTIR_CheckSizeAction` reçoit un quatrième paramètre `withTape` : il lève la condition de niveau dans `MTIR.needsSizeCheck` et dans `complete`, et multiplie la durée par `MTIR.MEASURE_DURATION_FACTOR`. L'autorité revérifie le ruban au moment du `complete` : un joueur qui l'a perdu entre-temps retombe sur la règle du niveau. `MTIR_MeasurePersonAction` mesure un personnage (`MTIR.MEASURE_REACH`, cible transmise par identifiant de connexion en MP et par emplacement local en solo) et rend le résultat au mesureur par `MTIR.tell` ; `resolveSay` accepte jusqu'à trois paramètres (`arg`, `arg2`, `arg3`).
+
 ### Sons (`MTIR_sounds.txt`)
 
 `MTIR_ResizeClothes`, `MTIR_ResizeFailed`, `MTIR_CheckSize`, `MTIR_TightClothesRip` (repris de Realistic Clothes, hors licence MIT), `MTIR_SewingMachineElectric`, `MTIR_SewingMachineTreadle` (boucles).

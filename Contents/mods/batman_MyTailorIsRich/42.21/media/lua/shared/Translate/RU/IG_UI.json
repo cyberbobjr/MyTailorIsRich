@@ -238,5 +238,11 @@
     "IGUI_MTIR_Machine_NotEmbroidered": "Без вышивки",
     "IGUI_MTIR_Machine_Embroider": "Вышить",
     "IGUI_MTIR_Machine_Embroidering": "Вышивание... %1 %%",
-    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(ножная машина: только прямая строчка)"
+    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(ножная машина: только прямая строчка)",
+    "IGUI_MTIR_JobType_Measure": "Снятие мерок",
+    "IGUI_MTIR_Measure_Clothes": "Измерить рулеткой",
+    "IGUI_MTIR_Measure_Person_Menu": "Снять мерки",
+    "IGUI_MTIR_Measure_Person_Self": "С себя",
+    "IGUI_MTIR_Say_Measured_Self": "Размер %1, обувь %2",
+    "IGUI_MTIR_Say_Measured_Other": "%1: размер %2, обувь %3"
 }

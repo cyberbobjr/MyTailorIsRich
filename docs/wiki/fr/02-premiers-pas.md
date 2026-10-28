@@ -33,6 +33,17 @@ Sur un cadavre, le sous-menu propose **Les vêtements sélectionnés**, **Tous l
 
 ![Lire l'étiquette sur un cadavre](../../images/screenshots/shot6.png)
 
+### Avec un mètre ruban
+
+Avec un **mètre ruban** dans l'inventaire (l'outil du jeu de base), l'option devient **Mesurer au
+ruban** : la taille exacte est lue quel que soit votre niveau de Couture, et deux fois plus vite.
+Les lectures groupées reprennent alors les vêtements dont vous n'aviez qu'un indice.
+
+Clic droit sur le mètre ruban lui-même pour **Prendre les mesures** : sur vous, ou sur un joueur
+juste à côté. Votre personnage dit à voix haute sa taille de vêtement et sa pointure. Rien n'est
+enregistré, et vous restez libre de coudre la taille que vous voulez : le ruban renseigne, il
+n'impose rien.
+
 Une taille connue s'ajoute au nom de l'objet dans l'inventaire et s'affiche dans son infobulle, avec l'ajustement sur vous :
 
 ![Taille dans l'infobulle](../../images/screenshots/shot1.png)

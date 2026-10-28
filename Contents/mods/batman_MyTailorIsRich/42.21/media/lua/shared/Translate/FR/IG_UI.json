@@ -238,5 +238,11 @@
     "IGUI_MTIR_Machine_NotEmbroidered": "Pas de broderie",
     "IGUI_MTIR_Machine_Embroider": "Broder",
     "IGUI_MTIR_Machine_Embroidering": "Broderie... %1 %%",
-    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(machine à pédale : point droit seulement)"
+    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(machine à pédale : point droit seulement)",
+    "IGUI_MTIR_JobType_Measure": "Prendre les mesures",
+    "IGUI_MTIR_Measure_Clothes": "Mesurer au ruban",
+    "IGUI_MTIR_Measure_Person_Menu": "Prendre les mesures",
+    "IGUI_MTIR_Measure_Person_Self": "Moi-même",
+    "IGUI_MTIR_Say_Measured_Self": "Du %1, et du %2 en chaussures",
+    "IGUI_MTIR_Say_Measured_Other": "%1 fait du %2, et du %3 en chaussures"
 }

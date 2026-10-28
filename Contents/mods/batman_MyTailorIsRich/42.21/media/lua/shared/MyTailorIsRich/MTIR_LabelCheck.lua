@@ -2,7 +2,8 @@
 require "MyTailorIsRich/MTIR_Effects"
 require "MyTailorIsRich/MTIR_Reach"
 
-function MTIR.needsSizeCheck(item, character, bulk)
+--- `withTape` : mesure au mètre ruban, qui lit la taille quel que soit le niveau.
+function MTIR.needsSizeCheck(item, character, bulk, withTape)
     if not item then return false end
     if MTIR.canShoeHaveSize(item) then
         local data = MTIR.getShoeData(item)
@@ -13,7 +14,7 @@ function MTIR.needsSizeCheck(item, character, bulk)
     if data and data.reveal then return false end
     -- En groupe, ne pas relire un indice sans pouvoir apprendre davantage.
     -- La sélection manuelle reste possible ; une progression débloque la relecture.
-    if bulk and data and data.hint and MTIR.opt("NeedTailoringLevel")
+    if bulk and not withTape and data and data.hint and MTIR.opt("NeedTailoringLevel")
             and character:getPerkLevel(Perks.Tailoring) < MTIR.getRequiredLevelToCheck(item) then
         return false
     end

@@ -238,5 +238,11 @@
     "IGUI_MTIR_Machine_NotEmbroidered": "Sin bordado",
     "IGUI_MTIR_Machine_Embroider": "Bordar",
     "IGUI_MTIR_Machine_Embroidering": "Bordando... %1 %%",
-    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(máquina de pedal: solo puntada recta)"
+    "IGUI_MTIR_Machine_EmbroiderTreadleLevel": "(máquina de pedal: solo puntada recta)",
+    "IGUI_MTIR_JobType_Measure": "Tomando medidas",
+    "IGUI_MTIR_Measure_Clothes": "Medir con la cinta",
+    "IGUI_MTIR_Measure_Person_Menu": "Tomar medidas",
+    "IGUI_MTIR_Measure_Person_Self": "A mí mismo",
+    "IGUI_MTIR_Say_Measured_Self": "Talla %1, y número %2 de calzado",
+    "IGUI_MTIR_Say_Measured_Other": "%1 usa la talla %2 y el número %3"
 }
