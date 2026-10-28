@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **6 faites, 0 en partie, 7 à faire, 5 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09 et C10 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
+**Bilan** : améliorations de code **6 faites, 0 en partie, 6 à faire, 6 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09, C10 et C12 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
 
 ### Améliorations de code
 
@@ -42,7 +42,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C09 | Usure comptée par événement horaire | ❌ Annulé | — | — | — | Rien : aucune heure ne peut être sautée (décision du 2026-10-28) |
 | C10 | Noms de patrons dans la langue du serveur | ❌ Annulé | — | — | — | Rien : serveur et joueurs dans la même langue (décision du 2026-10-28) |
 | C11 | Taille d'artisanat : envoi unique, voies non couvertes | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Vérifier en jeu en MP (changer de taille puis coudre aussitôt) |
-| C12 | `instanceItem` pour lire les stats d'origine | ⬜ À faire | — | — | — | Relevé des getters 42.21, puis correction |
+| C12 | `instanceItem` pour lire les stats d'origine | ❌ Annulé | — | — | — | Rien : aucun getter sur le script en 42.21 (décision du 2026-10-28) |
 | C13 | Stats non rétablies quand une option passe à 0 | ⬜ À faire | — | — | — | Tout |
 | C14 | Deux analyseurs de listes sandbox | ⬜ À faire | — | — | — | Tout |
 | C15 | Peau entière consommée pour une unité | ⬜ À faire | — | — | — | Tout |
@@ -94,7 +94,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C09 | Usure comptée par événement horaire | Simulation | — | — | infondé, confirmé statiquement | ❌ annulé |
 | C10 | Noms de patrons figés dans la langue du serveur | Traduction MP | — | — | confirmé statiquement (sans gêne constatée) | ❌ annulé |
 | C11 | Taille d'artisanat : envoi unique, voies de fabrication non couvertes | MP / compatibilité | Basse | S | confirmé statiquement | ✅ non publié |
-| C12 | `instanceItem` pour lire les stats d'origine | Compatibilité / effets de bord | Basse | S-M | à vérifier en jeu | ⬜ |
+| C12 | `instanceItem` pour lire les stats d'origine | Compatibilité / effets de bord | — | — | impossible, confirmé statiquement | ❌ annulé |
 | C13 | Stats dérivées non rétablies quand une option passe à 0 | Bug mineur | Basse | S | confirmé statiquement | ⬜ |
 | C14 | Deux analyseurs de listes sandbox, règles différentes | Maintenabilité | Basse | S | confirmé statiquement | ⬜ |
 | C15 | Peau entière consommée pour une unité | Gameplay | Basse | S | confirmé statiquement | ⬜ |
@@ -224,15 +224,15 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Avancement : ✅ corrigé le 2026-10-28, sur `main`, non publié, testé hors jeu (lupa + luacheck), à vérifier en jeu en MP** — Enveloppe de `ISHandcraftAction:start` dans `client/MyTailorIsRich/MTIR_ClientFx.lua` : pour le joueur local seulement, la taille déjà choisie est renvoyée (`MTIR.resendCraftSize`) pour chaque sortie vêtement de la recette, avec les mêmes contrôles que le bouton de taille (`ResourceType.Item`, `ItemType.CLOTHING`, `MTIR.canOutputHaveSize`). La commande précède donc la création du vêtement de toute la durée de l'action, au lieu de partir en même temps que le clic. Sans taille jamais choisie, rien n'est envoyé et la taille reste à choisir, comme avant. Tests : `tests/lua/test_craft_size_resend.lua` (7 cas).
 - **Volontairement non couvert** : `ISCraftAction` (recettes du clic droit dans l'inventaire, `client/ISUI/ISInventoryPaneContextMenu.lua:3515, 3573` en 42.21) et les sorties d'établi automatiques. Aucun vêtement vanilla ne sort par là, et un vêtement qui en sortirait naîtrait sans taille, donc prendrait celle de son porteur au premier enfilage : il tomberait parfait. À reprendre seulement si un mod fait sortir un vêtement par cette voie.
 
-### C12 — `instanceItem` pour lire les valeurs d'origine
+### C12 — `instanceItem` pour lire les valeurs d'origine — ❌ annulé
 
-- **Problème** : vitesse de combat, défenses, résistances, force d'écrasement et protection balistique sont lues sur une instance créée pour l'occasion.
+- **Comportement** : vitesse de combat, défenses, résistances, force d'écrasement et protection balistique sont lues sur une instance créée pour l'occasion.
 - **Preuves** : `shared/MyTailorIsRich/MTIR_Effects.lua:80-101` ; `shared/MyTailorIsRich/MTIR_Shoes.lua:273-279` ; `shared/MyTailorIsRich/MTIR_PrintedPatterns.lua:106-114`. L'isolation est déjà lue sur le script (`MTIR_Effects.lua:72-78`).
 - **Risque** : chaque instance exécute l'`OnCreate` du script, éventuellement posé par un autre mod (base moteur, `loot-distributions.md`), et consomme un identifiant. Effet de bord peu probable mais invisible.
-- **Correction** : lire sur le script (`ScriptManager.instance:getItem(t)`) chaque valeur dont le getter existe en 42.21 ; garder l'instance pour les seules valeurs non exposées, en commentant pourquoi.
-- **Priorité** : basse. **Effort** : S à M (relevé des getters `Item` à faire).
-- **Statut** : à vérifier (liste des getters du script Item 42.21).
-- **Avancement : ⬜ à faire.**
+- **Piste écartée, parce qu'impossible** : lire sur le script (`ScriptManager.instance:getItem(t)`). Relevé fait sur le Java 42.21 : le script `Item` ne porte **aucun** getter pour ces valeurs. `stompPower` (`:392`), `biteDefense`, `scratchDefense`, `bulletDefense` (`:421-424`) sont des champs privés, `windresist` et `waterresist` de même, et `combatSpeedModifier` (`:394`) est un champ public — donc illisible depuis Kahlua, qui ne lit aucun champ d'instance (base moteur, `kahlua-lua.md`). Le script les pousse seulement dans l'objet créé (`Item.java:1616-1628`). Seul `getInsulation()` existe (`:3823`), et le mod le lit déjà sur le script.
+- **Atténuation déjà en place** : une seule instance par type d'objet et par session, gardée en cache (`originalInsulation`, `originalCombatSpeed`, `originalStats`, `originalStompPower`).
+- **Statut** : confirmé statiquement ; `instanceItem` est la seule voie en 42.21.
+- **Avancement : ❌ annulé (2026-10-28)** — rien à corriger : la correction proposée n'existe pas dans l'API. À revoir si une version du jeu expose ces valeurs sur le script.
 
 ### C13 — Valeurs dérivées non rétablies quand une option passe à 0
 
