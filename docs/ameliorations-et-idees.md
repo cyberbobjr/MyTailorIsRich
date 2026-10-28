@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **7 faites, 0 en partie, 4 à faire, 7 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12 et C13 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
+**Bilan** : améliorations de code **7 faites, 0 en partie, 3 à faire, 8 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13 et C15 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
 
 ### Améliorations de code
 
@@ -45,7 +45,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C12 | `instanceItem` pour lire les stats d'origine | ❌ Annulé | — | — | — | Rien : aucun getter sur le script en 42.21 (décision du 2026-10-28) |
 | C13 | Stats non rétablies quand une option passe à 0 | ❌ Annulé | — | — | — | Rien : effacé au redémarrage (décision du 2026-10-28) |
 | C14 | Deux analyseurs de listes sandbox | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Infobulles toujours « séparés par des virgules » pour deux listes (volontaire) |
-| C15 | Peau entière consommée pour une unité | ⬜ À faire | — | — | — | Tout |
+| C15 | Peau entière consommée pour une unité | ❌ Annulé | — | — | — | Rien : comportement vanilla, recette « couper en deux » (décision du 2026-10-28) |
 | C16 | Portée machine / table sans test de mur | ⬜ À faire | — | — | — | Tout |
 | C17 | Duplications, incohérences d'actions, trous de tests | ⬜ À faire | — | — | — | Tout |
 | C18 | Descriptions Steam proches de 8 000 octets | ⬜ À faire | — | — | — | Tout |
@@ -97,7 +97,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C12 | `instanceItem` pour lire les stats d'origine | Compatibilité / effets de bord | — | — | impossible, confirmé statiquement | ❌ annulé |
 | C13 | Stats dérivées non rétablies quand une option passe à 0 | Bug mineur | — | — | confirmé statiquement | ❌ annulé |
 | C14 | Deux analyseurs de listes sandbox, règles différentes | Maintenabilité | Basse | S | confirmé statiquement | ✅ non publié |
-| C15 | Peau entière consommée pour une unité | Gameplay | Basse | S | confirmé statiquement | ⬜ |
+| C15 | Peau entière consommée pour une unité | Gameplay | — | — | conforme au vanilla, confirmé statiquement | ❌ annulé |
 | C16 | Portée machine / table sans test de mur | Autorité serveur | Basse | S | à vérifier en jeu | ⬜ |
 | C17 | Duplications, incohérences d'actions, trous de tests | Maintenabilité | Basse | M | confirmé statiquement | ⬜ |
 | C18 | Descriptions Steam presque à la limite de 8 000 octets | Maintenabilité / traduction | Basse | S | confirmé statiquement | ⬜ |
@@ -254,15 +254,15 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Avancement : ✅ corrigé le 2026-10-28, sur `main`, non publié, testé hors jeu (lupa + luacheck)** — Analyseur unique `MTIR.parseOptionList(raw, lowerKeys)` dans `MTIR_Core.lua`, utilisé par les trois options : virgule et point-virgule acceptés partout, difficulté arrondie vers le bas et bornée à 1..3. `MTIR.isClothingType` et `MTIR.warnUnknownOptionItem` signalent en anglais chaque entrée qui ne nomme pas un vêtement chargé, une seule fois par valeur d'option (les deux listes sont déjà mises en cache par leur texte brut). `ListCustomClothes` écarte l'entrée comme avant ; `ListExcludedClothes` la garde (un nom inconnu ne correspond à rien de toute façon) et se contente de l'avertissement ; `ExtraSizedLocations` nomme des emplacements du corps, pas des objets : rien à vérifier. Tests : `tests/lua/test_option_lists.lua` (7 cas), plus un bouchon `ScriptManager` ajouté à `test_glove_patterns.lua`.
 - **Volontairement inchangé** : les infobulles des réglages. Elles disent « séparés par des virgules » pour `ListCustomClothes` et `ListExcludedClothes`, ce qui reste vrai et reste la façon recommandée ; le point-virgule est maintenant toléré sans être documenté, pour ne pas retoucher neuf langues.
 
-### C15 — Une peau entière consommée pour une unité de cuir
+### C15 — Une peau entière consommée pour une unité de cuir — ❌ annulé
 
-- **Problème** : une peau tannée apporte 3, 6 ou 10 unités, mais elle est retirée entière dès qu'on en prend une. L'ordre de prélèvement suit la liste envoyée par le client.
+- **Comportement** : une peau tannée apporte 3, 6 ou 10 unités, mais elle est retirée entière dès qu'on en prend une. L'ordre de prélèvement suit la liste envoyée par le client.
 - **Preuves** : `shared/MyTailorIsRich/MTIR_Patterns.lua:40-54, 521-538`.
-- **Risque** : gaspillage, par exemple une grande peau perdue sur un échec qui ne coûte que la moitié des unités.
-- **Correction** : sur l'autorité, trier les matériaux du plus petit au plus grand et rendre le reliquat en `Base.LeatherStrips` (`AddItems` + `sendAddItemsToContainer`).
-- **Priorité** : basse. **Effort** : S.
-- **Statut** : confirmé statiquement.
-- **Avancement : ⬜ à faire.**
+- **C'est le comportement vanilla** : une recette vanilla consomme la peau entière, sans rendre de reliquat (`media/scripts/generated/recipes/recipes_tailoring_leatherAndHide.txt:1271`, `item 1 [Base.Leather_Crude_Large_Tan;2:Base.Leather_Crude_Medium_Tan]`), et le jeu donne au joueur sa propre parade : la recette **`CutLeatherInHalf`** découpe une grande peau en deux moyennes, une moyenne en deux petites (`media/scripts/generated/entities/animals/craftRecipes/recipes_leather_prep_blair.txt:3-35`). Rendre un reliquat en lanières rendrait le mod plus généreux que le vanilla et contournerait cette recette.
+- **Déjà en place** : le prélèvement va du plus petit au plus grand (lanières, petite, moyenne, grande), donc une grande peau n'est jamais entamée s'il reste plus petit (`MTIR_Patterns.lua:51-64, 556-573`).
+- **Piste écartée** : rendre le reliquat en `Base.LeatherStrips`.
+- **Statut** : confirmé statiquement ; conforme au vanilla.
+- **Avancement : ❌ annulé (2026-10-28)** — rien à corriger : le gaspillage est celui du jeu de base, et le joueur l'évite en coupant sa peau en deux d'abord.
 
 ### C16 — Portée d'une machine ou d'une table sans test de mur
 
