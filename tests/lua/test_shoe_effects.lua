@@ -41,23 +41,25 @@ function T.setup()
     -- Pointure du personnage et écart de la paire : fournis par le banc.
     -- MTIR_Effects n est pas charge ici : cle du joueur comme en solo.
     MTIR.playerKey = function(player) return "p" .. tostring(player:getPlayerNum()) end
-    MTIR.canShoeHaveSize = function(item) return item ~= nil end
+    MTIR.canShoeHaveSize = function(item) return item ~= nil and item.shoe == true end
     MTIR.getPlayerShoeSize = function() return 43 end
     MTIR.getShoeDiff = function(shoe) return shoe.diff end
     SAID, DROPPED = {}, {}
     MTIR.tell = function(_, fx) table.insert(SAID, fx) end
     MTIR.dropWornItem = function(shoe) table.insert(DROPPED, shoe); return true end
 
-    PLAYER = { traits = {}, discomfort = 0, endurance = 1, scratched = {} }
+    PLAYER = { traits = {}, discomfort = 0, endurance = 1, scratched = {}, socks = nil }
     function PLAYER:getWornItem(location)
         if self.shoe and location == ItemBodyLocation.SHOES then return self.shoe end
         return nil
     end
     function PLAYER:getWornItems()
-        local shoe = self.shoe
+        local worn = {}
+        if self.shoe then worn[#worn + 1] = self.shoe end
+        if self.socks then worn[#worn + 1] = self.socks end
         return {
-            size = function() return shoe and 1 or 0 end,
-            getItemByIndex = function() return shoe end,
+            size = function() return #worn end,
+            getItemByIndex = function(_, i) return worn[i + 1] end,
         }
     end
     function PLAYER:hasTrait(trait) return self.traits[trait] == true end
@@ -91,7 +93,22 @@ end
 --- Chausse la paire d'écart `diff` (nil : pieds nus) et avance `minutes` à l'allure
 --- donnée (0 immobile, 1 marche, 2 course, 3 sprint).
 local function wear(diff, fullType)
-    PLAYER.shoe = diff and { diff = diff, getFullType = function() return fullType or "Base.Shoes_Random" end } or nil
+    PLAYER.shoe = diff and {
+        shoe = true,
+        diff = diff,
+        getFullType = function() return fullType or "Base.Shoes_Random" end,
+        getBodyLocation = function() return "Shoes" end,
+    } or nil
+end
+
+--- Chaussettes portées : isolation du script (0,15 chevilles, 0,35 montantes,
+--- 0,55 épaisses) et humidité de 0 à 100.
+local function socks(insulation, wetness)
+    PLAYER.socks = insulation and {
+        getBodyLocation = function() return "base:socks" end,
+        getInsulation = function() return insulation end,
+        getWetness = function() return wetness or 0 end,
+    } or nil
 end
 
 local function move(pace, minutes)
@@ -107,6 +124,53 @@ local function scratchedFeet()
     local n = 0
     for _ in pairs(PLAYER.scratched) do n = n + 1 end
     return n
+end
+
+T["chaussettes : le frottement ralentit, trempées il s'emballe"] = function()
+    wear(-2)
+    move(1, 20)
+    local bare = friction()
+
+    MTIR.Friction = {}
+    socks(0.15)
+    move(1, 20)
+    local ankle = friction()
+    assertTrue(ankle < bare, "chaussettes de cheville : un peu moins de frottement")
+
+    MTIR.Friction = {}
+    socks(0.55)
+    move(1, 20)
+    local heavy = friction()
+    assertTrue(heavy < ankle, "chaussettes épaisses : nettement moins")
+
+    MTIR.Friction = {}
+    socks(0.55, 100)
+    move(1, 20)
+    assertTrue(friction() > bare, "trempées : pire que pieds nus dans la chaussure")
+end
+
+T["chaussettes épaisses : une pointure de trop comblée"] = function()
+    wear(2)
+    socks(0.55)
+    move(2, 200)
+    assertEq(scratchedFeet(), 0, "deux pointures de trop comblées : plus d'ampoule")
+    assertEq(MTIR.getShoeLossChance(PLAYER, "fall"), 0, "ni risque de perdre la chaussure")
+
+    socks(0.35)
+    MTIR.Friction = {}
+    move(2, 90)
+    assertEq(scratchedFeet(), 0, "chaussettes montantes : elles freinent le frottement")
+    move(2, 30)
+    assertEq(scratchedFeet(), 1, "mais elles ne comblent pas la pointure : l'ampoule vient")
+end
+
+T["chaussettes épaisses : une paire trop grande de trois reste gênante"] = function()
+    wear(3, "Base.Shoes_FlipFlop")
+    socks(0.55)
+    assertTrue(MTIR.getShoeLossChance(PLAYER, "fall") > 0, "il reste une pointure de trop")
+    socks(nil)
+    assertTrue(MTIR.getShoeLossChance(PLAYER, "fall")
+        > 0, "sans chaussettes, le risque est entier")
 end
 
 T["deux pointures trop petites : ampoule après 45 minutes de marche"] = function()

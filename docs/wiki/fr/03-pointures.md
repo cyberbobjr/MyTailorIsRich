@@ -30,6 +30,16 @@ Une jauge de frottement se remplit quand on marche avec des chaussures trop peti
 
 > Capture à faire : la réplique d'avertissement et une ampoule au pied dans le panneau de santé.
 
+## Chaussettes
+
+Des chaussettes freinent les ampoules : plus elles sont épaisses, plus elles protègent (jusqu'à un
+tiers de frottement en moins avec des chaussettes épaisses). **Trempées**, elles font l'inverse et
+râpent le pied plus vite qu'un pied nu dans la chaussure.
+
+Des chaussettes épaisses comblent en plus **une pointure de trop** : une paire deux pointures trop
+grande se porte alors sans gêne et ne risque plus de partir en courant. Trois pointures de trop
+restent trop grandes. Les chaussettes d'un mod comptent comme celles du jeu.
+
 ## Pourquoi pas de pénalité de vitesse ?
 
 En Build 42.21, le `RunSpeedModifier` vanilla des vêtements n'est affiché que dans les infobulles et jamais appliqué au déplacement (seuls les sacs l'utilisent). Le mod ralentit comme le moteur le permet : blessures aux pieds et endurance.

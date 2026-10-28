@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **9 faites, 0 en partie, 0 à faire, 9 annulées** — la partie 1 est entièrement tranchée. Faites : C01 à C04 (publiées en 0.4.6), C08, C11, C14, C16 et C17 (sur `main`, non publiées). Annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13, C15 et C18 le 2026-10-28. Idées de fonctionnalités : **2 faites, 0 en partie, 18 à faire** (sur 20) — I01 et I06 faites le 2026-10-28, non publiées.
+**Bilan** : améliorations de code **9 faites, 0 en partie, 0 à faire, 9 annulées** — la partie 1 est entièrement tranchée. Faites : C01 à C04 (publiées en 0.4.6), C08, C11, C14, C16 et C17 (sur `main`, non publiées). Annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13, C15 et C18 le 2026-10-28. Idées de fonctionnalités : **3 faites, 0 en partie, 17 à faire** (sur 20) — I01, I05 et I06 faites le 2026-10-28, non publiées.
 
 ### Améliorations de code
 
@@ -58,7 +58,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | I02 | Couture sur mesure pour un autre joueur | ⬜ Proposée | Dépend de I01 |
 | I03 | Patron qui garde l'apparence du modèle | ⬜ Proposée | |
 | I04 | Garnir une chaussure trop grande | ⬜ Proposée | |
-| I05 | Chaussettes épaisses | ⬜ Proposée | |
+| I05 | Chaussettes épaisses | ✅ Faite | Non publiée ; frottement selon l'épaisseur et l'humidité, une pointure comblée |
 | I06 | Alerte de changement de taille | ✅ Faite | Non publiée ; réplique à l'approche et au franchissement, ligne d'infobulle |
 | I07 | Panneau « Garde-robe » | ⬜ Proposée | Prérequis C03 fait |
 | I08 | Pastille d'ajustement dans l'inventaire | ⬜ Proposée | |
@@ -374,7 +374,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Faisabilité** : emplacement `socks` (déjà connu de `MTIR_Sizing.lua:30`) ; facteur dans `updateFriction` (`shared/MyTailorIsRich/MTIR_ShoeEffects.lua:223-250`) et dans `getShoeEffectDiff`. `getWetness()` est déjà employé pour l'usure.
 - **MP** : calcul d'autorité existant ; rien à transmettre en plus.
 - **Effort** : S.
-- **Avancement : ⬜ proposée, pas commencée.**
+- **Avancement : ✅ faite le 2026-10-28, sur `main`, non publiée, testée hors jeu (lupa + luacheck), à vérifier en jeu** — Chaussettes reconnues par leur emplacement (`MTIR.locKey(item) == "socks"`, celles d'un mod comprises) et leur épaisseur lue sur l'isolation du script (référence 0,55, les chaussettes épaisses vanilla) : `MTIR.getSocksFrictionFactor` va de 0,65 (épaisses sèches) à 1,75 (trempées), appliqué au remplissage de la jauge dans `updateFriction`. `MTIR.socksPadShoe` (isolation ≥ 0,5) retire un cran d'écart dans `wornShoe`, donc pour **tous** les effets des chaussures. Aucun texte ni option ajoutés. Tests : trois cas dans `tests/lua/test_shoe_effects.lua`.
 
 ### I06 — Alerte de changement de taille
 

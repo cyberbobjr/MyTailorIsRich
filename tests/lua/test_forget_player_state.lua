@@ -20,6 +20,8 @@ function T.setup()
         canShoeHaveSize = function(item) return item ~= nil end,
         getPlayerShoeSize = function() return 43 end,
         getShoeDiff = function(shoe) return shoe.diff end,
+        -- Emplacement du corps : aucun objet de ce banc n'est une chaussette.
+        locKey = function(item) return item.location end,
         getShoeEffectDiff = function() return 0 end,
     }
     loadMod("shared/MyTailorIsRich/MTIR_Effects.lua")

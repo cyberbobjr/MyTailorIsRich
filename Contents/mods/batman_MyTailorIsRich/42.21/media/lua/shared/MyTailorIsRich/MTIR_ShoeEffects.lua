@@ -1,6 +1,9 @@
 -- ============================================================================
 -- My Tailor Is Rich — effets continus des chaussures mal ajustées
 --
+-- Chaussettes           : moins de frottement (d'autant plus qu'elles sont
+--                          épaisses), davantage si elles sont trempées ; les
+--                          plus épaisses comblent une pointure de trop.
 -- Trop petites (-1, -2)  : inconfort (humeur vanilla), ampoules en marchant,
 --                          plus fréquentes en courant.
 -- Trop grandes (+2 et +) : endurance consommée en plus en course/sprint,
@@ -57,6 +60,16 @@ local SHOE_SLIP = {
     ["Base.Shoes_BlackBoots"] = 0.8,
 }
 
+-- Chaussettes : l'épaisseur se lit sur l'isolation du script (0,15 aux chevilles,
+-- 0,35 montantes, 0,55 épaisses en vanilla), ce qui vaut aussi pour celles d'un mod.
+local SOCKS_REFERENCE_INSULATION = 0.55
+--- Frottement en moins avec les chaussettes les plus épaisses.
+local SOCKS_MAX_RELIEF = 0.35
+--- Frottement en plus quand elles sont trempées.
+local SOCKS_WET_PENALTY = 0.75
+--- À partir de cette isolation, elles comblent une pointure de trop.
+local SOCKS_PADDING_INSULATION = 0.5
+
 -- Part de la dépense d'endurance vanilla ajoutée par cran d'effet.
 local ENDURANCE_SHARE_PER_EFFECT = 0.15
 
@@ -79,8 +92,41 @@ local function statMask(stat)
     return SyncPlayerStatsPacket.getBitMaskForStat(stat)
 end
 
+--- Chaussettes portées, ou nil. Seul l'emplacement compte : celles d'un mod valent
+--- celles du jeu.
+local function wornSocks(player)
+    local worn = player:getWornItems()
+    for i = 0, worn:size() - 1 do
+        local item = worn:getItemByIndex(i)
+        if item and MTIR.locKey(item) == "socks" then
+            return item
+        end
+    end
+    return nil
+end
+
+--- Effet des chaussettes sur la vitesse de frottement : moins de 1 elles protègent,
+--- plus de 1 trempées, 1 sans chaussettes.
+function MTIR.getSocksFrictionFactor(player)
+    local socks = wornSocks(player)
+    if not socks then
+        return 1
+    end
+    local thickness = math.min(1, (socks:getInsulation() or 0) / SOCKS_REFERENCE_INSULATION)
+    local wet = math.max(0, math.min(1, (socks:getWetness() or 0) / 100))
+    return math.max(0.1, 1 - SOCKS_MAX_RELIEF * thickness + SOCKS_WET_PENALTY * wet)
+end
+
+--- Vrai si les chaussettes portées sont assez épaisses pour combler une pointure.
+function MTIR.socksPadShoe(player)
+    local socks = wornSocks(player)
+    return socks ~= nil and (socks:getInsulation() or 0) >= SOCKS_PADDING_INSULATION
+end
+
 --- Chaussure portée et son écart, ou nil. Emplacement vanilla `shoes` d'abord, puis
 --- toute la tenue : une chaussure de mod peut être portée ailleurs (MTIR_Sizing).
+--- Des chaussettes épaisses comblent une pointure de trop : tous les effets des
+--- chaussures (inconfort, ampoules, endurance, perte) voient l'écart corrigé.
 local function wornShoe(player)
     local shoe = player:getWornItem(ItemBodyLocation.SHOES)
     if not shoe or not MTIR.canShoeHaveSize(shoe) then
@@ -97,7 +143,11 @@ local function wornShoe(player)
     if not shoe then
         return nil, nil
     end
-    return shoe, MTIR.getShoeDiff(shoe, MTIR.getPlayerShoeSize(player))
+    local diff = MTIR.getShoeDiff(shoe, MTIR.getPlayerShoeSize(player))
+    if diff and diff > 0 and MTIR.socksPadShoe(player) then
+        diff = diff - 1
+    end
+    return shoe, diff
 end
 
 --- 0 immobile, 1 marche, 2 course, 3 sprint.
@@ -242,7 +292,9 @@ local function updateFriction(player, diff, pace, minutes)
 
     local limit = diff and blisterMinutes(diff, pace) or nil
     if limit then
-        state.value = state.value + minutes * intensity() / limit
+        -- Les chaussettes protègent le pied ; trempées, elles le râpent.
+        local socks = MTIR.getSocksFrictionFactor(player)
+        state.value = state.value + minutes * intensity() * socks / limit
     else
         state.value = math.max(0, state.value - minutes * FRICTION_RECOVERY_PER_MINUTE)
     end

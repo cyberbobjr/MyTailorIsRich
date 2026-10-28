@@ -30,6 +30,15 @@ A friction gauge fills while you walk in tight shoes, faster when you run; your 
 
 > Capture à faire : the warning line and a blister on the foot in the health panel.
 
+## Socks
+
+Socks slow blisters down: the thicker they are, the more they protect (up to a third less friction
+with heavy socks). **Soaked**, they do the opposite and chafe faster than a bare foot in the shoe.
+
+Heavy socks also fill in **one size too big**: a pair two sizes too large then causes no trouble and
+no longer slips off while running. Three sizes too big stays too big. Modded socks count like
+vanilla ones.
+
 ## Why no speed penalty?
 
 In Build 42.21 the vanilla clothing `RunSpeedModifier` is only shown in tooltips and never applied to movement (only bags use it). The mod slows you down the way the engine allows: foot injuries and endurance.
