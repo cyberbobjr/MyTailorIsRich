@@ -19,6 +19,7 @@
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
+require "MyTailorIsRich/MTIR_ActionBase"
 require "MyTailorIsRich/MTIR_Alterations"
 require "MyTailorIsRich/MTIR_PatternBinder"
 
@@ -91,10 +92,7 @@ local function validate(self)
 end
 
 function MTIR_SewPatternAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return validate(self) ~= nil
+    return MTIR.Action.startedOnClient(self) or validate(self) ~= nil
 end
 
 function MTIR_SewPatternAction:waitToStart()
@@ -105,31 +103,25 @@ function MTIR_SewPatternAction:start()
     self.pattern = MTIR.resolveItem(self.character, self.pattern)
     self.needle = MTIR.resolveItem(self.character, self.needle)
     self.scissors = MTIR.resolveItem(self.character, self.scissors)
-    self.started = true
-    self.pattern:setJobType(getText("IGUI_MTIR_JobType_SewPattern"))
-    self.pattern:setJobDelta(0.0)
+    MTIR.Action.startProgress(self, self.pattern, "IGUI_MTIR_JobType_SewPattern")
     self:setActionAnim(CharacterActionAnims.Craft)
     self:setOverrideHandModels(self.scissors, self.needle)
     MTIR.MachineWork.start(self, "MTIR_ResizeClothes")
 end
 
 function MTIR_SewPatternAction:update()
-    self.pattern:setJobDelta(self:getJobDelta())
+    MTIR.Action.updateProgress(self, self.pattern)
     MTIR.MachineWork.update(self)
 end
 
 function MTIR_SewPatternAction:stop()
     MTIR.MachineWork.stopSound(self)
-    self.started = false
-    self.pattern:setJobDelta(0.0)
-    ISBaseTimedAction.stop(self)
+    MTIR.Action.stop(self, self.pattern)
 end
 
 function MTIR_SewPatternAction:perform()
     MTIR.MachineWork.stopSound(self)
-    self.started = false
-    self.pattern:setJobDelta(0.0)
-    ISBaseTimedAction.perform(self)
+    MTIR.Action.perform(self, self.pattern)
 end
 
 --- Une couture (réussie ou non) use le patron ; usé jusqu'au bout, il disparaît

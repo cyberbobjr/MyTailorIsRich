@@ -19,6 +19,7 @@
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
+require "MyTailorIsRich/MTIR_ActionBase"
 require "MyTailorIsRich/MTIR_Effects"
 require "MyTailorIsRich/MTIR_Alterations"
 require "MyTailorIsRich/MTIR_Embroidery"
@@ -68,10 +69,7 @@ local function validate(self)
 end
 
 function MTIR_MachineEmbroiderAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return validate(self) ~= nil
+    return MTIR.Action.startedOnClient(self) or validate(self) ~= nil
 end
 
 function MTIR_MachineEmbroiderAction:waitToStart()
@@ -81,31 +79,25 @@ end
 function MTIR_MachineEmbroiderAction:start()
     self.item = MTIR.resolveItem(self.character, self.item)
     self.needle = MTIR.resolveItem(self.character, self.needle)
-    self.started = true
-    self.item:setJobType(getText("IGUI_MTIR_JobType_Embroidering"))
-    self.item:setJobDelta(0.0)
+    MTIR.Action.startProgress(self, self.item, "IGUI_MTIR_JobType_Embroidering")
     self:setActionAnim(CharacterActionAnims.Craft)
     self:setOverrideHandModels(self.needle, nil)
     MTIR.MachineWork.start(self, "MTIR_ResizeClothes")
 end
 
 function MTIR_MachineEmbroiderAction:update()
-    self.item:setJobDelta(self:getJobDelta())
+    MTIR.Action.updateProgress(self, self.item)
     MTIR.MachineWork.update(self)
 end
 
 function MTIR_MachineEmbroiderAction:stop()
     MTIR.MachineWork.stopSound(self)
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.stop(self)
+    MTIR.Action.stop(self, self.item)
 end
 
 function MTIR_MachineEmbroiderAction:perform()
     MTIR.MachineWork.stopSound(self)
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.perform(self)
+    MTIR.Action.perform(self, self.item)
 end
 
 function MTIR_MachineEmbroiderAction:complete()

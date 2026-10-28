@@ -7,6 +7,7 @@
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
+require "MyTailorIsRich/MTIR_ActionBase"
 require "MyTailorIsRich/MTIR_Effects"
 
 MTIR_DebugSizeAction = ISBaseTimedAction:derive("MTIR_DebugSizeAction")
@@ -17,10 +18,7 @@ local function validate(self)
 end
 
 function MTIR_DebugSizeAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return validate(self)
+    return MTIR.Action.startedOnClient(self) or validate(self)
 end
 
 function MTIR_DebugSizeAction:start()

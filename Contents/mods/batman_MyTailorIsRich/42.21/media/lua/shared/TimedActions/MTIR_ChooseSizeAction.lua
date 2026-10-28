@@ -5,6 +5,7 @@
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
+require "MyTailorIsRich/MTIR_ActionBase"
 require "MyTailorIsRich/MTIR_Effects"
 
 MTIR_ChooseSizeAction = ISBaseTimedAction:derive("MTIR_ChooseSizeAction")
@@ -25,33 +26,24 @@ local function validate(self)
 end
 
 function MTIR_ChooseSizeAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return validate(self) ~= nil
+    return MTIR.Action.startedOnClient(self) or validate(self) ~= nil
 end
 
 function MTIR_ChooseSizeAction:start()
     self.item = MTIR.resolveItem(self.character, self.item)
-    self.started = true
-    self.item:setJobType(getText("IGUI_MTIR_JobType_ChooseClothesSize"))
-    self.item:setJobDelta(0.0)
+    MTIR.Action.startProgress(self, self.item, "IGUI_MTIR_JobType_ChooseClothesSize")
 end
 
 function MTIR_ChooseSizeAction:update()
-    self.item:setJobDelta(self:getJobDelta())
+    MTIR.Action.updateProgress(self, self.item)
 end
 
 function MTIR_ChooseSizeAction:stop()
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.stop(self)
+    MTIR.Action.stop(self, self.item)
 end
 
 function MTIR_ChooseSizeAction:perform()
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.perform(self)
+    MTIR.Action.perform(self, self.item)
 end
 
 function MTIR_ChooseSizeAction:complete()

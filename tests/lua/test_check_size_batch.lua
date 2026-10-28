@@ -142,6 +142,7 @@ function T.setup()
     assertTrue(loadVanilla("client/TimedActions/ISTimedActionQueue.lua"))
     loadMod("shared/MyTailorIsRich/MTIR_Reach.lua")
     loadMod("shared/MyTailorIsRich/MTIR_LabelCheck.lua")
+    loadMod("shared/MyTailorIsRich/MTIR_ActionBase.lua")
     loadMod("shared/TimedActions/MTIR_CheckSizeAction.lua")
     loadMod("client/MyTailorIsRich/MTIR_CheckSizeMenu.lua")
 end

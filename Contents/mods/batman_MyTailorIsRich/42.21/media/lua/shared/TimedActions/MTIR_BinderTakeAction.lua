@@ -10,6 +10,7 @@
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
+require "MyTailorIsRich/MTIR_ActionBase"
 require "MyTailorIsRich/MTIR_Effects"
 require "MyTailorIsRich/MTIR_PatternBinder"
 
@@ -23,35 +24,26 @@ local function validate(self)
 end
 
 function MTIR_BinderTakeAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return validate(self)
+    return MTIR.Action.startedOnClient(self) or validate(self)
 end
 
 function MTIR_BinderTakeAction:start()
     self.binder = MTIR.resolveItem(self.character, self.binder)
-    self.started = true
-    self.binder:setJobType(getText("IGUI_MTIR_JobType_BinderTake"))
-    self.binder:setJobDelta(0.0)
+    MTIR.Action.startProgress(self, self.binder, "IGUI_MTIR_JobType_BinderTake")
     self:setActionAnim(CharacterActionAnims.Craft)
     self.character:getEmitter():playSound("MapAddNote")
 end
 
 function MTIR_BinderTakeAction:update()
-    self.binder:setJobDelta(self:getJobDelta())
+    MTIR.Action.updateProgress(self, self.binder)
 end
 
 function MTIR_BinderTakeAction:stop()
-    self.started = false
-    self.binder:setJobDelta(0.0)
-    ISBaseTimedAction.stop(self)
+    MTIR.Action.stop(self, self.binder)
 end
 
 function MTIR_BinderTakeAction:perform()
-    self.started = false
-    self.binder:setJobDelta(0.0)
-    ISBaseTimedAction.perform(self)
+    MTIR.Action.perform(self, self.binder)
 end
 
 function MTIR_BinderTakeAction:complete()

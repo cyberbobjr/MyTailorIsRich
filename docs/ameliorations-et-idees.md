@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **8 faites, 0 en partie, 2 à faire, 8 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13 et C15 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
+**Bilan** : améliorations de code **9 faites, 0 en partie, 1 à faire, 8 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13 et C15 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
 
 ### Améliorations de code
 
@@ -47,7 +47,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C14 | Deux analyseurs de listes sandbox | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Infobulles toujours « séparés par des virgules » pour deux listes (volontaire) |
 | C15 | Peau entière consommée pour une unité | ❌ Annulé | — | — | — | Rien : comportement vanilla, recette « couper en deux » (décision du 2026-10-28) |
 | C16 | Portée machine / table sans test de mur | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Vérifier en jeu : machine contre une cloison |
-| C17 | Duplications, incohérences d'actions, trous de tests | ⬜ À faire | — | — | — | Tout |
+| C17 | Duplications, incohérences d'actions, trous de tests | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Vérifier en jeu : outils en main pendant une remise en état, actions inchangées |
 | C18 | Descriptions Steam proches de 8 000 octets | ⬜ À faire | — | — | — | Tout |
 
 ### Idées de fonctionnalités
@@ -99,7 +99,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C14 | Deux analyseurs de listes sandbox, règles différentes | Maintenabilité | Basse | S | confirmé statiquement | ✅ non publié |
 | C15 | Peau entière consommée pour une unité | Gameplay | — | — | conforme au vanilla, confirmé statiquement | ❌ annulé |
 | C16 | Portée machine / table sans test de mur | Autorité serveur | Basse | S | confirmé statiquement | ✅ non publié |
-| C17 | Duplications, incohérences d'actions, trous de tests | Maintenabilité | Basse | M | confirmé statiquement | ⬜ |
+| C17 | Duplications, incohérences d'actions, trous de tests | Maintenabilité | Basse | M | confirmé statiquement | ✅ non publié |
 | C18 | Descriptions Steam presque à la limite de 8 000 octets | Maintenabilité / traduction | Basse | S | confirmé statiquement | ⬜ |
 
 ---
@@ -285,7 +285,13 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : un module `MTIR_ActionBase.lua` (validation commune, barre de progression, sons) et un `MTIR.findLocalPlayer` partagé ; tests ciblés sur les modules listés, en commençant par `Sizing` et `ShoeEffects`, qui touchent les mods tiers.
 - **Priorité** : basse. **Effort** : M.
 - **Statut** : confirmé statiquement.
-- **Avancement : ⬜ à faire.**
+- **Avancement : ✅ corrigé le 2026-10-28, sur `main`, non publié, testé hors jeu (lupa + luacheck), à vérifier en jeu** — Les cinq constats sont traités :
+  1. **Outils en main pendant la remise en état** : `setOverrideHandModels(scissors, needle)` comme la retouche (`MTIR_ReconditionAction.lua:27`). Le silence de la remise en état à la main reste volontaire.
+  2. **`findLocalPlayer` dédoublée** : une seule `MTIR.findLocalPlayer` (version tolérante au `nil`) dans `client/MyTailorIsRich/MTIR_ClientFx.lua`, utilisée aussi par `MTIR_DecorMenu.lua`.
+  3. **Police de l'écran Personnage** : la largeur du poids est mesurée avec la police réellement passée (`MTIR_ClientUI.lua:83`).
+  4. **Squelette commun des actions** : nouveau `shared/MyTailorIsRich/MTIR_ActionBase.lua` (`MTIR.Action.startedOnClient`, `startProgress`, `updateProgress`, `endProgress`, `stop`, `perform`), adopté par les quatorze actions : **201 lignes retirées pour 86 ajoutées**. Ce qui reste propre à chaque action (validation, animation, sons, matériaux, durée) n'a pas bougé ; le garde `isTimedActionInstant` de `getDuration` est laissé sur place (deux lignes, aucun gain à l'extraire).
+  5. **Tests des cinq zones sans couverture** : `test_sizing_deduction.lua` (9 cas), `test_shoe_effects.lua` (10), `test_craft_sizing.lua` (7), `test_alteration_formulas.lua` (7), `test_degrade_chance.lua` (6).
+- **Trouvé en écrivant les tests** : la part « état du vêtement » de la formule d'usure est presque inerte. Saleté et humidité se lisent de 0 à 100, la formule les divise par 7 puis retire un seuil de 0,25 : un vêtement couvert de boue (1/7) ne change rien, trempé de pluie (2/7) à peine, seul le sang (4/7) pèse (+4 %), et il faut les trois à la fois pour +50 %. Formule d'origine conservée telle quelle ; à revoir si l'usure doit vraiment dépendre de la saleté.
 
 ### C18 — Descriptions Steam presque à la limite
 

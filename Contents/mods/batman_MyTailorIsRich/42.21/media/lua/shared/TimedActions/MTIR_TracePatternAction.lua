@@ -12,6 +12,7 @@
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
+require "MyTailorIsRich/MTIR_ActionBase"
 require "MyTailorIsRich/MTIR_Patterns"
 require "MyTailorIsRich/MTIR_WorkTable"
 
@@ -47,10 +48,7 @@ local function validate(self)
 end
 
 function MTIR_TracePatternAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return validate(self) ~= nil
+    return MTIR.Action.startedOnClient(self) or validate(self) ~= nil
 end
 
 function MTIR_TracePatternAction:waitToStart()
@@ -66,9 +64,7 @@ function MTIR_TracePatternAction:start()
     self.item = MTIR.resolveItem(self.character, self.item)
     self.scissors = MTIR.resolveItem(self.character, self.scissors)
     self.pen = MTIR.resolveItem(self.character, self.pen)
-    self.started = true
-    self.item:setJobType(getText("IGUI_MTIR_JobType_TracePattern"))
-    self.item:setJobDelta(0.0)
+    MTIR.Action.startProgress(self, self.item, "IGUI_MTIR_JobType_TracePattern")
     -- Mains au travail sur une surface (animation vanilla B42 des établis).
     self:setActionAnim("Making_Surface")
     self:setOverrideHandModels(self.scissors, self.pen)
@@ -76,19 +72,15 @@ function MTIR_TracePatternAction:start()
 end
 
 function MTIR_TracePatternAction:update()
-    self.item:setJobDelta(self:getJobDelta())
+    MTIR.Action.updateProgress(self, self.item)
 end
 
 function MTIR_TracePatternAction:stop()
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.stop(self)
+    MTIR.Action.stop(self, self.item)
 end
 
 function MTIR_TracePatternAction:perform()
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.perform(self)
+    MTIR.Action.perform(self, self.item)
 end
 
 function MTIR_TracePatternAction:complete()

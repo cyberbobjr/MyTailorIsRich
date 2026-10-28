@@ -12,6 +12,7 @@
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
+require "MyTailorIsRich/MTIR_ActionBase"
 require "MyTailorIsRich/MTIR_Effects"
 require "MyTailorIsRich/MTIR_PatternCopy"
 require "MyTailorIsRich/MTIR_WorkTable"
@@ -50,10 +51,7 @@ local function validate(self)
 end
 
 function MTIR_CopyPatternAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return validate(self) ~= nil
+    return MTIR.Action.startedOnClient(self) or validate(self) ~= nil
 end
 
 function MTIR_CopyPatternAction:waitToStart()
@@ -69,28 +67,22 @@ function MTIR_CopyPatternAction:start()
     self.pattern = MTIR.resolveItem(self.character, self.pattern)
     self.scissors = MTIR.resolveItem(self.character, self.scissors)
     self.pen = MTIR.resolveItem(self.character, self.pen)
-    self.started = true
-    self.pattern:setJobType(getText("IGUI_MTIR_JobType_CopyPattern"))
-    self.pattern:setJobDelta(0.0)
+    MTIR.Action.startProgress(self, self.pattern, "IGUI_MTIR_JobType_CopyPattern")
     self:setActionAnim("Making_Surface")
     self:setOverrideHandModels(self.scissors, self.pen)
     self.character:getEmitter():playSound("MapAddNote")
 end
 
 function MTIR_CopyPatternAction:update()
-    self.pattern:setJobDelta(self:getJobDelta())
+    MTIR.Action.updateProgress(self, self.pattern)
 end
 
 function MTIR_CopyPatternAction:stop()
-    self.started = false
-    self.pattern:setJobDelta(0.0)
-    ISBaseTimedAction.stop(self)
+    MTIR.Action.stop(self, self.pattern)
 end
 
 function MTIR_CopyPatternAction:perform()
-    self.started = false
-    self.pattern:setJobDelta(0.0)
-    ISBaseTimedAction.perform(self)
+    MTIR.Action.perform(self, self.pattern)
 end
 
 function MTIR_CopyPatternAction:complete()

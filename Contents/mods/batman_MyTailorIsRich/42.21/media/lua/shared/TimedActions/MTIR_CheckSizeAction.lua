@@ -7,6 +7,7 @@
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
+require "MyTailorIsRich/MTIR_ActionBase"
 require "MyTailorIsRich/MTIR_Effects"
 require "MyTailorIsRich/MTIR_Reach"
 require "MyTailorIsRich/MTIR_LabelCheck"
@@ -41,17 +42,12 @@ function MTIR_CheckSizeAction:begin()
 end
 
 function MTIR_CheckSizeAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return MTIR.canReachItem(self.character, self.item)
+    return MTIR.Action.startedOnClient(self) or MTIR.canReachItem(self.character, self.item)
 end
 
 function MTIR_CheckSizeAction:start()
     self.item = MTIR.resolveItem(self.character, self.item)
-    self.started = true
-    self.item:setJobType(getText("IGUI_MTIR_JobType_CheckClothesSize"))
-    self.item:setJobDelta(0.0)
+    MTIR.Action.startProgress(self, self.item, "IGUI_MTIR_JobType_CheckClothesSize")
     self:setActionAnim("Loot")
     self:setAnimVariable("LootPosition", "")
     self:setOverrideHandModels(nil, nil)
@@ -63,7 +59,7 @@ function MTIR_CheckSizeAction:start()
 end
 
 function MTIR_CheckSizeAction:update()
-    self.item:setJobDelta(self:getJobDelta())
+    MTIR.Action.updateProgress(self, self.item)
 end
 
 local function stopSound(self)
@@ -74,16 +70,12 @@ end
 
 function MTIR_CheckSizeAction:stop()
     stopSound(self)
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.stop(self)
+    MTIR.Action.stop(self, self.item)
 end
 
 function MTIR_CheckSizeAction:perform()
     stopSound(self)
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.perform(self)
+    MTIR.Action.perform(self, self.item)
 end
 
 --- Chaussure : la pointure est imprimée à l'intérieur, lisible sans Couture.

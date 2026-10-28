@@ -15,6 +15,7 @@
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
+require "MyTailorIsRich/MTIR_ActionBase"
 require "MyTailorIsRich/MTIR_Alterations"
 
 MTIR_MachineMaintenanceAction = ISBaseTimedAction:derive("MTIR_MachineMaintenanceAction")
@@ -51,10 +52,7 @@ local function validate(self)
 end
 
 function MTIR_MachineMaintenanceAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return validate(self) ~= nil
+    return MTIR.Action.startedOnClient(self) or validate(self) ~= nil
 end
 
 function MTIR_MachineMaintenanceAction:waitToStart()
@@ -77,9 +75,7 @@ function MTIR_MachineMaintenanceAction:start()
     self.screwdriver = MTIR.resolveItem(self.character, self.screwdriver)
     self.oil = MTIR.resolveItem(self.character, self.oil)
     self.machine = MTIR.machineFromPos(self.machinePos)
-    self.started = true
-    self.screwdriver:setJobType(getText("IGUI_MTIR_JobType_MachineMaintenance"))
-    self.screwdriver:setJobDelta(0.0)
+    MTIR.Action.startProgress(self, self.screwdriver, "IGUI_MTIR_JobType_MachineMaintenance")
     self:setActionAnim(CharacterActionAnims.Disassemble)
     self:setOverrideHandModels(self.screwdriver, nil)
     if self.machine then
@@ -89,7 +85,7 @@ function MTIR_MachineMaintenanceAction:start()
 end
 
 function MTIR_MachineMaintenanceAction:update()
-    self.screwdriver:setJobDelta(self:getJobDelta())
+    MTIR.Action.updateProgress(self, self.screwdriver)
     if self.machine then
         self.character:faceThisObject(self.machine)
     end
@@ -109,16 +105,12 @@ end
 
 function MTIR_MachineMaintenanceAction:stop()
     stopSound(self)
-    self.started = false
-    self.screwdriver:setJobDelta(0.0)
-    ISBaseTimedAction.stop(self)
+    MTIR.Action.stop(self, self.screwdriver)
 end
 
 function MTIR_MachineMaintenanceAction:perform()
     stopSound(self)
-    self.started = false
-    self.screwdriver:setJobDelta(0.0)
-    ISBaseTimedAction.perform(self)
+    MTIR.Action.perform(self, self.screwdriver)
 end
 
 --- Autorité : consomme les utilisations d'huile (UseAndSync retire l'objet vide et synchronise).

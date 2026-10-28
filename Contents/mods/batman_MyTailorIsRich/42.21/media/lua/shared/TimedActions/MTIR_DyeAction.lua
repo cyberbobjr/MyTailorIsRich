@@ -14,6 +14,7 @@
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
+require "MyTailorIsRich/MTIR_ActionBase"
 require "MyTailorIsRich/MTIR_Effects"
 require "MyTailorIsRich/MTIR_Dyeing"
 
@@ -30,19 +31,14 @@ local function validate(self)
 end
 
 function MTIR_DyeAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return validate(self) ~= nil
+    return MTIR.Action.startedOnClient(self) or validate(self) ~= nil
 end
 
 function MTIR_DyeAction:start()
     self.item = MTIR.resolveItem(self.character, self.item)
     self.dye = MTIR.resolveItem(self.character, self.dye)
     self.water = MTIR.resolveItem(self.character, self.water)
-    self.started = true
-    self.item:setJobType(getText("IGUI_MTIR_JobType_Dyeing"))
-    self.item:setJobDelta(0.0)
+    MTIR.Action.startProgress(self, self.item, "IGUI_MTIR_JobType_Dyeing")
     -- Animation et accessoires de la recette vanilla « Dye Clothes » (timedAction MixingBucket).
     self:setActionAnim("MixingBucket")
     self:setOverrideHandModels("Base.WoodenStick_Broken", "Base.CraftingBucket")
@@ -50,7 +46,7 @@ function MTIR_DyeAction:start()
 end
 
 function MTIR_DyeAction:update()
-    self.item:setJobDelta(self:getJobDelta())
+    MTIR.Action.updateProgress(self, self.item)
 end
 
 local function stopSound(self)
@@ -62,16 +58,12 @@ end
 
 function MTIR_DyeAction:stop()
     stopSound(self)
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.stop(self)
+    MTIR.Action.stop(self, self.item)
 end
 
 function MTIR_DyeAction:perform()
     stopSound(self)
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.perform(self)
+    MTIR.Action.perform(self, self.item)
 end
 
 function MTIR_DyeAction:complete()

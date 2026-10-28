@@ -13,6 +13,7 @@
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
+require "MyTailorIsRich/MTIR_ActionBase"
 require "MyTailorIsRich/MTIR_Alterations"
 
 -- ----------------------------------------------------------------------------
@@ -21,9 +22,7 @@ require "MyTailorIsRich/MTIR_Alterations"
 
 local function startCommon(self)
     self.item = MTIR.resolveItem(self.character, self.item)
-    self.started = true
-    self.item:setJobType(getText("IGUI_MTIR_JobType_ReconditionClothes"))
-    self.item:setJobDelta(0.0)
+    MTIR.Action.startProgress(self, self.item, "IGUI_MTIR_JobType_ReconditionClothes")
     self:setActionAnim("SewingCloth")
     -- Les outils exigés sont ceux que l'on voit, comme pour la retouche.
     self:setOverrideHandModels(self.scissors, self.needle)
@@ -32,22 +31,18 @@ local function startCommon(self)
 end
 
 local function updateCommon(self)
-    self.item:setJobDelta(self:getJobDelta())
+    MTIR.Action.updateProgress(self, self.item)
     MTIR.MachineWork.update(self)
 end
 
 local function stopCommon(self)
     MTIR.MachineWork.stopSound(self)
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.stop(self)
+    MTIR.Action.stop(self, self.item)
 end
 
 local function performCommon(self)
     MTIR.MachineWork.stopSound(self)
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.perform(self)
+    MTIR.Action.perform(self, self.item)
 end
 
 local function durationCommon(self)
@@ -152,10 +147,7 @@ local function validateStrips(self)
 end
 
 function MTIR_ReconditionAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return validateStrips(self) ~= nil
+    return MTIR.Action.startedOnClient(self) or validateStrips(self) ~= nil
 end
 
 MTIR_ReconditionAction.waitToStart = waitCommon
@@ -229,10 +221,7 @@ local function validateSpare(self)
 end
 
 function MTIR_ReconditionSpareAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return validateSpare(self) ~= nil
+    return MTIR.Action.startedOnClient(self) or validateSpare(self) ~= nil
 end
 
 MTIR_ReconditionSpareAction.waitToStart = waitCommon

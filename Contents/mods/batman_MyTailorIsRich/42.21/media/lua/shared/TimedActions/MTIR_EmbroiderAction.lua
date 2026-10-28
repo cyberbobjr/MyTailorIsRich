@@ -14,6 +14,7 @@
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
+require "MyTailorIsRich/MTIR_ActionBase"
 require "MyTailorIsRich/MTIR_Effects"
 require "MyTailorIsRich/MTIR_Alterations"
 require "MyTailorIsRich/MTIR_Embroidery"
@@ -52,25 +53,20 @@ local function validateEmbroider(self)
 end
 
 function MTIR_EmbroiderAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return validateEmbroider(self)
+    return MTIR.Action.startedOnClient(self) or validateEmbroider(self)
 end
 
 function MTIR_EmbroiderAction:start()
     self.item = MTIR.resolveItem(self.character, self.item)
     self.needle = MTIR.resolveItem(self.character, self.needle)
-    self.started = true
-    self.item:setJobType(getText("IGUI_MTIR_JobType_Embroidering"))
-    self.item:setJobDelta(0.0)
+    MTIR.Action.startProgress(self, self.item, "IGUI_MTIR_JobType_Embroidering")
     self:setActionAnim(CharacterActionAnims.Craft)
     self:setOverrideHandModels(self.needle, nil)
     self.sound = self.character:getEmitter():playSound("MTIR_ResizeClothes")
 end
 
 function MTIR_EmbroiderAction:update()
-    self.item:setJobDelta(self:getJobDelta())
+    MTIR.Action.updateProgress(self, self.item)
 end
 
 local function stopSound(self)
@@ -82,16 +78,12 @@ end
 
 function MTIR_EmbroiderAction:stop()
     stopSound(self)
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.stop(self)
+    MTIR.Action.stop(self, self.item)
 end
 
 function MTIR_EmbroiderAction:perform()
     stopSound(self)
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.perform(self)
+    MTIR.Action.perform(self, self.item)
 end
 
 function MTIR_EmbroiderAction:complete()
@@ -148,36 +140,27 @@ local function validateUnpick(self)
 end
 
 function MTIR_UnpickEmbroideryAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return validateUnpick(self)
+    return MTIR.Action.startedOnClient(self) or validateUnpick(self)
 end
 
 function MTIR_UnpickEmbroideryAction:start()
     self.item = MTIR.resolveItem(self.character, self.item)
     self.scissors = MTIR.resolveItem(self.character, self.scissors)
-    self.started = true
-    self.item:setJobType(getText("IGUI_MTIR_JobType_Unpicking"))
-    self.item:setJobDelta(0.0)
+    MTIR.Action.startProgress(self, self.item, "IGUI_MTIR_JobType_Unpicking")
     self:setActionAnim(CharacterActionAnims.Craft)
     self:setOverrideHandModels(self.scissors, nil)
 end
 
 function MTIR_UnpickEmbroideryAction:update()
-    self.item:setJobDelta(self:getJobDelta())
+    MTIR.Action.updateProgress(self, self.item)
 end
 
 function MTIR_UnpickEmbroideryAction:stop()
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.stop(self)
+    MTIR.Action.stop(self, self.item)
 end
 
 function MTIR_UnpickEmbroideryAction:perform()
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.perform(self)
+    MTIR.Action.perform(self, self.item)
 end
 
 function MTIR_UnpickEmbroideryAction:complete()

@@ -13,6 +13,7 @@
 -- ============================================================================
 
 require "TimedActions/ISBaseTimedAction"
+require "MyTailorIsRich/MTIR_ActionBase"
 require "MyTailorIsRich/MTIR_Alterations"
 
 MTIR_ResizeAction = ISBaseTimedAction:derive("MTIR_ResizeAction")
@@ -68,10 +69,7 @@ local function validate(self)
 end
 
 function MTIR_ResizeAction:isValid()
-    if isClient() and self.started then
-        return true
-    end
-    return validate(self) ~= nil
+    return MTIR.Action.startedOnClient(self) or validate(self) ~= nil
 end
 
 function MTIR_ResizeAction:waitToStart()
@@ -92,22 +90,18 @@ function MTIR_ResizeAction:start()
 end
 
 function MTIR_ResizeAction:update()
-    self.item:setJobDelta(self:getJobDelta())
+    MTIR.Action.updateProgress(self, self.item)
     MTIR.MachineWork.update(self)
 end
 
 function MTIR_ResizeAction:stop()
     MTIR.MachineWork.stopSound(self)
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.stop(self)
+    MTIR.Action.stop(self, self.item)
 end
 
 function MTIR_ResizeAction:perform()
     MTIR.MachineWork.stopSound(self)
-    self.started = false
-    self.item:setJobDelta(0.0)
-    ISBaseTimedAction.perform(self)
+    MTIR.Action.perform(self, self.item)
 end
 
 --- Réussite : état ajusté selon la marge de Couture (ou perte si à la limite).
