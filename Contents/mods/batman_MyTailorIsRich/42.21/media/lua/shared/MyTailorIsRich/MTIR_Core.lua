@@ -97,6 +97,38 @@ function MTIR.getDegradeParams()
     return degradeCache
 end
 
+--- Listes des options texte : « a,b:2 » ou « a;b:2 » -> { a = 1, b = 2 }, difficulté
+--- arrondie vers le bas et bornée à 1..3 (clés en minuscules si lowerKeys).
+--- Le point-virgule est accepté pour les trois listes : une virgule terminerait la
+--- valeur par défaut dans sandbox-options.txt, et l'exemple d'une infobulle en utilise.
+function MTIR.parseOptionList(raw, lowerKeys)
+    local result = {}
+    local normalized = string.gsub(raw or "", ";", ",")
+    for _, entry in ipairs(luautils.split(normalized, ",")) do
+        local parts = luautils.split(luautils.trim(entry), ":")
+        local name = luautils.trim(parts[1] or "")
+        if name ~= "" then
+            local difficulty = tonumber(parts[2] and luautils.trim(parts[2]) or "") or 1
+            difficulty = math.max(1, math.min(3, math.floor(difficulty)))
+            result[lowerKeys and string.lower(name) or name] = difficulty
+        end
+    end
+    return result
+end
+
+--- Vrai si ce nom complet est un vêtement chargé dans cette partie.
+function MTIR.isClothingType(fullType)
+    local script = ScriptManager.instance:getItem(fullType)
+    return script ~= nil and script:getItemType() == ItemType.CLOTHING
+end
+
+--- Entrée d'option qui ne nomme aucun vêtement : sans ce message, une faute de frappe
+--- ou un séparateur inattendu laisse la liste sans effet et sans explication.
+function MTIR.warnUnknownOptionItem(optionName, fullType)
+    print("[MTIR] Sandbox option " .. tostring(optionName) .. ": '" .. tostring(fullType)
+        .. "' is not a clothing item of this game, entry ignored.")
+end
+
 local customCache = { raw = nil, list = {} }
 
 --- Vêtements ajoutés par l'option ListCustomClothes : fullType -> difficulté.
@@ -107,21 +139,11 @@ function MTIR.getCustomClothes()
     end
 
     local list = {}
-    for _, pair in ipairs(luautils.split(raw, ",")) do
-        local parts = luautils.split(luautils.trim(pair), ":")
-        local name = luautils.trim(parts[1] or "")
-        local difficulty = 1
-        if #parts == 2 then
-            local number = tonumber(luautils.trim(parts[2]))
-            if number and number > 0 and math.floor(number) == number then
-                difficulty = math.min(number, 3)
-            end
-        end
-        if name ~= "" then
-            local script = ScriptManager.instance:getItem(name)
-            if script and script:getItemType() == ItemType.CLOTHING then
-                list[name] = difficulty
-            end
+    for name, difficulty in pairs(MTIR.parseOptionList(raw, false)) do
+        if MTIR.isClothingType(name) then
+            list[name] = difficulty
+        else
+            MTIR.warnUnknownOptionItem("ListCustomClothes", name)
         end
     end
 

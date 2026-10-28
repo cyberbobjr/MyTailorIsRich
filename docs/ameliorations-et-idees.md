@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **6 faites, 0 en partie, 5 à faire, 7 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12 et C13 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
+**Bilan** : améliorations de code **7 faites, 0 en partie, 4 à faire, 7 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12 et C13 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
 
 ### Améliorations de code
 
@@ -44,7 +44,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C11 | Taille d'artisanat : envoi unique, voies non couvertes | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Vérifier en jeu en MP (changer de taille puis coudre aussitôt) |
 | C12 | `instanceItem` pour lire les stats d'origine | ❌ Annulé | — | — | — | Rien : aucun getter sur le script en 42.21 (décision du 2026-10-28) |
 | C13 | Stats non rétablies quand une option passe à 0 | ❌ Annulé | — | — | — | Rien : effacé au redémarrage (décision du 2026-10-28) |
-| C14 | Deux analyseurs de listes sandbox | ⬜ À faire | — | — | — | Tout |
+| C14 | Deux analyseurs de listes sandbox | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Infobulles toujours « séparés par des virgules » pour deux listes (volontaire) |
 | C15 | Peau entière consommée pour une unité | ⬜ À faire | — | — | — | Tout |
 | C16 | Portée machine / table sans test de mur | ⬜ À faire | — | — | — | Tout |
 | C17 | Duplications, incohérences d'actions, trous de tests | ⬜ À faire | — | — | — | Tout |
@@ -96,7 +96,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C11 | Taille d'artisanat : envoi unique, voies de fabrication non couvertes | MP / compatibilité | Basse | S | confirmé statiquement | ✅ non publié |
 | C12 | `instanceItem` pour lire les stats d'origine | Compatibilité / effets de bord | — | — | impossible, confirmé statiquement | ❌ annulé |
 | C13 | Stats dérivées non rétablies quand une option passe à 0 | Bug mineur | — | — | confirmé statiquement | ❌ annulé |
-| C14 | Deux analyseurs de listes sandbox, règles différentes | Maintenabilité | Basse | S | confirmé statiquement | ⬜ |
+| C14 | Deux analyseurs de listes sandbox, règles différentes | Maintenabilité | Basse | S | confirmé statiquement | ✅ non publié |
 | C15 | Peau entière consommée pour une unité | Gameplay | Basse | S | confirmé statiquement | ⬜ |
 | C16 | Portée machine / table sans test de mur | Autorité serveur | Basse | S | à vérifier en jeu | ⬜ |
 | C17 | Duplications, incohérences d'actions, trous de tests | Maintenabilité | Basse | M | confirmé statiquement | ⬜ |
@@ -251,7 +251,8 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : un seul analyseur pour les trois options, et un `print` en anglais pour chaque type inconnu, une fois par valeur d'option.
 - **Priorité** : basse. **Effort** : S.
 - **Statut** : confirmé statiquement.
-- **Avancement : ⬜ à faire.**
+- **Avancement : ✅ corrigé le 2026-10-28, sur `main`, non publié, testé hors jeu (lupa + luacheck)** — Analyseur unique `MTIR.parseOptionList(raw, lowerKeys)` dans `MTIR_Core.lua`, utilisé par les trois options : virgule et point-virgule acceptés partout, difficulté arrondie vers le bas et bornée à 1..3. `MTIR.isClothingType` et `MTIR.warnUnknownOptionItem` signalent en anglais chaque entrée qui ne nomme pas un vêtement chargé, une seule fois par valeur d'option (les deux listes sont déjà mises en cache par leur texte brut). `ListCustomClothes` écarte l'entrée comme avant ; `ListExcludedClothes` la garde (un nom inconnu ne correspond à rien de toute façon) et se contente de l'avertissement ; `ExtraSizedLocations` nomme des emplacements du corps, pas des objets : rien à vérifier. Tests : `tests/lua/test_option_lists.lua` (7 cas), plus un bouchon `ScriptManager` ajouté à `test_glove_patterns.lua`.
+- **Volontairement inchangé** : les infobulles des réglages. Elles disent « séparés par des virgules » pour `ListCustomClothes` et `ListExcludedClothes`, ce qui reste vrai et reste la façon recommandée ; le point-virgule est maintenant toléré sans être documenté, pour ne pas retoucher neuf langues.
 
 ### C15 — Une peau entière consommée pour une unité de cuir
 

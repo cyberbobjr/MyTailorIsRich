@@ -78,23 +78,6 @@ end
 -- Options texte
 -- ----------------------------------------------------------------------------
 
---- "a,b:2" ou "a;b:2" -> { a = 1, b = 2 } (clés en minuscules si lowerKeys).
---- « ; » est accepté car une virgule termine la valeur par défaut dans sandbox-options.txt.
-local function parseList(raw, lowerKeys)
-    local result = {}
-    local normalized = string.gsub(raw or "", ";", ",")
-    for _, entry in ipairs(luautils.split(normalized, ",")) do
-        local parts = luautils.split(luautils.trim(entry), ":")
-        local name = luautils.trim(parts[1] or "")
-        if name ~= "" then
-            local difficulty = tonumber(parts[2] and luautils.trim(parts[2]) or "") or 1
-            difficulty = math.max(1, math.min(3, math.floor(difficulty)))
-            result[lowerKeys and string.lower(name) or name] = difficulty
-        end
-    end
-    return result
-end
-
 local cache = {}
 local seenOptions = {}
 local excluded = {}
@@ -109,8 +92,16 @@ local function refreshOptions()
         return
     end
     seenOptions = { custom = custom, excluded = excludedRaw, extra = extraRaw }
-    excluded = parseList(excludedRaw, false)
-    extraLocations = parseList(extraRaw, true)
+    excluded = MTIR.parseOptionList(excludedRaw, false)
+    -- Entrée gardée même inconnue (elle ne correspondra simplement à rien) : seul
+    -- l'avertissement manque aujourd'hui. Les emplacements du corps ne sont pas des
+    -- objets : rien à vérifier pour ExtraSizedLocations.
+    for name in pairs(excluded) do
+        if not MTIR.isClothingType(name) then
+            MTIR.warnUnknownOptionItem("ListExcludedClothes", name)
+        end
+    end
+    extraLocations = MTIR.parseOptionList(extraRaw, true)
     cache = {}
 end
 

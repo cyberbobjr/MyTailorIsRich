@@ -46,6 +46,9 @@ end
 function T.setup()
     SandboxVars = { MyTailorIsRich = {} }
     ItemType = { CLOTHING = "clothing" }
+    -- Aucun script enregistre ici : les noms des listes d options sont inconnus de ce
+    -- banc, ce qui ne change que l avertissement de console (print est muet).
+    ScriptManager = { instance = { getItem = function() return nil end } }
     Perks = { Tailoring = "tailoring" }
     ArrayList = { new = function() return list() end }
     luautils = {
