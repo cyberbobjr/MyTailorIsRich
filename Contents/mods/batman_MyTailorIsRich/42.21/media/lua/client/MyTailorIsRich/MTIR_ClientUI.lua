@@ -80,7 +80,7 @@ do
             return screenDrawText(self, str, x, y, r, g, b, a, font, ...)
         end
         hasWeightText = false
-        local width = getTextManager():MeasureStringX(UIFont.Small, str)
+        local width = getTextManager():MeasureStringX(font or UIFont.Small, str)
         local result = screenDrawText(self, str, x, y, r, g, b, a, font, ...)
         if hasWeightIcon then
             savedWidth, savedX, savedY, savedFont = width, x, y, font

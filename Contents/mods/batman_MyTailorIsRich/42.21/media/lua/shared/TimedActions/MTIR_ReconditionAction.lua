@@ -25,6 +25,8 @@ local function startCommon(self)
     self.item:setJobType(getText("IGUI_MTIR_JobType_ReconditionClothes"))
     self.item:setJobDelta(0.0)
     self:setActionAnim("SewingCloth")
+    -- Les outils exigés sont ceux que l'on voit, comme pour la retouche.
+    self:setOverrideHandModels(self.scissors, self.needle)
     -- À la main : aucun son (comportement d'origine) ; sur machine : son de la machine.
     MTIR.MachineWork.start(self, nil)
 end

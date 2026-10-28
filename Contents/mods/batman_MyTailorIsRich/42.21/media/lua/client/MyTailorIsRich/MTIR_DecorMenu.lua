@@ -277,22 +277,12 @@ Events.OnFillInventoryObjectContextMenu.Add(onFillInventoryObjectContextMenu)
 -- redevenu celui du script ; le client le rétablit dans sa langue.
 -- ----------------------------------------------------------------------------
 
-local function findLocalPlayer(onlineId)
-    for i = 0, getNumActivePlayers() - 1 do
-        local player = getSpecificPlayer(i)
-        if player and player:getOnlineID() == onlineId then
-            return player
-        end
-    end
-    return getPlayer()
-end
-
 local function onServerCommand(module, command, args)
     if module ~= MTIR.NET_MODULE or command ~= "embroideryRemoved" or type(args) ~= "table"
         or type(args.itemId) ~= "number" then
         return
     end
-    local player = findLocalPlayer(args.playerOnlineId)
+    local player = MTIR.findLocalPlayer(args.playerOnlineId)
     local item = player and player:getInventory():getItemWithIDRecursiv(args.itemId)
     if not item then
         return

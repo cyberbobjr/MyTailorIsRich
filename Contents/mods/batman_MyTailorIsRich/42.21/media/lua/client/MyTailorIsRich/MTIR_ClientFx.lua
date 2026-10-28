@@ -53,7 +53,8 @@ function MTIR.applyFx(player, fx)
 end
 
 --- Joueur local visé par le serveur (écran partagé), à défaut le joueur principal.
-local function findLocalPlayer(onlineId)
+--- Partagée par les fichiers client qui reçoivent une commande serveur.
+function MTIR.findLocalPlayer(onlineId)
     if onlineId ~= nil then
         for i = 0, getNumActivePlayers() - 1 do
             local player = getSpecificPlayer(i)
@@ -69,7 +70,7 @@ local function onServerCommand(module, command, args)
     if module ~= MTIR.NET_MODULE or command ~= "fx" or type(args) ~= "table" then
         return
     end
-    MTIR.applyFx(findLocalPlayer(args.playerOnlineId), args)
+    MTIR.applyFx(MTIR.findLocalPlayer(args.playerOnlineId), args)
 end
 
 Events.OnServerCommand.Add(onServerCommand)
