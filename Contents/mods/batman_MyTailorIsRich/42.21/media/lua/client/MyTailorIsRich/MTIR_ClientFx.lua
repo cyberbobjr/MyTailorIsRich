@@ -118,3 +118,51 @@ function MTIR.cycleUICraftSize(fullType, defaultSize)
     MTIR.setUICraftSize(fullType, nextSize)
     return nextSize
 end
+
+-- ----------------------------------------------------------------------------
+-- Taille renvoyée au début de la fabrication
+--
+-- La taille n'est envoyée qu'à son changement, et une commande Lua n'est pas
+-- ordonnée par rapport aux paquets de l'action (base moteur, multiplayer.md) :
+-- changer de taille puis lancer la couture aussitôt pouvait coudre l'ancienne
+-- taille. Renvoyée au début de l'action, elle précède de toute la durée de
+-- l'action la création du vêtement par l'autorité.
+-- ----------------------------------------------------------------------------
+
+--- Renvoie la taille déjà choisie pour ce type, même inchangée. Rien à renvoyer si
+--- le joueur n'en a jamais choisi : l'autorité laissera la taille à choisir, comme
+--- aujourd'hui.
+function MTIR.resendCraftSize(player, fullType)
+    local sizeName = player and MTIR.UICraftSize[fullType]
+    if not sizeName then
+        return
+    end
+    sendClientCommand(player, MTIR.NET_MODULE, "setCraftSize", { fullType = fullType, size = sizeName })
+end
+
+--- Tailles des vêtements que cette recette peut produire (mêmes contrôles que le
+--- bouton de taille de la fenêtre de fabrication).
+local function resendRecipeCraftSizes(player, recipe)
+    local outputs = recipe and recipe:getOutputs()
+    for i = 0, (outputs and outputs:size() or 0) - 1 do
+        local script = outputs:get(i)
+        if script and script:getResourceType() == ResourceType.Item then
+            local results = script:getPossibleResultItems()
+            for j = 0, (results and results:size() or 0) - 1 do
+                local output = results:get(j)
+                if output and output:getItemType() == ItemType.CLOTHING
+                    and MTIR.canOutputHaveSize(output) then
+                    MTIR.resendCraftSize(player, output:getFullName())
+                end
+            end
+        end
+    end
+end
+
+local handcraftStart = ISHandcraftAction.start
+function ISHandcraftAction:start(...)
+    if self.character and self.character:isLocalPlayer() then
+        resendRecipeCraftSizes(self.character, self.craftRecipe)
+    end
+    return handcraftStart(self, ...)
+end

@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **5 faites, 0 en partie, 8 à faire, 5 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09 et C10 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
+**Bilan** : améliorations de code **6 faites, 0 en partie, 7 à faire, 5 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09 et C10 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
 
 ### Améliorations de code
 
@@ -41,7 +41,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C08 | Tables par joueur jamais purgées | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | `58d56f4` | Vérifier en jeu : mourir, revenir, jauge d'ampoules à zéro |
 | C09 | Usure comptée par événement horaire | ❌ Annulé | — | — | — | Rien : aucune heure ne peut être sautée (décision du 2026-10-28) |
 | C10 | Noms de patrons dans la langue du serveur | ❌ Annulé | — | — | — | Rien : serveur et joueurs dans la même langue (décision du 2026-10-28) |
-| C11 | Taille d'artisanat : envoi unique, voies non couvertes | ⬜ À faire | — | — | — | Vérifier en jeu, puis corriger |
+| C11 | Taille d'artisanat : envoi unique, voies non couvertes | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Vérifier en jeu en MP (changer de taille puis coudre aussitôt) |
 | C12 | `instanceItem` pour lire les stats d'origine | ⬜ À faire | — | — | — | Relevé des getters 42.21, puis correction |
 | C13 | Stats non rétablies quand une option passe à 0 | ⬜ À faire | — | — | — | Tout |
 | C14 | Deux analyseurs de listes sandbox | ⬜ À faire | — | — | — | Tout |
@@ -93,7 +93,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C08 | Tables par joueur jamais purgées, jauge héritée après la mort | MP / persistance | Basse | S | confirmé statiquement | ✅ non publié |
 | C09 | Usure comptée par événement horaire | Simulation | — | — | infondé, confirmé statiquement | ❌ annulé |
 | C10 | Noms de patrons figés dans la langue du serveur | Traduction MP | — | — | confirmé statiquement (sans gêne constatée) | ❌ annulé |
-| C11 | Taille d'artisanat : envoi unique, voies de fabrication non couvertes | MP / compatibilité | Basse | M | à vérifier en jeu | ⬜ |
+| C11 | Taille d'artisanat : envoi unique, voies de fabrication non couvertes | MP / compatibilité | Basse | S | confirmé statiquement | ✅ non publié |
 | C12 | `instanceItem` pour lire les stats d'origine | Compatibilité / effets de bord | Basse | S-M | à vérifier en jeu | ⬜ |
 | C13 | Stats dérivées non rétablies quand une option passe à 0 | Bug mineur | Basse | S | confirmé statiquement | ⬜ |
 | C14 | Deux analyseurs de listes sandbox, règles différentes | Maintenabilité | Basse | S | confirmé statiquement | ⬜ |
@@ -219,9 +219,10 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
   - seul `ISHandcraftAction:performRecipe` est enveloppé (`shared/MyTailorIsRich/MTIR_VanillaHooks.lua:248-288`). `ISCraftAction:complete` appelle aussi `Actions.addOrDropItem` (vanilla `shared/TimedActions/ISCraftAction.lua:111`). Les sorties d'établis automatiques ne passent par aucun des deux.
 - **Risque** : vêtement fabriqué « taille à choisir » ou à la mauvaise taille ; en solo, rien.
 - **Correction** : renvoyer la taille courante au début de l'action côté client (enveloppe de `ISHandcraftAction:start`) ; envelopper aussi `ISCraftAction:complete` si cette voie sert encore en 42.21 ; garder `MTIR_ChooseSizeAction` comme filet.
-- **Priorité** : basse. **Effort** : M.
-- **Statut** : à vérifier en jeu (fréquence de la course, usage réel d'`ISCraftAction`).
-- **Avancement : ⬜ à faire.**
+- **Priorité** : basse. **Effort** : S (la seule enveloppe de `start` suffit).
+- **Statut** : confirmé statiquement.
+- **Avancement : ✅ corrigé le 2026-10-28, sur `main`, non publié, testé hors jeu (lupa + luacheck), à vérifier en jeu en MP** — Enveloppe de `ISHandcraftAction:start` dans `client/MyTailorIsRich/MTIR_ClientFx.lua` : pour le joueur local seulement, la taille déjà choisie est renvoyée (`MTIR.resendCraftSize`) pour chaque sortie vêtement de la recette, avec les mêmes contrôles que le bouton de taille (`ResourceType.Item`, `ItemType.CLOTHING`, `MTIR.canOutputHaveSize`). La commande précède donc la création du vêtement de toute la durée de l'action, au lieu de partir en même temps que le clic. Sans taille jamais choisie, rien n'est envoyé et la taille reste à choisir, comme avant. Tests : `tests/lua/test_craft_size_resend.lua` (7 cas).
+- **Volontairement non couvert** : `ISCraftAction` (recettes du clic droit dans l'inventaire, `client/ISUI/ISInventoryPaneContextMenu.lua:3515, 3573` en 42.21) et les sorties d'établi automatiques. Aucun vêtement vanilla ne sort par là, et un vêtement qui en sortirait naîtrait sans taille, donc prendrait celle de son porteur au premier enfilage : il tomberait parfait. À reprendre seulement si un mod fait sortir un vêtement par cette voie.
 
 ### C12 — `instanceItem` pour lire les valeurs d'origine
 
