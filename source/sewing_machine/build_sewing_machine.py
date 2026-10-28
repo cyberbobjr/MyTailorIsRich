@@ -15,6 +15,9 @@ Package:
         --prop IsTableTop= --prop IsSurfaceOffset= --prop Surface=34 --prop ItemHeight=17 \
         --prop PickUpWeight=80 --prop Material=MetalScrap --prop Material2=Electric \
         --prop MaterialType=Metal_Light --prop ScrapSize=Small
+then add the rotation offsets that pz-sprite-forge does not write (without them
+the placement cursor ignores the chosen facing):
+    python source/fix_tile_facings.py <dist>/.../mtir_sewing_01.tiles
 then copy <dist>/MTIRSewingTiles/42/media/texturepacks/mtir_sewing_01.pack and
 mtir_sewing_01.tiles into Contents/mods/batman_MyTailorIsRich/common/media/, and
 <cells-dir>/panel_art.png to 42.21/media/textures/MTIR_SewingMachinePanel.png

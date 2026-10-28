@@ -18,6 +18,9 @@ Package:
         --prop IsMoveAble= --prop PickUpWeight=300 --prop BlocksPlacement= \
         --prop CanScrap= --prop Material=Wood --prop Material2=MetalScrap \
         --prop ScrapSize=Medium --prop solidtrans=
+then add the rotation offsets that pz-sprite-forge does not write (without them
+the placement cursor ignores the chosen facing):
+    python source/fix_tile_facings.py <dist>/.../mtir_treadle_01.tiles
 then copy <dist>/MTIRTreadleTiles/42/media/texturepacks/mtir_treadle_01.pack and
 mtir_treadle_01.tiles into Contents/mods/batman_MyTailorIsRich/common/media/, and
 <cells-dir>/panel_art.png to 42.21/media/textures/MTIR_TreadleMachinePanel.png

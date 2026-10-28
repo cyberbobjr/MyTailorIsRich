@@ -29,6 +29,14 @@ Toute la logique est dans la table globale `MTIR`. Le module réseau et la clé 
 
 Les entités restent dans `module Base` (`EntityScriptName` résolu sans module). Leurs composants `SpriteConfig` sont enregistrés dans `WorldDictionary.bin` de la sauvegarde : d'où le mod de désinstallation qui les redéclare à l'identique (contrôlé par `tests/run_tests.py`). Tuiles : `pack=`/`tiledef=` `mtir_sewing_01 7171`, `mtir_treadle_01 7172` (fichiers `.tiles`, `.pack`, `tileGeometry.txt` et cartes de profondeur dans `common/media`). Détection en Lua : préfixe du nom de sprite (`MTIR.MACHINE_KINDS[*].prefix`).
 
+**Rotation des machines posées.** Les quatre sprites `_0` à `_3` sont les faces S, E, N, W. Un meuble
+ne tourne que si chaque sprite déclare, en plus de `Facing`, les décalages `Noffset`, `Soffset`,
+`Woffset` et `Eoffset` vers ses sœurs : `ISMoveableSpriteProps:hasFaces()` rend faux sans eux, et le
+curseur de pose garde alors le sprite de l'objet d'inventaire quelle que soit la face choisie
+(`media/lua/shared/Moveables/ISMoveableSpriteProps.lua:258-311`, 42.21). pz-sprite-forge n'écrit que
+`Facing` : `source/fix_tile_facings.py` complète les `.tiles` après chaque génération, et
+`tests/run_tests.py` vérifie les douze décalages de chaque tuile à quatre faces.
+
 ### Sons (`MTIR_sounds.txt`)
 
 `MTIR_ResizeClothes`, `MTIR_ResizeFailed`, `MTIR_CheckSize`, `MTIR_TightClothesRip` (repris de Realistic Clothes, hors licence MIT), `MTIR_SewingMachineElectric`, `MTIR_SewingMachineTreadle` (boucles).

@@ -27,6 +27,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import lua_harness  # noqa: E402
 
+sys.path.insert(0, str(lua_harness.REPO / "source"))
+import fix_tile_facings  # noqa: E402
+
 REPO = lua_harness.REPO
 MOD_LUA = lua_harness.MOD_LUA
 TRANSLATE = MOD_LUA / "shared" / "Translate"
@@ -275,6 +278,38 @@ def check_uninstall_mod(report):
         report.ok("entités, tuiles, objets posables et traductions identiques au mod principal")
 
 
+def check_tile_facings(report):
+    """Une tuile posable ne tourne que si ses quatre faces déclarent les décalages
+    Noffset / Soffset / Woffset / Eoffset vers leurs sœurs : sans eux, le curseur de
+    pose garde le sprite de l'objet d'inventaire quelle que soit la face choisie
+    (ISMoveableSpriteProps:hasFaces, 42.21). pz-sprite-forge n'écrit que `Facing` :
+    source/fix_tile_facings.py complète le fichier après chaque génération."""
+    report.section("Faces des tuiles posables")
+    before = report.failures
+    sheets_seen = 0
+    for path in sorted((MAIN_MOD / "common" / "media").glob("*.tiles")):
+        _version, sheets = fix_tile_facings.parse(path.read_bytes())
+        for name, _png, _cols, _rows, _levels, sprites in sheets:
+            group = fix_tile_facings.facing_group(sprites)
+            if not group:
+                continue
+            sheets_seen += 1
+            for own, index in sorted(group.items()):
+                props = dict(sprites[index])
+                for facing, other in sorted(group.items()):
+                    if facing == own:
+                        continue
+                    key = fix_tile_facings.OFFSET_KEYS[facing]
+                    expected = str(other - index)
+                    if props.get(key) != expected:
+                        report.fail(f"{name}_{index} ({own}) : {key} = "
+                                    f"{props.get(key)}, attendu {expected}")
+    if not sheets_seen:
+        report.fail("aucune tuile à quatre faces trouvée")
+    elif report.failures == before:
+        report.ok(f"{sheets_seen} tuile(s) à quatre faces : décalages de rotation complets")
+
+
 def check_lua_tests(report):
     report.section(f"Tests Lua ({lua_harness.LUA_VERSION})")
     for path in sorted((Path(__file__).parent / "lua").glob("test_*.lua")):
@@ -297,6 +332,7 @@ def main():
     check_translations(report)
     check_steam_descriptions(report)
     check_uninstall_mod(report)
+    check_tile_facings(report)
     check_lua_tests(report)
     print()
     if report.failures:
