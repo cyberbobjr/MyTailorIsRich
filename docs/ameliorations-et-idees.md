@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **7 faites, 0 en partie, 3 à faire, 8 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13 et C15 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
+**Bilan** : améliorations de code **8 faites, 0 en partie, 2 à faire, 8 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13 et C15 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
 
 ### Améliorations de code
 
@@ -46,7 +46,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C13 | Stats non rétablies quand une option passe à 0 | ❌ Annulé | — | — | — | Rien : effacé au redémarrage (décision du 2026-10-28) |
 | C14 | Deux analyseurs de listes sandbox | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Infobulles toujours « séparés par des virgules » pour deux listes (volontaire) |
 | C15 | Peau entière consommée pour une unité | ❌ Annulé | — | — | — | Rien : comportement vanilla, recette « couper en deux » (décision du 2026-10-28) |
-| C16 | Portée machine / table sans test de mur | ⬜ À faire | — | — | — | Tout |
+| C16 | Portée machine / table sans test de mur | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Vérifier en jeu : machine contre une cloison |
 | C17 | Duplications, incohérences d'actions, trous de tests | ⬜ À faire | — | — | — | Tout |
 | C18 | Descriptions Steam proches de 8 000 octets | ⬜ À faire | — | — | — | Tout |
 
@@ -98,7 +98,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C13 | Stats dérivées non rétablies quand une option passe à 0 | Bug mineur | — | — | confirmé statiquement | ❌ annulé |
 | C14 | Deux analyseurs de listes sandbox, règles différentes | Maintenabilité | Basse | S | confirmé statiquement | ✅ non publié |
 | C15 | Peau entière consommée pour une unité | Gameplay | — | — | conforme au vanilla, confirmé statiquement | ❌ annulé |
-| C16 | Portée machine / table sans test de mur | Autorité serveur | Basse | S | à vérifier en jeu | ⬜ |
+| C16 | Portée machine / table sans test de mur | Autorité serveur | Basse | S | confirmé statiquement | ✅ non publié |
 | C17 | Duplications, incohérences d'actions, trous de tests | Maintenabilité | Basse | M | confirmé statiquement | ⬜ |
 | C18 | Descriptions Steam presque à la limite de 8 000 octets | Maintenabilité / traduction | Basse | S | confirmé statiquement | ⬜ |
 
@@ -271,8 +271,8 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Risque** : travail à travers un mur si un client forge l'action, ou si la marche s'arrête de l'autre côté d'une cloison.
 - **Correction** : ajouter `current == square or current:canReachTo(square)` au test, sur l'autorité comme sur le client.
 - **Priorité** : basse (serveur entre amis, anti-triche secondaire). **Effort** : S.
-- **Statut** : à vérifier en jeu.
-- **Avancement : ⬜ à faire.**
+- **Statut** : confirmé statiquement.
+- **Avancement : ✅ corrigé le 2026-10-28, sur `main`, non publié, testé hors jeu (lupa + luacheck), à vérifier en jeu** — `MTIR.isWithinReach` exige désormais `current == square or current:canReachTo(square)` avant le test de distance, donc pour la couture, le tracé, la copie, l'entretien et le relais du son de machine, client et autorité. Aucune perte de portée utile : `canReachTo` accepte la même case et les huit voisines, diagonales comprises (`IsoGridSquare.java:943-969`, 42.21), et la tolérance de 1,6 case ne dépassait la case voisine que sur une bande de 0,1 case. Tests : `tests/lua/test_machine_reach.lua` (6 cas).
 
 ### C17 — Duplications, incohérences entre actions, trous de tests
 

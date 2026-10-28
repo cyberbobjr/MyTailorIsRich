@@ -141,10 +141,17 @@ function MTIR.machineFromPos(pos)
     return MTIR.findSewingMachine(MTIR.squareFromPos(pos))
 end
 
---- Personnage à portée de main d'un objet posé (même étage, case voisine).
+--- Personnage à portée de main d'un objet posé : même étage, case voisine, et aucun
+--- mur, fenêtre ou porte fermée entre les deux cases (`canReachTo` accepte les
+--- diagonales). Même règle que la lecture d'une étiquette sur un cadavre
+--- (`MTIR_LabelCheck.canCheckCorpse`), appliquée sur le client comme sur l'autorité.
 function MTIR.isWithinReach(character, object)
     local square = object and object:getSquare()
     if not square or math.floor(character:getZ()) ~= square:getZ() then
+        return false
+    end
+    local current = character:getCurrentSquare()
+    if not current or (current ~= square and not current:canReachTo(square)) then
         return false
     end
     return math.abs(character:getX() - (square:getX() + 0.5)) <= MAX_REACH
