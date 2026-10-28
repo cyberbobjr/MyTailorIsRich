@@ -41,13 +41,13 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C08 | Tables par joueur jamais purgées | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | `58d56f4` | Vérifier en jeu : mourir, revenir, jauge d'ampoules à zéro |
 | C09 | Usure comptée par événement horaire | ❌ Annulé | — | — | — | Rien : aucune heure ne peut être sautée (décision du 2026-10-28) |
 | C10 | Noms de patrons dans la langue du serveur | ❌ Annulé | — | — | — | Rien : serveur et joueurs dans la même langue (décision du 2026-10-28) |
-| C11 | Taille d'artisanat : envoi unique, voies non couvertes | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Vérifier en jeu en MP (changer de taille puis coudre aussitôt) |
+| C11 | Taille d'artisanat : envoi unique, voies non couvertes | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | `6805c3d` | Vérifier en jeu en MP (changer de taille puis coudre aussitôt) |
 | C12 | `instanceItem` pour lire les stats d'origine | ❌ Annulé | — | — | — | Rien : aucun getter sur le script en 42.21 (décision du 2026-10-28) |
 | C13 | Stats non rétablies quand une option passe à 0 | ❌ Annulé | — | — | — | Rien : effacé au redémarrage (décision du 2026-10-28) |
-| C14 | Deux analyseurs de listes sandbox | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Infobulles toujours « séparés par des virgules » pour deux listes (volontaire) |
+| C14 | Deux analyseurs de listes sandbox | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | `4e23261` | Infobulles toujours « séparés par des virgules » pour deux listes (volontaire) |
 | C15 | Peau entière consommée pour une unité | ❌ Annulé | — | — | — | Rien : comportement vanilla, recette « couper en deux » (décision du 2026-10-28) |
-| C16 | Portée machine / table sans test de mur | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Vérifier en jeu : machine contre une cloison |
-| C17 | Duplications, incohérences d'actions, trous de tests | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Vérifier en jeu : outils en main pendant une remise en état, actions inchangées |
+| C16 | Portée machine / table sans test de mur | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | `9cc6590` | Vérifier en jeu : machine contre une cloison |
+| C17 | Duplications, incohérences d'actions, trous de tests | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | `e0c5420` à `68a7e42` | Vérifier en jeu : outils en main pendant une remise en état, actions inchangées |
 | C18 | Descriptions Steam proches de 8 000 octets | ❌ Annulé | — | — | — | Rien pour l'instant : le test bloque un dépassement (décision du 2026-10-28) |
 
 ### Idées de fonctionnalités
