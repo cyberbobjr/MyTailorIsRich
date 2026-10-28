@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **6 faites, 0 en partie, 6 à faire, 6 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09, C10 et C12 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
+**Bilan** : améliorations de code **6 faites, 0 en partie, 5 à faire, 7 annulées** (sur 18 ; annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12 et C13 le 2026-10-28) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
 
 ### Améliorations de code
 
@@ -43,7 +43,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C10 | Noms de patrons dans la langue du serveur | ❌ Annulé | — | — | — | Rien : serveur et joueurs dans la même langue (décision du 2026-10-28) |
 | C11 | Taille d'artisanat : envoi unique, voies non couvertes | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Vérifier en jeu en MP (changer de taille puis coudre aussitôt) |
 | C12 | `instanceItem` pour lire les stats d'origine | ❌ Annulé | — | — | — | Rien : aucun getter sur le script en 42.21 (décision du 2026-10-28) |
-| C13 | Stats non rétablies quand une option passe à 0 | ⬜ À faire | — | — | — | Tout |
+| C13 | Stats non rétablies quand une option passe à 0 | ❌ Annulé | — | — | — | Rien : effacé au redémarrage (décision du 2026-10-28) |
 | C14 | Deux analyseurs de listes sandbox | ⬜ À faire | — | — | — | Tout |
 | C15 | Peau entière consommée pour une unité | ⬜ À faire | — | — | — | Tout |
 | C16 | Portée machine / table sans test de mur | ⬜ À faire | — | — | — | Tout |
@@ -95,7 +95,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C10 | Noms de patrons figés dans la langue du serveur | Traduction MP | — | — | confirmé statiquement (sans gêne constatée) | ❌ annulé |
 | C11 | Taille d'artisanat : envoi unique, voies de fabrication non couvertes | MP / compatibilité | Basse | S | confirmé statiquement | ✅ non publié |
 | C12 | `instanceItem` pour lire les stats d'origine | Compatibilité / effets de bord | — | — | impossible, confirmé statiquement | ❌ annulé |
-| C13 | Stats dérivées non rétablies quand une option passe à 0 | Bug mineur | Basse | S | confirmé statiquement | ⬜ |
+| C13 | Stats dérivées non rétablies quand une option passe à 0 | Bug mineur | — | — | confirmé statiquement | ❌ annulé |
 | C14 | Deux analyseurs de listes sandbox, règles différentes | Maintenabilité | Basse | S | confirmé statiquement | ⬜ |
 | C15 | Peau entière consommée pour une unité | Gameplay | Basse | S | confirmé statiquement | ⬜ |
 | C16 | Portée machine / table sans test de mur | Autorité serveur | Basse | S | à vérifier en jeu | ⬜ |
@@ -234,14 +234,14 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Statut** : confirmé statiquement ; `instanceItem` est la seule voie en 42.21.
 - **Avancement : ❌ annulé (2026-10-28)** — rien à corriger : la correction proposée n'existe pas dans l'API. À revoir si une version du jeu expose ces valeurs sur le script.
 
-### C13 — Valeurs dérivées non rétablies quand une option passe à 0
+### C13 — Valeurs dérivées non rétablies quand une option passe à 0 — ❌ annulé
 
-- **Problème** : `updateClothesStats` n'écrit défenses et résistances que si la perte configurée est positive. Si un admin passe l'option à 0 en cours de partie, les valeurs déjà réduites restent jusqu'au rechargement.
+- **Comportement** : `updateClothesStats` n'écrit défenses et résistances que si la perte configurée est positive. Si un admin passe l'option à 0 en cours de partie, les valeurs déjà réduites restent jusqu'au rechargement.
 - **Preuves** : `shared/MyTailorIsRich/MTIR_Effects.lua:140-167`, en particulier `:158-166`. Ces valeurs ne sont pas sauvegardées (`zombie/inventory/types/Clothing.java:594-627` : `save` n'écrit que sprite, saleté, sang, humidité et rustines), d'où un retour à la normale au chargement.
-- **Correction** : écrire toujours les valeurs (d'origine si la perte vaut 0).
-- **Priorité** : basse. **Effort** : S.
+- **Portée** : visible seulement si quelqu'un change ce réglage en cours de partie, et effacé par le redémarrage suivant (valeurs non sauvegardées, reprises du script de l'objet).
+- **Pistes écartées** : écrire toujours les valeurs (d'origine si la perte vaut 0) — mais le mod réécrirait alors protection et résistance de chaque vêtement porté **même sa fonction désactivée**, effaçant le travail d'un mod de renfort ; ou, version propre, ne remonter une valeur que si elle est plus basse que celle du script (le mod ne fait jamais que baisser).
 - **Statut** : confirmé statiquement.
-- **Avancement : ⬜ à faire.**
+- **Avancement : ❌ annulé (2026-10-28)** — décision de l'auteur : défaut réel mais sans portée, le redémarrage suffit. La version propre est documentée ci-dessus si le besoin revient.
 
 ### C14 — Deux analyseurs pour les listes sandbox
 
