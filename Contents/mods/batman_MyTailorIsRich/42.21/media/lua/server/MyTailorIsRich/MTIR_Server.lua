@@ -26,6 +26,25 @@ local FALL_COOLDOWN_MS = 1500
 --- Au plus un relais de son de machine par joueur et par intervalle.
 local MACHINE_SOUND_COOLDOWN_MS = 500
 
+-- Dernier passage par joueur, pour les délais ci-dessus.
+local lastClimb = {}
+local lastFall = {}
+local lastMachineSound = {}
+
+--- Oublie tout l'état en mémoire de ce joueur : à sa mort et, en solo, à la création
+--- du personnage suivant. Un nouveau module à état par joueur s'ajoute ici.
+local function forgetPlayerState(player)
+    if not player then
+        return
+    end
+    MTIR.forgetPlayerEffects(player)
+    MTIR.forgetPlayerShoeState(player)
+    local key = MTIR.playerKey(player)
+    lastClimb[key] = nil
+    lastFall[key] = nil
+    lastMachineSound[key] = nil
+end
+
 local function forEachAuthorityPlayer(callback)
     if isServer() then
         local players = getOnlinePlayers()
@@ -108,12 +127,24 @@ local function onTick()
     forEachAuthorityPlayer(updatePlayerPeriodic)
 end
 
---- Solo : tailles de la tenue de départ dès l'apparition du personnage.
+--- Solo : tailles de la tenue de départ dès l'apparition du personnage. Le personnage
+--- suivant réutilise la clé du précédent (l'emplacement local) : on repart à zéro.
 local function onCreatePlayer(_, player)
     if isServer() or not player then
         return
     end
+    forgetPlayerState(player)
     updatePlayerClothes(player)
+end
+
+--- Mort d'un personnage joueur. L'événement part aussi pour un zombie et pour un
+--- animal (IsoAnimal hérite d'IsoPlayer, `IsoGameCharacter.DoDeath` 42.21) : les deux
+--- sont écartés. Déclenché aussi sur un serveur dédié, contrairement à OnPlayerDeath.
+local function onCharacterDeath(character)
+    if not character or not instanceof(character, "IsoPlayer") or character:isAnimal() then
+        return
+    end
+    forgetPlayerState(character)
 end
 
 local function onZombieDead(zombie)
@@ -144,8 +175,6 @@ end
 -- Commandes client (en solo aussi : sendClientCommand passe par ici)
 -- ----------------------------------------------------------------------------
 
-local lastClimb = {}
-local lastFall = {}
 local Commands = {}
 
 function Commands.setCraftSize(player, args)
@@ -187,8 +216,6 @@ end
 --- Son de la machine (MTIR_MachineSound) : relayé aux autres joueurs proches.
 --- Marche : son connu, machine présente et à portée du joueur. Arrêt : toujours
 --- relayé (la machine a pu être ramassée entre-temps).
-local lastMachineSound = {}
-
 function Commands.machineSound(player, args)
     local x, y, z = args.x, args.y, args.z
     if type(x) ~= "number" or type(y) ~= "number" or type(z) ~= "number" then
@@ -233,5 +260,6 @@ Events.EveryOneMinute.Add(onEveryOneMinute)
 Events.EveryHours.Add(onEveryHours)
 Events.OnTick.Add(onTick)
 Events.OnCreatePlayer.Add(onCreatePlayer)
+Events.OnCharacterDeath.Add(onCharacterDeath)
 Events.OnZombieDead.Add(onZombieDead)
 Events.OnClientCommand.Add(onClientCommand)

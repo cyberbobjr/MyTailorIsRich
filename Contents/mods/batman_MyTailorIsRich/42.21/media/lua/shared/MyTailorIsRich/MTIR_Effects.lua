@@ -29,6 +29,18 @@ function MTIR.playerKey(player)
     return "p" .. tostring(player:getPlayerNum())
 end
 
+--- Oublie l'état gardé en mémoire pour ce joueur. La clé est le compte (serveur) ou
+--- l'emplacement local (solo) : un personnage neuf la réutilise et ne doit rien hériter
+--- du précédent. Les tables des chaussures sont vidées par MTIR.forgetPlayerShoeState.
+function MTIR.forgetPlayerEffects(player)
+    if not player then
+        return
+    end
+    local key = MTIR.playerKey(player)
+    MTIR.BodyDiffs[key] = nil
+    MTIR.ServerCraftSize[key] = nil
+end
+
 --- Effets côté client : fx = { say = {key, arg}, sound, halo = {itemType, good}, refresh, resetModel }.
 --- Serveur : commande réseau (sendServerCommand ne fait rien en solo). Solo et client MP : local.
 function MTIR.tell(player, fx)

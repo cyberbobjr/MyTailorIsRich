@@ -23,9 +23,9 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 ## Tableau de bord — ce qui est fait et ce qui reste
 
-**Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
+**Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **4 faites, 0 en partie, 14 à faire** (sur 18, dont 2 choix de conception à trancher : C05, C06) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
+**Bilan** : améliorations de code **5 faites, 0 en partie, 10 à faire, 3 annulées** (sur 18 ; annulées le 2026-10-27 : C05, C06, C07) ; idées de fonctionnalités **0 faite, 0 en partie, 20 à faire** (sur 20).
 
 ### Améliorations de code
 
@@ -35,10 +35,10 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C02 | Fil cherché par type ou par tag selon l'action | ✅ Corrigé | hors jeu (lupa) | 0.4.6 | `00cd2e7` | Vérifier en jeu (fil aramide en retouche ou couture) |
 | C03 | Usure estimée figée dans l'infobulle d'un client MP | ✅ Corrigé | — | 0.4.6 | `00cd2e7` | Vérifier en jeu sur un client MP |
 | C04 | Effets des chaussures limités à l'emplacement `shoes` | ✅ Corrigé | hors jeu (lupa) | 0.4.6 | `00cd2e7` | Vérifier en jeu avec une chaussure de mod |
-| C05 | Copie de patron sans coût pour l'original | ⬜ À décider | — | — | — | Choix de conception de l'auteur, puis correction |
-| C06 | Infobulle « Enfiler » qui révèle l'ajustement | ⬜ À décider | — | — | — | Choix de conception de l'auteur, puis correction |
-| C07 | Clé joueur serveur = compte seul (écran partagé) | ⬜ À faire | — | — | — | Tout |
-| C08 | Tables par joueur jamais purgées | ⬜ À faire | — | — | — | Tout |
+| C05 | Copie de patron sans coût pour l'original | ❌ Annulé | — | — | — | Rien : équilibrage voulu, pas un bug (décision du 2026-10-27) |
+| C06 | Infobulle « Enfiler » qui révèle l'ajustement | ❌ Annulé | — | — | — | Rien : confort voulu, aucune gêne constatée en jeu (décision du 2026-10-27) |
+| C07 | Clé joueur serveur = compte seul (écran partagé) | ❌ Annulé | — | — | — | Rien : aucun jeu en écran partagé (décision du 2026-10-27) |
+| C08 | Tables par joueur jamais purgées | ✅ Corrigé | hors jeu (lupa, luacheck) | non publié | — | Vérifier en jeu : mourir, revenir, jauge d'ampoules à zéro |
 | C09 | Usure comptée par événement horaire | ⬜ À faire | — | — | — | Mesurer en jeu, puis corriger |
 | C10 | Noms de patrons dans la langue du serveur | ⬜ À faire | — | — | — | Tout |
 | C11 | Taille d'artisanat : envoi unique, voies non couvertes | ⬜ À faire | — | — | — | Vérifier en jeu, puis corriger |
@@ -87,10 +87,10 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | C02 | Fil cherché par type `Thread` ou par tag selon l'action | Bug / compatibilité | Moyenne | S | confirmé statiquement | ✅ 0.4.6 |
 | C03 | Usure estimée figée dans l'infobulle d'un client MP | Bug MP | Moyenne | S | confirmé statiquement | ✅ 0.4.6 |
 | C04 | Effets continus des chaussures limités à l'emplacement `shoes` | Bug / compatibilité mods | Moyenne | S | confirmé statiquement | ✅ 0.4.6 |
-| C05 | Copie de patron sans coût pour l'original | Équilibre | Moyenne | S | confirmé statiquement (choix à valider) | ⬜ à décider |
-| C06 | Infobulle « Enfiler » qui révèle l'ajustement | Cohérence gameplay | Moyenne | S | confirmé statiquement (choix à valider) | ⬜ à décider |
-| C07 | Clé joueur serveur = compte seul (écran partagé) | MP | Basse | S | confirmé statiquement | ⬜ |
-| C08 | Tables par joueur jamais purgées, jauge héritée après la mort | MP / persistance | Basse | S | confirmé statiquement | ⬜ |
+| C05 | Copie de patron sans coût pour l'original | Équilibre | — | — | confirmé statiquement (comportement voulu) | ❌ annulé |
+| C06 | Infobulle « Enfiler » qui révèle l'ajustement | Cohérence gameplay | — | — | confirmé statiquement (comportement voulu) | ❌ annulé |
+| C07 | Clé joueur serveur = compte seul (écran partagé) | MP | — | — | confirmé statiquement (hors périmètre) | ❌ annulé |
+| C08 | Tables par joueur jamais purgées, jauge héritée après la mort | MP / persistance | Basse | S | confirmé statiquement | ✅ non publié |
 | C09 | Usure comptée par événement horaire | Simulation | Basse | M | à vérifier en jeu | ⬜ |
 | C10 | Noms de patrons figés dans la langue du serveur | Traduction MP | Moyenne | M | confirmé statiquement | ⬜ |
 | C11 | Taille d'artisanat : envoi unique, voies de fabrication non couvertes | MP / compatibilité | Basse | M | à vérifier en jeu | ⬜ |
@@ -155,35 +155,32 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Statut** : confirmé statiquement.
 - **Avancement : ✅ corrigé, publié en 0.4.6 (commit 00cd2e7), testé hors jeu, à vérifier en jeu** — `wornShoe` cherche ensuite dans toute la tenue ; test lupa ajouté.
 
-### C05 — Copier un patron ne coûte rien à l'original
+### C05 — Copier un patron ne coûte rien à l'original — ❌ annulé
 
-- **Problème** : la copie garde l'original intact et reçoit `PatternMaxUses` utilisations neuves. Un original devient une source illimitée de patrons pleins, contre du papier.
+- **Comportement** : la copie garde l'original intact et reçoit `PatternMaxUses` utilisations neuves. Un original devient une source illimitée de patrons pleins, contre du papier.
 - **Preuves** : `shared/MyTailorIsRich/MTIR_PatternCopy.lua:4-9` (en-tête) et `:33-39` (`uses = maxUses`), `:65-79`.
-- **Risque** : la limite « 5 coutures puis le patron est perdu » ne joue plus pour qui a un original. La perte de précision, une par génération, ne touche pas les copies de première génération.
-- **Correction** (à valider) : au choix, copier retire une utilisation de l'original ; la copie reçoit les utilisations restantes de l'original au lieu du maximum ; ou une option sandbox `PatternCopyUsesOriginal`.
-- **Priorité** : moyenne. **Effort** : S.
-- **Statut** : comportement confirmé statiquement ; le caractère voulu reste à confirmer par l'auteur.
-- **Avancement : ⬜ à décider** — choix de conception de l'auteur attendu ; rien de modifié.
+- **Conséquence** : la limite « 5 coutures puis le patron est perdu » ne joue plus pour qui a un original. La perte de précision, une par génération, ne touche pas les copies de première génération.
+- **Pistes écartées** : au choix, copier retire une utilisation de l'original ; la copie reçoit les utilisations restantes de l'original au lieu du maximum ; ou une option sandbox `PatternCopyUsesOriginal`.
+- **Statut** : comportement confirmé statiquement et **voulu**.
+- **Avancement : ❌ annulé (2026-10-27)** — décision de l'auteur : c'est de l'équilibrage, pas un bug. Le comportement reste tel quel ; aucune correction ni option sandbox à prévoir.
 
-### C06 — L'infobulle « Enfiler » donne l'ajustement avant toute lecture
+### C06 — L'infobulle « Enfiler » donne l'ajustement avant toute lecture — ❌ annulé
 
-- **Problème** : l'enveloppe de `doWearClothingTooltip` affiche l'indice d'ajustement dès que la taille existe, sans tester `hint` ni `reveal`. L'infobulle d'objet, elle, affiche « ??? » tant que rien n'est connu.
+- **Comportement** : l'enveloppe de `doWearClothingTooltip` affiche l'indice d'ajustement dès que la taille existe, sans tester `hint` ni `reveal`. L'infobulle d'objet, elle, affiche « ??? » tant que rien n'est connu.
 - **Preuves** : `client/MyTailorIsRich/MTIR_ClientUI.lua:298-307` (chaussures) et `:313-329` (vêtements) ; à comparer à `client/MyTailorIsRich/MTIR_Tooltip.lua:33-39, 58-64`.
-- **Risque** : la lecture d'étiquette sans compétence n'apprend rien de plus qu'un survol du menu « Enfiler ». En MP, la taille est de toute façon présente dans la ModData du client : c'est une limite connue, à ne pas aggraver.
-- **Correction** : n'afficher l'indice qu'avec `hint` ou `reveal`, sinon une ligne « Taille inconnue ».
-- **Priorité** : moyenne. **Effort** : S.
-- **Statut** : confirmé statiquement ; intention de conception à valider.
-- **Avancement : ⬜ à décider** — choix de conception de l'auteur attendu ; rien de modifié.
+- **Conséquence** : la lecture d'étiquette sans compétence n'apprend rien de plus qu'un survol du menu « Enfiler ». En MP, la taille est de toute façon présente dans la ModData du client : c'est une limite connue, à ne pas aggraver.
+- **Piste écartée** : n'afficher l'indice qu'avec `hint` ou `reveal`, sinon une ligne « Taille inconnue ».
+- **Statut** : confirmé statiquement et **voulu**.
+- **Avancement : ❌ annulé (2026-10-27)** — décision de l'auteur après une partie où la taille était systématiquement vérifiée avant d'enfiler : aucune gêne ressentie, l'indice au survol est un confort assumé. À revoir seulement si un joueur signale qu'il remplace l'action « Vérifier la taille ».
 
-### C07 — Clé joueur côté serveur : le compte seul
+### C07 — Clé joueur côté serveur : le compte seul — ❌ annulé
 
-- **Problème** : `MTIR.playerKey` rend `"u" .. username` sur le serveur. Deux joueurs en écran partagé sur une même connexion ont le même compte ; seul `getPlayerNum()` les distingue côté serveur (base moteur, `multiplayer.md`, « `getPlayerNum()` d'un joueur côté serveur »).
+- **Comportement** : `MTIR.playerKey` rend `"u" .. username` sur le serveur. Deux joueurs en écran partagé sur une même connexion ont le même compte ; seul `getPlayerNum()` les distingue côté serveur (base moteur, `multiplayer.md`, « `getPlayerNum()` d'un joueur côté serveur »).
 - **Preuves** : `shared/MyTailorIsRich/MTIR_Effects.lua:25-31` ; utilisateurs de la clé : `BodyDiffs` (`:186-188`), `Friction` (`shared/MyTailorIsRich/MTIR_ShoeEffects.lua:227-229`), `DiscomfortFloor`, `ServerCraftSize` (`MTIR_Effects.lua:565-576`). Côté client, `MTIR.setUICraftSize` envoie toujours pour `getPlayer()` (`client/MyTailorIsRich/MTIR_ClientFx.lua:89-92`).
-- **Risque** : raideur, jauge d'ampoules, plancher d'inconfort et tailles d'artisanat mélangés entre les deux joueurs.
-- **Correction** : `"u" .. username .. "#" .. player:getPlayerNum()` sur le serveur ; passer le joueur du widget d'artisanat (`widget.player`) à `setUICraftSize`.
-- **Priorité** : basse (cas rare). **Effort** : S.
-- **Statut** : confirmé statiquement.
-- **Avancement : ⬜ à faire.**
+- **Conséquence** : raideur, jauge d'ampoules, plancher d'inconfort et tailles d'artisanat mélangés entre les deux joueurs. Rien pour un joueur seul par PC, solo ou en MP.
+- **Piste écartée** : `"u" .. username .. "#" .. player:getPlayerNum()` sur le serveur ; passer le joueur du widget d'artisanat (`widget.player`) à `setUICraftSize`. Trois lignes, sans migration (ces tables ne sont qu'en mémoire).
+- **Statut** : confirmé statiquement ; **hors périmètre d'usage**.
+- **Avancement : ❌ annulé (2026-10-27)** — décision de l'auteur : personne ne joue en écran partagé, le cas ne se produit jamais. À reprendre tel quel si l'écran partagé devient un usage réel.
 
 ### C08 — Tables par joueur jamais purgées ; jauge héritée après la mort
 
@@ -193,7 +190,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Correction** : vider les entrées du joueur sur `OnCharacterDeath` côté serveur (événement disponible sur un serveur dédié, contrairement à `OnPlayerDeath`, base moteur) et en solo sur `OnCreatePlayer`.
 - **Priorité** : basse. **Effort** : S.
 - **Statut** : confirmé statiquement.
-- **Avancement : ⬜ à faire.**
+- **Avancement : ✅ corrigé le 2026-10-28, sur `main`, non publié, testé hors jeu (lupa + luacheck), à vérifier en jeu** — Deux purges partagées, `MTIR.forgetPlayerEffects` (zones serrées, taille d'artisanat d'autorité) et `MTIR.forgetPlayerShoeState` (jauge de frottement, inconfort à corriger) ; le plancher d'inconfort n'est pas concerné, il est reconstruit à chaque recalcul complet. Côté autorité, `forgetPlayerState` de `MTIR_Server.lua` les appelle et vide aussi ses trois tables de délais (`lastClimb`, `lastFall`, `lastMachineSound`), sur `OnCharacterDeath` (zombies et animaux écartés par `instanceof(IsoPlayer)` et `isAnimal()`) et, en solo, sur `OnCreatePlayer`. Côté client, les tailles choisies dans les fenêtres d'artisanat sont oubliées au personnage neuf (`MTIR.forgetUICraftSizes`, seulement pour le joueur local 0 : la table est commune aux joueurs locaux). Preuves : `Events.OnCharacterDeath` déclenché aussi sur un serveur dédié (`IsoPlayer.OnDeath` appelle `super.OnDeath()` avant le retour `GameServer.server`, `IsoPlayer.java:6093-6097`) et pour tout personnage (`IsoGameCharacter.DoDeath`, `:1812-1815`) ; tests `tests/lua/test_forget_player_state.lua` (5 cas). Reste à faire : une déconnexion ne purge rien (quelques centaines d'octets par compte pour la durée du serveur, volontairement laissés).
 
 ### C09 — Usure et effets « par minute » comptés par événement
 
@@ -377,7 +374,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **Description** : quand le poids approche d'un seuil de taille (environ 1 kg) ou le franchit, le personnage le dit, et l'infobulle des vêtements portés signale « commence à serrer ».
 - **Intérêt** : aujourd'hui le vêtement trop serré est retiré sans prévenir (`MTIR.removeTooTight`).
 - **Faisabilité** : comparaison du poids à chaque passage de minute (`server/MyTailorIsRich/MTIR_Server.lua:48-55`), seuils de `MTIR.SIZES`, réplique par `MTIR.tell`.
-- **MP** : dernier seuil retenu côté serveur par joueur (voir C07 pour la clé).
+- **MP** : dernier seuil retenu côté serveur par joueur (clé = compte, voir C07).
 - **Effort** : S.
 - **Avancement : ⬜ proposée, pas commencée.**
 
@@ -523,7 +520,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Avancement (2026-10-23)** : rangs 1 à 4 faits et publiés en 0.4.6 (commit `00cd2e7`) ; rang 5 (I01) pas commencé.
 
-À trancher ensuite par l'auteur, car ce sont des choix de conception : ⬜ **C05** (coût de la copie) et ⬜ **C06** (infobulle « Enfiler »).
+Les deux choix de conception ont été tranchés le 2026-10-27, tous deux **annulés** : ❌ **C05** (coût de la copie) — équilibrage voulu, pas un bug ; ❌ **C06** (infobulle « Enfiler ») — confort voulu, aucune gêne constatée en jeu. Le prochain point utile est donc le rang 5, ⬜ **I01** (mètre ruban).
 
 ---
 

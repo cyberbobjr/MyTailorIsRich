@@ -267,6 +267,18 @@ function MTIR.getFriction(player)
     return state and state.value or 0
 end
 
+--- Oublie la jauge de frottement et l'inconfort à corriger de ce joueur : un
+--- personnage neuf repart les pieds reposés. Le plancher d'inconfort n'est pas
+--- concerné, il est reconstruit à chaque recalcul complet (resetDiscomfortFloors).
+function MTIR.forgetPlayerShoeState(player)
+    if not player then
+        return
+    end
+    local key = MTIR.playerKey(player)
+    MTIR.Friction[key] = nil
+    MTIR.DiscomfortCorrected[key] = nil
+end
+
 -- ----------------------------------------------------------------------------
 -- Endurance et perte de chaussure (trop grande)
 -- ----------------------------------------------------------------------------

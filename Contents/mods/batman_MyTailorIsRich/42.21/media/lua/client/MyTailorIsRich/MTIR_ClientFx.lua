@@ -100,6 +100,12 @@ function MTIR.getUICraftSize(fullType, defaultSize)
     return MTIR.UICraftSize[fullType]
 end
 
+--- Oublie les tailles choisies dans les fenêtres d'artisanat : un personnage neuf ne
+--- coud pas dans la taille retenue par le précédent.
+function MTIR.forgetUICraftSizes()
+    MTIR.UICraftSize = {}
+end
+
 --- Passe à la taille suivante (XXL revient à XS).
 function MTIR.cycleUICraftSize(fullType, defaultSize)
     local current = MTIR.getUICraftSize(fullType, defaultSize)

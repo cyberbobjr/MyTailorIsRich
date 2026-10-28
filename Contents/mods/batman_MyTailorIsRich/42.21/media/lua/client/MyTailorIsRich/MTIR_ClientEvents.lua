@@ -10,6 +10,7 @@
 
 require "MyTailorIsRich/MTIR_Effects"
 require "MyTailorIsRich/MTIR_ShoeEffects"
+require "MyTailorIsRich/MTIR_ClientFx"
 require "TimedActions/ISInventoryTransferAction"
 
 local DISCOMFORT_TICKS = 30
@@ -213,6 +214,16 @@ local function onTick()
     end
 end
 
+--- Personnage neuf (solo comme client MP) : les tailles d'artisanat du précédent sont
+--- oubliées. Un second joueur local qui arrive n'efface pas les choix du premier
+--- (la table est commune aux joueurs locaux).
+local function onCreatePlayer(playerNum, player)
+    if player and playerNum == 0 then
+        MTIR.forgetUICraftSizes()
+    end
+end
+
 Events.OnAIStateChange.Add(onAIStateChange)
+Events.OnCreatePlayer.Add(onCreatePlayer)
 Events.EveryOneMinute.Add(onEveryOneMinute)
 Events.OnTick.Add(onTick)
