@@ -65,7 +65,6 @@ local function forEachAuthorityPlayer(callback)
 end
 
 local function updatePlayerClothes(player)
-    MTIR.checkSizeDrift(player)
     MTIR.applyAuthorityWornEffects(player)
     MTIR.applyDerivedStats(player)
 end
@@ -74,9 +73,13 @@ local function onEveryOneMinute()
     forEachAuthorityPlayer(updatePlayerClothes)
 end
 
+--- Chaque heure : usure des vêtements portés, et surveillance du poids. Le poids
+--- bouge de quelques centaines de grammes par jour : une passe par heure précède
+--- largement la marge d'un kilo, et le retrait d'un vêtement devenu trop petit.
 local function onEveryHours()
     MTIR.DegradingChance = {}
     forEachAuthorityPlayer(MTIR.degradeWornClothes)
+    forEachAuthorityPlayer(MTIR.checkSizeDrift)
 end
 
 local tickCount = 0

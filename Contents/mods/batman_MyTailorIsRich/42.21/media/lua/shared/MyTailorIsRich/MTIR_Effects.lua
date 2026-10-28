@@ -51,7 +51,7 @@ end
 -- quand il approche d'une borne, puis quand il la franchit.
 -- ----------------------------------------------------------------------------
 
---- Surveille le poids du joueur et le prévient. Appelé chaque minute par l'autorité.
+--- Surveille le poids du joueur et le prévient. Appelé chaque heure par l'autorité.
 function MTIR.checkSizeDrift(player)
     local key = MTIR.playerKey(player)
     local drift = MTIR.getSizeDrift(player:getNutrition():getWeight())
