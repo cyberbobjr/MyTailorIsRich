@@ -25,7 +25,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 **Légende** : ✅ fait · 🟡 fait en partie · ⬜ pas commencé · ❌ annulé. « Publié » = présent dans une version du Workshop ; « non publié » = sur `main`, pas encore dans une version publiée du `CHANGELOG.md`. Détail de chaque point dans les parties 1 et 2 ; protocole des tests en jeu automatiques dans `docs/annexes/tests/autotest.md`.
 
-**Bilan** : améliorations de code **9 faites, 0 en partie, 0 à faire, 9 annulées** — la partie 1 est entièrement tranchée. Faites : C01 à C04 (publiées en 0.4.6), C08, C11, C14, C16 et C17 (sur `main`, non publiées). Annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13, C15 et C18 le 2026-10-28. Idées de fonctionnalités : **3 faites, 0 en partie, 16 à faire, 1 écartée** (sur 20) — I01, I05 et I06 faites le 2026-10-28, non publiées ; I07 écartée le 2026-10-28.
+**Bilan** : améliorations de code **9 faites, 0 en partie, 0 à faire, 9 annulées** — la partie 1 est entièrement tranchée. Faites : C01 à C04 (publiées en 0.4.6), C08, C11, C14, C16 et C17 (publiées en 0.4.8). Annulées : C05, C06 et C07 le 2026-10-27, C09, C10, C12, C13, C15 et C18 le 2026-10-28. Idées de fonctionnalités : **3 faites, 0 en partie, 16 à faire, 1 écartée** (sur 20) — I01, I05 et I06 faites le 2026-10-28, publiées en 0.4.9 le 2026-11-05 ; I07 écartée le 2026-10-28.
 
 ### Améliorations de code
 
@@ -54,12 +54,12 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 
 | ID | Idée | État | Remarque |
 |---|---|---|---|
-| I01 | Mètre ruban vanilla | ✅ Faite | Non publiée ; mesure informative, la couture reste libre |
+| I01 | Mètre ruban vanilla | ✅ Faite | Publiée en 0.4.9 ; mesure informative, la couture reste libre |
 | I02 | Couture sur mesure pour un autre joueur | ⬜ Proposée | Dépend de I01 |
 | I03 | Patron qui garde l'apparence du modèle | ⬜ Proposée | |
 | I04 | Garnir une chaussure trop grande | ⬜ Proposée | |
-| I05 | Chaussettes épaisses | ✅ Faite | Non publiée ; frottement selon l'épaisseur et l'humidité, une pointure comblée |
-| I06 | Alerte de changement de taille | ✅ Faite | Non publiée ; réplique à l'approche et au franchissement, ligne d'infobulle |
+| I05 | Chaussettes épaisses | ✅ Faite | Publiée en 0.4.9 ; frottement selon l'épaisseur et l'humidité, une pointure comblée |
+| I06 | Alerte de changement de taille | ✅ Faite | Publiée en 0.4.9 ; réplique à l'approche et au franchissement, ligne d'infobulle |
 | I07 | Panneau « Garde-robe » | ❌ Écartée | Non retenue le 2026-10-28 : panneau d'interface refusé par l'auteur |
 | I08 | Pastille d'ajustement dans l'inventaire | ⬜ Proposée | |
 | I09 | Blanchir à la javel | ⬜ Proposée | |
