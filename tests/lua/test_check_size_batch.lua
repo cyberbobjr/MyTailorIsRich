@@ -14,11 +14,12 @@ local function javaList(values)
 end
 
 local function square(x, y, z)
-    local sq = { x = x, y = y, z = z or 0, objects = javaList(), reachable = true }
+    local sq = { x = x, y = y, z = z or 0, objects = javaList(), furniture = javaList(), reachable = true }
     function sq:getX() return self.x end
     function sq:getY() return self.y end
     function sq:getZ() return self.z end
     function sq:getStaticMovingObjects() return self.objects end
+    function sq:getObjects() return self.furniture end
     function sq:canReachTo(other)
         return other.reachable and math.abs(self.x - other.x) <= 1
             and math.abs(self.y - other.y) <= 1 and self.z == other.z
@@ -41,6 +42,26 @@ local function corpse(sq, animal)
     function parent:getContainer() return container end
     table.insert(sq.objects.values, parent)
     return container
+end
+
+--- Meuble posé : un objet du monde portant un ou plusieurs conteneurs.
+local function furniture(sq, count)
+    local object = { class = "IsoObject", square = sq, containers = {} }
+    function object:getSquare() return self.square end
+    function object:getContainerCount() return #self.containers end
+    function object:getContainerByIndex(i) return self.containers[i + 1] end
+    for _ = 1, count or 1 do
+        local container = { parent = object, items = javaList(), accessible = true }
+        function container:getParent() return self.parent end
+        function container:getType() return "wardrobe" end
+        function container:getItems() return self.items end
+        function container:getContainingItem() return nil end
+        function container:getVehiclePart() return nil end
+        function container:isInCharacterInventory() return false end
+        table.insert(object.containers, container)
+    end
+    table.insert(sq.furniture.values, object)
+    return object.containers[1], object
 end
 
 local function garment(container, data, shoe)
@@ -164,7 +185,7 @@ T["cadavre : vêtements et chaussures inconnus, sans doublons ni objets divers"]
     local shirt, shoes = garment(c), garment(c, nil, true)
     garment(c, { reveal = true })
     garment(c).sized = false
-    local found = MTIR.CheckSizeMenu.collectCorpseItems(PLAYER, { c, c })
+    local found = MTIR.CheckSizeMenu.collectContainerItems(PLAYER, { c, c })
     assertEq(#found, 2)
     assertEq(found[1].item, shirt)
     assertEq(found[2].item, shoes)
@@ -203,13 +224,13 @@ T["indice : groupe ignoré sans progrès, lecture manuelle permise, reprise apr�
     local c = corpse(PLAYER.square)
     local item = garment(c, { size = "M", hint = true })
     item.requiredLevel = 2
-    assertEq(#MTIR.CheckSizeMenu.collectCorpseItems(PLAYER, { c }), 0)
+    assertEq(#MTIR.CheckSizeMenu.collectContainerItems(PLAYER, { c }), 0)
     assertTrue(MTIR.needsSizeCheck(item), "lecture manuelle")
     PLAYER.level = 2
-    assertEq(#MTIR.CheckSizeMenu.collectCorpseItems(PLAYER, { c }), 1)
+    assertEq(#MTIR.CheckSizeMenu.collectContainerItems(PLAYER, { c }), 1)
     PLAYER.level = 0
     OPTIONS.NeedTailoringLevel = false
-    assertEq(#MTIR.CheckSizeMenu.collectCorpseItems(PLAYER, { c }), 1)
+    assertEq(#MTIR.CheckSizeMenu.collectContainerItems(PLAYER, { c }), 1)
 end
 
 T["menu : trois choix sur cadavre, collecte renouvelée au clic et aucun déplacement"] = function()
@@ -228,7 +249,7 @@ T["menu : trois choix sur cadavre, collecte renouvelée au clic et aucun déplac
     local queue = ISTimedActionQueue.getTimedActionQueue(PLAYER)
     assertEq(#queue.queue, 1)
     assertEq(queue.current.item, replacement)
-    assertEq(queue.current.corpseContainer, c)
+    assertEq(queue.current.batchContainer, c)
     assertEq(replacement.container, c)
     assertEq(PLAYER.x, 10.5)
 end
@@ -329,7 +350,7 @@ T["conteneur de cadavre introuvable au décodage MP : lecture refusée"] = funct
     local c = corpse(PLAYER.square)
     local item = garment(c)
     local action = MTIR_CheckSizeAction:new(PLAYER, item, c)
-    action.corpseContainer = nil
+    action.batchContainer = nil
     assertEq(action:canBeginCheck(), false)
     SERVER = true
     assertEq(action:complete(), false)
@@ -401,9 +422,9 @@ T["mètre ruban : lecture possible sans le niveau, et groupe non écarté"] = fu
     local c = corpse(PLAYER.square)
     local item = garment(c, { size = "M", hint = true })
     item.requiredLevel = 2
-    assertEq(#MTIR.CheckSizeMenu.collectCorpseItems(PLAYER, { c }), 0, "sans ruban : écarté du lot")
+    assertEq(#MTIR.CheckSizeMenu.collectContainerItems(PLAYER, { c }), 0, "sans ruban : écarté du lot")
     TAPE = { tape = true }
-    assertEq(#MTIR.CheckSizeMenu.collectCorpseItems(PLAYER, { c }, true), 1, "avec ruban : proposé")
+    assertEq(#MTIR.CheckSizeMenu.collectContainerItems(PLAYER, { c }, true), 1, "avec ruban : proposé")
 
     assertTrue(MTIR_CheckSizeAction:new(PLAYER, item, c, true):complete(), "mesure faite")
     assertTrue(item.data.reveal, "taille lue sans le niveau requis")
@@ -428,6 +449,48 @@ T["mètre ruban perdu avant la fin : l'autorité retombe sur le niveau"] = funct
     assertTrue(action:complete(), "action menée à bien")
     assertTrue(not item.data.reveal, "sans ruban en main, pas de révélation")
     assertTrue(item.data.hint, "seulement un indice")
+end
+
+
+T["meuble : vêtements d'une armoire lus sur place, option « ce conteneur »"] = function()
+    local wardrobe = furniture(square(11, 10))
+    local item = garment(wardrobe)
+    garment(wardrobe, nil, true)
+    local ctx = context()
+    MTIR.CheckSizeMenu.addOptions({ item }, PLAYER, ctx, function() end)
+    local options = ctx.options[1].subMenu.options
+    assertEq(#options, 3)
+    assertEq(options[2].name, "IGUI_MTIR_CheckSize_Container")
+    assertTrue(not options[2].notAvailable)
+    options[2].callback(options[2].target, options[2].arg)
+    local queue = ISTimedActionQueue.getTimedActionQueue(PLAYER)
+    assertEq(#queue.queue, 2)
+    assertEq(queue.current.batchContainer, wardrobe)
+    assertEq(item.container, wardrobe, "pas de transfert")
+end
+
+T["proximité : cadavres et meubles ensemble, plusieurs conteneurs par objet, pas derrière un mur"] = function()
+    garment(corpse(PLAYER.square))
+    local _, fridge = furniture(square(11, 10), 2)
+    garment(fridge.containers[1])
+    garment(fridge.containers[2], nil, true)
+    local blocked = square(10, 11)
+    blocked.reachable = false
+    garment(furniture(blocked))
+    garment(furniture(square(12, 10)))
+    local locked = furniture(square(10, 9))
+    locked.accessible = false
+    garment(locked)
+    assertEq(#MTIR.CheckSizeMenu.collectNearbyItems(PLAYER), 3)
+end
+
+T["meuble : lecture groupée revérifiée par l'autorité"] = function()
+    local wardrobe = furniture(square(11, 10))
+    local item = garment(wardrobe)
+    SERVER = true
+    assertEq(MTIR_CheckSizeAction:new(PLAYER, item, wardrobe):complete(), true)
+    PLAYER.x = 14.5
+    assertEq(MTIR_CheckSizeAction:new(PLAYER, garment(wardrobe), wardrobe):complete(), false, "hors de portée")
 end
 
 return T

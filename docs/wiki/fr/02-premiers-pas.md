@@ -29,7 +29,7 @@ La taille d'un vêtement trouvé est **inconnue**. Clic droit, puis **Lire l'ét
 - sinon, il devine seulement : « un peu serré », « très ample »… ;
 - un vêtement dans un cadavre, un meuble ou un véhicule à portée est lu **sur place**, sans être pris ; au sol, il est d'abord ramassé.
 
-Sur un cadavre, le sous-menu propose **Les vêtements sélectionnés**, **Tous les vêtements de ce cadavre** et **Tous les vêtements des cadavres à proximité** (chaussures comprises). Les lectures groupées sautent les tailles connues et les indices qu'on ne peut pas améliorer avec son niveau actuel.
+Sur un cadavre, le sous-menu propose **Les vêtements sélectionnés**, **Tous les vêtements de ce cadavre** et **Tous les vêtements des cadavres et conteneurs à proximité** (chaussures comprises). Dans une armoire, une commode ou tout autre conteneur, la deuxième option devient **Tous les vêtements de ce conteneur**. Les lectures groupées sautent les tailles connues et les indices qu'on ne peut pas améliorer avec son niveau actuel.
 
 ![Lire l'étiquette sur un cadavre](../../images/screenshots/shot6.png)
 

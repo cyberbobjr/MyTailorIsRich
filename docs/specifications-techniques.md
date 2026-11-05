@@ -51,7 +51,7 @@ Toutes dans `media/lua/shared/TimedActions/`, dérivées d'`ISBaseTimedAction`, 
 
 | Action | Constructeur `new(...)` |
 |---|---|
-| `MTIR_CheckSizeAction` | `character, item, corpseContainer` |
+| `MTIR_CheckSizeAction` | `character, item, batchContainer, withTape` (`batchContainer` : cadavre ou meuble d'une lecture groupée, revérifié par `MTIR.canCheckContainer`) |
 | `MTIR_ChooseSizeAction` | `character, item, size` |
 | `MTIR_DebugSizeAction` | `character, item, mode ("clothes"/"shoe"/"clear"), size` |
 | `MTIR_ResizeAction` | `character, item, needle, scissors, threads, materials, upsize, machinePos` |

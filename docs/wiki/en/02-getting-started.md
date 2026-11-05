@@ -29,7 +29,7 @@ A garment you find has an **unknown** size. Right-click it and choose **Check cl
 - Otherwise they only guess: "a bit tight", "very loose"…
 - Clothes in a corpse, a piece of furniture or a vehicle within reach are checked **in place**, without taking them. Clothes on the floor are picked up first.
 
-On a corpse, the submenu offers **Selected clothes**, **All clothes on this corpse** and **All clothes on nearby corpses** (shoes included). Group checks skip known sizes and hints you can't improve at your current level.
+On a corpse, the submenu offers **Selected clothes**, **All clothes on this corpse** and **All clothes on nearby corpses and in nearby containers** (shoes included). In a wardrobe, a dresser or any other container, the second option becomes **All clothes in this container**. Group checks skip known sizes and hints you can't improve at your current level.
 
 ![Check clothes size on a corpse](../../images/screenshots/shot6.png)
 

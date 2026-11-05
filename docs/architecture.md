@@ -89,7 +89,7 @@ Une action par opération, toutes dérivées d'`ISBaseTimedAction` : `MTIR_Check
 
 | Module | Responsabilité |
 |---|---|
-| `MTIR_ContextMenu`, `MTIR_CheckSizeMenu` | Menu d'inventaire : lire la taille (sélection, ce cadavre, cadavres proches), retouche, remise en état, choix de taille, sous-menu de débogage. |
+| `MTIR_ContextMenu`, `MTIR_CheckSizeMenu` | Menu d'inventaire : lire la taille (sélection, ce cadavre ou ce meuble, cadavres et meubles proches), retouche, remise en état, choix de taille, sous-menu de débogage. |
 | `MTIR_PatternMenu`, `MTIR_PatternBinderMenu` | Tracer, coudre, copier, ranger, sortir, aperçu ; infobulle du classeur. |
 | `MTIR_DecorMenu` | Teindre, broder, découdre ; ligne d'infobulle de la broderie ; commande `embroideryRemoved`. |
 | `MTIR_SewingMachineWindow` + `MTIR_MachineTabPattern`, `MTIR_MachineTabAlter`, `MTIR_MachineTabEmbroider`, `MTIR_MachineUIUtil` | Panneau d'entité de la machine (ouvert par `ISEntityUI` via `LuaWindowClass`), quatre onglets, état et entretien. |

@@ -144,7 +144,7 @@ end
 --- Personnage à portée de main d'un objet posé : même étage, case voisine, et aucun
 --- mur, fenêtre ou porte fermée entre les deux cases (`canReachTo` accepte les
 --- diagonales). Même règle que la lecture d'une étiquette sur un cadavre
---- (`MTIR_LabelCheck.canCheckCorpse`), appliquée sur le client comme sur l'autorité.
+--- (`MTIR_LabelCheck.canCheckContainer`), appliquée sur le client comme sur l'autorité.
 function MTIR.isWithinReach(character, object)
     local square = object and object:getSquare()
     if not square or math.floor(character:getZ()) ~= square:getZ() then

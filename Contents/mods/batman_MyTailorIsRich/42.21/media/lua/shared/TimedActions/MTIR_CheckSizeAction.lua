@@ -19,13 +19,13 @@ MTIR_CheckSizeAction = ISBaseTimedAction:derive("MTIR_CheckSizeAction")
 function MTIR_CheckSizeAction:canBeginCheck()
     self.item = MTIR.resolveItem(self.character, self.item)
     if not self.item then return false end
-    if self.corpseCheck and (not self.corpseContainer or self.item:getContainer() ~= self.corpseContainer
-            or not self.corpseContainer:getItems():contains(self.item)
-            or not MTIR.canCheckCorpse(self.character, self.corpseContainer)) then
+    if self.batchCheck and (not self.batchContainer or self.item:getContainer() ~= self.batchContainer
+            or not self.batchContainer:getItems():contains(self.item)
+            or not MTIR.canCheckContainer(self.character, self.batchContainer)) then
         return false
     end
     return MTIR.canReachItem(self.character, self.item)
-        and MTIR.needsSizeCheck(self.item, self.character, self.corpseCheck, self.withTape)
+        and MTIR.needsSizeCheck(self.item, self.character, self.batchCheck, self.withTape)
 end
 
 function MTIR_CheckSizeAction:begin()
@@ -99,9 +99,9 @@ function MTIR_CheckSizeAction:complete()
     if not MTIR.canReachItem(character, item) then
         return false
     end
-    if self.corpseCheck and (not self.corpseContainer or item:getContainer() ~= self.corpseContainer
-            or not self.corpseContainer:getItems():contains(item)
-            or not MTIR.canCheckCorpse(character, self.corpseContainer)) then
+    if self.batchCheck and (not self.batchContainer or item:getContainer() ~= self.batchContainer
+            or not self.batchContainer:getItems():contains(item)
+            or not MTIR.canCheckContainer(character, self.batchContainer)) then
         return false
     end
     if MTIR.canShoeHaveSize(item) then
@@ -156,13 +156,14 @@ function MTIR_CheckSizeAction:getDuration()
     return base
 end
 
-function MTIR_CheckSizeAction:new(character, item, corpseContainer, withTape)
+--- `batchContainer` : cadavre ou meuble d'une lecture groupée (nil pour la sélection).
+function MTIR_CheckSizeAction:new(character, item, batchContainer, withTape)
     local o = ISBaseTimedAction.new(self, character)
     o.item = item
     o.withTape = withTape == true
-    o.corpseContainer = corpseContainer
+    o.batchContainer = batchContainer
     -- Le booléen reste présent même si le conteneur ne peut plus être résolu en MP.
-    o.corpseCheck = corpseContainer ~= nil
+    o.batchCheck = batchContainer ~= nil
     -- Lecture sur place : s'éloigner du conteneur l'interrompt.
     o.stopOnWalk = not MTIR.isCarried(character, item)
     o.stopOnRun = true

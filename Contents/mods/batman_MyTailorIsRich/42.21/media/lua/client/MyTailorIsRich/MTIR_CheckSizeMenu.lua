@@ -1,14 +1,14 @@
--- Collecte au clic : seulement les cadavres accessibles, sans déplacement ni transfert.
+-- Collecte au clic : cadavres et meubles accessibles, sans déplacement ni transfert.
 require "MyTailorIsRich/MTIR_LabelCheck"
 require "TimedActions/MTIR_CheckSizeAction"
 
 MTIR.CheckSizeMenu = {}
 local Menu = MTIR.CheckSizeMenu
 
-function Menu.collectCorpseItems(player, containers, withTape)
+function Menu.collectContainerItems(player, containers, withTape)
     local result, seen = {}, {}
     for _, container in ipairs(containers) do
-        if MTIR.canCheckCorpse(player, container) then
+        if MTIR.canCheckContainer(player, container) then
             local items = container:getItems()
             for i = 0, items:size() - 1 do
                 local item = items:get(i)
@@ -24,6 +24,13 @@ function Menu.collectCorpseItems(player, containers, withTape)
     return result
 end
 
+local function addContainer(containers, seen, container)
+    if container and not seen[container] and MTIR.isBatchContainer(container) then
+        seen[container] = true
+        containers[#containers + 1] = container
+    end
+end
+
 function Menu.collectNearbyItems(player, withTape)
     local containers, seen = {}, {}
     local cell = getCell()
@@ -35,21 +42,25 @@ function Menu.collectNearbyItems(player, withTape)
         for dx = -radius, radius do
             local square = cell:getGridSquare(x + dx, y + dy, z)
             if square then
-                local objects = square:getStaticMovingObjects()
+                local bodies = square:getStaticMovingObjects()
+                for i = 0, bodies:size() - 1 do
+                    local body = bodies:get(i)
+                    if instanceof(body, "IsoDeadBody") then
+                        addContainer(containers, seen, body:getContainer())
+                    end
+                end
+                -- Meubles : un objet peut porter plusieurs conteneurs (frigo et congélateur).
+                local objects = square:getObjects()
                 for i = 0, objects:size() - 1 do
                     local object = objects:get(i)
-                    if instanceof(object, "IsoDeadBody") and not object:isAnimal() then
-                        local container = object:getContainer()
-                        if container and not seen[container] then
-                            seen[container] = true
-                            containers[#containers + 1] = container
-                        end
+                    for index = 0, object:getContainerCount() - 1 do
+                        addContainer(containers, seen, object:getContainerByIndex(index))
                     end
                 end
             end
         end
     end
-    return Menu.collectCorpseItems(player, containers, withTape)
+    return Menu.collectContainerItems(player, containers, withTape)
 end
 
 local function queueBatch(player, entries, withTape)
@@ -58,12 +69,19 @@ local function queueBatch(player, entries, withTape)
     end
 end
 
-local function checkCorpse(player, containers, withTape)
-    queueBatch(player, Menu.collectCorpseItems(player, containers, withTape), withTape)
+local function checkContainers(player, containers, withTape)
+    queueBatch(player, Menu.collectContainerItems(player, containers, withTape), withTape)
 end
 
 local function checkNearby(player, withTape)
     queueBatch(player, Menu.collectNearbyItems(player, withTape), withTape)
+end
+
+local function allCorpses(containers)
+    for _, container in ipairs(containers) do
+        if not MTIR.isCorpseContainer(container) then return false end
+    end
+    return true
 end
 
 function Menu.addOptions(selected, player, context, queueSelection)
@@ -74,15 +92,11 @@ function Menu.addOptions(selected, player, context, queueSelection)
     local clothes, containers, seen = {}, {}, {}
     for _, item in ipairs(selected) do
         if MTIR.needsSizeCheck(item) then clothes[#clothes + 1] = item end
-        local container = MTIR.getCorpseContainer(item)
-        if container and not seen[container] then
-            seen[container] = true
-            containers[#containers + 1] = container
-        end
+        addContainer(containers, seen, MTIR.getBatchContainer(item))
     end
-    local corpseItems = Menu.collectCorpseItems(player, containers, withTape)
+    local containerItems = Menu.collectContainerItems(player, containers, withTape)
     local nearbyItems = Menu.collectNearbyItems(player, withTape)
-    if #clothes == 0 and #corpseItems == 0 and #nearbyItems == 0 then return end
+    if #clothes == 0 and #containerItems == 0 and #nearbyItems == 0 then return end
     local title = withTape and "IGUI_MTIR_Measure_Clothes" or "IGUI_MTIR_JobType_CheckClothesSize"
     local option = context:addOption(getText(title))
     local subMenu = context:getNew(context)
@@ -92,9 +106,9 @@ function Menu.addOptions(selected, player, context, queueSelection)
             clothes, withTape)
     end
     if #containers > 0 then
-        local corpse = subMenu:addOption(getText("IGUI_MTIR_CheckSize_Corpse"), player, checkCorpse,
-            containers, withTape)
-        corpse.notAvailable = #corpseItems == 0
+        local label = allCorpses(containers) and "IGUI_MTIR_CheckSize_Corpse" or "IGUI_MTIR_CheckSize_Container"
+        local here = subMenu:addOption(getText(label), player, checkContainers, containers, withTape)
+        here.notAvailable = #containerItems == 0
     end
     local nearby = subMenu:addOption(getText("IGUI_MTIR_CheckSize_Nearby"), player, checkNearby, withTape)
     nearby.notAvailable = #nearbyItems == 0
