@@ -3,6 +3,17 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.9 — 2026-11-05
+
+### New features
+- **Measuring tape.** With a vanilla Tape Measure in your inventory, **Check clothes size** becomes **Measure with tape**: you read the exact size whatever your Tailoring level, twice as fast. Right-click the tape and choose **Take measurements** to learn your own clothing and shoe sizes, or those of a player standing next to you.
+- **Warning before clothes stop fitting.** When your weight gets close to the next size, your character says their clothes are starting to feel tight (or loose), and says so again when the size changes. The tooltip of a worn garment shows the same warning.
+- **Socks against blisters.** Socks rub less the thicker they are; soaked socks rub more than bare feet. Heavy socks also make up for shoes one size too big.
+- **Check clothes size in furniture.** In a wardrobe, a dresser or any other container, the menu now offers **All clothes in this container**, and the nearby option covers both corpses and containers around you. Clothes stay where they are, as with corpses.
+
+### Fixes
+- **No more errors with Companion Dogs saddlebags.** Putting a saddlebag on a dog or a cat (CD: Cats) no longer causes errors in singleplayer.
+
 ## 0.4.8 — 2026-10-28
 
 ### Fixes
