@@ -149,4 +149,18 @@ T["client MP sans données : isValid laisse le serveur trancher"] = function()
     assertEq(#told, 0, "aucun message")
 end
 
+
+T["animal (IsoAnimal hérite d'IsoPlayer) : changement de tenue ignoré"] = function()
+    local applied = {}
+    MTIR.applyDerivedStats = function(character) table.insert(applied, character) end
+    instanceof = function(value, class) return class == "IsoPlayer" and value.player == true end
+    local cat = { player = true, isAnimal = function() return true end }
+    local player = { player = true, isAnimal = function() return false end }
+    triggerEvent("OnClothingUpdated", cat)
+    assertEq(#applied, 0, "sacoche posée sur un animal : aucun calcul de taille")
+    triggerEvent("OnClothingUpdated", player)
+    assertTrue(#applied > 0, "joueur toujours recalculé")
+    assertEq(applied[1], player)
+end
+
 return T

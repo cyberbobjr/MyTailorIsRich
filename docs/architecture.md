@@ -120,7 +120,7 @@ Une action par opération, toutes dérivées d'`ISBaseTimedAction` : `MTIR_Check
 | `OnTick`, `OnAIStateChange` | client | Détection de l'escalade, de la chute et de la réception. |
 | `OnCreatePlayer` | serveur (solo seulement) | Tailles de la tenue de départ. |
 | `OnZombieDead` | serveur | Une taille de référence et une pointure par zombie, avant la création du cadavre. |
-| `OnClothingUpdated` | partagé | Recalcul des stats dérivées. |
+| `OnClothingUpdated` | partagé | Recalcul des stats dérivées, joueurs seulement (`IsoAnimal` hérite d'`IsoPlayer` et reçoit aussi cet événement en solo). |
 | `OnClientCommand` / `OnServerCommand` | serveur / client | Commandes du module `MTIR`. |
 | `OnFillInventoryObjectContextMenu` | client | Menus (quatre abonnés). |
 | `OnPostDistributionMerge`, `OnInitGlobalModData`, `OnFillContainer` | serveur | Butin (voir [specifications-techniques.md](specifications-techniques.md#butin)). |

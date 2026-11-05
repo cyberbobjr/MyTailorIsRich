@@ -293,7 +293,9 @@ end
 -- ----------------------------------------------------------------------------
 
 local function onClothingUpdated(character)
-    if not instanceof(character, "IsoPlayer") then
+    -- IsoAnimal hérite d'IsoPlayer et reçoit cet événement en solo (setAttachedItem,
+    -- IsoAnimal.isLocalPlayer) : un animal n'a ni nutrition ni taille de vêtement.
+    if not instanceof(character, "IsoPlayer") or character:isAnimal() then
         return
     end
     if MTIR.isAuthority() or character:isLocalPlayer() then
