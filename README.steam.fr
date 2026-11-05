@@ -6,19 +6,6 @@ Cette veste en cuir parfaite sur un zombie ? Elle fait peut-être deux tailles d
 
 Vêtements et chaussures ont une taille. Trouvez ce qui vous va, retouchez, cousez et teignez le reste.
 
-[h2]En bref[/h2]
-
-[list]
-[*][b]Tailles de vêtements[/b] du XS au XXL, selon votre poids.
-[*][b]Pointures[/b] du 35 au 47 : gare aux ampoules, aux chutes et aux chaussures perdues.
-[*][b]Retouches[/b] : agrandissez ou rétrécissez vos vêtements.
-[*][b]Usure et remise en état[/b] : réparez vos vêtements abîmés.
-[*][b]Patrons de couture[/b] : tracés, trouvés ou copiés, rangés dans un classeur, essayés en 3D.
-[*][b]Teinture et broderie[/b] : teignez vos vêtements, brodez un nom.
-[*][b]Machines à coudre[/b] : plus rapides, meilleurs résultats... mais bruyantes.
-[*]Compatible avec les [b]mods de vêtements[/b] et le [b]multijoueur[/b].
-[/list]
-
 [h2]Prérequis[/h2]
 
 [list]
@@ -31,7 +18,7 @@ Vêtements et chaussures ont une taille. Trouvez ce qui vous va, retouchez, cous
 
 [list]
 [*]Votre taille dépend de votre [b]poids[/b] : XS ≤ 50 kg, S ≤ 65, M ≤ 75, L < 85, XL < 100, XXL ≥ 100. Elle évolue avec lui.
-[*][b]Lire l'étiquette[/b] → Les vêtements sélectionnés, Tous les vêtements de ce cadavre ou Tous les vêtements des cadavres à proximité. Sur cadavre : sans ramassage ni déplacement, durée habituelle. Peu de Couture : indice.
+[*][b]Lire l'étiquette[/b] → Les vêtements sélectionnés, Tous les vêtements de ce cadavre (ou Tous les vêtements de ce conteneur) ou Tous les vêtements des cadavres et conteneurs à proximité. Sur cadavre ou meuble : sans ramassage ni déplacement, durée habituelle. Peu de Couture : indice.
 [*]Sur un même zombie, les tailles varient d'un cran au plus.
 [*]Chapeaux, masques, gants, bijoux, ceintures et sous-vêtements : taille unique.
 [/list]
@@ -120,6 +107,10 @@ Presque tout se règle : Couture, XP, mauvaises tailles, usure, pointures, patro
 [h2]Retirer le mod d'une partie[/h2]
 
 Ne le désactivez pas : la sauvegarde retient les machines et, en multijoueur, plus personne ne pourrait se connecter. Remplacez [b]batman_MyTailorIsRich[/b] par [b]batman_MyTailorIsRich_Uninstall[/b] (inclus) et gardez-le : il garde les machines comme simple mobilier. N'activez jamais les deux.
+
+[h2]Un mot sur l'IA[/h2]
+
+Je suis développeur depuis des années et je créais des mods bien avant les agents de code, souvent au détriment du temps passé en famille. J'utilise ouvertement Claude Code et Codex : chaque fonctionnalité est toujours discutée, conçue et planifiée, pas « vibe codée » à l'aveugle. L'IA est là pour rester ; j'ai choisi de m'adapter plutôt que de résister. Merci à tous ceux qui ont pris ma défense face aux attaques personnelles.
 
 [h2]Soutenir le projet[/h2]
 

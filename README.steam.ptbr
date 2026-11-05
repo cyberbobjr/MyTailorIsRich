@@ -6,19 +6,6 @@ Aquela jaqueta de couro perfeita no zumbi? Pode ser dois tamanhos menor que o se
 
 Roupas e sapatos têm tamanho. Encontre o que serve, ajuste, costure e tinja o resto.
 
-[h2]Resumo[/h2]
-
-[list]
-[*][b]Tamanhos de roupa[/b] do XS ao XXL, conforme o seu peso.
-[*][b]Números de calçado[/b] de 35 a 47 (EU): cuidado com bolhas, tropeços e sapatos perdidos.
-[*][b]Ajustes[/b]: aumente ou diminua roupas.
-[*][b]Desgaste e reparo[/b]: as roupas se desgastam, e você pode restaurá-las.
-[*][b]Moldes de costura[/b]: trace, encontre ou copie, guarde numa pasta, veja em você em 3D.
-[*][b]Tingimento e bordado[/b]: tinja suas roupas, borde um nome.
-[*][b]Máquinas de costura[/b]: mais rápidas e com resultados melhores... mas barulhentas.
-[*]Funciona com [b]mods de roupas[/b] e no [b]multijogador[/b].
-[/list]
-
 [h2]Requisitos[/h2]
 
 [list]
@@ -31,7 +18,7 @@ Roupas e sapatos têm tamanho. Encontre o que serve, ajuste, costure e tinja o r
 
 [list]
 [*]Seu tamanho depende do seu [b]peso[/b]: XS até 50 kg, S até 65, M até 75, L abaixo de 85, XL abaixo de 100, XXL a partir de 100. Muda com o seu peso.
-[*][b]Ver tamanho da roupa[/b] → Roupas selecionadas, Todas as roupas deste cadáver ou Todas as roupas dos cadáveres próximos. Nos cadáveres: sem pegar nem se mover; tempo habitual. Pouca Costura: estimativa.
+[*][b]Ver tamanho da roupa[/b] → Roupas selecionadas, Todas as roupas deste cadáver (ou Todas as roupas deste recipiente) ou Todas as roupas dos cadáveres e recipientes próximos. Nos cadáveres e móveis: sem pegar nem se mover; tempo habitual. Pouca Costura: estimativa.
 [*]As roupas de um mesmo zumbi variam um tamanho no máximo.
 [*]Chapéus, máscaras, luvas, joias, cintos e roupas íntimas têm tamanho único.
 [/list]
@@ -120,6 +107,10 @@ Quase tudo é configurável: habilidade, XP, velocidade, penalidades de tamanho,
 [h2]Remover o mod de um save[/h2]
 
 Não basta desativar: o save registra as máquinas de costura e, no multijogador, ninguém consegue mais entrar. Substitua [b]batman_MyTailorIsRich[/b] por [b]batman_MyTailorIsRich_Uninstall[/b] (incluído) e mantenha-o ativo para sempre: ele só mantém as máquinas, como móveis comuns. Nunca ative os dois.
+
+[h2]Uma observação sobre IA[/h2]
+
+Sou desenvolvedor há anos e já criava mods muito antes de existirem agentes de programação, muitas vezes às custas do tempo com a minha família. Uso abertamente o Claude Code e o Codex: cada funcionalidade continua sendo discutida, projetada e planejada, e não feita às cegas no "vibe coding". A IA veio para ficar; escolhi me adaptar em vez de resistir. Obrigado a todos que se posicionaram contra os ataques pessoais.
 
 [h2]Apoie o projeto[/h2]
 

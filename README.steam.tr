@@ -6,19 +6,6 @@ Zombinin ceketi iki beden küçük; botları 46 numara, sen 41 giyiyorsun.
 
 Her kıyafetin ve ayakkabının bir ölçüsü var. Uyanları bul, kalanları tadilatla, dikerek ve boyayarak değerlendir.
 
-[h2]Bir bakışta[/h2]
-
-[list]
-[*]Karakterinin kilosuna göre XS–XXL [b]kıyafet bedenleri[/b].
-[*]35–47 (AB) [b]ayakkabı numaraları[/b]: su toplamasına, düşmeye ve ayakkabını kaybetmeye dikkat.
-[*][b]Tadilat[/b]: Terzilik becerinle kıyafetleri genişlet veya daralt.
-[*][b]Yıpranma ve onarım[/b]: kıyafetler yıpranır, onları yenileyebilirsin.
-[*][b]Dikiş kalıpları[/b]: çıkar, bul veya kopyala; klasörde sakla, üzerinde 3B önizle.
-[*][b]Boyama ve işleme[/b]: kıyafetlerini boya, bir isim işle.
-[*][b]Dikiş makineleri[/b]: daha hızlı ve daha iyi sonuçlar... ama gürültülü.
-[*][b]Kıyafet modlarıyla[/b] ve [b]çok oyunculuda[/b] çalışır.
-[/list]
-
 [h2]Gereksinimler[/h2]
 
 [list]
@@ -31,7 +18,7 @@ Her kıyafetin ve ayakkabının bir ölçüsü var. Uyanları bul, kalanları ta
 
 [list]
 [*]Bedenin [b]kilona[/b] bağlıdır: 50 kg'a kadar XS, 65'e kadar S, 75'e kadar M, 85'in altında L, 100'ün altında XL, 100 ve üzeri XXL. Kilonla birlikte değişir.
-[*][b]Kıyafet bedenini kontrol et[/b] → Seçili kıyafetler, Bu cesetteki tüm kıyafetler veya Yakındaki cesetlerdeki tüm kıyafetler. Cesetlerde almadan ve hareket etmeden, normal sürede okunur. Düşük Terzilikte tahmin edilir.
+[*][b]Kıyafet bedenini kontrol et[/b] → Seçili kıyafetler, Bu cesetteki tüm kıyafetler (veya Bu kaptaki tüm kıyafetler) veya Yakındaki cesetlerdeki ve kaplardaki tüm kıyafetler. Ceset ve mobilyalarda almadan ve hareket etmeden, normal sürede okunur. Düşük Terzilikte tahmin edilir.
 [*]Aynı zombinin kıyafetleri arasında en fazla bir beden fark vardır.
 [*]Şapka, maske, eldiven, takı, kemer ve iç çamaşırları tek bedendir.
 [/list]
@@ -119,6 +106,10 @@ Beceri, deneyim, hız, uyumsuz beden cezaları, yıpranma, ayakkabı numaraları
 [h2]Modu bir kayıttan kaldırma[/h2]
 
 Doğrudan kapatma: kayıt dikiş makinelerini hatırlar, çok oyunculuda kimse katılamaz ("Missing dictionary script on client"). [b]batman_MyTailorIsRich[/b] yerine paketteki [b]batman_MyTailorIsRich_Uninstall[/b] modunu aç ve kalıcı olarak etkin tut: makineleri yalnızca sıradan mobilya olarak korur. İkisini birlikte asla açma.
+
+[h2]Yapay zekâ hakkında bir not[/h2]
+
+Yıllardır geliştiriciyim ve kodlama ajanları ortaya çıkmadan çok önce mod yapıyordum; bu da çoğu zaman ailemle geçirdiğim zamandan çalıyordu. Claude Code ve Codex'i açıkça kullanıyorum: her özellik hâlâ tartışılıyor, tasarlanıyor ve planlanıyor; körü körüne "vibe coding" yapılmıyor. Yapay zekâ kalıcı; direnmek yerine uyum sağlamayı seçtim. Kişisel saldırılara karşı duran herkese teşekkür ederim.
 
 [h2]Projeye destek ol[/h2]
 

@@ -6,19 +6,6 @@ That perfect leather jacket on a zombie? It might be two sizes too small. Those 
 
 Every garment and pair of shoes has a size. Find what fits, alter, sew and dye the rest.
 
-[h2]At a glance[/h2]
-
-[list]
-[*][b]Clothing sizes[/b] from XS to XXL, based on your character's weight.
-[*][b]Shoe sizes[/b] from 35 to 47 (EU): watch out for blisters, trips and lost shoes.
-[*][b]Alterations[/b]: make clothes bigger or smaller with your Tailoring skill.
-[*][b]Wear and repair[/b]: clothes wear out, and you can recondition them.
-[*][b]Sewing patterns[/b]: trace, find or copy them, keep them in a binder, preview them on you in 3D.
-[*][b]Dyeing and embroidery[/b]: dye your clothes, embroider a name.
-[*][b]Sewing machines[/b]: faster and better results... but noisy.
-[*]Works with [b]clothing mods[/b] and in [b]multiplayer[/b].
-[/list]
-
 [h2]Requirements[/h2]
 
 [list]
@@ -31,7 +18,7 @@ Every garment and pair of shoes has a size. Find what fits, alter, sew and dye t
 
 [list]
 [*]Your size depends on your [b]weight[/b]: XS up to 50 kg, S up to 65, M up to 75, L under 85, XL under 100, XXL 100 and above. It changes with your weight.
-[*]Found clothes: [b]Check clothes size[/b] → Selected clothes, All clothes on this corpse, or All clothes on nearby corpses. Corpses: no pickup or movement; usual reading time. Low Tailoring: guesses.
+[*]Found clothes: [b]Check clothes size[/b] → Selected clothes, All clothes on this corpse (or in this container), or All clothes on nearby corpses and in nearby containers. Corpses and furniture: no pickup or movement; usual reading time. Low Tailoring: guesses.
 [*]Clothes on the same zombie are within one size of each other.
 [*]Hats, masks, gloves, jewelry, belts and underwear are one size fits all.
 [/list]
@@ -121,6 +108,10 @@ Almost everything can be tuned: skill, XP, speed, bad-fit penalties, wear, shoe 
 [h2]Removing the mod from a save[/h2]
 
 Don't just disable it: the save keeps a record of the sewing machines, and in multiplayer nobody can join anymore ("Missing dictionary script on client"). Replace [b]batman_MyTailorIsRich[/b] with [b]batman_MyTailorIsRich_Uninstall[/b] (included) and keep it for good: it only keeps the machines, as plain furniture. Never enable both.
+
+[h2]A note on AI[/h2]
+
+I've been a developer for years and made mods long before coding agents existed, often at the expense of time with my family. I openly use Claude Code and Codex: every feature is still discussed, designed and planned, not blindly "vibe coded". AI is here to stay; I chose to adapt rather than resist. Thank you to everyone who stood up against the personal attacks.
 
 [h2]Support the project[/h2]
 

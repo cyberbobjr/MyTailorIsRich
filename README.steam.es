@@ -6,19 +6,6 @@
 
 Ropa y zapatos tienen talla. Encuentra lo que te vale, arregla, cose y tiñe el resto.
 
-[h2]De un vistazo[/h2]
-
-[list]
-[*][b]Tallas de ropa[/b] de la XS a la XXL, según tu peso.
-[*][b]Números de calzado[/b] del 35 al 47 (EU): cuidado con las ampollas, los tropiezos y los zapatos perdidos.
-[*][b]Arreglos[/b]: agranda o estrecha la ropa.
-[*][b]Desgaste y restauración[/b]: la ropa se desgasta y puedes restaurarla.
-[*][b]Patrones de costura[/b]: trázalos, encuéntralos o cópialos, guárdalos en una carpeta, pruébatelos en 3D.
-[*][b]Teñido y bordado[/b]: tiñe tu ropa, borda un nombre.
-[*][b]Máquinas de coser[/b]: más rápidas y con mejores resultados... pero ruidosas.
-[*]Funciona con [b]mods de ropa[/b] y en [b]multijugador[/b].
-[/list]
-
 [h2]Requisitos[/h2]
 
 [list]
@@ -31,7 +18,7 @@ Ropa y zapatos tienen talla. Encuentra lo que te vale, arregla, cose y tiñe el 
 
 [list]
 [*]Tu talla depende de tu [b]peso[/b]: XS hasta 50 kg, S hasta 65, M hasta 75, L menos de 85, XL menos de 100, XXL a partir de 100. Cambia con tu peso.
-[*][b]Mirar la talla[/b] → Ropa seleccionada, Toda la ropa de este cadáver o Toda la ropa de los cadáveres cercanos. En cadáveres: sin recoger ni moverse; tiempo habitual. Poca Sastrería: estimación.
+[*][b]Mirar la talla[/b] → Ropa seleccionada, Toda la ropa de este cadáver (o Toda la ropa de este contenedor) o Toda la ropa de los cadáveres y contenedores cercanos. En cadáveres y muebles: sin recoger ni moverse; tiempo habitual. Poca Sastrería: estimación.
 [*]La ropa de un mismo zombi varía una talla como mucho.
 [*]Sombreros, máscaras, guantes, joyas, cinturones y ropa interior son de talla única.
 [/list]
@@ -120,6 +107,10 @@ Casi todo se puede ajustar: habilidad, XP, velocidad, penalizaciones de talla, d
 [h2]Quitar el mod de una partida[/h2]
 
 No lo desactives sin más: la partida guarda las máquinas de coser y, en multijugador, nadie podrá volver a entrar. Sustituye [b]batman_MyTailorIsRich[/b] por [b]batman_MyTailorIsRich_Uninstall[/b] (incluido) y déjalo activado para siempre: solo conserva las máquinas, como simples muebles. Nunca actives los dos.
+
+[h2]Una nota sobre la IA[/h2]
+
+Soy desarrollador desde hace años y creaba mods mucho antes de que existieran los agentes de programación, a menudo a costa del tiempo con mi familia. Uso abiertamente Claude Code y Codex: cada función se sigue discutiendo, diseñando y planificando, no se hace a ciegas con «vibe coding». La IA ha llegado para quedarse; he elegido adaptarme en lugar de resistirme. Gracias a todos los que se opusieron a los ataques personales.
 
 [h2]Apoya el proyecto[/h2]
 
