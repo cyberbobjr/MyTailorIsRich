@@ -16,6 +16,8 @@ MTIR.BodyDiffs = MTIR.BodyDiffs or {}
 MTIR.SizeWatch = MTIR.SizeWatch or {}
 MTIR.DegradingChance = MTIR.DegradingChance or {}
 MTIR.ServerCraftSize = MTIR.ServerCraftSize or {}
+-- Raideur laissée par le dernier passage de MTIR.applyStiffness, par joueur et partie.
+MTIR.StiffnessAfterPass = MTIR.StiffnessAfterPass or {}
 
 -- ----------------------------------------------------------------------------
 -- Joueurs, notifications, synchronisation
@@ -41,6 +43,7 @@ function MTIR.forgetPlayerEffects(player)
     MTIR.BodyDiffs[key] = nil
     MTIR.ServerCraftSize[key] = nil
     MTIR.SizeWatch[key] = nil
+    MTIR.StiffnessAfterPass[key] = nil
 end
 
 -- ----------------------------------------------------------------------------
@@ -560,26 +563,43 @@ local function syncStiffness(changed)
     end
 end
 
+-- Baisse de la raideur par unité de temps hors exercice (BodyPart.update, 42.21).
+local VANILLA_STIFFNESS_DECAY = 0.002
+-- Part de cette baisse compensée par écart de taille, plafonnée : la guérison
+-- ralentit sans jamais s'arrêter.
+local RECOVERY_SLOWDOWN_PER_DIFF = 0.25
+local RECOVERY_SLOWDOWN_MAX = 0.5
+
 --- timeFactor : somme des multiplicateurs de temps écoulés depuis le dernier appel.
+--- Le moteur retire la raideur à chaque mise à jour, ce passage l'ajoute tous les
+--- STIFFNESS_TICKS : le résultat doit suivre l'évolution continue des deux taux.
+--- Quand le moteur a ramené une partie à 0 pendant le passage, la part de sa baisse
+--- tombée sous 0 est déduite de l'ajout : sinon un ajout plus faible que la baisse
+--- ferait apparaître puis disparaître la raideur à chaque passage, et un ajout à
+--- peine plus fort ne s'installerait jamais.
 function MTIR.applyStiffness(player, timeFactor)
-    local bodyDiffs = MTIR.BodyDiffs[MTIR.playerKey(player)]
+    local key = MTIR.playerKey(player)
+    local bodyDiffs = MTIR.BodyDiffs[key]
     if not bodyDiffs or timeFactor <= 0 then
+        MTIR.StiffnessAfterPass[key] = nil
         return
     end
+    local previous = MTIR.StiffnessAfterPass[key] or {}
+    local after = {}
     local bodyDamage = player:getBodyDamage()
-    local changed = {}
-
-    -- Récupération ralentie : la raideur ne redescend pas sous 5 x l'écart.
     local fitness = player:getFitness()
-    if fitness and not fitness:onGoingStiffness() then
+    local decaying = fitness ~= nil and not fitness:onGoingStiffness()
+    local rates = {}
+
+    -- Récupération ralentie d'une partie déjà raide sous un vêtement serré.
+    if decaying then
         local parts = bodyDamage:getBodyParts()
         for i = 0, parts:size() - 1 do
             local bodyPart = parts:get(i)
-            local stiffness = bodyPart:getStiffness()
             local diff = bodyDiffs[bodyPart:getType()] or 0
-            if stiffness > 0 and diff < 0 then
-                local extra = (stiffness < 5 * math.abs(diff)) and 0.002 or (math.abs(diff) * 0.0005)
-                addStiffness(bodyPart, extra * timeFactor, changed)
+            if diff < 0 and bodyPart:getStiffness() > 0 then
+                local share = math.min(RECOVERY_SLOWDOWN_MAX, math.abs(diff) * RECOVERY_SLOWDOWN_PER_DIFF)
+                rates[bodyPart:getType()] = VANILLA_STIFFNESS_DECAY * share
             end
         end
     end
@@ -596,8 +616,8 @@ function MTIR.applyStiffness(player, timeFactor)
         local function stiffenMoving(bodyPartType)
             local diff = bodyDiffs[bodyPartType] or 0
             if diff < 0 then
-                local amount = 0.00075 * pace * (math.abs(diff) + 1) / 2 * multiplier
-                addStiffness(bodyDamage:getBodyPart(bodyPartType), amount * timeFactor, changed)
+                local rate = 0.00075 * pace * (math.abs(diff) + 1) / 2 * multiplier
+                rates[bodyPartType] = (rates[bodyPartType] or 0) + rate
             end
         end
         for _, bodyPartType in ipairs(getLegParts()) do
@@ -607,6 +627,21 @@ function MTIR.applyStiffness(player, timeFactor)
             stiffenMoving(bodyPartType)
         end
     end
+
+    local changed = {}
+    for bodyPartType, rate in pairs(rates) do
+        local bodyPart = bodyDamage:getBodyPart(bodyPartType)
+        local amount = rate * timeFactor
+        if bodyPart:getStiffness() <= 0 and decaying then
+            local decay = VANILLA_STIFFNESS_DECAY * timeFactor
+            amount = amount - math.max(0, decay - (previous[bodyPartType] or 0))
+        end
+        if amount > 0 then
+            addStiffness(bodyPart, amount, changed)
+        end
+        after[bodyPartType] = bodyPart:getStiffness()
+    end
+    MTIR.StiffnessAfterPass[key] = after
 
     syncStiffness(changed)
 end

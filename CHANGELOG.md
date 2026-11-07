@@ -3,6 +3,12 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.10 — 2026-11-08
+
+### Fixes
+- **No more flickering leg stiffness when walking.** Walking in trousers one size too small no longer makes stiffness and pain pop in and out every half second. Tight clothes now stiffen the covered muscles steadily when you sprint, or run in clothes two sizes too small or more.
+- **Stiffness always heals.** Under clothes that are too small, stiffness used to stay stuck for as long as you wore them. It now heals more slowly, up to twice as slowly, but always goes away.
+
 ## 0.4.9 — 2026-11-05
 
 ### New features
