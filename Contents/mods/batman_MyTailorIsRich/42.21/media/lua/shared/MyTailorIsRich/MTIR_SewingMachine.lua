@@ -101,8 +101,15 @@ function MTIR.findSewingMachine(square)
 end
 
 --- Courant : groupe électrogène, ou réseau public tant qu'il existe, à l'intérieur.
-function MTIR.hasSewingPower(square)
+--- machine (facultative) : avec LiveWire Extended chargé, un disjoncteur ouvert de son
+--- tableau, ou une machine non raccordée dans un bâtiment desservi, la prive de courant
+--- (LiveWire.Extended.isCut). Aucune dépendance : sans ce mod, rien ne change.
+function MTIR.hasSewingPower(square, machine)
     if not square then
+        return false
+    end
+    local lwx = machine and LiveWire and LiveWire.Extended
+    if lwx and lwx.isCut and lwx.isCut(machine) then
         return false
     end
     if square:haveElectricity() then
@@ -286,7 +293,7 @@ function MTIR.getSewingMachineProblem(character, machine, data)
     if not kind or not machine:getSquare() or machine:getObjectIndex() == -1 then
         return "IGUI_MTIR_Machine_Missing"
     end
-    if kind.needsPower and not MTIR.hasSewingPower(machine:getSquare()) then
+    if kind.needsPower and not MTIR.hasSewingPower(machine:getSquare(), machine) then
         return "IGUI_MTIR_Machine_NoPower"
     end
     if MTIR.isMachineJammed(machine) then

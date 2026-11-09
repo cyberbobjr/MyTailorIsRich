@@ -196,6 +196,7 @@ Aucune API publique stabilisée. Fonctions lisibles sans risque : `MTIR.getData(
 | Immersive Weighing (3791897755) | Compatible | ID `ImmersiveWeighing` détecté dans `getActivatedMods()` : taille masquée sur l'écran Personnage. |
 | Mods de vêtements | Compatibles | Taille déduite par emplacement et `BloodLocation` ; options d'ajout et d'exclusion. |
 | Mods de butin ajoutant des kits de couture | Compatibles | Traités à `OnPostDistributionMerge`. |
+| LiveWire Extended (`batman_LiveWireExtended`, sous-mod de Live Wire) | Facultatif | `MTIR.hasSewingPower(case, machine)` interroge `LiveWire.Extended.isCut(machine)` s'il existe : un disjoncteur ouvert ou une machine non raccordée dans un bâtiment desservi par un tableau prive la machine électrique de courant. Aucune dépendance (`require=` inchangé) ; sans ce mod, seul le courant de la case compte. |
 
 ## Contraintes de version
 

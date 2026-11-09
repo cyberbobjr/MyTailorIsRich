@@ -390,7 +390,7 @@ function MTIR_SewingMachineWindow:refresh()
         return
     end
     self.kind = MTIR.getMachineKind(self.machine)
-    self.powered = MTIR.hasSewingPower(self.machine:getSquare())
+    self.powered = MTIR.hasSewingPower(self.machine:getSquare(), self.machine)
     self.powerText = getText(self.powered and "IGUI_MTIR_Machine_Powered" or "IGUI_MTIR_Machine_Unpowered")
     self.condition = MTIR.getMachineCondition(self.machine)
     self:refreshConditionColor()
