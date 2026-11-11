@@ -1,6 +1,6 @@
-# Test en jeu automatique (pz-autotest)
+# Test en jeu automatique (pzdev)
 
-Parcours nominal de My Tailor Is Rich joué par script dans le vrai jeu 42.21, sans personne devant le PC, avec l'outil générique `C:\Users\cyber\Zomboid\Workshop\.claude\tools\pz-autotest` (voir son `README.md` et le skill `pz-autotest`).
+Parcours nominal de My Tailor Is Rich joué par script dans le vrai jeu 42.21, sans personne devant le PC, avec l'outil générique `C:\Users\cyber\Zomboid\Workshop\.claude\tools\pzdev` (voir son `README.md` et le skill `pzdev`).
 
 Fichiers : [`autotest.json`](../../../autotest.json) (mods chargés, sauvegarde, serveur) et [`autotest/mtir_hooks.lua`](../../../autotest/mtir_hooks.lua) (scénario et contrôles). Les résultats vont dans `runs/` (ignoré par git).
 
@@ -9,9 +9,9 @@ Fichiers : [`autotest.json`](../../../autotest.json) (mods chargés, sauvegarde,
 Depuis `C:\Users\cyber\Zomboid\Workshop` :
 
 ```powershell
-python .claude/tools/pz-autotest/pz_autotest.py check MyTailorIsRich                                   # config, mods, hooks
-python .claude/tools/pz-autotest/pz_autotest.py sp    MyTailorIsRich --wait-idle 3600                  # client solo
-python .claude/tools/pz-autotest/pz_autotest.py mp    MyTailorIsRich --clients 1 --client-run --wait-idle 3600
+python PZDevKit/pzdev.py check MyTailorIsRich                                   # config, mods, hooks
+python PZDevKit/pzdev.py sp    MyTailorIsRich --wait-idle 3600                  # client solo
+python PZDevKit/pzdev.py mp    MyTailorIsRich --clients 1 --client-run --wait-idle 3600
 ```
 
 Mods chargés : TooltipLib (Workshop 3694097672, copié en lecture) puis `Contents/mods/batman_MyTailorIsRich`. En solo, la sauvegarde Sandbox la plus récente (`20*`) est copiée et sa liste de mods remplacée.

@@ -1,4 +1,4 @@
--- My Tailor Is Rich in-game nominal test (pz-autotest, .claude/tools/pz-autotest/README.md).
+-- My Tailor Is Rich in-game nominal test (pzdev, PZDevKit/docs/wiki/fr/01-tests-automatiques.md).
 --
 -- The authority (single player client, or the dedicated server in mp) plays the
 -- nominal path through the mod's real timed actions (complete() called at once,

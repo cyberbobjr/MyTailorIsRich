@@ -1,7 +1,7 @@
-// pz-autotest configuration of My Tailor Is Rich (.claude/tools/pz-autotest/README.md,
+// pzdev configuration of My Tailor Is Rich (PZDevKit/docs/wiki/fr/01-tests-automatiques.md,
 // docs/annexes/tests/autotest.md):
-//   python .claude/tools/pz-autotest/pz_autotest.py sp MyTailorIsRich --wait-idle 3600
-//   python .claude/tools/pz-autotest/pz_autotest.py mp MyTailorIsRich --clients 1 --client-run --wait-idle 3600
+//   python PZDevKit/pzdev.py sp MyTailorIsRich --wait-idle 3600
+//   python PZDevKit/pzdev.py mp MyTailorIsRich --clients 1 --client-run --wait-idle 3600
 {
   "name": "MyTailorIsRich",
   "gameVersion": "42.21",
