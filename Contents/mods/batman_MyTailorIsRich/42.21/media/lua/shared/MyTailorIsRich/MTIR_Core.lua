@@ -258,6 +258,89 @@ function MTIR.getRandomClothesSize()
 end
 
 -- ----------------------------------------------------------------------------
+-- Dynamic Body Shape Redux (facultatif, Workshop 3834708923)
+-- ----------------------------------------------------------------------------
+-- Ce mod donne à chaque zombie une silhouette (1 émacié, 2 maigre, 3 normal, 4 gros,
+-- 5 obèse) tirée côté client par `DBSR.zombieLevel`, avec un java.util.Random
+-- (newrandom) semé par l'identifiant de tenue du zombie : le même tirage est donc
+-- reproductible ici, sur l'autorité. Ses seuils de poids (65, 75, 85, 100 kg) sont
+-- ceux de MTIR.SIZES : chaque silhouette correspond aux tailles de la même plage.
+
+local BODY_SHAPE_SIZES = {
+    { "XS", "S" },
+    { "M" },
+    { "L" },
+    { "XL" },
+    { "XXL" },
+}
+
+local function randomSizeAmong(names)
+    local total = 0
+    for _, name in ipairs(names) do
+        total = total + MTIR.SIZES[name].chance
+    end
+    local roll = ZombRand(total)
+    local cumulative = 0
+    for _, name in ipairs(names) do
+        cumulative = cumulative + MTIR.SIZES[name].chance
+        if roll < cumulative then
+            return MTIR.SIZES[name]
+        end
+    end
+    return MTIR.SIZES[names[#names]]
+end
+
+--- Silhouette Dynamic Body Shape Redux du zombie (1 à 5), ou nil sans ce mod ou pour
+--- un zombie qu'il ne façonne pas (joueur réanimé, squelette, tenue inconnue).
+function MTIR.getZombieBodyShape(zombie)
+    local dbsr = DBSR
+    if type(dbsr) ~= "table" or type(dbsr.zombieLevel) ~= "function" or type(dbsr.trueId) ~= "function" then
+        return nil
+    end
+    if zombie:isReanimatedPlayer() or zombie:isSkeleton() then
+        return nil
+    end
+    -- Compagne de Stay With Me : Dynamic Body Shape Redux lui garde une silhouette normale.
+    local companion = BridgeCompanion
+    if type(companion) == "table" and type(companion.isBody) == "function" and companion.isBody(zombie) == true then
+        return dbsr.NORMAL
+    end
+    local outfitId = zombie:getPersistentOutfitID()
+    if not outfitId or outfitId == 0 then
+        return nil
+    end
+    local rand = newrandom()
+    rand:seed(dbsr.trueId(outfitId))
+    return dbsr.zombieLevel(rand:random(), zombie:isFemale())
+end
+
+--- Taille de la tenue d'un zombie : celle de sa silhouette Dynamic Body Shape Redux
+--- si ce mod est chargé, sinon le tirage habituel.
+function MTIR.getZombieClothesSize(zombie)
+    local shape = MTIR.getZombieBodyShape(zombie)
+    local names = shape and BODY_SHAPE_SIZES[shape]
+    if names then
+        return randomSizeAmong(names)
+    end
+    return MTIR.getRandomClothesSize()
+end
+
+--- Version `_Fat` ou `_Obese` d'un type de vêtement pour le poids donné, quand
+--- Dynamic Body Shape Redux est chargé et la fournit ; sinon nil.
+function MTIR.getBodyShapeVisualType(fullType, weight)
+    local dbsr = DBSR
+    if type(dbsr) ~= "table" or type(dbsr.levelForWeight) ~= "function" or type(dbsr.SUFFIX) ~= "table" then
+        return nil
+    end
+    local suffix = dbsr.SUFFIX[dbsr.levelForWeight(weight)]
+    if not suffix or not fullType then
+        return nil
+    end
+    local wanted = fullType .. suffix
+    return getScriptManager():FindItem(wanted) and wanted or nil
+end
+
+-- ----------------------------------------------------------------------------
 -- Emplacements (clés texte normalisées, portage 42.21)
 -- ----------------------------------------------------------------------------
 

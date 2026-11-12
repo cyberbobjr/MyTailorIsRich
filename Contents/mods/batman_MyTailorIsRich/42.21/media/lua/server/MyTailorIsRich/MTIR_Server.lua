@@ -6,7 +6,8 @@
 -- * OnTick        : raideur musculaire (OnPlayerUpdate ne se déclenche pas
 --                   côté serveur en 42.21, et le corps y fait autorité).
 -- * OnZombieDead  : une taille cohérente pour toute la tenue du zombie, fixée
---                   avant la création et l'envoi du cadavre.
+--                   avant la création et l'envoi du cadavre (celle de sa
+--                   silhouette avec Dynamic Body Shape Redux).
 -- * Commandes     : taille d'artisanat choisie, escalade (déchirures).
 -- ============================================================================
 
@@ -155,7 +156,7 @@ local function onZombieDead(zombie)
     if not zombie or not instanceof(zombie, "IsoZombie") then
         return
     end
-    local sizeName = MTIR.getRandomClothesSize().name
+    local sizeName = MTIR.getZombieClothesSize(zombie).name
     local shoeSize = MTIR.randomShoeSize(zombie:isFemale())
     local worn = zombie:getWornItems()
     if worn then
@@ -265,5 +266,15 @@ Events.EveryHours.Add(onEveryHours)
 Events.OnTick.Add(onTick)
 Events.OnCreatePlayer.Add(onCreatePlayer)
 Events.OnCharacterDeath.Add(onCharacterDeath)
-Events.OnZombieDead.Add(onZombieDead)
 Events.OnClientCommand.Add(onClientCommand)
+
+-- En solo, Dynamic Body Shape Redux remplace à OnZombieDead les vêtements `_Fat` et
+-- `_Obese` du cadavre par des objets neufs, qui ne gardent pas notre ModData. Inscrit
+-- une fois tous les fichiers Lua chargés (OnInitGlobalModData : solo et serveur),
+-- notre gestionnaire passe après lui et taille les objets définitifs.
+local function registerZombieDead()
+    Events.OnZombieDead.Remove(onZombieDead)
+    Events.OnZombieDead.Add(onZombieDead)
+end
+
+Events.OnInitGlobalModData.Add(registerZombieDead)

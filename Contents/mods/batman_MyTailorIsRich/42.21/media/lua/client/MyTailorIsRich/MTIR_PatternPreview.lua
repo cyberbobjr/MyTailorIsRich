@@ -74,6 +74,12 @@ local function buildDesc(player, item, keepClothes)
             end
         end
     end
+    -- Dynamic Body Shape Redux : sur un corps gros ou obèse, le vêtement essayé prend
+    -- la même version élargie que ceux que le joueur porte (objet local seulement).
+    local shaped = MTIR.getBodyShapeVisualType(item:getFullType(), player:getNutrition():getWeight())
+    if shaped then
+        item:getVisual():setItemType(shaped)
+    end
     desc:setWornItem(item:getBodyLocation(), item)
     return desc
 end
