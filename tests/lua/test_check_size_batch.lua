@@ -171,6 +171,8 @@ function T.setup()
     local state = { instance = function() return {} end }
     ClimbThroughWindowState, ClimbOverFenceState, ClimbOverWallState = state, state, state
     ClimbSheetRopeState, ClimbDownSheetRopeState, CloseWindowState, OpenWindowState = state, state, state, state
+    -- États ajoutés à la file vanilla en 42.22.
+    ClimbState, ClimbDownState, ForceOpenState = state, state, state
     assertTrue(loadVanilla("shared/TimedActions/ISBaseTimedAction.lua"))
     assertTrue(loadVanilla("client/TimedActions/ISTimedActionQueue.lua"))
     loadMod("shared/MyTailorIsRich/MTIR_Reach.lua")
