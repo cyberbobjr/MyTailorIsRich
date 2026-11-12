@@ -11,7 +11,7 @@
 [list]
 [*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b]（必需）：在物品提示框中显示尺码和耐久。
 [*]与 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] [b]不兼容[/b]。本模组是它的 Build 42.21 重写版：请勿同时启用。
-[*]兼容 [b]Immersive Weighing[/b]：尺码会随体重一起隐藏。
+[*]兼容 [b]Immersive Weighing[/b]（尺码会随体重一起隐藏）和 [b]Dynamic Body Shape Redux[/b]（僵尸衣服的尺码与其体型一致）。
 [/list]
 
 [h2]合身，还是不合身[/h2]

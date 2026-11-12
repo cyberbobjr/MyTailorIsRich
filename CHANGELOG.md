@@ -3,6 +3,15 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.11 — 2026-11-12
+
+### Improvements
+- **Compatible with [Dynamic Body Shape Redux](https://steamcommunity.com/sharedfiles/filedetails/?id=3834708923).** A zombie's clothes now match its body shape: XS or S on an emaciated zombie, M underweight, L normal, XL fat, XXL obese. **Preview on me** shows the widened version of the garment on a fat or obese character. Without that mod, nothing changes.
+- **Compatible with Live Wire Extended breakers.** An open breaker, or an electric sewing machine not wired to the building's panel, leaves the machine without power. Without that mod, nothing changes.
+
+### Fixes
+- **Singleplayer with Dynamic Body Shape Redux: corpses keep their clothing sizes.** The clothes of a fat or obese zombie no longer lose their size when it dies.
+
 ## 0.4.10 — 2026-11-08
 
 ### Fixes

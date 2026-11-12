@@ -11,7 +11,7 @@ Vêtements et chaussures ont une taille. Trouvez ce qui vous va, retouchez, cous
 [list]
 [*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (obligatoire) : taille et état dans les infobulles.
 [*][b]Incompatible[/b] avec [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url], qu'il réécrit pour la Build 42.21 : n'activez pas les deux.
-[*]Compatible avec [b]Immersive Weighing[/b] : la taille est cachée avec le poids.
+[*]Compatible avec [b]Immersive Weighing[/b] (la taille est cachée avec le poids) et [b]Dynamic Body Shape Redux[/b] (les vêtements des zombies suivent leur silhouette).
 [/list]
 
 [h2]Des vêtements à votre taille (ou pas)[/h2]

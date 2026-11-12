@@ -9,7 +9,7 @@
 [list]
 [*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (обязательно): размер и износ в подсказках.
 [*][b]Несовместим[/b] с [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]: не включайте оба.
-[*]Совместим с [b]Immersive Weighing[/b]: размер скрыт с весом.
+[*]Совместим с [b]Immersive Weighing[/b] и [b]Dynamic Body Shape Redux[/b] (одежда зомби по фигуре).
 [/list]
 
 [h2]Одежда по размеру (или нет)[/h2]
@@ -100,7 +100,7 @@
 
 [h2]Настройки песочницы[/h2]
 
-Навык, штрафы, износ и прочее настраиваются. Одежда модов получает размер сама. Детали на [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
+Всё настраивается. Одежда модов получает размер сама. Детали на [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 
 [h2]Удаление мода[/h2]
 

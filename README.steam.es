@@ -11,7 +11,7 @@ Ropa y zapatos tienen talla. Encuentra lo que te vale, arregla, cose y tiñe el 
 [list]
 [*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (obligatorio): muestra talla y estado en las descripciones emergentes.
 [*][b]No es compatible[/b] con [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]. Este mod es su reescritura para la Build 42.21: no actives los dos.
-[*]Compatible con [b]Immersive Weighing[/b]: la talla se oculta junto con el peso.
+[*]Compatible con [b]Immersive Weighing[/b] (la talla se oculta junto con el peso) y [b]Dynamic Body Shape Redux[/b] (la ropa de los zombis sigue su silueta).
 [/list]
 
 [h2]Ropa que te queda bien (o no)[/h2]

@@ -7,6 +7,7 @@
 | [TooltipLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672) | **Required.** |
 | [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) | **Incompatible** (declared in the mod). My Tailor Is Rich is its rewrite for Build 42.21. |
 | [Immersive Weighing](https://steamcommunity.com/sharedfiles/filedetails/?id=3791897755) | Compatible: when your weight is hidden, your size is hidden too, since it follows your weight. |
+| [Dynamic Body Shape Redux](https://steamcommunity.com/sharedfiles/filedetails/?id=3834708923) | Compatible: a zombie's clothes are the size of its body shape (XS or S emaciated, M underweight, L normal, XL fat, XXL obese). **Preview on me** shows the widened garment on a fat or obese character. |
 | Clothing mods | Compatible: their clothes are sized automatically from what they cover; store-bought patterns, the 3D preview and dyeing include them. |
 | Loot mods that add sewing kits | Compatible: the electric machine can turn up where they put a sewing kit. |
 

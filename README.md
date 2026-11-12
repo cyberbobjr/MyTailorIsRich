@@ -13,6 +13,7 @@ Clothes and shoes finally have sizes. Loot that doesn't fit, resize it with your
 - **[TooltipLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672)** (required): the size and wear lines in item tooltips.
 - **Incompatible** with [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356). This mod is a full rewrite of it for Build 42.21.
 - **Compatible** with [Immersive Weighing](https://steamcommunity.com/sharedfiles/filedetails/?id=3791897755): when your weight is hidden, the size shown next to it is hidden too, since it follows your weight.
+- **Compatible** with [Dynamic Body Shape Redux](https://steamcommunity.com/sharedfiles/filedetails/?id=3834708923): a zombie's clothes are the size of its body shape (XS or S for emaciated, M underweight, L normal, XL fat, XXL obese), and **Preview on me** shows the widened version of a garment on a fat or obese character.
 
 ## Clothing sizes (XS to XXL)
 
@@ -143,6 +144,7 @@ Les vêtements et les chaussures ont enfin une taille. Trouvez ce qui vous va, r
 - **[TooltipLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672)** (obligatoire) : les lignes de taille et d'usure dans les infobulles.
 - **Incompatible** avec [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356), dont ce mod est une réécriture complète pour la Build 42.21.
 - **Compatible** avec [Immersive Weighing](https://steamcommunity.com/sharedfiles/filedetails/?id=3791897755) : quand le poids est caché, la taille affichée à côté l'est aussi, puisqu'elle découle du poids.
+- **Compatible** avec [Dynamic Body Shape Redux](https://steamcommunity.com/sharedfiles/filedetails/?id=3834708923) : les vêtements d'un zombie sont à la taille de sa silhouette (XS ou S pour émacié, M maigre, L normal, XL gros, XXL obèse), et **Aperçu sur moi** montre la version élargie du vêtement sur un personnage gros ou obèse.
 
 ## Tailles de vêtements (XS à XXL)
 

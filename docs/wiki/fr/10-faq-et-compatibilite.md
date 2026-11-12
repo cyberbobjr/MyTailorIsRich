@@ -7,6 +7,7 @@
 | [TooltipLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672) | **Obligatoire.** |
 | [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) | **Incompatible** (déclaré dans le mod). My Tailor Is Rich en est la réécriture pour la Build 42.21. |
 | [Immersive Weighing](https://steamcommunity.com/sharedfiles/filedetails/?id=3791897755) | Compatible : quand le poids est masqué, la taille l'est aussi, puisqu'elle suit le poids. |
+| [Dynamic Body Shape Redux](https://steamcommunity.com/sharedfiles/filedetails/?id=3834708923) | Compatible : les vêtements d'un zombie sont à la taille de sa silhouette (XS ou S émacié, M maigre, L normal, XL gros, XXL obèse). **Aperçu sur moi** montre le vêtement élargi sur un personnage gros ou obèse. |
 | Mods de vêtements | Compatibles : leurs vêtements reçoivent une taille d'après ce qu'ils couvrent ; patrons du commerce, aperçu 3D et teinture les incluent. |
 | Mods de butin qui ajoutent des kits de couture | Compatibles : la machine électrique peut apparaître là où ils posent un kit de couture. |
 
