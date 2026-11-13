@@ -40,7 +40,11 @@ local SHOE_LOSS_RATE_BY_PACE = { [2] = 0.01, [3] = 0.03 }
 local EVENT_LOSS_CHANCE = {
     fence = 0.05, fenceRun = 0.08, fenceSprint = 0.12,
     wall = 0.08, window = 0.04, fall = 0.15,
+    rope = 0.08, ropeDown = 0.06, ladder = 0.04, ladderDown = 0.04,
 }
+-- Corde et échelle : la chaussure tombe en bas, au pied de la corde ou de l'échelle
+-- (valeur : la recherche du sol part de l'étage du dessous à la descente).
+local FALLS_BELOW = { rope = 0, ropeDown = -1, ladder = 0, ladderDown = -1 }
 local EVENT_LOSS_MAX = 0.9
 -- Tirage raté de moins de (facteur - 1) x la chance : « elle a failli partir ».
 local NEAR_MISS_FACTOR = 2
@@ -148,6 +152,12 @@ local function wornShoe(player)
         diff = diff - 1
     end
     return shoe, diff
+end
+
+--- Vrai en chaussettes sans chaussures : le pied glisse sur un barreau d'échelle.
+function MTIR.isInSocksOnly(player)
+    return wornSocks(player) ~= nil and player:getWornItem(ItemBodyLocation.SHOES) == nil
+        and wornShoe(player) == nil
 end
 
 --- 0 immobile, 1 marche, 2 course, 3 sprint.
@@ -355,11 +365,19 @@ local function slipFactor(shoe)
     return SHOE_SLIP[shoe:getFullType()] or DEFAULT_SLIP
 end
 
-local function loseShoe(player, shoe)
-    if MTIR.dropWornItem(shoe, player) then
+--- `below` : nil pour poser la chaussure aux pieds du personnage, sinon le décalage
+--- d'étage d'où part la recherche du sol en dessous (corde, échelle).
+local function loseShoe(player, shoe, below)
+    local square = nil
+    if below then
+        local current = player:getCurrentSquare()
+        square = current and MTIR.getGroundSquareBelow(player, current:getZ() + below)
+    end
+    if MTIR.dropWornItem(shoe, player, square) then
+        local prefix = below and "IGUI_MTIR_Say_ShoeFellBelow" or "IGUI_MTIR_Say_LostShoe"
         MTIR.tell(player, {
             sound = "PutItemInBag",
-            say = { key = "IGUI_MTIR_Say_LostShoe" .. tostring(ZombRand(2)) },
+            say = { key = prefix .. tostring(ZombRand(2)) },
             refresh = true,
         })
     end
@@ -403,7 +421,7 @@ function MTIR.rollShoeLossEvent(player, kind)
         print(string.format("[MTIR] shoe loss %s: chance %.2f, roll %.2f", tostring(kind), chance, draw))
     end
     if draw < chance then
-        loseShoe(player, (wornShoe(player)))
+        loseShoe(player, (wornShoe(player)), FALLS_BELOW[kind])
     elseif draw < chance * NEAR_MISS_FACTOR then
         MTIR.tell(player, { say = { key = "IGUI_MTIR_Say_ShoeSlipping" .. tostring(ZombRand(2)) } })
     end

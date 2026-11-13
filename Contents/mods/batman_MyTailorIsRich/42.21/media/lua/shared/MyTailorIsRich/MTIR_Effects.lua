@@ -303,9 +303,31 @@ end
 
 local SKIRT_KEYS = { skirt = true, longskirt = true }
 
---- Autorité : retire un objet porté et le pose au sol. Faux si le personnage n'a pas de case.
-function MTIR.dropWornItem(item, player)
+--- Première case avec un sol sous le personnage, en descendant à partir de `fromZ`
+--- (étage courant par défaut) : là où tombe un objet lâché sur une corde ou une échelle.
+function MTIR.getGroundSquareBelow(player, fromZ)
     local square = player:getCurrentSquare()
+    if not square then
+        return nil
+    end
+    local cell = getCell()
+    local x, y = square:getX(), square:getY()
+    local z = fromZ or square:getZ()
+    -- Build 42 : sous-sols jusqu'au niveau -32.
+    while z >= -32 do
+        local candidate = cell:getGridSquare(x, y, z)
+        if candidate and candidate:TreatAsSolidFloor() then
+            return candidate
+        end
+        z = z - 1
+    end
+    return square
+end
+
+--- Autorité : retire un objet porté et le pose au sol, sur `square` (case du
+--- personnage par défaut). Faux si le personnage n'a pas de case.
+function MTIR.dropWornItem(item, player, square)
+    square = square or player:getCurrentSquare()
     if not square then
         return false
     end
@@ -460,7 +482,12 @@ end
 -- Déchirures à l'escalade
 -- ----------------------------------------------------------------------------
 
-local CLIMB_RIP_CHANCE = { wall = 0.01, window = 0.002, fence = 0.001, fenceRun = 0.004, fenceSprint = 0.005 }
+-- Corde de draps (42.22 : ClimbState, ClimbDownState) : bras tendus et genoux contre
+-- le mur, autant qu'un mur à la montée, moitié moins à la descente. Échelle : aucun accroc.
+local CLIMB_RIP_CHANCE = {
+    wall = 0.01, window = 0.002, fence = 0.001, fenceRun = 0.004, fenceSprint = 0.005,
+    rope = 0.01, ropeDown = 0.005,
+}
 
 function MTIR.ripClothes(item, player)
     if not item:getCanHaveHoles() then

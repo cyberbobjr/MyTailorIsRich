@@ -278,6 +278,39 @@ T["tirage d'un franchissement : perte, presque perdue, ou rien"] = function()
     assertEq(#SAID, 1, "elle a failli partir")
 end
 
+T["corde et échelle : la chaussure perdue tombe en bas"] = function()
+    local fromZs, ground = {}, { ground = true }
+    MTIR.getGroundSquareBelow = function(_, fromZ)
+        table.insert(fromZs, fromZ)
+        return ground
+    end
+    local dropSquares = {}
+    MTIR.dropWornItem = function(shoe, _, square)
+        table.insert(DROPPED, shoe)
+        table.insert(dropSquares, square or "pieds")
+        return true
+    end
+    function PLAYER:getCurrentSquare() return { getZ = function() return 2 end } end
+    wear(3, "Base.Shoes_FlipFlop")
+    ROLL = 0.0
+    MTIR.rollShoeLossEvent(PLAYER, "rope")
+    assertEq(dropSquares[1], ground, "au pied de la corde")
+    assertEq(fromZs[1], 2, "recherche depuis l'étage courant à la montée")
+    assertEq(SAID[1].say.key, "IGUI_MTIR_Say_ShoeFellBelow0", "phrase de la chute")
+    MTIR.rollShoeLossEvent(PLAYER, "ladderDown")
+    assertEq(fromZs[2], 1, "depuis l'étage du dessous à la descente")
+    MTIR.rollShoeLossEvent(PLAYER, "fall")
+    assertEq(dropSquares[3], "pieds", "chute : aux pieds du personnage")
+end
+
+T["chaussettes sans chaussures : seulement sans rien aux pieds"] = function()
+    assertEq(MTIR.isInSocksOnly(PLAYER), false, "pieds nus")
+    socks(0.15)
+    assertEq(MTIR.isInSocksOnly(PLAYER), true, "chaussettes seules")
+    wear(0)
+    assertEq(MTIR.isInSocksOnly(PLAYER), false, "chaussé")
+end
+
 T["effets des chaussures désactivés : plus rien"] = function()
     SandboxVars.MyTailorIsRich.ShoeEffectMultiplier = 0
     ROLL = 0.0

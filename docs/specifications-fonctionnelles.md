@@ -27,8 +27,8 @@ La taille d'un vêtement trouvé est inconnue. L'option **Check clothes size** l
 ![Taille dans l'infobulle](images/screenshots/shot1.png)
 
 ### F05 — Effets d'un vêtement mal ajusté
-- **Trop grand** : isolation réduite ; combat plus lent pour un haut ; un pantalon ou une jupe trop grand peut **tomber** sans ceinture quand les deux mains sont occupées ; trébuchement possible à la réception d'une clôture, même au pas (moins souvent qu'en courant).
-- **Trop petit** : plus long à enfiler, peut **se déchirer** en escaladant, trébuchement possible après un mur, raideur musculaire des zones couvertes (aggravée par l'exercice) ; **impossible à enfiler** à 3 tailles ou plus d'écart.
+- **Trop grand** : isolation réduite ; combat plus lent pour un haut ; un pantalon ou une jupe trop grand peut **tomber** sans ceinture quand les deux mains sont occupées ; trébuchement possible à la réception d'une clôture, même au pas (moins souvent qu'en courant) ; sur une corde de draps, un pantalon ou une jupe trop grand sans ceinture glisse et peut faire trébucher à l'arrivée par la fenêtre du haut (moitié moins de risque qu'à une clôture, jamais à la descente).
+- **Trop petit** : plus long à enfiler, peut **se déchirer** en escaladant, y compris en montant à une corde de draps (moitié moins à la descente ; jamais sur une échelle), trébuchement possible après un mur, raideur musculaire des zones couvertes (aggravée par l'exercice) ; **impossible à enfiler** à 3 tailles ou plus d'écart.
 - Prise de poids : un vêtement devenu impossible à porter est retiré.
 - Un vêtement fabriqué dont la taille reste à choisir ne s'enfile pas.
 
@@ -59,7 +59,7 @@ Pointures EU 35 à 47 (option `EnableShoeSizes`). Le pied du personnage a une po
 | 3 pointures ou plus trop petite | Impossible à enfiler |
 | 1–2 trop petite | Humeur **inconfort**, **ampoules** (jauge de frottement qui se remplit en marchant, plus vite en courant ; le personnage prévient à mi-jauge), raideur des pieds |
 | Bonne pointure ou une de plus | Rien |
-| 2 ou plus trop grande | Endurance consommée en plus en course, ampoules rares, trébuchement possible après une clôture ou un mur, piétinement plus faible sur un zombie au sol (jusqu'au niveau pieds nus), **chaussure perdue** possible en enjambant une clôture, en escaladant ou en tombant |
+| 2 ou plus trop grande | Endurance consommée en plus en course, ampoules rares, trébuchement possible après une clôture ou un mur, piétinement plus faible sur un zombie au sol (jusqu'au niveau pieds nus), **chaussure perdue** possible en enjambant une clôture, en escaladant, en tombant, ou sur une corde de draps ou une échelle (elle tombe alors en bas, au pied de la corde ou de l'échelle) ; pied qui glisse d'un barreau et trébuchement en quittant une échelle (moitié moins de risque qu'à une clôture), aussi en chaussettes sans chaussures |
 | 3 ou plus trop grande | En plus : inconfort, et chaussure perdue possible aussi en courant ou en sprintant |
 
 Le risque de perte est plus élevé avec des tongs et des pantoufles, plus faible avec des bottes lacées ; un tirage manqué de peu fait dire au personnage que la chaussure a failli partir.
