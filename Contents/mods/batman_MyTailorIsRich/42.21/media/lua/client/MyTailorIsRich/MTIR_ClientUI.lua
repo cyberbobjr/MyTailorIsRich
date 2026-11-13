@@ -19,7 +19,7 @@ end
 MTIR.clientUIInstalled = true
 
 -- ----------------------------------------------------------------------------
--- Écran Personnage : « (L) » après la valeur du poids
+-- Écran Personnage : « (L) » après la valeur du poids, « (L -> M) » près d'une borne
 -- ----------------------------------------------------------------------------
 
 do
@@ -54,8 +54,13 @@ do
         return MTIR.opt("ShowPlayerSize") and not isWeightHiddenByMod()
     end
 
+    -- À moins d'un kilo d'une borne : « (XL -> L) », la taille à venir après la flèche.
     local function sizeLabel(screen)
         local label = MTIR.getPlayerSize(screen.char).name
+        local _, target = MTIR.getSizeWarning(screen.char)
+        if target then
+            label = label .. " -> " .. target.name
+        end
         if MTIR.opt("EnableShoeSizes") then
             label = label .. ", " .. tostring(MTIR.getPlayerShoeSize(screen.char))
         end

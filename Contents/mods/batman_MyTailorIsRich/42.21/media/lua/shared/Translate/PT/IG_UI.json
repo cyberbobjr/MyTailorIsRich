@@ -254,8 +254,8 @@
     "IGUI_MTIR_Say_Measured_Other": "%1 veste tamanho %2 e calça o %3",
     "IGUI_MTIR_Say_SizeUp": "A roupa está a apertar, agora visto tamanho %1",
     "IGUI_MTIR_Say_SizeDown": "A roupa anda a bailar, agora visto tamanho %1",
-    "IGUI_MTIR_Say_SizeNearUp": "Começa a apertar",
-    "IGUI_MTIR_Say_SizeNearDown": "Começa a ficar larga",
-    "IGUI_MTIR_Tooltip_SizeNearUp": "Começa a apertar",
-    "IGUI_MTIR_Tooltip_SizeNearDown": "Começa a ficar larga"
+    "IGUI_MTIR_Say_SizeNearUp": "Começa a apertar, em breve tamanho %1",
+    "IGUI_MTIR_Say_SizeNearDown": "Começa a ficar larga, em breve tamanho %1",
+    "IGUI_MTIR_Tooltip_SizeNearUp": "Começa a apertar, em breve %1",
+    "IGUI_MTIR_Tooltip_SizeNearDown": "Começa a ficar larga, em breve %1"
 }

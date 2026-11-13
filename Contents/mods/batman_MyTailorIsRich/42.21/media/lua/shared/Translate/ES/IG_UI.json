@@ -254,8 +254,8 @@
     "IGUI_MTIR_Say_Measured_Other": "%1 usa la talla %2 y el número %3",
     "IGUI_MTIR_Say_SizeUp": "La ropa me aprieta, ahora uso la talla %1",
     "IGUI_MTIR_Say_SizeDown": "La ropa me baila, ahora uso la talla %1",
-    "IGUI_MTIR_Say_SizeNearUp": "Empieza a apretarme",
-    "IGUI_MTIR_Say_SizeNearDown": "Empieza a quedarme holgada",
-    "IGUI_MTIR_Tooltip_SizeNearUp": "Empieza a apretar",
-    "IGUI_MTIR_Tooltip_SizeNearDown": "Empieza a quedar holgada"
+    "IGUI_MTIR_Say_SizeNearUp": "Empieza a apretarme, pronto seré talla %1",
+    "IGUI_MTIR_Say_SizeNearDown": "Empieza a quedarme holgada, pronto seré talla %1",
+    "IGUI_MTIR_Tooltip_SizeNearUp": "Empieza a apretar, pronto talla %1",
+    "IGUI_MTIR_Tooltip_SizeNearDown": "Empieza a quedar holgada, pronto talla %1"
 }

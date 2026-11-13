@@ -61,8 +61,9 @@ Les vêtements d'un même zombie ont des tailles proches : la même le plus souv
 Si le personnage prend du poids, les vêtements devenus impossibles à porter sont retirés. Le personnage dit pourquoi.
 
 Vous êtes prévenu avant : à moins d'un kilo de la taille suivante, le personnage dit que ça commence
-à serrer (ou à flotter), et l'infobulle de ce qu'il porte le répète. Au changement de taille, il
-annonce la nouvelle.
+à serrer (ou à flotter) et quelle taille l'attend, et l'infobulle de ce qu'il porte le répète.
+L'écran Personnage l'indique aussi par une flèche, par exemple `(XL -> L)` : la taille reste XL
+tant que le poids n'a pas franchi la borne. Au changement de taille, il annonce la nouvelle.
 
 ## Ensuite
 

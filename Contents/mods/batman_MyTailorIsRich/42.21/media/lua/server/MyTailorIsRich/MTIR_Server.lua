@@ -241,6 +241,7 @@ function Commands.machineSound(player, args)
         lastMachineSound[key] = now
         relay.sound = args.sound
     end
+    MTIR.MachineSound.setRunning(relay, relay.on)
     local players = getOnlinePlayers()
     local range = MTIR.MachineSound.RELAY_RANGE
     for i = 0, (players and players:size() or 0) - 1 do

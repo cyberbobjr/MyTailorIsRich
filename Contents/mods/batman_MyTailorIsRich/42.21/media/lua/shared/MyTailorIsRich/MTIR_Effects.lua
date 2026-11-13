@@ -82,9 +82,11 @@ function MTIR.checkSizeDrift(player)
     if near ~= state.near then
         state.near = near
         if near then
+            local target = near == "up" and MTIR.getNextSize(drift.size.name)
+                or MTIR.getPrevSize(drift.size.name)
             MTIR.tell(player, {
                 say = { key = near == "up" and "IGUI_MTIR_Say_SizeNearUp"
-                    or "IGUI_MTIR_Say_SizeNearDown" },
+                    or "IGUI_MTIR_Say_SizeNearDown", arg = target and target.name },
             })
         end
     end
@@ -242,16 +244,16 @@ function MTIR.updateOneClothes(item, player)
     end
 end
 
---- Vrai si le joueur est à moins d'un kilo de changer de taille, avec le sens.
---- Lu par l'infobulle, côté client comme côté autorité.
+--- Sens (« up » ou « down ») et taille à venir si le joueur est à moins d'un kilo
+--- de changer de taille, nil sinon. Lu par l'infobulle et l'écran Personnage.
 function MTIR.getSizeWarning(player)
     local drift = MTIR.getSizeDrift(player:getNutrition():getWeight())
     local margin = MTIR.SIZE_WARNING_MARGIN
     if drift.up and drift.up <= margin then
-        return "up"
+        return "up", MTIR.getNextSize(drift.size.name)
     end
     if drift.down and drift.down <= margin then
-        return "down"
+        return "down", MTIR.getPrevSize(drift.size.name)
     end
     return nil
 end

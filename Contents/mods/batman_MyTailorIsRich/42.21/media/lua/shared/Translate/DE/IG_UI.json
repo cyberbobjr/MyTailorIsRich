@@ -254,8 +254,8 @@
     "IGUI_MTIR_Say_Measured_Other": "%1 hat Größe %2, Schuhgröße %3",
     "IGUI_MTIR_Say_SizeUp": "Meine Kleidung spannt, ich habe jetzt Größe %1",
     "IGUI_MTIR_Say_SizeDown": "Meine Kleidung schlackert, ich habe jetzt Größe %1",
-    "IGUI_MTIR_Say_SizeNearUp": "Es fängt an zu spannen",
-    "IGUI_MTIR_Say_SizeNearDown": "Es wird langsam zu weit",
-    "IGUI_MTIR_Tooltip_SizeNearUp": "Fängt an zu spannen",
-    "IGUI_MTIR_Tooltip_SizeNearDown": "Wird langsam zu weit"
+    "IGUI_MTIR_Say_SizeNearUp": "Es fängt an zu spannen, bald Größe %1",
+    "IGUI_MTIR_Say_SizeNearDown": "Es wird langsam zu weit, bald Größe %1",
+    "IGUI_MTIR_Tooltip_SizeNearUp": "Fängt an zu spannen, bald %1",
+    "IGUI_MTIR_Tooltip_SizeNearDown": "Wird langsam zu weit, bald %1"
 }

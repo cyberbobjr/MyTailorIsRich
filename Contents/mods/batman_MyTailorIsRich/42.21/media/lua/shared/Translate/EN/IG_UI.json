@@ -254,8 +254,8 @@
     "IGUI_MTIR_Say_Measured_Other": "%1 is a size %2, size %3 shoes",
     "IGUI_MTIR_Say_SizeUp": "My clothes are getting tight, I'm a size %1 now",
     "IGUI_MTIR_Say_SizeDown": "My clothes are hanging off me, I'm a size %1 now",
-    "IGUI_MTIR_Say_SizeNearUp": "My clothes are starting to feel tight",
-    "IGUI_MTIR_Say_SizeNearDown": "My clothes are starting to feel loose",
-    "IGUI_MTIR_Tooltip_SizeNearUp": "Starting to feel tight",
-    "IGUI_MTIR_Tooltip_SizeNearDown": "Starting to feel loose"
+    "IGUI_MTIR_Say_SizeNearUp": "My clothes are starting to feel tight, soon a size %1",
+    "IGUI_MTIR_Say_SizeNearDown": "My clothes are starting to feel loose, soon a size %1",
+    "IGUI_MTIR_Tooltip_SizeNearUp": "Starting to feel tight, soon %1",
+    "IGUI_MTIR_Tooltip_SizeNearDown": "Starting to feel loose, soon %1"
 }

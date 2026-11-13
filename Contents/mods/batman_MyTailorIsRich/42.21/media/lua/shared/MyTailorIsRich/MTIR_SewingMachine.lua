@@ -101,11 +101,19 @@ function MTIR.findSewingMachine(square)
 end
 
 --- Courant : groupe électrogène, ou réseau public tant qu'il existe, à l'intérieur.
---- machine (facultative) : avec LiveWire Extended chargé, un disjoncteur ouvert de son
---- tableau, ou une machine non raccordée dans un bâtiment desservi, la prive de courant
---- (LiveWire.Extended.isCut). Aucune dépendance : sans ce mod, rien ne change.
+--- machine (facultative) : avec Live Wire chargé et la machine inscrite comme
+--- consommateur (MTIR_LiveWire), un circuit ou un disjoncteur qui la coupe la prive
+--- de courant (LiveWire.API.consumerPowered). Avec LiveWire Extended, un disjoncteur
+--- ouvert de son tableau, ou une machine non raccordée dans un bâtiment desservi, la
+--- prive aussi de courant (LiveWire.Extended.isCut). Aucune dépendance : sans ces
+--- mods, rien ne change.
 function MTIR.hasSewingPower(square, machine)
     if not square then
+        return false
+    end
+    local api = machine and LiveWire and LiveWire.API
+    if api and api.consumer and api.consumerPowered and api.consumer(machine)
+        and not api.consumerPowered(machine) then
         return false
     end
     local lwx = machine and LiveWire and LiveWire.Extended

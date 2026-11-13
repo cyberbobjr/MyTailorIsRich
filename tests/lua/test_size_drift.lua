@@ -80,6 +80,7 @@ T["approche d'une borne : prévenu une seule fois"] = function()
     MTIR.checkSizeDrift(p)
     assertEq(keys(), 1, "prévenu à moins d'un kilo")
     assertEq(SAID[1].key, "IGUI_MTIR_Say_SizeNearUp", "ça commence à serrer")
+    assertEq(SAID[1].arg, "L", "la taille à venir")
     p.weight = 74.8
     MTIR.checkSizeDrift(p)
     assertEq(keys(), 1, "pas répété")
@@ -97,6 +98,7 @@ T["maigrir : prévenu puis annonce de la nouvelle taille"] = function()
     p.weight = 65.5
     MTIR.checkSizeDrift(p)
     assertEq(SAID[1].key, "IGUI_MTIR_Say_SizeNearDown", "ça commence à flotter")
+    assertEq(SAID[1].arg, "S", "la taille à venir")
     p.weight = 64
     MTIR.checkSizeDrift(p)
     assertEq(SAID[2].key, "IGUI_MTIR_Say_SizeDown", "nouvelle taille annoncée")
@@ -140,6 +142,10 @@ T["l'infobulle sait quand le poids approche d'une borne"] = function()
     assertEq(MTIR.getSizeWarning(player(74.5)), "up", "près de la borne haute")
     assertEq(MTIR.getSizeWarning(player(65.5)), "down", "près de la borne basse")
     assertEq(MTIR.getSizeWarning(player(40)), nil, "XS : aucune borne basse")
+    local _, up = MTIR.getSizeWarning(player(74.5))
+    assertEq(up.name, "L", "taille à venir en grossissant")
+    local _, down = MTIR.getSizeWarning(player(85.5))
+    assertEq(down.name, "L", "XL à 85,5 kg : bientôt du L")
 end
 
 return T

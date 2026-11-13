@@ -254,8 +254,8 @@
     "IGUI_MTIR_Say_Measured_Other": "%1: размер %2, обувь %3",
     "IGUI_MTIR_Say_SizeUp": "Одежда жмёт, теперь у меня размер %1",
     "IGUI_MTIR_Say_SizeDown": "Одежда висит на мне, теперь у меня размер %1",
-    "IGUI_MTIR_Say_SizeNearUp": "Начинает жать",
-    "IGUI_MTIR_Say_SizeNearDown": "Начинает болтаться",
-    "IGUI_MTIR_Tooltip_SizeNearUp": "Начинает жать",
-    "IGUI_MTIR_Tooltip_SizeNearDown": "Начинает болтаться"
+    "IGUI_MTIR_Say_SizeNearUp": "Начинает жать, скоро будет %1",
+    "IGUI_MTIR_Say_SizeNearDown": "Начинает болтаться, скоро будет %1",
+    "IGUI_MTIR_Tooltip_SizeNearUp": "Начинает жать, скоро %1",
+    "IGUI_MTIR_Tooltip_SizeNearDown": "Начинает болтаться, скоро %1"
 }

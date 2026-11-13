@@ -3,6 +3,11 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.13 — 2026-11-13
+
+### Improvements
+- **Clearer warning before a size change.** When your weight gets close to the next size, your character now names it: "My clothes are starting to feel loose, soon a size L". The tooltip of worn clothes says the same, and the Character screen shows the coming size with an arrow, for example (XL -> L). Your size only changes once your weight actually crosses the limit.
+
 ## 0.4.12 — 2026-11-13
 
 ### New features

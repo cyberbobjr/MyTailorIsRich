@@ -53,9 +53,49 @@ local function stopLocal(playing)
     end
 end
 
+-- ----------------------------------------------------------------------------
+-- Machines en marche, vues par l'autorité (consommation facturée par Live Wire,
+-- MTIR_LiveWire). En solo, le joueur qui coud les note lui-même ; sur un serveur,
+-- MTIR_Server les note à réception d'une commande "machineSound" vérifiée.
+-- Clé "x,y,z" -> horodatage de la dernière nouvelle ; une machine sans nouvelles
+-- depuis REMOTE_TIMEOUT_MS (déconnexion, plantage) ne tourne plus.
+-- ----------------------------------------------------------------------------
+
+local running = {}
+
+local function posKey(x, y, z)
+    return x .. "," .. y .. "," .. z
+end
+
+--- Autorité : note qu'une machine tourne (on = true) ou s'arrête ; args = { x, y, z }.
+function MachineSound.setRunning(args, on)
+    local key = posKey(args.x, args.y, args.z)
+    running[key] = on == true and getTimestampMs() or nil
+end
+
+--- Autorité : vrai si la machine posée a tourné il y a moins de REMOTE_TIMEOUT_MS.
+function MachineSound.isRunning(machine)
+    local square = machine and machine:getSquare()
+    if not square then
+        return false
+    end
+    local key = posKey(square:getX(), square:getY(), square:getZ())
+    local at = running[key]
+    if not at then
+        return false
+    end
+    if getTimestampMs() - at > REMOTE_TIMEOUT_MS then
+        running[key] = nil
+        return false
+    end
+    return true
+end
+
 local function notify(character, args)
     if isClient() then
         sendClientCommand(character, MTIR.NET_MODULE, "machineSound", args)
+    elseif not isServer() then
+        MachineSound.setRunning(args, args.on)
     end
 end
 

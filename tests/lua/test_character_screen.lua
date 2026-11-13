@@ -11,6 +11,7 @@ function T.setup()
     OPTIONS = { ShowPlayerSize = true, EnableShoeSizes = false }
     DRAWN = {}
     WEIGHT_ICON = false
+    SIZE_WARNING, SIZE_TARGET = nil, nil
 
     UIFont = { Small = "Small" }
     function getText(key)
@@ -29,6 +30,7 @@ function T.setup()
     MTIR = {
         opt = function(name) return OPTIONS[name] end,
         getPlayerSize = function() return { name = "L" } end,
+        getSizeWarning = function() return SIZE_WARNING, SIZE_TARGET end,
     }
     ISInventoryPane = {}
     ISWidgetOutput = {}
@@ -106,6 +108,11 @@ T["taille après le poids"] = function()
     assertEq(renderScreen(), "right:Weight text:80 text:(L) right:Height text:180", "sans chevron")
     WEIGHT_ICON = true
     assertEq(renderScreen(), "right:Weight text:80 text:(L) icon:chevron_up right:Height text:180", "avec chevron")
+end
+
+T["près d'une borne : la taille à venir après une flèche"] = function()
+    SIZE_WARNING, SIZE_TARGET = "down", { name = "M" }
+    assertEq(renderScreen(), "right:Weight text:80 text:(L -> M) right:Height text:180", "bientôt du M")
 end
 
 T["option désactivée : écran vanilla"] = function()

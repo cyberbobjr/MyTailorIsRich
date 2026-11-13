@@ -110,12 +110,12 @@ local function driftLine(item, player)
     if not player:isEquippedClothing(item) then
         return nil
     end
-    local warning = MTIR.getSizeWarning(player)
-    if not warning then
+    local warning, target = MTIR.getSizeWarning(player)
+    if not warning or not target then
         return nil
     end
     local key = warning == "up" and "IGUI_MTIR_Tooltip_SizeNearUp" or "IGUI_MTIR_Tooltip_SizeNearDown"
-    return getText(key), DRIFT
+    return getText(key, target.name), DRIFT
 end
 
 TooltipLib.registerProvider({

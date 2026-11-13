@@ -254,8 +254,8 @@
     "IGUI_MTIR_Say_Measured_Other": "%1: %2 beden, %3 numara ayakkabı",
     "IGUI_MTIR_Say_SizeUp": "Kıyafetlerim sıkmaya başladı, artık %1 bedenim",
     "IGUI_MTIR_Say_SizeDown": "Kıyafetlerim üstümde bol duruyor, artık %1 bedenim",
-    "IGUI_MTIR_Say_SizeNearUp": "Sıkmaya başlıyor",
-    "IGUI_MTIR_Say_SizeNearDown": "Bollaşmaya başlıyor",
-    "IGUI_MTIR_Tooltip_SizeNearUp": "Sıkmaya başlıyor",
-    "IGUI_MTIR_Tooltip_SizeNearDown": "Bollaşmaya başlıyor"
+    "IGUI_MTIR_Say_SizeNearUp": "Sıkmaya başlıyor, yakında %1 beden",
+    "IGUI_MTIR_Say_SizeNearDown": "Bollaşmaya başlıyor, yakında %1 beden",
+    "IGUI_MTIR_Tooltip_SizeNearUp": "Sıkmaya başlıyor, yakında %1",
+    "IGUI_MTIR_Tooltip_SizeNearDown": "Bollaşmaya başlıyor, yakında %1"
 }

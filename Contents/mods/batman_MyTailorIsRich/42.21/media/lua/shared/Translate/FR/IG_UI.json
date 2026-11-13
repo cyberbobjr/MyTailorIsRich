@@ -254,8 +254,8 @@
     "IGUI_MTIR_Say_Measured_Other": "%1 fait du %2, et du %3 en chaussures",
     "IGUI_MTIR_Say_SizeUp": "Mes vêtements me serrent, je fais du %1 maintenant",
     "IGUI_MTIR_Say_SizeDown": "Mes vêtements flottent, je fais du %1 maintenant",
-    "IGUI_MTIR_Say_SizeNearUp": "Ça commence à serrer",
-    "IGUI_MTIR_Say_SizeNearDown": "Ça commence à flotter",
-    "IGUI_MTIR_Tooltip_SizeNearUp": "Commence à serrer",
-    "IGUI_MTIR_Tooltip_SizeNearDown": "Commence à flotter"
+    "IGUI_MTIR_Say_SizeNearUp": "Ça commence à serrer, bientôt du %1",
+    "IGUI_MTIR_Say_SizeNearDown": "Ça commence à flotter, bientôt du %1",
+    "IGUI_MTIR_Tooltip_SizeNearUp": "Commence à serrer, bientôt du %1",
+    "IGUI_MTIR_Tooltip_SizeNearDown": "Commence à flotter, bientôt du %1"
 }
