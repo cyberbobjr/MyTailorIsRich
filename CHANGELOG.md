@@ -7,7 +7,7 @@ Each `## <version> — <date>` section is published as the Steam Workshop change
 
 ### Improvements
 - **Clearer warning before a size change.** When your weight gets close to the next size, your character now names it: "My clothes are starting to feel loose, soon a size L". The tooltip of worn clothes says the same, and the Character screen shows the coming size with an arrow, for example (XL -> L). Your size only changes once your weight actually crosses the limit.
-- **Live Wire: the electric sewing machine is an appliance.** It draws power from your inverter while it sews, shows up in Live Wire's consumer list, and stops when its circuit or breaker is cut. This needs the next Live Wire update; without Live Wire, nothing changes.
+- **Optional Live Wire support: the electric sewing machine is an appliance.** Live Wire is optional: My Tailor Is Rich works perfectly well without it, and nothing changes if you don't use it. With Live Wire (from its next update), the machine draws power from your inverter while it sews, shows up in Live Wire's consumer list, and stops when its circuit or breaker is cut.
 
 ## 0.4.12 — 2026-11-13
 
