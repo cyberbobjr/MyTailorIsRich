@@ -3,6 +3,13 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.12 — 2026-11-13
+
+### New features
+- **Clothes matter on sheet ropes and ladders.** Climbing a sheet rope can snag tight clothes, like climbing a fence. A loose shoe can slip off on a rope or a ladder, and it falls all the way down.
+- **Loose pants on a rope.** Pants too big without a belt can make you stumble as you climb in through the window at the top of a sheet rope. A belt or the right size prevents it.
+- **Slipping off a ladder.** Shoes too big, or socks without shoes, can make your foot slip as you step off a ladder.
+
 ## 0.4.11 — 2026-11-12
 
 ### Improvements
