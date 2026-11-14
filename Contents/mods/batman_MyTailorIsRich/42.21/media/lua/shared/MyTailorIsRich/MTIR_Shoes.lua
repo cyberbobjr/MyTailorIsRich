@@ -109,18 +109,6 @@ function MTIR.randomShoeSizeForItem(item)
     return MTIR.randomShoeSize(isFemale)
 end
 
---- Pointure voisine : 70 % identique, 15 % une de moins, 15 % une de plus.
-function MTIR.shoeSizeNear(size)
-    local roll = ZombRand(100)
-    local result = size
-    if roll < 15 then
-        result = size - 1
-    elseif roll >= 85 then
-        result = size + 1
-    end
-    return math.max(MTIR.SHOE_MIN, math.min(MTIR.SHOE_MAX, result))
-end
-
 local function hashString(text)
     local hash = 5381
     for i = 1, #text do

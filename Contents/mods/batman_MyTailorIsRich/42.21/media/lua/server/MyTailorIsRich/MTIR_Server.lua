@@ -74,6 +74,12 @@ local function onEveryOneMinute()
     forEachAuthorityPlayer(updatePlayerClothes)
 end
 
+--- Filet de sécurité, toutes les dix minutes : un vêtement porté encore sans taille
+--- (OnNewGame non reçu, objet antérieur au mod) prend la taille exacte du porteur.
+local function onEveryTenMinutes()
+    forEachAuthorityPlayer(MTIR.fitUnsizedWornItems)
+end
+
 --- Chaque heure : usure des vêtements portés, et surveillance du poids. Le poids
 --- bouge de quelques centaines de grammes par jour : une passe par heure précède
 --- largement la marge d'un kilo, et le retrait d'un vêtement devenu trop petit.
@@ -139,7 +145,18 @@ local function onCreatePlayer(_, player)
         return
     end
     forgetPlayerState(player)
+    MTIR.fitUnsizedWornItems(player)
     updatePlayerClothes(player)
+end
+
+--- Création d'un personnage (nouvelle partie, nouveau personnage, écran partagé ; en MP
+--- sur le serveur, CreatePlayerPacket). La tenue de départ est déjà portée (Dressup du
+--- constructeur) et le poids tient compte des traits (applyTraits) : elle prend
+--- exactement la taille et la pointure du personnage. Jamais au rechargement.
+local function onNewGame(player)
+    if player and MTIR.isAuthority() then
+        MTIR.fitUnsizedWornItems(player)
+    end
 end
 
 --- Mort d'un personnage joueur. L'événement part aussi pour un zombie et pour un
@@ -263,9 +280,11 @@ local function onClientCommand(module, command, player, args)
 end
 
 Events.EveryOneMinute.Add(onEveryOneMinute)
+Events.EveryTenMinutes.Add(onEveryTenMinutes)
 Events.EveryHours.Add(onEveryHours)
 Events.OnTick.Add(onTick)
 Events.OnCreatePlayer.Add(onCreatePlayer)
+Events.OnNewGame.Add(onNewGame)
 Events.OnCharacterDeath.Add(onCharacterDeath)
 Events.OnClientCommand.Add(onClientCommand)
 

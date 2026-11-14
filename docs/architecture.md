@@ -114,11 +114,13 @@ Une action par opération, toutes dérivées d'`ISBaseTimedAction` : `MTIR_Check
 | Événement | Où | Rôle |
 |---|---|---|
 | `EveryOneMinute` | serveur | `applyAuthorityWornEffects` + `applyDerivedStats` pour chaque joueur vivant. |
+| `EveryTenMinutes` | serveur | Filet de sécurité : vêtement porté encore sans taille → taille exacte du porteur (`fitUnsizedWornItems`). |
 | `EveryOneMinute` | client | Stats dérivées du joueur local (affichage MP). |
 | `EveryHours` | serveur | Usure des vêtements portés (`degradeWornClothes`). |
 | `OnTick` | serveur | Plancher d'inconfort, puis tous les 30 ticks raideur et effets de chaussures ; resynchronisation de l'inconfort tous les 300 ticks. |
 | `OnTick`, `OnAIStateChange` | client | Détection de l'escalade, de la chute et de la réception. |
-| `OnCreatePlayer` | serveur (solo seulement) | Tailles de la tenue de départ. |
+| `OnNewGame` | serveur (et solo) | Création d'un personnage seulement : tenue de départ à la taille et à la pointure exactes (`fitUnsizedWornItems`). |
+| `OnCreatePlayer` | serveur (solo seulement) | Remise à zéro de l'état du joueur et première passe de la tenue portée. |
 | `OnZombieDead` | serveur | Une taille de référence et une pointure par zombie, avant la création du cadavre. |
 | `OnClothingUpdated` | partagé | Recalcul des stats dérivées, joueurs seulement (`IsoAnimal` hérite d'`IsoPlayer` et reçoit aussi cet événement en solo). |
 | `OnClientCommand` / `OnServerCommand` | serveur / client | Commandes du module `MTIR`. |

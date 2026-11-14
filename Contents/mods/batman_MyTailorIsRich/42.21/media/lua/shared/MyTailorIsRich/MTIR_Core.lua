@@ -506,7 +506,16 @@ function MTIR.createData(item, initSize)
     return modData[MTIR.DATA_KEY]
 end
 
-local CORPSE_CONTAINERS = { inventorymale = true, inventoryfemale = true }
+--- Autorité uniquement. Crée la donnée à la taille donnée, sans tirage voisin.
+function MTIR.createExactData(item, sizeName)
+    local modData = item:getModData()
+    if not modData[MTIR.DATA_KEY] then
+        modData[MTIR.DATA_KEY] = { size = sizeName, reveal = false, hint = false, resized = 0 }
+    end
+    return modData[MTIR.DATA_KEY]
+end
+
+local CORPSE_CONTAINERS ={ inventorymale = true, inventoryfemale = true }
 
 --- Autorité : tous les vêtements d'un même corps reçoivent une taille voisine.
 function MTIR.sizeClothingCollection(items, sizeName)

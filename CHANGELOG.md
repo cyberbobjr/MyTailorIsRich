@@ -3,6 +3,11 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.15 — 2026-11-14
+
+### Fixes
+- **Your starting clothes always fit.** A new character's starting outfit and shoes now always match their exact size, including the weight from traits like Overweight or Underweight. Before, a piece could start one size off.
+
 ## 0.4.14 — 2026-11-14
 
 ### New features

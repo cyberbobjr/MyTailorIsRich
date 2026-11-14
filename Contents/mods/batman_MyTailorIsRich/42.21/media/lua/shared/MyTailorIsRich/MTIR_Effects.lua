@@ -367,7 +367,29 @@ function MTIR.removeTooTight(item, player)
     })
 end
 
---- Autorité, chaque minute : tailles de la tenue de départ, chute, retrait.
+--- Autorité : la tenue portée sans taille (tenue de départ, objet antérieur au mod)
+--- prend exactement la taille et la pointure du porteur, sans tirage. Appelé à la
+--- création du personnage (OnNewGame) puis toutes les dix minutes en filet de sécurité.
+function MTIR.fitUnsizedWornItems(player)
+    local worn = player:getWornItems()
+    if not worn then
+        return
+    end
+    local playerSize = MTIR.getPlayerSize(player)
+    for i = 0, worn:size() - 1 do
+        local item = worn:getItemByIndex(i)
+        if item and MTIR.canShoeHaveSize(item) and not MTIR.getShoeData(item) then
+            MTIR.createShoeData(item, MTIR.getPlayerShoeSize(player)).hint = true
+            MTIR.syncItem(player, item)
+        end
+        if item and MTIR.canClothesHaveSize(item) and not MTIR.getData(item) then
+            MTIR.createExactData(item, playerSize.name).hint = true
+            MTIR.syncItem(player, item)
+        end
+    end
+end
+
+--- Autorité, chaque minute : chute, retrait.
 function MTIR.applyAuthorityWornEffects(player)
     local worn = player:getWornItems()
     local playerSize = MTIR.getPlayerSize(player)
@@ -376,20 +398,7 @@ function MTIR.applyAuthorityWornEffects(player)
 
     for i = 0, worn:size() - 1 do
         local item = worn:getItemByIndex(i)
-        if item and MTIR.canShoeHaveSize(item) and not MTIR.getShoeData(item) then
-            -- Chaussures de départ : à la pointure du porteur, à une près.
-            local shoeData = MTIR.createShoeData(item, MTIR.shoeSizeNear(MTIR.getPlayerShoeSize(player)))
-            shoeData.hint = true
-            MTIR.syncItem(player, item)
-        end
         if item and MTIR.canClothesHaveSize(item) then
-            local data = MTIR.getData(item)
-            if not data then
-                -- Tenue de départ ou objet antérieur au mod : taille proche du porteur.
-                data = MTIR.createData(item, playerSize.name)
-                data.hint = true
-                MTIR.syncItem(player, item)
-            end
             local diff = MTIR.getItemDiff(item, playerSize)
             if diff then
                 if canDrop and diff > 0 and MTIR.canClothesDrop(item)

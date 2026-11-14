@@ -9,6 +9,8 @@ Prérequis : TooltipLib. Incompatible : Realistic Clothes (dont ce mod est une r
 ### F01 — Taille du personnage
 La taille du personnage suit son poids : XS ≤ 50 kg, S ≤ 65, M ≤ 75, L < 85, XL < 100, XXL ≥ 100. Elle change avec le poids. Elle s'affiche sur l'écran Personnage à côté du poids, avec la pointure (option `ShowPlayerSize`), sauf si un mod masque le poids (Immersive Weighing).
 
+La tenue de départ d'un nouveau personnage est toujours exactement à sa taille et à sa pointure, sans tirage : elle est taillée dès la création du personnage (poids des traits compris). Un vêtement porté encore sans taille (objet antérieur au mod) reçoit de même la taille exacte du porteur.
+
 ### F02 — Vêtements qui ont une taille
 Hauts, bas, robes et combinaisons ont une taille XS à XXL, qu'ils viennent du jeu ou d'un autre mod. Les emplacements vanilla connus ont un profil fixe ; tout autre vêtement reçoit une taille d'après ce qu'il couvre (torse, jambes, les deux, ou pieds seuls pour une chaussure). Accessoires (chapeaux, masques, gants, bijoux, ceintures, écharpes, chaussettes…), sous-vêtements et cosmétiques n'ont pas de taille. L'administrateur ajoute des emplacements ou des objets, ou en exclut, par options (F27).
 
