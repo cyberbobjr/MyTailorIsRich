@@ -96,9 +96,23 @@ T["trace and printed models agree on cotton, denim and leather without adding si
         assertEq(printed.kind, model.kind, "printed kind")
         assertEq(printed.fabric, model.fabric, "printed material")
         assertEq(printed.difficulty, model.difficulty, "same difficulty")
-        assertEq(MTIR.getRequiredLevelToSew(model), 1 + MTIR.FABRIC_DIFFICULTY[fabric], "fabric affects level")
+        assertEq(MTIR.getRequiredLevelToSew(model), 2 + MTIR.FABRIC_DIFFICULTY[fabric], "fabric affects level")
         assertEq(MTIR.getRequiredPaper(model), 1, "one paper")
     end
+end
+
+T["pattern levels follow the sandbox option of each garment type"] = function()
+    SandboxVars.MyTailorIsRich.GlovePatternLevel = 4
+    SandboxVars.MyTailorIsRich.EasyClothesLevel = 0
+    SandboxVars.MyTailorIsRich.MediumClothesLevel = 5
+    SandboxVars.MyTailorIsRich.HardClothesLevel = 7
+    SandboxVars.MyTailorIsRich.ShoePatternLevel = 6
+    assertEq(MTIR.getRequiredLevelToSew({ kind = "glove", fabric = "Leather", difficulty = 1 }), 6, "glove option + leather")
+    assertEq(MTIR.getRequiredLevelToSew({ kind = "clothes", fabric = "Cotton", difficulty = 1 }), 0, "easy option")
+    assertEq(MTIR.getRequiredLevelToSew({ kind = "clothes", fabric = "Denim", difficulty = 2 }), 6, "medium option + denim")
+    local hard = { kind = "clothes", fabric = "Cotton", difficulty = 3 }
+    assertEq(MTIR.getRequiredLevelToTrace(hard), 6, "hard option, tracing one less")
+    assertEq(MTIR.getRequiredLevelToSew({ kind = "shoe", fabric = "Leather", difficulty = 3 }), 6, "shoe option, no fabric")
 end
 
 T["missing vanilla fingerless fabrics have explicit fallbacks"] = function()

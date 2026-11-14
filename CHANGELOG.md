@@ -3,6 +3,14 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.14 — 2026-11-14
+
+### New features
+- **Tailoring levels in the sandbox options.** Each garment type now has its own required Tailoring level: easy clothes (T-shirts, shirts, pants, skirts: 1), medium clothes (sweaters, jackets, dungarees: 2), hard clothes (bulky jackets, dresses, boiler suits: 3) and glove patterns (2), next to the existing shoe pattern level (8). They apply to reading size labels, resizing and sewing from patterns; denim and leather still add 1 and 2.
+
+### Balance
+- **Gloves take a bit more skill.** Sewing gloves from a pattern now needs Tailoring 2 for cotton, 3 for denim and 4 for leather (one level more than before). Server owners can set it back to 1 in the sandbox options.
+
 ## 0.4.13 — 2026-11-13
 
 ### Improvements

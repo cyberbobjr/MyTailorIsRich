@@ -4,7 +4,7 @@ Patterns let you sew a garment or a pair of shoes in **any size**.
 
 You can also trace and sew **gloves in one size**, by hand or on a sewing machine. The pattern keeps the exact glove model and its material: cotton, denim or leather. Gloves from other mods work when they use a standard hand slot and declare a supported fabric. Known vanilla fingerless gloves without a declared fabric are handled explicitly. Rubber, surgical, metal and unknown-material gloves cannot be traced.
 
-A glove pattern takes one blank sheet to trace, and two units of the matching material plus three thread uses to sew by hand (machines can reduce thread use). Tailoring required to sew: 1 for cotton, 2 for denim, 3 for leather, before machine bonuses and Sandbox settings. There is no size-offset risk. Glove patterns also work with copying, binders, previews and store-bought patterns. Tracing destroys the original gloves.
+A glove pattern takes one blank sheet to trace, and two units of the matching material plus three thread uses to sew by hand (machines can reduce thread use). Tailoring required to sew: 2 for cotton, 3 for denim, 4 for leather, before machine bonuses (sandbox option: Tailoring for glove patterns). There is no size-offset risk. Glove patterns also work with copying, binders, previews and store-bought patterns. Tracing destroys the original gloves.
 
 ## Tracing a pattern
 
@@ -36,7 +36,7 @@ Right-click the pattern: **Sew from pattern**, then pick a size (XS–XXL, or EU
 
 - Needle, scissors and thread (leather work also accepts an awl and a sharp knife), and a thimble by hand.
 - Bigger sizes use more fabric.
-- Required Tailoring: garment difficulty + fabric difficulty.
+- Required Tailoring: the level of the garment type + fabric difficulty. Each type (easy, medium, hard clothes, gloves) has its own level in the sandbox options.
 - **Precision**: the result can come out one size off. The risk goes from 50% down to 0% with the precision of the pattern plus the Tailoring level of the sewer (zero at 10 levels together). A machine adds precision.
 - A pattern survives **5 sewings** (success or failure), then falls apart.
 

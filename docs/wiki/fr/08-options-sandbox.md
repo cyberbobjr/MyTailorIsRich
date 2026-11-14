@@ -50,6 +50,10 @@ Toutes les options sont sur la page **My Tailor Is Rich** des réglages sandbox.
 | Option | Défaut | Bornes | Effet |
 |---|---|---|---|
 | Coutures par patron | 5 | 1–50 | Coutures par patron (réussies ou ratées). |
+| Couture pour les vêtements simples | 1 | 0–10 | Niveau de base des t-shirts, chemises, pantalons et jupes : retouche et patron (+1 jean, +2 cuir), lecture d'étiquette et tracé un de moins, agrandissement un de plus. |
+| Couture pour les vêtements moyens | 2 | 0–10 | Idem pour les pulls, vestes, vestes de costume et salopettes. |
+| Couture pour les vêtements difficiles | 3 | 0–10 | Idem pour les vestes épaisses, robes et combinaisons de travail. |
+| Couture pour les patrons de gants | 2 | 0–10 | Niveau pour coudre des gants d'après un patron (+1 jean, +2 cuir ; tracé : un de moins). |
 | Couture pour les patrons de chaussures | 8 | 0–10 | Niveau pour coudre des chaussures (tracé : un de moins). Ignoré si le niveau requis est désactivé. |
 | Copies de patrons | Oui | — | Autorise la copie des patrons. |
 | Précision perdue par copie | 1 | 0–10 | Niveaux de précision perdus par copie. 0 : copies parfaites. |

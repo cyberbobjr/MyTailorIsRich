@@ -4,7 +4,7 @@ Un patron permet de coudre un vêtement ou une paire de chaussures dans **n'impo
 
 On peut aussi tracer et coudre des **gants en taille unique**, à la main ou sur une machine à coudre. Le patron conserve le modèle exact et sa matière : coton, jean ou cuir. Les gants d'autres mods sont pris en charge s'ils utilisent un emplacement standard des mains et déclarent un tissu compatible. Une correspondance explicite couvre les mitaines vanilla sans tissu déclaré. Les gants en caoutchouc, chirurgicaux, métalliques ou à matière inconnue sont exclus.
 
-Un patron de gants demande une feuille vierge au tracé, puis deux unités du matériau correspondant et trois utilisations de fil pour une couture à la main (une machine peut réduire le fil). Niveau de Couture requis : 1 pour le coton, 2 pour le jean, 3 pour le cuir, avant bonus de machine et options sandbox. Aucun risque de taille décalée. Copie, classeurs, aperçu et patrons du commerce prennent aussi les gants en charge. Le tracé détruit les gants d'origine.
+Un patron de gants demande une feuille vierge au tracé, puis deux unités du matériau correspondant et trois utilisations de fil pour une couture à la main (une machine peut réduire le fil). Niveau de Couture requis : 2 pour le coton, 3 pour le jean, 4 pour le cuir, avant bonus de machine (option sandbox : Couture pour les patrons de gants). Aucun risque de taille décalée. Copie, classeurs, aperçu et patrons du commerce prennent aussi les gants en charge. Le tracé détruit les gants d'origine.
 
 ## Tracer un patron
 
@@ -36,7 +36,7 @@ Clic droit sur le patron : **Coudre d'après le patron**, puis une taille (XS–
 
 - Aiguille, ciseaux et fil (le cuir accepte aussi une alêne et un couteau tranchant), et un dé à la main.
 - Les grandes tailles demandent plus de tissu.
-- Couture requise : difficulté du vêtement + difficulté du tissu.
+- Couture requise : niveau du type de vêtement + difficulté du tissu. Chaque type (vêtements simples, moyens, difficiles, gants) a son niveau dans les options sandbox.
 - **Précision** : le résultat peut sortir avec une taille d'écart. Le risque va de 50 % à 0 % selon la précision du patron plus le niveau de Couture du couturier (nul à 10 niveaux cumulés). Une machine ajoute de la précision.
 - Un patron supporte **5 coutures** (réussies ou ratées), puis tombe en morceaux.
 

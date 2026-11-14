@@ -294,12 +294,14 @@ function MTIR.describeModel(item)
     return { kind = "clothes", fabric = MTIR.getClothesFabricType(item), difficulty = MTIR.getClothesDifficulty(item) }
 end
 
---- Niveau de Couture du modèle : difficulté + tissu ; option dédiée pour les chaussures.
+--- Niveau de Couture du modèle : option sandbox du type de vêtement + tissu ;
+--- les chaussures ont leur option, sans tissu.
 local function patternLevel(model)
     if model.kind == "shoe" then
         return MTIR.opt("ShoePatternLevel")
     end
-    return model.difficulty + (MTIR.FABRIC_DIFFICULTY[model.fabric] or 0)
+    local base = model.kind == "glove" and MTIR.opt("GlovePatternLevel") or MTIR.getGarmentLevel(model.difficulty)
+    return base + (MTIR.FABRIC_DIFFICULTY[model.fabric] or 0)
 end
 
 function MTIR.getRequiredLevelToTrace(model)

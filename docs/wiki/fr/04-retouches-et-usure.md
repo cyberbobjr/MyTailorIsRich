@@ -10,7 +10,7 @@ Clic droit sur un vêtement dont la taille est connue : **Retoucher**, puis **É
 | Matériau | Bandes du tissu du vêtement (draps déchirés, bandes de jean, bandes de cuir) | Trombones |
 | Couture requise | difficulté + tissu + 1 | difficulté + tissu |
 
-- La difficulté va de 1 (tee-shirt, pantalon) à 3 (robe, combinaison, veste épaisse) ; le tissu ajoute 0 (coton), 1 (jean) ou 2 (cuir).
+- La difficulté va de 1 (tee-shirt, pantalon) à 3 (robe, combinaison, veste épaisse) ; le tissu ajoute 0 (coton), 1 (jean) ou 2 (cuir). Le niveau de chaque difficulté (1, 2, 3 par défaut) se règle dans les options sandbox.
 - Réussite : 50 % au niveau requis, +25 % par niveau au-dessus.
 - Un vêtement ne se retouche **qu'une fois**. Environ un vêtement trouvé sur dix a déjà été retouché.
 - Une retouche ratée peut user le vêtement.

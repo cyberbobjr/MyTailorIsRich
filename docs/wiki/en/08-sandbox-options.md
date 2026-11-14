@@ -50,6 +50,10 @@ All options are on the **My Tailor Is Rich** page of the sandbox settings. The m
 | Option | Default | Range | Effect |
 |---|---|---|---|
 | Pattern max uses | 5 | 1–50 | Sewings per pattern (success or failure). |
+| Tailoring for easy clothes | 1 | 0–10 | Base level for T-shirts, shirts, pants and skirts: resizing and patterns (+1 denim, +2 leather), label reading and tracing one less, enlarging one more. |
+| Tailoring for medium clothes | 2 | 0–10 | Same for sweaters, jackets, suit jackets and dungarees. |
+| Tailoring for hard clothes | 3 | 0–10 | Same for bulky jackets, dresses and boiler suits. |
+| Tailoring for glove patterns | 2 | 0–10 | Tailoring to sew gloves from a pattern (+1 denim, +2 leather; tracing: one less). |
 | Shoe pattern level | 8 | 0–10 | Tailoring to sew shoes from a pattern (tracing: one less). Ignored when the level requirement is off. |
 | Enable pattern copy | On | — | Allows copying patterns. |
 | Pattern copy precision loss | 1 | 0–10 | Precision levels lost per copy. 0: perfect copies. |

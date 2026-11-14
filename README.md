@@ -55,7 +55,7 @@ A blister is a small foot scratch without zombie infection. Like any foot injury
 - Materials follow the fabric of the model: cotton (ripped sheets, cotton fabric roll), denim (denim strips, denim rolls) or leather (leather strips, tanned leather). Bigger sizes use more fabric. Leather work also accepts an awl and a sharp knife.
 - **Precision**: the result can come out one size off (bigger or smaller). The risk goes from 50% down to 0% with the Tailoring level of the tracer plus that of the sewer.
 - A pattern survives **5 sewings** (success or failure), then falls apart.
-- Required Tailoring: garment difficulty + fabric (cotton 0, denim 1, leather 2); tracing needs one level less. **Shoes need level 8** (sandbox option), a needle **and an awl**, thread, **glue**, and leather or fabric depending on the model (trainers and slippers in cotton, the rest in leather); they are always sewn by hand. Rubber or plastic shoes (wellies, flip-flops) have no pattern.
+- Required Tailoring: garment type level (easy 1, medium 2, hard 3, gloves 2, all sandbox options) + fabric (cotton 0, denim 1, leather 2); tracing needs one level less. **Shoes need level 8** (sandbox option), a needle **and an awl**, thread, **glue**, and leather or fabric depending on the model (trainers and slippers in cotton, the rest in leather); they are always sewn by hand. Rubber or plastic shoes (wellies, flip-flops) have no pattern.
 - No pattern for ballistic protection or items without a sewable fabric.
 
 ## Pattern binder, copies and 3D preview
@@ -186,7 +186,7 @@ Une ampoule est une petite égratignure au pied, sans infection zombie. Comme to
 - Les matériaux suivent le tissu du modèle : coton (draps déchirés, rouleau de coton), jean (bandes de jean, rouleaux de jean) ou cuir (lanières de cuir, cuir tanné). Une grande taille demande plus de tissu. Pour le cuir, une alêne et un couteau aiguisé conviennent aussi.
 - **Précision** : l'objet peut sortir avec une taille d'écart, plus grand ou plus petit. Le risque passe de 50 % à 0 % selon le niveau de Couture du traceur et celui de la couturière ou du couturier.
 - Un patron supporte **5 coutures** (réussies ou non), puis part en morceaux.
-- Couture requise : difficulté du vêtement + tissu (coton 0, jean 1, cuir 2) ; le tracé demande un niveau de moins. **Les chaussures demandent le niveau 8** (option sandbox), une aiguille **et un poinçon**, du fil, **de la colle**, et du cuir ou du tissu selon le modèle (baskets et chaussons en coton, le reste en cuir) ; elles se cousent toujours à la main. Les chaussures en caoutchouc ou en plastique (bottes de pluie, tongs) n'ont pas de patron.
+- Couture requise : niveau du type de vêtement (simple 1, moyen 2, difficile 3, gants 2, tous en options sandbox) + tissu (coton 0, jean 1, cuir 2) ; le tracé demande un niveau de moins. **Les chaussures demandent le niveau 8** (option sandbox), une aiguille **et un poinçon**, du fil, **de la colle**, et du cuir ou du tissu selon le modèle (baskets et chaussons en coton, le reste en cuir) ; elles se cousent toujours à la main. Les chaussures en caoutchouc ou en plastique (bottes de pluie, tongs) n'ont pas de patron.
 - Pas de patron pour une protection balistique ni pour un objet sans tissu cousable.
 
 ## Classeur à patrons, copies et aperçu 3D

@@ -132,6 +132,30 @@ option MyTailorIsRich.PatternMaxUses
     page = MyTailorIsRich, translation = MyTailorIsRich_PatternMaxUses,
 }
 
+option MyTailorIsRich.EasyClothesLevel
+{
+    type = integer, min = 0, max = 10, default = 1,
+    page = MyTailorIsRich, translation = MyTailorIsRich_EasyClothesLevel,
+}
+
+option MyTailorIsRich.MediumClothesLevel
+{
+    type = integer, min = 0, max = 10, default = 2,
+    page = MyTailorIsRich, translation = MyTailorIsRich_MediumClothesLevel,
+}
+
+option MyTailorIsRich.HardClothesLevel
+{
+    type = integer, min = 0, max = 10, default = 3,
+    page = MyTailorIsRich, translation = MyTailorIsRich_HardClothesLevel,
+}
+
+option MyTailorIsRich.GlovePatternLevel
+{
+    type = integer, min = 0, max = 10, default = 2,
+    page = MyTailorIsRich, translation = MyTailorIsRich_GlovePatternLevel,
+}
+
 option MyTailorIsRich.ShoePatternLevel
 {
     type = integer, min = 0, max = 10, default = 8,

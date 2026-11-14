@@ -73,6 +73,21 @@ T["fil : facteur de la machine, arrondi au-dessus, jamais zéro"] = function()
     assertEq(MTIR.applyThreadFactor(0, mods(ELECTRIC)), 1, "jamais zéro")
 end
 
+T["niveaux requis : option sandbox du type de vêtement"] = function()
+    local shirt = garment()
+    assertEq(MTIR.getRequiredLevelToCheck(shirt), 0, "défaut : étiquette d'un vêtement simple")
+    assertEq(MTIR.getRequiredLevelToChange(shirt, false), 1, "défaut : rétrécir un t-shirt en coton")
+    SandboxVars.MyTailorIsRich.EasyClothesLevel = 4
+    assertEq(MTIR.getRequiredLevelToCheck(shirt), 3, "étiquette : un de moins")
+    assertEq(MTIR.getRequiredLevelToChange(shirt, false), 4, "rétrécir")
+    assertEq(MTIR.getRequiredLevelToChange(shirt, true), 5, "agrandir : un de plus")
+    MTIR.getSlot = function() return { difficulty = 3 } end
+    SandboxVars.MyTailorIsRich.HardClothesLevel = 6
+    assertEq(MTIR.getRequiredLevelToChange(shirt, false), 6, "vêtement difficile")
+    SandboxVars.MyTailorIsRich.NeedTailoringLevel = false
+    assertEq(MTIR.getRequiredLevelToChange(shirt, true), 0, "niveau requis désactivé")
+end
+
 T["niveau retenu : compétence plus le bonus de la machine"] = function()
     assertEq(MTIR.getEffectiveTailoring(PLAYER, nil), 4, "à la main : la compétence")
     assertEq(MTIR.getEffectiveTailoring(PLAYER, mods(ELECTRIC)), 6, "électrique : +2")

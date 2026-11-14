@@ -53,6 +53,10 @@ local DEFAULTS = {
     ExtraSizedLocations = "",
     ListExcludedClothes = "",
     PatternMaxUses = 5,
+    EasyClothesLevel = 1,
+    MediumClothesLevel = 2,
+    HardClothesLevel = 3,
+    GlovePatternLevel = 2,
     ShoePatternLevel = 8,
     EnablePatternCopy = true,
     PatternCopyPrecisionLoss = 1,
@@ -598,13 +602,23 @@ function MTIR.getClothesDifficulty(item)
     return found and found.difficulty or 1
 end
 
+--- Option sandbox du niveau de Couture de base, par difficulté de vêtement (1 à 3).
+local GARMENT_LEVEL_OPTIONS = { "EasyClothesLevel", "MediumClothesLevel", "HardClothesLevel" }
+
+--- Niveau de Couture de base d'une difficulté de vêtement, avant le tissu.
+function MTIR.getGarmentLevel(difficulty)
+    local tier = math.floor(tonumber(difficulty) or 1)
+    tier = math.max(1, math.min(#GARMENT_LEVEL_OPTIONS, tier))
+    return MTIR.opt(GARMENT_LEVEL_OPTIONS[tier])
+end
+
 function MTIR.canResizeClothes(item)
     return MTIR.canClothesHaveSize(item) and MTIR.getClothesFabricType(item) ~= nil
 end
 
 function MTIR.getRequiredLevelToCheck(item)
     if not MTIR.opt("NeedTailoringLevel") then return 0 end
-    return math.max(MTIR.getClothesDifficulty(item) - 1, 0)
+    return math.max(MTIR.getGarmentLevel(MTIR.getClothesDifficulty(item)) - 1, 0)
 end
 
 --- Mesure au mètre ruban : deux fois plus rapide qu'une lecture d'étiquette.
@@ -620,11 +634,11 @@ end
 
 function MTIR.getRequiredLevelToChange(item, isUpsizing)
     if not MTIR.opt("NeedTailoringLevel") then return 0 end
-    local difficulty = MTIR.getClothesDifficulty(item) + fabricDifficulty(item)
+    local level = MTIR.getGarmentLevel(MTIR.getClothesDifficulty(item)) + fabricDifficulty(item)
     if isUpsizing then
-        difficulty = difficulty + 1
+        level = level + 1
     end
-    return difficulty
+    return level
 end
 
 function MTIR.getChangeDuration(item, isUpsizing)

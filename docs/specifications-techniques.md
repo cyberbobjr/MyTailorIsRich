@@ -119,7 +119,7 @@ Clé joueur côté serveur : `"u" .. getUsername()` (`MTIR.playerKey`), `"p" .. 
 - Tailles : XS ≤ 50 kg, S ≤ 65, M ≤ 75, L < 85, XL < 100, XXL ≥ 100 ; poids de tirage 5/10/25/35/15/10 ; tirage près d'une référence : −1 (25), 0 (60), +1 (15), pondéré par la fréquence ; 10 % de vêtements déjà retouchés.
 - Lecture : niveau `max(difficulté − 1, 0)` ; durée `difficulté × 50 × ActionTimeMultiplier` ; chaussure 30.
 - Papier des patrons : feuille vierge, non favorite, non renommée, non verrouillée ; nom identique au script. Les ModData inconnues protègent les documents de mods. Seule exception : une entrée vanilla `customName` égale au nom normal avec `isCustomName() == false` n'empêche pas le tracé ou la copie (`setCustomName(false)` laisse cette entrée en Java). Même prédicat dans les menus et les contrôles d'autorité.
-- Retouche : niveau `difficulté + tissu (+1 agrandir)` ; réussite `0,5 + 0,25 × (niveau − requis)` ; durée `difficulté × 150 + tissu × 75 (+300)` ; matériaux et fil `difficulté × 2` ; trombones (`Base.Paperclip`) pour rétrécir.
+- Retouche : niveau `option du type (EasyClothesLevel, MediumClothesLevel, HardClothesLevel selon la difficulté 1, 2, 3) + tissu (+1 agrandir)` ; réussite `0,5 + 0,25 × (niveau − requis)` ; durée `difficulté × 150 + tissu × 75 (+300)` ; matériaux et fil `difficulté × 2` ; trombones (`Base.Paperclip`) pour rétrécir.
 - Patron : fil `difficulté × 2 + 1` (chaussure 5) ; durée `300 + difficulté × 150` (chaussure 750) ; décalage `0,5 − 0,05 × (précision + niveau + bonus machine)`, borné 0–0,5 ; chaussure : difficulté 3, 1 utilisation de colle, alêne ; tracé : état ≥ 50 %.
 - Gants : `kind = "glove"`, difficulté 1, taille réseau `"OneSize"` (affichage traduit), aucun décalage ni ModData de taille sur l'objet cousu. Tracé : 1 feuille ; couture : 2 unités de tissu, 3 utilisations de fil à la main. `FabricType` reconnu prioritaire ; repli explicite pour `Base.Gloves_FingerlessGloves` (coton) et `Base.Gloves_FingerlessLeatherGloves`, `_Black`, `_Brown` (cuir). Emplacements `hands`, `handsleft`, `handsright` ; cosmétiques et `ListExcludedClothes` exclus. La même matière est conservée dans les patrons tracés, imprimés, copiés et rangés. Couture à la main ou sur machine par les actions existantes, qui revérifient les matériaux sur l'autorité. Aucun changement des anciens patrons.
 - Machines (`MTIR.MACHINE_KINDS`) : électrique durée × 0,5, +2 niveaux, +4 précision, fil × 0,7, bruit rayon/volume 12, usure 2–4 ; pédale × 0,75, +1, +2, × 0,85, bruit 5/6, usure 1–3 ; malus de réussite `(50 − état)/100` sous 50 % ; casse d'aiguille `0,04 + (100 − état)/1000` ; entretien `20 + 8 × niveau` (Électricité / Mécanique), 3 utilisations d'huile (`base:oil`), durée 300 ; portée 1,6 case.
@@ -155,6 +155,10 @@ Page `MyTailorIsRich`, clés `SandboxVars.MyTailorIsRich.<Nom>`, lues à chaque 
 | `ExtraSizedLocations` | texte | `""` | — | Emplacements à tailler même sans parties couvertes, `nom[:difficulté]`, séparés par `,` ou `;`. |
 | `ListExcludedClothes` | texte | `""` | — | Types complets jamais taillés, séparés par des virgules. |
 | `PatternMaxUses` | entier | 5 | 1–50 | Utilisations d'un patron. |
+| `EasyClothesLevel` | entier | 1 | 0–10 | Niveau de base des vêtements de difficulté 1 (t-shirts, chemises, pantalons, jupes) : lecture d'étiquette (−1), retouche et patron (+ tissu). |
+| `MediumClothesLevel` | entier | 2 | 0–10 | Idem, difficulté 2 (pulls, vestes, vestes de costume, salopettes). |
+| `HardClothesLevel` | entier | 3 | 0–10 | Idem, difficulté 3 (vestes épaisses, robes, combinaisons de travail). |
+| `GlovePatternLevel` | entier | 2 | 0–10 | Niveau pour coudre des gants d'après un patron (+ tissu ; tracé : un de moins). |
 | `ShoePatternLevel` | entier | 8 | 0–10 | Niveau pour coudre des chaussures (tracé : un de moins). |
 | `EnablePatternCopy` | booléen | vrai | — | Copie de patron. |
 | `PatternCopyPrecisionLoss` | entier | 1 | 0–10 | Niveaux de précision perdus par copie. |

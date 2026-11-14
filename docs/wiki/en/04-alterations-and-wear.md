@@ -10,7 +10,7 @@ Right-click a garment whose size you know: **Resize clothes**, then **Upsize clo
 | Material | Fabric strips of the garment's fabric (ripped sheets, denim strips, leather strips) | Paperclips |
 | Required Tailoring | difficulty + fabric + 1 | difficulty + fabric |
 
-- Garment difficulty goes from 1 (T-shirt, pants) to 3 (dress, boiler suit, bulky jacket); fabric adds 0 (cotton), 1 (denim) or 2 (leather).
+- Garment difficulty goes from 1 (T-shirt, pants) to 3 (dress, boiler suit, bulky jacket); fabric adds 0 (cotton), 1 (denim) or 2 (leather). The level of each difficulty (1, 2, 3 by default) can be changed in the sandbox options.
 - Success is 50% at the required level, +25% per level above.
 - A garment can be resized **once**. About one found garment in ten has already been altered.
 - A failed alteration can wear the garment out.
