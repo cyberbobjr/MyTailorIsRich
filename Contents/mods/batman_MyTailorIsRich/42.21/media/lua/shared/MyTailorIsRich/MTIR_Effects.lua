@@ -54,6 +54,39 @@ end
 -- quand il approche d'une borne, puis quand il la franchit.
 -- ----------------------------------------------------------------------------
 
+--- Sens de variation du poids selon le jeu (flèche de l'écran Personnage) :
+--- "up", "down" ou nil si le poids est stable.
+function MTIR.getWeightTrend(player)
+    local nutrition = player:getNutrition()
+    if nutrition:isIncWeight() or nutrition:isIncWeightLot() then
+        return "up"
+    end
+    if nutrition:isDecWeight() then
+        return "down"
+    end
+    return nil
+end
+
+--- Borne de taille à moins d'un kilo : "up" (borne haute), "down" (borne basse) ou nil.
+local function nearBound(drift)
+    local margin = MTIR.SIZE_WARNING_MARGIN
+    if drift.up and drift.up <= margin then
+        return "up"
+    end
+    if drift.down and drift.down <= margin then
+        return "down"
+    end
+    return nil
+end
+
+--- Taille atteinte en franchissant la borne `bound`.
+local function boundTarget(drift, bound)
+    if bound == "up" then
+        return MTIR.getNextSize(drift.size.name)
+    end
+    return MTIR.getPrevSize(drift.size.name)
+end
+
 --- Surveille le poids du joueur et le prévient. Appelé chaque heure par l'autorité.
 function MTIR.checkSizeDrift(player)
     local key = MTIR.playerKey(player)
@@ -76,19 +109,22 @@ function MTIR.checkSizeDrift(player)
         return
     end
 
-    local margin = MTIR.SIZE_WARNING_MARGIN
-    local near = (drift.up and drift.up <= margin and "up")
-        or (drift.down and drift.down <= margin and "down") or nil
-    if near ~= state.near then
-        state.near = near
-        if near then
-            local target = near == "up" and MTIR.getNextSize(drift.size.name)
-                or MTIR.getPrevSize(drift.size.name)
-            MTIR.tell(player, {
-                say = { key = near == "up" and "IGUI_MTIR_Say_SizeNearUp"
-                    or "IGUI_MTIR_Say_SizeNearDown", arg = target and target.name },
-            })
-        end
+    -- Une borne proche ne compte que si le poids va vers elle : juste après être passé
+    -- de XL à L en maigrissant, la borne du XL est à quelques grammes mais s'éloigne.
+    local bound = nearBound(drift)
+    if not bound then
+        state.near = nil
+        return
+    end
+    -- Hors de la marge seulement on oublie l'avertissement : une tendance qui hésite
+    -- (repas, effort) ne le fait pas répéter.
+    if bound ~= state.near and bound == MTIR.getWeightTrend(player) then
+        state.near = bound
+        local target = boundTarget(drift, bound)
+        MTIR.tell(player, {
+            say = { key = bound == "up" and "IGUI_MTIR_Say_SizeNearUp"
+                or "IGUI_MTIR_Say_SizeNearDown", arg = target and target.name },
+        })
     end
 end
 
@@ -245,15 +281,13 @@ function MTIR.updateOneClothes(item, player)
 end
 
 --- Sens (« up » ou « down ») et taille à venir si le joueur est à moins d'un kilo
---- de changer de taille, nil sinon. Lu par l'infobulle et l'écran Personnage.
+--- de changer de taille et que son poids va vers cette borne, nil sinon. Lu par
+--- l'infobulle et l'écran Personnage.
 function MTIR.getSizeWarning(player)
     local drift = MTIR.getSizeDrift(player:getNutrition():getWeight())
-    local margin = MTIR.SIZE_WARNING_MARGIN
-    if drift.up and drift.up <= margin then
-        return "up", MTIR.getNextSize(drift.size.name)
-    end
-    if drift.down and drift.down <= margin then
-        return "down", MTIR.getPrevSize(drift.size.name)
+    local bound = nearBound(drift)
+    if bound and bound == MTIR.getWeightTrend(player) then
+        return bound, boundTarget(drift, bound)
     end
     return nil
 end

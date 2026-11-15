@@ -32,12 +32,18 @@ function T.setup()
     MTIR.tell = function(_, fx) table.insert(SAID, fx.say) end
 end
 
---- Joueur simulé, de poids réglable (kilos).
-local function player(weight, num)
-    local o = { weight = weight, num = num or 0 }
+--- Joueur simulé, de poids réglable (kilos) et de tendance réglable
+--- ("up", "down" ou nil : la flèche de l'écran Personnage).
+local function player(weight, num, trend)
+    local o = { weight = weight, num = num or 0, trend = trend }
     function o:getNutrition()
         local owner = self
-        return { getWeight = function() return owner.weight end }
+        return {
+            getWeight = function() return owner.weight end,
+            isIncWeight = function() return owner.trend == "up" end,
+            isIncWeightLot = function() return false end,
+            isDecWeight = function() return owner.trend == "down" end,
+        }
     end
     function o:getPlayerNum() return self.num end
     return o
@@ -74,7 +80,7 @@ T["première passe : la taille est retenue sans rien dire"] = function()
 end
 
 T["approche d'une borne : prévenu une seule fois"] = function()
-    local p = player(70)
+    local p = player(70, 0, "up")
     MTIR.checkSizeDrift(p)
     p.weight = 74.5
     MTIR.checkSizeDrift(p)
@@ -93,7 +99,7 @@ T["approche d'une borne : prévenu une seule fois"] = function()
 end
 
 T["maigrir : prévenu puis annonce de la nouvelle taille"] = function()
-    local p = player(70)
+    local p = player(70, 0, "down")
     MTIR.checkSizeDrift(p)
     p.weight = 65.5
     MTIR.checkSizeDrift(p)
@@ -138,14 +144,48 @@ T["l'oubli d'un joueur efface sa surveillance"] = function()
 end
 
 T["l'infobulle sait quand le poids approche d'une borne"] = function()
-    assertEq(MTIR.getSizeWarning(player(70)), nil, "au milieu de la taille")
-    assertEq(MTIR.getSizeWarning(player(74.5)), "up", "près de la borne haute")
-    assertEq(MTIR.getSizeWarning(player(65.5)), "down", "près de la borne basse")
-    assertEq(MTIR.getSizeWarning(player(40)), nil, "XS : aucune borne basse")
-    local _, up = MTIR.getSizeWarning(player(74.5))
+    assertEq(MTIR.getSizeWarning(player(70, 0, "up")), nil, "au milieu de la taille")
+    assertEq(MTIR.getSizeWarning(player(74.5, 0, "up")), "up", "près de la borne haute en grossissant")
+    assertEq(MTIR.getSizeWarning(player(65.5, 0, "down")), "down", "près de la borne basse en maigrissant")
+    assertEq(MTIR.getSizeWarning(player(40, 0, "down")), nil, "XS : aucune borne basse")
+    local _, up = MTIR.getSizeWarning(player(74.5, 0, "up"))
     assertEq(up.name, "L", "taille à venir en grossissant")
-    local _, down = MTIR.getSizeWarning(player(85.5))
-    assertEq(down.name, "L", "XL à 85,5 kg : bientôt du L")
+    local _, down = MTIR.getSizeWarning(player(85.5, 0, "down"))
+    assertEq(down.name, "L", "XL à 85,5 kg en maigrissant : bientôt du L")
+end
+
+T["une borne dont le poids s'éloigne n'annonce rien"] = function()
+    assertEq(MTIR.getSizeWarning(player(84.9, 0, "down")), nil, "L à 84,9 kg en maigrissant : pas de XL")
+    assertEq(MTIR.getSizeWarning(player(85.5, 0, "up")), nil, "XL à 85,5 kg en grossissant : pas de L")
+    assertEq(MTIR.getSizeWarning(player(74.5, 0, nil)), nil, "poids stable : rien ne va changer")
+end
+
+T["passer de XL à L en maigrissant : pas de « bientôt du XL »"] = function()
+    local p = player(86, 0, "down")
+    MTIR.checkSizeDrift(p)
+    p.weight = 85.5
+    MTIR.checkSizeDrift(p)
+    assertEq(SAID[1].key, "IGUI_MTIR_Say_SizeNearDown", "ça commence à flotter")
+    assertEq(SAID[1].arg, "L", "bientôt du L")
+    p.weight = 84.9
+    MTIR.checkSizeDrift(p)
+    assertEq(SAID[2].key, "IGUI_MTIR_Say_SizeDown", "du L maintenant")
+    p.weight = 84.6
+    MTIR.checkSizeDrift(p)
+    assertEq(keys(), 2, "la borne du XL est proche mais s'éloigne : rien à dire")
+end
+
+T["une tendance qui hésite ne fait pas répéter l'avertissement"] = function()
+    local p = player(70, 0, "up")
+    MTIR.checkSizeDrift(p)
+    p.weight = 74.5
+    MTIR.checkSizeDrift(p)
+    assertEq(keys(), 1, "prévenu")
+    p.trend = nil
+    MTIR.checkSizeDrift(p)
+    p.trend = "up"
+    MTIR.checkSizeDrift(p)
+    assertEq(keys(), 1, "pas répété après une pause de la prise de poids")
 end
 
 return T
