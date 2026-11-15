@@ -3,6 +3,14 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.4.16 — 2026-11-15
+
+### Fixes
+- **Size warnings follow your weight trend.** The "soon a size..." warning, the tooltip line and the arrow on the Character screen now only appear when your weight is actually heading toward the next size. Before, losing weight from XL to L could make your character say their clothes were getting tight, soon a size XL.
+
+### Improvements
+- **Works with Nutrition Makes Sense.** On the Character screen, your size now appears after Nutrition Makes Sense's weekly weight change instead of being hidden under it. Nothing to set up: it is detected automatically.
+
 ## 0.4.15 — 2026-11-14
 
 ### Fixes
