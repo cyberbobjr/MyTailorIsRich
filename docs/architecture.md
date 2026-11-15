@@ -95,6 +95,7 @@ Une action par opération, toutes dérivées d'`ISBaseTimedAction` : `MTIR_Check
 | `MTIR_SewingMachineWindow` + `MTIR_MachineTabPattern`, `MTIR_MachineTabAlter`, `MTIR_MachineTabEmbroider`, `MTIR_MachineUIUtil` | Panneau d'entité de la machine (ouvert par `ISEntityUI` via `LuaWindowClass`), quatre onglets, état et entretien. |
 | `MTIR_PatternPreview` | Fenêtre d'aperçu 3D (`ISUI3DModel`, copie locale du descripteur). |
 | `MTIR_ClientUI` | Taille sur l'écran Personnage, taille dans le nom en inventaire, bouton de taille dans la fenêtre d'artisanat, indice dans l'option « Enfiler ». |
+| `WeightRow/MTIR_WeightRow` + un fichier `MTIR_WeightRow<Mod>` par mod voisin | Registre des mods qui cachent le poids ou écrivent après lui sur l'écran Personnage ; `MTIR_ClientUI` en lit seulement la mise en page (taille cachée, ou placée au-delà de la place prise). |
 | `MTIR_Tooltip` | Ligne d'infobulle taille / usure (TooltipLib). |
 | `MTIR_ClientEvents` | Escalade et chute (commandes `climb`, `fall`), trébuchement à la réception, recalcul d'affichage des stats chaque minute en MP. |
 | `MTIR_ClientFx` | Effets reçus (`fx` : réplique, son, halo, rafraîchissement), envoi de la taille d'artisanat (`setCraftSize`). |
@@ -160,7 +161,7 @@ Migration existante : noms de patrons en clé brute `IGUI_MTIR_…` (0.4.5, `MTI
 
 - **TooltipLib** (prérequis) : `TooltipLib.registerProvider` pour la ligne de taille, la broderie et le contenu du classeur.
 - **Vêtements d'autres mods** : tailles déduites automatiquement (`MTIR_Sizing`), patrons du commerce tirés parmi tous les scripts chargés, aperçu 3D et teinture compatibles.
-- **Immersive Weighing** : si un mod de la liste `WEIGHT_HIDING_MODS` (`ImmersiveWeighing`) est actif, la taille n'est pas affichée sur l'écran Personnage.
+- **Ligne du poids de l'écran Personnage** : registre `MTIR.WeightRow` (`client/MyTailorIsRich/WeightRow/`). Un mod voisin = un fichier qui appelle `MTIR.WeightRow.register({ modId, hidesWeight, occupiedWidth })`, détecté par son ID dans `getActivatedMods()`. Immersive Weighing cache le poids (taille masquée) ; Nutrition Makes Sense peint un cadre après le poids (taille placée au-delà).
 - **Realistic Clothes** : déclaré incompatible (`incompatible=\RealisticClothes`).
 - **Butin** : ajouts à `OnPostDistributionMerge`, après ceux des autres mods ; les listes contenant un kit de couture (y compris de mods) reçoivent la machine électrique.
 - **Désinstallation** : `batman_MyTailorIsRich_Uninstall` redéclare les entités à `SpriteConfig`, les objets posables, les tuiles et leurs traductions, pour que `WorldDictionary.bin` reste satisfait.

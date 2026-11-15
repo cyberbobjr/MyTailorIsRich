@@ -8,6 +8,7 @@
 -- ============================================================================
 
 require "MyTailorIsRich/MTIR_Effects"
+require "MyTailorIsRich/WeightRow/MTIR_WeightRow"
 require "ISUI/ISInventoryPane"
 require "ISUI/ISInventoryPaneContextMenu"
 require "XpSystem/ISUI/ISCharacterScreen"
@@ -31,27 +32,12 @@ do
     local hasWeightIcon = false
     local savedWidth, savedX, savedY, savedFont
 
-    -- Mods qui cachent le poids de cet écran : la taille en découle, elle est cachée aussi.
-    local WEIGHT_HIDING_MODS = { ImmersiveWeighing = true }
-    local weightHiddenByMod = nil
-
-    local function isWeightHiddenByMod()
-        if weightHiddenByMod == nil then
-            weightHiddenByMod = false
-            local mods = getActivatedMods()
-            for i = 0, mods:size() - 1 do
-                local id = string.gsub(tostring(mods:get(i)), "^\\", "")
-                if WEIGHT_HIDING_MODS[id] then
-                    weightHiddenByMod = true
-                    break
-                end
-            end
-        end
-        return weightHiddenByMod
-    end
+    -- Les autres mods de la ligne du poids sont décrits dans WeightRow/ (un fichier par mod).
+    local WeightRow = MTIR.WeightRow
+    local LABEL_GAP = 2
 
     local function showSize()
-        return MTIR.opt("ShowPlayerSize") and not isWeightHiddenByMod()
+        return MTIR.opt("ShowPlayerSize") and not WeightRow.isWeightHidden()
     end
 
     -- À moins d'un kilo d'une borne : « (XL -> L) », la taille à venir après la flèche.
@@ -87,10 +73,15 @@ do
         hasWeightText = false
         local width = getTextManager():MeasureStringX(font or UIFont.Small, str)
         local result = screenDrawText(self, str, x, y, r, g, b, a, font, ...)
-        if hasWeightIcon then
+        -- Un autre mod occupe la place après le poids (flèche comprise) : la taille va au-delà.
+        local occupied = WeightRow.occupiedWidth(font or UIFont.Small)
+        if occupied then
+            hasWeightIcon = false
+            screenDrawText(self, sizeLabel(self), x + width + occupied + LABEL_GAP, y, 1, 1, 1, 1, font or UIFont.Small, ...)
+        elseif hasWeightIcon then
             savedWidth, savedX, savedY, savedFont = width, x, y, font
         else
-            screenDrawText(self, sizeLabel(self), x + width + 2, y, 1, 1, 1, 1, font or UIFont.Small, ...)
+            screenDrawText(self, sizeLabel(self), x + width + LABEL_GAP, y, 1, 1, 1, 1, font or UIFont.Small, ...)
         end
         return result
     end

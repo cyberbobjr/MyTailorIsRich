@@ -1,6 +1,7 @@
 -- MTIR_ClientUI : taille « (L) » après le poids de l'écran Personnage, et
 -- coexistence avec un mod qui cache la ligne du poids en enveloppant render
--- (même technique qu'Immersive Weighing : le texte qui suit le libellé est masqué).
+-- (même technique qu'Immersive Weighing : le texte qui suit le libellé est masqué),
+-- ou qui peint son propre cadre après le poids (Nutrition Makes Sense).
 
 local T = {}
 
@@ -10,6 +11,7 @@ function T.setup()
     ACTIVE_MODS = { "batman_MyTailorIsRich" }
     OPTIONS = { ShowPlayerSize = true, EnableShoeSizes = false }
     DRAWN = {}
+    TEXT_X = {}
     WEIGHT_ICON = false
     SIZE_WARNING, SIZE_TARGET = nil, nil
 
@@ -39,7 +41,11 @@ function T.setup()
     -- Rendu vanilla réduit à la ligne du poids (ISCharacterScreen.lua l.116-128) et à la suivante.
     ISCharacterScreen = {}
     function ISCharacterScreen:drawTextRight(text) table.insert(DRAWN, "right:" .. text) end
-    function ISCharacterScreen:drawText(text) table.insert(DRAWN, "text:" .. text) end
+    function ISCharacterScreen:drawText(text, x)
+        table.insert(DRAWN, "text:" .. text)
+        TEXT_X[text] = x
+    end
+    function ISCharacterScreen:drawRect(x, _, w) table.insert(DRAWN, "rect:" .. x .. "+" .. w) end
     function ISCharacterScreen:drawTexture(texture) table.insert(DRAWN, "icon:" .. texture) end
     function ISCharacterScreen:render()
         self:drawTextRight(getText("IGUI_char_Weight"), 100, 10, 1, 1, 1, 1, UIFont.Small)
@@ -51,7 +57,24 @@ function T.setup()
         self:drawText("180", 110, 30, 1, 1, 1, 0.5, UIFont.Small)
     end
 
+    loadMod("client/MyTailorIsRich/WeightRow/MTIR_WeightRow.lua")
+    loadMod("client/MyTailorIsRich/WeightRow/MTIR_WeightRowImmersiveWeighing.lua")
+    loadMod("client/MyTailorIsRich/WeightRow/MTIR_WeightRowNutritionMakesSense.lua")
     loadMod("client/MyTailorIsRich/MTIR_ClientUI.lua")
+end
+
+--- Nutrition Makes Sense 2.0.2, posé au chargement de ses fichiers : après le rendu,
+--- un cadre plein à la place de la flèche puis la variation de poids dedans
+--- (xOffset = 100, valeur à xOffset + 10 ; cadre à xOffset + largeur + 13).
+local function installNutritionFrame()
+    local render = ISCharacterScreen.render
+    ISCharacterScreen.render = function(self)
+        render(self)
+        local frameX = 100 + getTextManager():MeasureStringX(UIFont.Small, "80") + 13
+        local frameWidth = getTextManager():MeasureStringX(UIFont.Small, "+0.00 kg/wk") + 8
+        self:drawRect(frameX, 10, frameWidth, 12)
+        self:drawText("-0.35 kg/wk", frameX, 10)
+    end
 end
 
 --- Enveloppe posée à OnGameStart, donc au-dessus de celle de MTIR : masque le
@@ -133,6 +156,23 @@ T["enveloppe externe inconnue : la valeur du poids lui parvient en premier"] = f
     assertEq(renderScreen(), "text:(L) right:Height text:180", "le poids reste caché")
     WEIGHT_ICON = true
     assertEq(renderScreen(), "text:(L) right:Height text:180", "chevron caché aussi")
+end
+
+T["Nutrition Makes Sense : la taille passe après son cadre"] = function()
+    ACTIVE_MODS = { "batman_MyTailorIsRich", "\\NutritionMakesSense" }
+    installNutritionFrame()
+    local frameEnd = 100 + 14 + 13 + 77 + 8
+    for _, icon in ipairs({ false, true }) do
+        WEIGHT_ICON = icon
+        local drawn = renderScreen()
+        assertEq(select(2, drawn:gsub("%(L%)", "")), 1, "taille dessinée une seule fois")
+        assertTrue(TEXT_X["(L)"] >= frameEnd, "après le cadre (" .. tostring(TEXT_X["(L)"]) .. ")")
+    end
+end
+
+T["sans Nutrition Makes Sense : la taille reste collée au poids"] = function()
+    renderScreen()
+    assertEq(TEXT_X["(L)"], 110 + 14 + 2, "juste après la valeur")
 end
 
 return T
