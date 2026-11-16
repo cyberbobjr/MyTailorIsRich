@@ -46,9 +46,9 @@ local function profile(fields)
 end
 
 local DEDUCED = {
-    top = profile({ combatMod = true, difficulty = 2 }),
-    bottom = profile({ incTrip = true, difficulty = 1 }),
-    full = profile({ combatMod = true, incTrip = true, difficulty = 3 }),
+    top = profile({ group = "top", combatMod = true, difficulty = 2 }),
+    bottom = profile({ group = "bottom", incTrip = true, difficulty = 1 }),
+    full = profile({ group = "full", combatMod = true, incTrip = true, difficulty = 3 }),
     -- Rien de déclaré : seulement la taille, sans effet de zone.
     plain = profile({ canRip = false, insulationMod = false, incStiffness = false, difficulty = 1 }),
 }

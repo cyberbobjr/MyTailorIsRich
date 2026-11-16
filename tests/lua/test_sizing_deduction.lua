@@ -105,6 +105,20 @@ T["emplacement inventé par un mod : déduit de ce qu'il couvre"] = function()
     assertEq(sizing(greaves).kind, "shoe", "pieds seuls : pointure")
 end
 
+T["groupe de l'emplacement : haut, bas ou tenue complète (catégorie de l'album)"] = function()
+    assertEq(sizing(script("Base.Tshirt_White", "Tshirt", { PARTS.Torso_Upper })).slot.group, "top", "t-shirt")
+    assertEq(sizing(script("Base.Trousers", "Pants", { PARTS.Groin })).slot.group, "bottom", "pantalon")
+    assertEq(sizing(script("Base.Dress_Normal", "Dress", { PARTS.Torso_Upper })).slot.group, "full", "robe")
+    assertEq(sizing(script("Mod.Sleeves", "mod:sleeves", { PARTS.UpperArm_L, PARTS.UpperArm_R })).slot.group,
+        "top", "deux bras : haut déduit")
+    assertEq(sizing(script("Mod.LegPlate", "mod:legarmour", { PARTS.UpperLeg_L, PARTS.UpperLeg_R })).slot.group,
+        "bottom", "bas déduit")
+    assertEq(sizing(script("Mod.LongCoat", "mod:coat", { PARTS.Torso_Upper, PARTS.Groin })).slot.group,
+        "full", "tenue complète déduite")
+    SandboxVars.MyTailorIsRich.ExtraSizedLocations = "plate:2"
+    assertEq(sizing(script("Mod.Plate2", "mod:plate", {})).slot.group, nil, "profil neutre : aucun groupe")
+end
+
 T["un seul bras ou une main : aucune taille"] = function()
     assertEq(sizing(script("Mod.ArmGuard", "mod:armguard", { PARTS.UpperArm_L })), nil,
         "un seul bras ne suffit pas")

@@ -60,7 +60,6 @@ local DEFAULTS = {
     ShoePatternLevel = 8,
     EnablePatternCopy = true,
     PatternCopyPrecisionLoss = 1,
-    PatternBinderCapacity = 20,
     RequireThimble = true,
     MachineBonusMultiplier = 1.0,
     MachineNoiseMultiplier = 1.0,
@@ -372,9 +371,13 @@ end
 -- insulationMod / combatMod : un vêtement trop grand isole moins / gêne le combat.
 -- incTrip : un bas trop grand augmente le risque de chute en franchissant.
 -- incStiffness : un vêtement trop petit raidit les muscles couverts.
-local TOP = { canRip = true, canDrop = false, insulationMod = true, combatMod = true, incTrip = false, incStiffness = true }
-local BOTTOM = { canRip = true, canDrop = true, insulationMod = true, combatMod = false, incTrip = true, incStiffness = true }
-local FULL = { canRip = true, canDrop = false, insulationMod = true, combatMod = true, incTrip = true, incStiffness = true }
+-- group : famille du vêtement (catégorie de l'album de patrons, MTIR_PatternAlbum).
+local TOP = { group = "top", canRip = true, canDrop = false, insulationMod = true, combatMod = true, incTrip = false,
+    incStiffness = true }
+local BOTTOM = { group = "bottom", canRip = true, canDrop = true, insulationMod = true, combatMod = false,
+    incTrip = true, incStiffness = true }
+local FULL = { group = "full", canRip = true, canDrop = false, insulationMod = true, combatMod = true, incTrip = true,
+    incStiffness = true }
 
 local function slot(base, difficulty)
     local result = { difficulty = difficulty }

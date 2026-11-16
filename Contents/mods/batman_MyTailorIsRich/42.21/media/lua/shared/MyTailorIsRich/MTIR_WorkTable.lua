@@ -37,8 +37,9 @@ function MTIR.workTableFromPos(pos)
     return MTIR.findWorkTable(MTIR.squareFromPos(pos))
 end
 
---- Table la plus proche du personnage, dans la même pièce (ou dehors, s'il y est).
-function MTIR.findNearestWorkTable(character)
+--- Objet trouvé par `findOnSquare(square)` le plus proche du personnage, dans la même
+--- pièce (ou dehors, s'il y est), au même étage, à SEARCH_RADIUS cases au plus.
+function MTIR.findNearestObject(character, findOnSquare)
     local origin = character:getCurrentSquare()
     if not origin then
         return nil
@@ -50,7 +51,7 @@ function MTIR.findNearestWorkTable(character)
     for x = cx - SEARCH_RADIUS, cx + SEARCH_RADIUS do
         for y = cy - SEARCH_RADIUS, cy + SEARCH_RADIUS do
             local square = cell:getGridSquare(x, y, z)
-            local found = square and square:getRoom() == room and MTIR.findWorkTable(square)
+            local found = square and square:getRoom() == room and findOnSquare(square)
             if found then
                 local distance = (x - cx) ^ 2 + (y - cy) ^ 2
                 if not bestDistance or distance < bestDistance then
@@ -60,4 +61,14 @@ function MTIR.findNearestWorkTable(character)
         end
     end
     return best
+end
+
+--- Table la plus proche du personnage (tracer, copier un patron).
+function MTIR.findNearestWorkTable(character)
+    return MTIR.findNearestObject(character, MTIR.findWorkTable)
+end
+
+--- Machine à coudre la plus proche du personnage (album : « Coudre à la machine »).
+function MTIR.findNearestSewingMachine(character)
+    return MTIR.findNearestObject(character, MTIR.findSewingMachine)
 end
