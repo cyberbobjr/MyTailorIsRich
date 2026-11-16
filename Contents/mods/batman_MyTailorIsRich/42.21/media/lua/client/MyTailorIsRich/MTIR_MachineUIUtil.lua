@@ -147,8 +147,10 @@ end
 
 --- Texte riche des besoins. Sa hauteur est fixée par UI.fitDetails : au-delà de la
 --- place disponible, il défile (barre vanilla, molette), comme ISModalRichText.
-function UI.newDetails(parent, y)
-    local details = ISRichTextPanel:new(UI.PAD, y, parent.width - UI.PAD * 2, UI.FONT_HGT)
+--- x et width : facultatifs (par défaut toute la largeur du parent, marges comprises).
+function UI.newDetails(parent, y, x, width)
+    x = x or UI.PAD
+    local details = ISRichTextPanel:new(x, y, width or (parent.width - UI.PAD * 2), UI.FONT_HGT)
     details:initialise()
     details:instantiate()
     details.autosetheight = false

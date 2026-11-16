@@ -2,8 +2,8 @@
 -- My Tailor Is Rich — classeur à patrons, copie et aperçu 3D (client)
 -- Menu contextuel :
 --   * patron : « Ranger dans le classeur », « Copier le patron », « Aperçu sur moi » ;
---   * classeur : « Patrons (n/max) » → un sous-menu par patron rangé (coudre,
---     sortir, aperçu), « Ranger tous les patrons (n) ».
+--   * classeur : « Ouvrir l'album (n/max) » (MTIR_PatternAlbumWindow : recherche,
+--     fiche, coudre, sortir, aperçu, dépôt), « Ranger tous les patrons (n) ».
 -- Infobulle du classeur (TooltipLib) : la liste des patrons rangés.
 -- Lecture seule : tout changement passe par une action chronométrée exécutée
 -- par l'autorité (MTIR_BinderStoreAction, MTIR_BinderTakeAction,
@@ -11,6 +11,7 @@
 -- ============================================================================
 
 require "MyTailorIsRich/MTIR_PatternMenu"
+require "MyTailorIsRich/MTIR_PatternAlbumWindow"
 require "MyTailorIsRich/MTIR_PatternPreview"
 require "MyTailorIsRich/MTIR_PatternBinder"
 require "MyTailorIsRich/MTIR_PatternCopy"
@@ -49,13 +50,8 @@ local function usesText(data)
     return tostring(data and data.uses or 0) .. "/" .. tostring(MTIR.opt("PatternMaxUses"))
 end
 
---- Libellé d'un patron rangé : nom et utilisations restantes.
-local function entryLabel(binder, entry)
-    return MTIR.getSourcePatternName(binder, entry.id) .. " (" .. usesText(MTIR.binderEntryPattern(entry)) .. ")"
-end
-
 local function binderLabel(binder)
-    return binder:getName() .. " (" .. MTIR.getBinderCount(binder) .. "/" .. MTIR.getBinderCapacity() .. ")"
+    return binder:getName() .. " (" .. MTIR.getBinderCount(binder) .. ")"
 end
 
 local function addPreviewOption(context, player, fullType)
@@ -79,20 +75,11 @@ local function queueStore(player, binder, pattern)
     ISTimedActionQueue.add(MTIR_BinderStoreAction:new(player, binder, pattern))
 end
 
---- Range autant de patrons que le classeur a de places libres.
+--- Range tous ces patrons (le classeur n'a pas de limite de nombre).
 local function queueStoreAll(player, binder, patterns)
-    local free = MTIR.getBinderCapacity() - MTIR.getBinderCount(binder)
-    for i = 1, math.min(free, #patterns) do
-        queueStore(player, binder, patterns[i])
+    for _, pattern in ipairs(patterns) do
+        queueStore(player, binder, pattern)
     end
-end
-
-local function setFullTooltip(option, binder)
-    option.notAvailable = true
-    option.toolTip = ISInventoryPaneContextMenu.addToolTip()
-    option.toolTip.description = ISInventoryPaneContextMenu.bhs
-        .. getText("IGUI_MTIR_Binder_Full", tostring(MTIR.getBinderCapacity()))
-    option.toolTip.texture = binder:getTex()
 end
 
 local function addStoreOption(pattern, player, context)
@@ -102,20 +89,14 @@ local function addStoreOption(pattern, player, context)
     end
     local label = getText("IGUI_MTIR_Binder_Store")
     if #binders == 1 then
-        local option = context:addOption(label, player, queueStore, binders[1], pattern)
-        if MTIR.isBinderFull(binders[1]) then
-            setFullTooltip(option, binders[1])
-        end
+        context:addOption(label, player, queueStore, binders[1], pattern)
         return
     end
     local option = context:addOption(label)
     local subMenu = context:getNew(context)
     context:addSubMenu(option, subMenu)
     for _, binder in ipairs(binders) do
-        local sub = subMenu:addOption(binderLabel(binder), player, queueStore, binder, pattern)
-        if MTIR.isBinderFull(binder) then
-            setFullTooltip(sub, binder)
-        end
+        subMenu:addOption(binderLabel(binder), player, queueStore, binder, pattern)
     end
 end
 
@@ -188,43 +169,27 @@ local function queueTake(player, binder, entryId)
     ISTimedActionQueue.add(MTIR_BinderTakeAction:new(player, binder, entryId))
 end
 
---- Sous-menu d'un patron rangé : coudre (tailles), sortir, aperçu.
-local function addEntryOption(subMenu, player, binder, entry)
-    local data = MTIR.binderEntryPattern(entry)
-    local option = subMenu:addOption(entryLabel(binder, entry))
-    local entryMenu = subMenu:getNew(subMenu)
-    subMenu:addSubMenu(option, entryMenu)
-    if data then
-        MTIR.SewUI.addSewOption(binder, player, entryMenu, entry.id)
-    end
-    entryMenu:addOption(getText("IGUI_MTIR_Binder_TakeOut"), player, queueTake, binder, entry.id)
-    if data and MTIR.patternModelExists(data) then
-        addPreviewOption(entryMenu, player, data.fullType)
-    end
+--- Pour l'album (MTIR_PatternAlbumWindow) : mêmes gestes que les menus.
+MTIR.BinderUI = { queueStore = queueStore, queueStoreAll = queueStoreAll, queueTake = queueTake }
+
+--- Album du classeur : ses patrons, la zone de dépôt, coudre, sortir, aperçu.
+local function openAlbum(player, binder)
+    MTIR.PatternAlbumUI.open(player, {
+        title = getText("IGUI_MTIR_Album_Title", binder:getName()),
+        binder = binder,
+        collect = function(spec)
+            return MTIR.PatternAlbum.sources({ spec.binder }, {})
+        end,
+    })
 end
 
 local function addBinderOptions(binder, player, context)
-    local entries = MTIR.getBinderEntries(binder)
-    local label = getText("IGUI_MTIR_Binder_Patterns", tostring(#entries), tostring(MTIR.getBinderCapacity()))
-    local option = context:addOption(label)
-    if #entries == 0 then
-        option.notAvailable = true
-        option.toolTip = ISInventoryPaneContextMenu.addToolTip()
-        option.toolTip.description = getText("IGUI_MTIR_Binder_Empty")
-    else
-        local subMenu = context:getNew(context)
-        context:addSubMenu(option, subMenu)
-        for _, entry in ipairs(entries) do
-            addEntryOption(subMenu, player, binder, entry)
-        end
-    end
+    local label = getText("IGUI_MTIR_Album_Open", tostring(MTIR.getBinderCount(binder)))
+    context:addOption(label, player, openAlbum, binder)
     local patterns = carried(player, MTIR.isPattern)
     if #patterns > 0 then
-        local store = context:addOption(getText("IGUI_MTIR_Binder_StoreAll", tostring(#patterns)), player,
+        context:addOption(getText("IGUI_MTIR_Binder_StoreAll", tostring(#patterns)), player,
             queueStoreAll, binder, patterns)
-        if MTIR.isBinderFull(binder) then
-            setFullTooltip(store, binder)
-        end
     end
 end
 
@@ -293,7 +258,7 @@ local WORN = { 0.9, 0.5, 0.4, 1 }
 local function binderTooltip(ctx)
     local binder = ctx.item
     local entries = MTIR.getBinderEntries(binder)
-    ctx:addKeyValue(getText("IGUI_MTIR_Binder_Contents"), #entries .. "/" .. MTIR.getBinderCapacity(), WHITE, WHITE)
+    ctx:addKeyValue(getText("IGUI_MTIR_Binder_Contents"), tostring(#entries), WHITE, WHITE)
     for index, entry in ipairs(entries) do
         if index > TOOLTIP_MAX_LINES then
             ctx:addLabel(getText("IGUI_MTIR_Binder_More", tostring(#entries - TOOLTIP_MAX_LINES)), DIM)

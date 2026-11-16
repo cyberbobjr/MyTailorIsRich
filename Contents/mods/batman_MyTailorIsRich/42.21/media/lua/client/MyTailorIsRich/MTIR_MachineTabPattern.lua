@@ -6,9 +6,10 @@
 -- tant que le panneau reste ouvert, que le patron existe et que tout est prêt.
 -- Le dernier patron utilisé est re-sélectionné à l'ouverture (par joueur).
 -- Les objets sont suivis par identifiant (un transfert MP peut changer l'instance).
--- Un patron rangé dans un classeur à patrons se choisit aussi (clic sur
--- l'emplacement) : la source est alors le classeur (self.pattern) et l'id de
--- l'entrée (self.entryId), voir MTIR_PatternBinder.lua. « Aperçu » ouvre
+-- Un clic sur l'emplacement ouvre l'album de patrons en mode « choisir »
+-- (MTIR_PatternAlbumWindow) : patrons portés et rangés dans les classeurs ; un
+-- patron rangé a pour source le classeur (self.pattern) et l'id de l'entrée
+-- (self.entryId), voir MTIR_PatternBinder.lua. « Aperçu » ouvre
 -- l'aperçu 3D du vêtement sur le personnage (MTIR_PatternPreview.lua).
 -- ============================================================================
 
@@ -18,6 +19,7 @@ require "MyTailorIsRich/MTIR_MachineUIUtil"
 require "MyTailorIsRich/MTIR_PatternMenu"
 require "MyTailorIsRich/MTIR_PatternBinder"
 require "MyTailorIsRich/MTIR_PatternPreview"
+require "MyTailorIsRich/MTIR_PatternAlbumWindow"
 
 MTIR_MachineTabPattern = ISPanel:derive("MTIR_MachineTabPattern")
 
@@ -68,33 +70,6 @@ local function isMachinePattern(item)
     return isMachineData(MTIR.getPatternData(item))
 end
 
---- Choix du menu : { item = patron } ou { item = classeur, entryId = id }.
-local function patternLabel(choice)
-    local data = MTIR.getSourcePatternData(choice.item, choice.entryId)
-    local label = MTIR.getSourcePatternName(choice.item, choice.entryId)
-        .. " (" .. (data and data.uses or 0) .. "/" .. MTIR.opt("PatternMaxUses") .. ")"
-    if choice.entryId ~= nil then
-        label = choice.item:getName() .. " - " .. label
-    end
-    return label
-end
-
---- Patrons de l'inventaire, puis patrons des classeurs, utilisables sur la machine.
-local function collectChoices(player)
-    local choices = {}
-    for _, item in ipairs(UI.collectItems(player, isMachinePattern)) do
-        table.insert(choices, { item = item })
-    end
-    for _, binder in ipairs(UI.collectItems(player, MTIR.isBinder)) do
-        for _, entry in ipairs(MTIR.getBinderEntries(binder)) do
-            if isMachineData(MTIR.binderEntryPattern(entry)) then
-                table.insert(choices, { item = binder, entryId = entry.id })
-            end
-        end
-    end
-    return choices
-end
-
 local function gameMinutes()
     return getGameTime():getWorldAgeHours() * 60
 end
@@ -120,14 +95,22 @@ function MTIR_MachineTabPattern:onPatternRemoved()
     self:setPattern(nil)
 end
 
-function MTIR_MachineTabPattern:onChoice(choice)
-    self:setPattern(choice.item, choice.entryId)
-end
-
-function MTIR_MachineTabPattern:choosePattern(box)
+--- Clic sur l'emplacement : l'album en mode « choisir », avec les patrons portés et
+--- ceux de tous les classeurs portés, sauf ce qui ne se coud pas à la machine.
+function MTIR_MachineTabPattern:choosePattern()
     local player = self.window.player
-    UI.openChooser(box, player, collectChoices(player), patternLabel,
-        "IGUI_MTIR_Machine_NoPattern", self, MTIR_MachineTabPattern.onChoice)
+    local tab = self
+    MTIR.PatternAlbumUI.open(player, {
+        title = getText("IGUI_MTIR_Album_ChooseTitle"),
+        collect = function()
+            return MTIR.PatternAlbum.sources(UI.collectItems(player, MTIR.isBinder),
+                UI.collectItems(player, MTIR.isPattern))
+        end,
+        accept = isMachineData,
+        onChoose = function(card)
+            tab:setPattern(card.item, card.entryId)
+        end,
+    })
 end
 
 --- Données du patron choisi (patron ou entrée de classeur), ou nil.
