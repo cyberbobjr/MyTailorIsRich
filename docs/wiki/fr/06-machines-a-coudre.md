@@ -15,7 +15,7 @@ Cliquez sur une machine (ou utilisez son option du menu contextuel) pour ouvrir 
 
 Le haut montre les bonus de la machine (et si elle est alimentée), son **état** et le bouton **Entretenir**. Puis quatre onglets :
 
-- **Patron** : glissez un patron de vêtement dans la case (ou cliquez sur la case pour en choisir un, y compris dans un classeur), choisissez la taille et la **quantité** à coudre d'affilée. Le panneau montre le vêtement obtenu, la chance de réussite, le risque d'une taille d'écart et la liste exacte des objets consommés. Il retient le dernier patron utilisé. Les patrons de chaussures se cousent à la main.
+- **Patron** : glissez un patron de vêtement dans la case (ou cliquez sur la case pour le choisir dans l'album de patrons, avec recherche, parmi les patrons portés et ceux rangés dans vos classeurs), choisissez la taille et la **quantité** à coudre d'affilée. Le panneau montre le vêtement obtenu, la chance de réussite, le risque d'une taille d'écart et la liste exacte des objets consommés. Il retient le dernier patron utilisé. Les patrons de chaussures se cousent à la main.
 - **Retouche** : élargir ou resserrer un vêtement.
 - **Remise en état** : réparer un vêtement usé avec des bandes de tissu ou un exemplaire de rechange.
 - **Broderie** : glissez un vêtement, tapez le texte (votre prénom pour commencer, 24 caractères au plus) et vérifiez le nom obtenu. Onglet masqué si la broderie est désactivée.

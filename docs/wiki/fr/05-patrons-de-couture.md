@@ -47,16 +47,23 @@ Les chaussures demandent **Couture 8**, une aiguille **et une alêne**, du fil, 
 ## Classeur à patrons
 
 - Recette **Fabriquer un classeur à patrons** (Couture : ciseaux et aiguille gardés, 1 fil, 2 bandes de coton, de jean ou de cuir, 2 feuilles), ou trouvé dans les rayons de couture.
-- Il range jusqu'à **20 patrons**, chacun avec ses utilisations et sa précision. Il pèse 0,3 kg plus 0,1 kg par patron.
-- Clic droit sur un patron : **Ranger dans le classeur**. Clic droit sur le classeur : **Patrons (n/max)** liste chaque patron avec **Coudre d'après le patron**, **Sortir** et **Aperçu sur moi** ; **Ranger tous les patrons** range tous les patrons que vous portez.
+- Il range autant de patrons que vous voulez, chacun avec ses utilisations et sa précision. Il pèse 0,3 kg plus 0,1 kg par patron.
+- Clic droit sur un patron : **Ranger dans le classeur**. Clic droit sur le classeur : **Ouvrir l'album (n)**, ou **Ranger tous les patrons** pour ranger tous les patrons que vous portez.
+- L'album s'ouvre comme un classeur de cartes. À gauche, des pages de 3 × 3 pochettes, un patron par pochette (image du vêtement, nom, utilisations restantes) ; on tourne les pages avec les flèches ou la molette. Tapez dans la barre de recherche pour filtrer par nom, catégorie (Haut, Bas, Tenue complète, Gants, Chaussures) ou matériau (Coton, Jean, Cuir) : `haut cuir` trouve les hauts en cuir.
+- À droite, votre personnage portant le vêtement choisi, en 3D (rotation, autres vêtements gardés ou retirés), puis sa précision, ses utilisations restantes et les matériaux et outils nécessaires pour votre taille. Boutons : **Coudre à la main**, **Coudre à la machine** (ouvre la machine à coudre la plus proche avec ce patron prêt) et **Sortir**.
+- Déposez des patrons de l'inventaire sur la page pour les ranger. Tirez le coin cousu en bas à droite pour agrandir tout l'album ; la taille est retenue.
 - Son infobulle liste les patrons rangés.
-- L'onglet Patron d'une machine à coudre liste aussi les patrons de vêtements rangés dans vos classeurs.
+- Sur une machine à coudre, cliquez sur la case du patron : le même album s'ouvre pour choisir parmi les patrons que vous portez et ceux rangés dans vos classeurs. Le patron reste dans le classeur ; chaque pièce cousue l'use là où il est.
 
-> Capture à faire : le menu contextuel du classeur avec la liste des patrons.
+> Capture à faire : l'album de patrons avec un patron sélectionné.
 
 ## Copier un patron
 
 **Copier le patron** : mêmes besoins que le tracé (ciseaux, stylo ou crayon, papier, une table, le niveau de Couture du tracé). L'original est gardé. La copie perd **1 niveau de précision** (jamais sous 0) et reçoit des utilisations neuves ; une copie de copie en perd encore. On copie un patron sorti du classeur.
+
+## Déchirer un patron
+
+Un patron dont vous n'avez plus besoin se déchire pour récupérer une feuille de papier : recette **Déchirer un patron** (en main, sans outil).
 
 ## Aperçu sur moi
 

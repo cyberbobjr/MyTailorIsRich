@@ -12,6 +12,7 @@ La présentation publique du mod est le [README du dépôt](../README.md) (angla
 | [specifications-fonctionnelles.md](specifications-fonctionnelles.md) | Ce que fait le mod pour le joueur et l'administrateur, fonctionnalité par fonctionnalité (`F01`…). |
 | [specifications-techniques.md](specifications-techniques.md) | Contrats précis : objets et scripts, actions chronométrées, commandes réseau, clés ModData, options sandbox, traductions, compatibilités. |
 | [ameliorations-et-idees.md](ameliorations-et-idees.md) | Améliorations de code proposées et idées de fonctionnalités (propositions, aucune implémentation sans validation). |
+| [ADR/](ADR/README.md) | Décisions d'architecture (ADR) et leur état ; plans de livraison dans `ADR-plans/`. |
 | [wiki/](wiki/) | Source des pages du wiki GitHub : guides joueur et administrateur, en anglais ([wiki/en/Home.md](wiki/en/Home.md)) et en français ([wiki/fr/Home.md](wiki/fr/Home.md)). |
 | [images/](images/) | Images de la documentation. [images/screenshots/](images/screenshots/) : captures en jeu `shot1.png` à `shot6.png`. |
 | [annexes/](annexes/) | Documents annexes rangés par thème. [annexes/communication/kofi-post.md](annexes/communication/kofi-post.md) : billet Ko-fi de lancement. [annexes/tests/autotest.md](annexes/tests/autotest.md) : test en jeu automatique du parcours nominal (pz-autotest). |

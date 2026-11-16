@@ -57,7 +57,6 @@ All options are on the **My Tailor Is Rich** page of the sandbox settings. The m
 | Shoe pattern level | 8 | 0–10 | Tailoring to sew shoes from a pattern (tracing: one less). Ignored when the level requirement is off. |
 | Enable pattern copy | On | — | Allows copying patterns. |
 | Pattern copy precision loss | 1 | 0–10 | Precision levels lost per copy. 0: perfect copies. |
-| Pattern binder capacity | 20 | 1–100 | Patterns per binder. |
 | Require thimble | On | — | Sewing by hand needs a thimble (not used up). |
 
 ## Machines, loot, dyeing, embroidery

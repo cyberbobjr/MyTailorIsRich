@@ -47,16 +47,23 @@ Shoes need **Tailoring 8**, a needle **and an awl**, thread, **glue**, and leath
 ## Pattern binder
 
 - Craft it with **Make Pattern Binder** (Tailoring: scissors and needle kept, 1 thread, 2 fabric strips of cotton, denim or leather, 2 sheets of paper), or find it on sewing shelves.
-- Holds up to **20 patterns**, each with its uses and precision. Weighs 0.3 kg plus 0.1 kg per pattern.
-- Right-click a pattern: **Store in binder**. Right-click the binder: **Patterns (n/max)** lists each pattern with **Sew from pattern**, **Take out** and **Preview on me**; **Store all patterns** files every loose pattern you carry.
+- Holds as many patterns as you like, each with its uses and precision. Weighs 0.3 kg plus 0.1 kg per pattern.
+- Right-click a pattern: **Store in binder**. Right-click the binder: **Open album (n)**, or **Store all patterns** to file every loose pattern you carry.
+- The album opens like a card binder. On the left, pages of 3 × 3 sleeves, one pattern per sleeve (picture of the garment, name, uses left); turn the pages with the arrows or the mouse wheel. Type in the search bar to filter by name, category (Top, Bottom, Full outfit, Gloves, Shoes) or material (Cotton, Denim, Leather): `top leather` finds leather tops.
+- On the right, your character wearing the selected garment in 3D (rotate it, keep or hide your other clothes), then its precision, uses left and the materials and tools it needs for your size. Buttons: **Sew by hand**, **Sew on the machine** (opens the nearest sewing machine with this pattern ready) and **Take out**.
+- Drop patterns from your inventory onto the page to store them. Drag the stitched corner at the bottom right to make the whole album bigger; it remembers the size.
 - Its tooltip lists the stored patterns.
-- A sewing machine's Pattern tab also lists the clothing patterns stored in your binders.
+- On a sewing machine, click the Pattern slot: the same album opens to pick a pattern among those you carry and those stored in your binders. The pattern stays in the binder; each piece sewn uses it up there.
 
-> Capture à faire : the binder context menu with its list of patterns.
+> Capture à faire : the pattern album with a pattern selected.
 
 ## Copying a pattern
 
 **Copy pattern**: same needs as tracing (scissors, pen or pencil, paper, a table, the tracing Tailoring level). The original is kept. The copy loses **1 level of precision** (never below 0) and gets fresh uses; a copy of a copy loses it again. Take a pattern out of the binder to copy it.
+
+## Tearing up a pattern
+
+A pattern you no longer need can be torn up for a sheet of paper: recipe **Tear Up Pattern** (in hand, no tool).
 
 ## Preview on me
 

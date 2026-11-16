@@ -15,7 +15,7 @@ Click a machine (or use its right-click option) to open its panel. Only one play
 
 The top shows the machine's bonuses (and whether it is powered), its **condition** and the **Maintain** button. Then four tabs:
 
-- **Pattern**: drag a clothing pattern into the slot (or click the slot to choose one, including patterns stored in a binder), pick the size and the **quantity** to sew in a row. The panel shows the garment that will come out, the chance of success, the risk of a size off, and the exact list of items used. It remembers the last pattern you used. Shoe patterns are sewn by hand.
+- **Pattern**: drag a clothing pattern into the slot (or click the slot to pick one in the pattern album, with search, among the patterns you carry and those stored in your binders), pick the size and the **quantity** to sew in a row. The panel shows the garment that will come out, the chance of success, the risk of a size off, and the exact list of items used. It remembers the last pattern you used. Shoe patterns are sewn by hand.
 - **Alteration**: let out or take in a garment.
 - **Reconditioning**: repair a worn garment with fabric strips or a spare one.
 - **Embroidery**: drag a garment, type the text (your first name to start with, up to 24 characters) and check the name it will get. Hidden when embroidery is disabled.

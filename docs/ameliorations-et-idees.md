@@ -74,6 +74,7 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 | I18 | Magazines de patronage | ⬜ Proposée | |
 | I19 | API publique pour les autres mods | ⬜ Proposée | |
 | I20 | Mannequins de vitrine taillés | ⬜ Proposée | |
+| I21 | Album de patrons (classeur consultable) | 🟨 Codée, à valider en jeu | Demande de l'auteur du 2026-11-15 ; [ADR-001](ADR/001-album-de-patrons.md) |
 
 ---
 
@@ -514,6 +515,17 @@ Les numéros de ligne renvoient aux fichiers sous `Contents/mods/batman_MyTailor
 - **MP** : tailles créées sur l'autorité, comme pour les cadavres.
 - **Effort** : M.
 - **Avancement : ⬜ proposée, pas commencée.**
+
+
+### I21 — Album de patrons (classeur consultable)
+
+- **Description** : le classeur à patrons s'ouvre dans une fenêtre « album » : vignettes des patrons rangés, barre de recherche (nom, catégorie, matériau), fiche et aperçu au clic. On y range un patron par glisser-déposer ou par le menu contextuel. Depuis la machine à coudre, le clic sur l'emplacement du patron ouvre le même album pour choisir.
+- **Intérêt** : retrouver un patron parmi des dizaines sans faire défiler un sous-menu ; voir ce qu'on va coudre avant de choisir.
+- **Faisabilité** : le classeur existe déjà (F16, `MTIR_PatternBinder.lua`), la machine lit déjà les classeurs portés (`MTIR_MachineTabPattern.lua:84-96`) et coud depuis une entrée sans la sortir ; l'emplacement de la machine accepte déjà un objet glissé. Reste à faire : la fenêtre, le modèle de recherche, le choix depuis la machine. Vignette tirée de l'icône du vêtement produit : **à vérifier**.
+- **Note** : l'idée I07 (panneau « Garde-robe ») avait été écartée le 2026-10-28 ; celle-ci est demandée par l'auteur.
+- **MP** : aucune nouvelle commande ; ranger, sortir et coudre passent par les actions existantes.
+- **Effort** : M à L.
+- **Avancement : 🟨 codée le 2026-11-15, test en jeu par l'auteur ; [ADR-001](ADR/001-album-de-patrons.md), [plan 001](ADR-plans/plan-001-album-de-patrons.md).**
 
 ---
 

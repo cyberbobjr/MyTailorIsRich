@@ -20,6 +20,8 @@ Toute la logique est dans la table globale `MTIR`. Le module réseau et la clé 
 
 `MTIR_MakePatternBinder` (`craftRecipe`, `category = Tailoring`, `timedAction = SewingCloth`, `time = 150`, `Tags = AnySurfaceCraft`, `xpAward = Tailoring:5`) : ciseaux `tags[base:scissors]` gardés (`SharpnessCheck;IsNotDull`), aiguille `tags[base:sewingneedle]` gardée, 1 `tags[base:thread]`, 2 parmi `Base.RippedSheets;Base.DenimStrips;Base.LeatherStrips`, 2 `Base.SheetPaper2` → 1 `Base.MTIR_PatternBinder`.
 
+`MTIR_TearPattern` (`craftRecipe`, `MTIR_items.txt`, `category = Tailoring`, `timedAction = RipClothing`, `time = 30`, `Tags = InHandCraft;CanBeDoneInDark;CanBeDoneWhileWalking`) : 1 parmi `Base.MTIR_TailorPattern;Base.MTIR_PrintedPattern` → 1 `Base.SheetPaper2`. Un patron rangé dans un classeur n'est pas un objet : il faut le sortir avant.
+
 ### Entités et tuiles (`MTIR_entities.txt`)
 
 | Entité | Style UI | Tuiles | Remarques |
@@ -125,7 +127,7 @@ Clé joueur côté serveur : `"u" .. getUsername()` (`MTIR.playerKey`), `"p" .. 
 - Machines (`MTIR.MACHINE_KINDS`) : électrique durée × 0,5, +2 niveaux, +4 précision, fil × 0,7, bruit rayon/volume 12, usure 2–4 ; pédale × 0,75, +1, +2, × 0,85, bruit 5/6, usure 1–3 ; malus de réussite `(50 − état)/100` sous 50 % ; casse d'aiguille `0,04 + (100 − état)/1000` ; entretien `20 + 8 × niveau` (Électricité / Mécanique), 3 utilisations d'huile (`base:oil`), durée 300 ; portée 1,6 case.
 - Broderie : 24 caractères (nom composé ≤ 64), Couture 1, 1 fil, durée 60 ; pédale : Couture 3 réelle.
 - Teinture : `Dye` 0,2 L et `HairDye` 0,25 L par unité de volume, eau 2 L par unité.
-- Classeur : capacité par défaut 20, 0,3 kg + 0,1 kg par patron.
+- Classeur : sans limite de nombre, 0,3 kg + 0,1 kg par patron.
 
 ## Options sandbox
 
@@ -162,7 +164,6 @@ Page `MyTailorIsRich`, clés `SandboxVars.MyTailorIsRich.<Nom>`, lues à chaque 
 | `ShoePatternLevel` | entier | 8 | 0–10 | Niveau pour coudre des chaussures (tracé : un de moins). |
 | `EnablePatternCopy` | booléen | vrai | — | Copie de patron. |
 | `PatternCopyPrecisionLoss` | entier | 1 | 0–10 | Niveaux de précision perdus par copie. |
-| `PatternBinderCapacity` | entier | 20 | 1–100 | Patrons par classeur. |
 | `RequireThimble` | booléen | vrai | — | Dé à coudre pour coudre à la main. |
 | `MachineBonusMultiplier` | réel | 1,0 | 0–2 | Échelle de tous les bonus de machine. |
 | `MachineNoiseMultiplier` | réel | 1,0 | 0–3 | Portée du bruit des machines (0 = silencieuses). |
@@ -183,7 +184,7 @@ Page `MyTailorIsRich`, clés `SandboxVars.MyTailorIsRich.<Nom>`, lues à chaque 
 
 ## Traductions
 
-Fichiers JSON `media/lua/shared/Translate/<LANGUE>/` : `IG_UI.json` (préfixe `IGUI_MTIR_` : `Machine`, `Say`, `JobType`, `Pattern`, `Color`, `Debug`, `Binder`, `Hint`, `Embroider`, `Preview`, `Dye`, `CheckSize`, `Maintenance`…), `ItemName.json` (types complets), `Moveables.json` (`Electric_Sewing_Machine`, `Treadle_Sewing_Machine`), `Recipes.json` (`MTIR_MakePatternBinder`), `Sandbox.json` (`Sandbox_MyTailorIsRich_<Option>` et `_tooltip`). Langues : EN, FR, DE, ES, PT, PTBR, RU, CN, TR (le mod de désinstallation : `IG_UI`, `ItemName`, `Moveables`). Mêmes clés et mêmes paramètres `%1` que l'anglais (contrôlé par `tests/run_tests.py`).
+Fichiers JSON `media/lua/shared/Translate/<LANGUE>/` : `IG_UI.json` (préfixe `IGUI_MTIR_` : `Machine`, `Say`, `JobType`, `Pattern`, `Color`, `Debug`, `Binder`, `Album`, `Hint`, `Embroider`, `Preview`, `Dye`, `CheckSize`, `Maintenance`…), `ItemName.json` (types complets), `Moveables.json` (`Electric_Sewing_Machine`, `Treadle_Sewing_Machine`), `Recipes.json` (`MTIR_MakePatternBinder`, `MTIR_TearPattern`), `Sandbox.json` (`Sandbox_MyTailorIsRich_<Option>` et `_tooltip`). Langues : EN, FR, DE, ES, PT, PTBR, RU, CN, TR (le mod de désinstallation : `IG_UI`, `ItemName`, `Moveables`). Mêmes clés et mêmes paramètres `%1` que l'anglais (contrôlé par `tests/run_tests.py`).
 
 Textes vus par le joueur : clés résolues sur le client (répliques `fx.say`). Exception : le nom d'un patron est composé par l'autorité et enregistré dans l'objet, donc dans la langue du serveur ; `MTIR_ServerTranslations.lua` recharge les traductions des mods sur un serveur MP (sinon `getText` y rend la clé). Messages de console en anglais, préfixe `[MTIR]`.
 

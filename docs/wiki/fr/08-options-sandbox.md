@@ -57,7 +57,6 @@ Toutes les options sont sur la page **My Tailor Is Rich** des réglages sandbox.
 | Couture pour les patrons de chaussures | 8 | 0–10 | Niveau pour coudre des chaussures (tracé : un de moins). Ignoré si le niveau requis est désactivé. |
 | Copies de patrons | Oui | — | Autorise la copie des patrons. |
 | Précision perdue par copie | 1 | 0–10 | Niveaux de précision perdus par copie. 0 : copies parfaites. |
-| Patrons par classeur | 20 | 1–100 | Capacité d'un classeur. |
 | Dé à coudre pour coudre à la main | Oui | — | Coudre à la main demande un dé (non consommé). |
 
 ## Machines, butin, teinture, broderie

@@ -87,7 +87,11 @@ Les gants cousables font aussi partie des modèles traçables et des patrons du 
 Niveau 8 (option `ShoePatternLevel`), aiguille **et alêne**, fil, **colle**, et cuir ou tissu selon le modèle (baskets et pantoufles en coton, le reste en cuir). Toujours cousues à la main.
 
 ### F16 — Classeur à patrons
-Recette **Make Pattern Binder** (catégorie Couture : ciseaux et aiguille gardés, 1 fil, 2 bandes de coton, jean ou cuir, 2 feuilles), ou trouvé dans les rayons de couture. Il range jusqu'à 20 patrons (option `PatternBinderCapacity`) avec leurs utilisations et leur précision, pèse 0,3 kg plus 0,1 kg par patron. Menu du patron : **Store in binder** ; menu du classeur : **Patterns (n/max)** (coudre, sortir, aperçu par patron) et **Store all patterns**. L'infobulle liste son contenu.
+Recette **Make Pattern Binder** (catégorie Couture : ciseaux et aiguille gardés, 1 fil, 2 bandes de coton, jean ou cuir, 2 feuilles), ou trouvé dans les rayons de couture. Il range autant de patrons qu'on veut, avec leurs utilisations et leur précision, pèse 0,3 kg plus 0,1 kg par patron. Menu du patron : **Store in binder** ; menu du classeur : **Open album (n)** et **Store all patterns**. L'infobulle liste son contenu.
+
+**Album** ([ADR-001](ADR/001-album-de-patrons.md)) : deux volets. À gauche, pages de 3 × 3 pochettes (icône du vêtement, nom, utilisations), tournées par les flèches ou la molette ; dépôt de patrons sur la page pour les ranger. À droite, aperçu 3D du vêtement porté par le personnage, puis la fiche. Coin bas-droit : poignée qui agrandit tout l'album (taille retenue). Barre de recherche : chaque mot doit apparaître dans le nom, la catégorie (Haut, Bas, Tenue complète, Gants, Chaussures, Autre) ou le matériau (Coton, Jean, Cuir), sans tenir compte des majuscules. Fiche du patron choisi : nom, catégorie, matériau, précision, utilisations, puis, sous l'aperçu, les besoins de couture à la main pour la taille du personnage. Boutons : **Sew by hand** (menu des tailles), **Sew on the machine** (machine la plus proche, onglet Patron prêt ; grisé sans machine à portée), **Take out**.
+
+**Déchirer un patron** : recette **Tear Up Pattern** (en main, sans outil) : un patron isolé (tracé ou du commerce) rend une feuille de papier.
 
 ### F17 — Copier un patron
 **Copy pattern** : mêmes besoins que le tracé ; l'original est gardé. La copie perd 1 niveau de précision (option `PatternCopyPrecisionLoss`, jamais sous 0) et reçoit des utilisations neuves ; une copie de copie perd encore. On copie un patron sorti du classeur. Option `EnablePatternCopy`.
@@ -112,7 +116,7 @@ Deux meubles : **machine électrique** posée sur une table, **machine à pédal
 
 ### F22 — Panneau de la machine
 Clic (ou option du menu contextuel) : panneau avec bandeau des bonus, état et entretien, et quatre onglets.
-- **Pattern** : glisser un patron de vêtement (ou cliquer pour choisir, y compris dans un classeur), taille, **quantité** à coudre d'affilée ; aperçu du résultat et liste exacte des objets consommés ; mémoire du dernier patron. Les patrons de chaussures se cousent à la main.
+- **Pattern** : glisser un patron de vêtement (ou cliquer pour le choisir dans l'album de patrons, mode « choisir » : patrons portés et rangés dans les classeurs, sans les chaussures), taille, **quantité** à coudre d'affilée ; aperçu du résultat et liste exacte des objets consommés ; mémoire du dernier patron. Les patrons de chaussures se cousent à la main.
 - **Alteration** : agrandir ou rétrécir.
 - **Reconditioning** : remise en état.
 - **Embroidery** : texte (prénom proposé), nom obtenu ; masqué si la broderie est désactivée.

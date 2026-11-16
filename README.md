@@ -60,7 +60,7 @@ A blister is a small foot scratch without zombie infection. Like any foot injury
 
 ## Pattern binder, copies and 3D preview
 
-- **Pattern Binder**: holds up to 20 patterns (sandbox option), each with its uses and precision. Craft it with **Make Pattern Binder** (Tailoring category: scissors and needle kept, 1 thread, 2 fabric strips of cotton, denim or leather, 2 sheets of paper), or find it on sewing shelves. It weighs 0.3 kg plus 0.1 kg per pattern.
+- **Pattern Binder**: holds as many patterns as you like, each with its uses and precision, and opens as a searchable album with a 3D preview on you. Craft it with **Make Pattern Binder** (Tailoring category: scissors and needle kept, 1 thread, 2 fabric strips of cotton, denim or leather, 2 sheets of paper), or find it on sewing shelves. It weighs 0.3 kg plus 0.1 kg per pattern.
 - Right-click a pattern: **Store in binder**. Right-click the binder: **Patterns (n/max)** lists each stored pattern with **Sew from pattern**, **Take out** and **Preview on me**, and **Store all patterns** files every loose pattern you carry.
 - A sewing machine's Pattern tab also lists the clothing patterns stored in your binders and sews straight from them. Shoe patterns stored in a binder are sewn by hand from the binder menu.
 - **Copy pattern**: same needs as tracing (scissors, pen or pencil, sheets of paper, a table nearby, the tracing Tailoring level). The original is kept. The copy loses 1 Tailoring level of precision (sandbox option, never below 0) and gets fresh uses; a copy of a copy loses it again. Copy a pattern after taking it out of the binder.
@@ -92,7 +92,7 @@ The server decides everything: sizes, resizing, wear, blisters, stiffness and lo
 
 ## Sandbox options
 
-Tailoring level requirement, tailoring XP, action time, rip / drop / trip / stiffness multipliers, insulation and combat penalties, clothes degrading (on/off, min/max days, failure chance, protection and resistance loss), custom clothes list, **extra sized body locations**, **excluded clothes**, **shoe sizes on/off**, **your size shown on the character screen**, **shoe fit effects intensity** (0 disables blisters, discomfort, extra endurance and lost shoes), **sewings per pattern**, **Tailoring level for shoe patterns**, **thimble for hand sewing**, **sewing machine bonus**, **machine noise**, **machine maintenance**, **sewing loot rarity**, **pattern copies**, **precision lost per copy**, **patterns per binder**, **enable dyeing**, **enable embroidery**.
+Tailoring level requirement, tailoring XP, action time, rip / drop / trip / stiffness multipliers, insulation and combat penalties, clothes degrading (on/off, min/max days, failure chance, protection and resistance loss), custom clothes list, **extra sized body locations**, **excluded clothes**, **shoe sizes on/off**, **your size shown on the character screen**, **shoe fit effects intensity** (0 disables blisters, discomfort, extra endurance and lost shoes), **sewings per pattern**, **Tailoring level for shoe patterns**, **thimble for hand sewing**, **sewing machine bonus**, **machine noise**, **machine maintenance**, **sewing loot rarity**, **pattern copies**, **precision lost per copy**, **enable dyeing**, **enable embroidery**.
 
 ## Debug
 
@@ -191,7 +191,7 @@ Une ampoule est une petite égratignure au pied, sans infection zombie. Comme to
 
 ## Classeur à patrons, copies et aperçu 3D
 
-- **Classeur à patrons** : il range jusqu'à 20 patrons (option sandbox), chacun avec ses utilisations et sa précision. Recette **Fabriquer un classeur à patrons** (catégorie Couture : ciseaux et aiguille conservés, 1 fil, 2 bandes de tissu de coton, de jean ou de cuir, 2 feuilles de papier), ou butin des rayons couture. Il pèse 0,3 kg plus 0,1 kg par patron.
+- **Classeur à patrons** : il range autant de patrons que vous voulez, chacun avec ses utilisations et sa précision, et s'ouvre en album avec recherche et aperçu 3D sur vous. Recette **Fabriquer un classeur à patrons** (catégorie Couture : ciseaux et aiguille conservés, 1 fil, 2 bandes de tissu de coton, de jean ou de cuir, 2 feuilles de papier), ou butin des rayons couture. Il pèse 0,3 kg plus 0,1 kg par patron.
 - Clic droit sur un patron : **Ranger dans le classeur**. Clic droit sur le classeur : **Patrons (n/max)** liste chaque patron rangé avec **Coudre d'après le patron**, **Sortir** et **Aperçu sur moi** ; **Ranger tous les patrons** y range tous les patrons portés.
 - L'onglet Patron d'une machine à coudre propose aussi les patrons de vêtements rangés dans les classeurs et coud directement depuis eux. Les patrons de chaussures rangés se cousent à la main depuis le menu du classeur.
 - **Copier le patron** : mêmes besoins que le relevé (ciseaux, stylo ou crayon, feuilles, table proche, niveau de Couture du relevé). L'original est conservé. La copie perd 1 niveau de précision (option sandbox, jamais sous 0) et reçoit des utilisations neuves ; une copie de copie en perd encore. Sortir le patron du classeur avant de le copier.
@@ -223,7 +223,7 @@ Le serveur décide de tout : tailles, retouches, usure, ampoules, courbatures, c
 
 ## Options sandbox
 
-Niveau de couture requis, XP de couture, durée des actions, multiplicateurs de déchirure, de chute du vêtement, de chute et de raideur, pertes d'isolation et de vitesse de combat, usure (activation, jours min/max, usure en cas d'échec, pertes de protection et de résistance), liste de vêtements supplémentaires, **emplacements supplémentaires**, **vêtements exclus**, **pointures activées ou non**, **taille affichée dans l'écran Personnage**, **intensité des effets des chaussures** (0 coupe ampoules, inconfort, endurance supplémentaire et pertes de chaussures), **coutures par patron**, **niveau de Couture des patrons de chaussures**, **dé à coudre pour coudre à la main**, **bonus des machines**, **bruit des machines**, **entretien des machines**, **rareté du butin de couture**, **copies de patrons**, **précision perdue par copie**, **patrons par classeur**, **teinture**, **broderie**.
+Niveau de couture requis, XP de couture, durée des actions, multiplicateurs de déchirure, de chute du vêtement, de chute et de raideur, pertes d'isolation et de vitesse de combat, usure (activation, jours min/max, usure en cas d'échec, pertes de protection et de résistance), liste de vêtements supplémentaires, **emplacements supplémentaires**, **vêtements exclus**, **pointures activées ou non**, **taille affichée dans l'écran Personnage**, **intensité des effets des chaussures** (0 coupe ampoules, inconfort, endurance supplémentaire et pertes de chaussures), **coutures par patron**, **niveau de Couture des patrons de chaussures**, **dé à coudre pour coudre à la main**, **bonus des machines**, **bruit des machines**, **entretien des machines**, **rareté du butin de couture**, **copies de patrons**, **précision perdue par copie**, **teinture**, **broderie**.
 
 ## Débogage
 

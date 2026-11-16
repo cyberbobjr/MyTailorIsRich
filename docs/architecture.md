@@ -75,6 +75,7 @@ Tous les modules remplissent la table globale `MTIR` (définie dans `MTIR_Core.l
 | `MTIR_Patterns` | Patrons : ModData `MTIR_Pattern`, modèle traçable (vêtement, chaussure, gant), tissus et matériaux, besoins, risque de taille décalée, nom du patron. Gants en taille unique, indépendants du système de tailles. | Sizing, Effects |
 | `MTIR_PrintedPatterns` | Patron du commerce : `OnCreate` qui tire un vêtement traçable parmi tous les scripts chargés. | Patterns, Shoes |
 | `MTIR_PatternBinder` | Classeur : ModData `MTIR_Binder`, entrées à identifiant stable, poids. | Patterns |
+| `MTIR_PatternAlbum` | Modèle de l'album (ADR-001), sans interface : sources (patrons isolés, entrées de classeurs), fiches, catégorie (`kind`, sinon `slot.group` de `MTIR.getSizing`), recherche et tri. | PatternBinder |
 | `MTIR_PatternCopy` | Copie d'un patron (précision réduite, utilisations neuves). | Patterns, PatternBinder |
 | `MTIR_SewingMachine` | Machines : détection par préfixe de sprite, bonus, courant, état et usure (`movableData.mtirCondition`), bruit, dé à coudre. | Patterns |
 | `MTIR_MachineSound` | Boucle sonore de la machine, relais aux joueurs proches. | SewingMachine |
@@ -90,7 +91,10 @@ Une action par opération, toutes dérivées d'`ISBaseTimedAction` : `MTIR_Check
 | Module | Responsabilité |
 |---|---|
 | `MTIR_ContextMenu`, `MTIR_CheckSizeMenu` | Menu d'inventaire : lire la taille (sélection, ce cadavre ou ce meuble, cadavres et meubles proches), retouche, remise en état, choix de taille, sous-menu de débogage. |
-| `MTIR_PatternMenu`, `MTIR_PatternBinderMenu` | Tracer, coudre, copier, ranger, sortir, aperçu ; infobulle du classeur. |
+| `MTIR_PatternMenu`, `MTIR_PatternBinderMenu` | Tracer, coudre, copier, ranger, aperçu ; « Ouvrir l'album » ; infobulle du classeur ; `MTIR.BinderUI` (ranger, tout ranger, sortir) pour l'album. |
+| `MTIR_UIScale` | Échelle des fenêtres (même méthode que Live Wire) : facteur d'après la petite police (référence 19 px), jamais sous 1, borné à l'écran ; `layout`, `fit`. |
+| `MTIR_VintageStyle` | Style « album ancien » : palette, couverture cousue, photos à coins, boutons, champs, pages. |
+| `MTIR_PatternAlbumWindow` | Fenêtre de l'album (`MTIR.PatternAlbumUI.open(player, spec)`) : grille, recherche, fiche, besoins, boutons, case de dépôt. La spécification fournit les sources, le filtre et l'action « choisir » : consultation d'un classeur (menu) ou choix pour l'onglet Patron de la machine. |
 | `MTIR_DecorMenu` | Teindre, broder, découdre ; ligne d'infobulle de la broderie ; commande `embroideryRemoved`. |
 | `MTIR_SewingMachineWindow` + `MTIR_MachineTabPattern`, `MTIR_MachineTabAlter`, `MTIR_MachineTabEmbroider`, `MTIR_MachineUIUtil` | Panneau d'entité de la machine (ouvert par `ISEntityUI` via `LuaWindowClass`), quatre onglets, état et entretien. |
 | `MTIR_PatternPreview` | Fenêtre d'aperçu 3D (`ISUI3DModel`, copie locale du descripteur). |
