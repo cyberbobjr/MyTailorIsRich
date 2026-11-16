@@ -45,4 +45,21 @@ module Base
         WorldStaticModel = SewingPattern,
         OnCreate = MTIR.onCreatePrintedPattern,
     }
+
+    /* Patron dont on n'a plus besoin : déchiré, il rend une feuille de papier. */
+    craftRecipe MTIR_TearPattern
+    {
+        timedAction = RipClothing,
+        time = 30,
+        Tags = InHandCraft;CanBeDoneInDark;CanBeDoneWhileWalking,
+        category = Tailoring,
+        inputs
+        {
+            item 1 [Base.MTIR_TailorPattern;Base.MTIR_PrintedPattern],
+        }
+        outputs
+        {
+            item 1 Base.SheetPaper2,
+        }
+    }
 }
