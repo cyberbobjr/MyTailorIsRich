@@ -1,4 +1,4 @@
--- MTIR_PatternBinder : entrées à id stable, capacité, usure, copie profonde
+-- MTIR_PatternBinder : entrées à id stable, sans limite de nombre, usure, copie profonde
 -- des données, et aller-retour ranger / sortir sans perte (type, nom, ModData).
 
 local T = {}
@@ -34,7 +34,7 @@ local function patternData(overrides)
 end
 
 function T.setup()
-    OPTS = { PatternBinderCapacity = 3, PatternMaxUses = 5 }
+    OPTS = { PatternMaxUses = 5 }
     synced = 0
     MTIR = {
         PATTERN_DATA_KEY = "MTIR_Pattern",
@@ -93,30 +93,31 @@ T["copie profonde : valeurs simples et tables, sans fonctions, indépendante"] =
     assertEq(source.d.e, 2, "la source n'est pas modifiée")
 end
 
-T["ajout jusqu'à la capacité, ids croissants"] = function()
+T["ajout sans limite de nombre, ids croissants"] = function()
     local data = MTIR.binderNewData()
-    assertEq(MTIR.binderAddEntry(data, entry("A"), 3), 1, "premier id")
-    assertEq(MTIR.binderAddEntry(data, entry("B"), 3), 2, "deuxième id")
-    assertEq(MTIR.binderAddEntry(data, entry("C"), 3), 3, "troisième id")
-    assertEq(MTIR.binderAddEntry(data, entry("D"), 3), nil, "classeur plein")
-    assertEq(MTIR.binderCount(data), 3, "trois entrées")
+    assertEq(MTIR.binderAddEntry(data, entry("A")), 1, "premier id")
+    assertEq(MTIR.binderAddEntry(data, entry("B")), 2, "deuxième id")
+    for i = 3, 150 do
+        assertEq(MTIR.binderAddEntry(data, entry("P" .. i)), i, "id " .. i)
+    end
+    assertEq(MTIR.binderCount(data), 150, "cent cinquante entrées")
 end
 
 T["entrée sans données de patron refusée"] = function()
     local data = MTIR.binderNewData()
-    assertEq(MTIR.binderAddEntry(data, { type = PATTERN_ITEM, name = "x", modData = {} }, 3), nil, "refusée")
-    assertEq(MTIR.binderAddEntry(data, nil, 3), nil, "nil refusé")
+    assertEq(MTIR.binderAddEntry(data, { type = PATTERN_ITEM, name = "x", modData = {} }), nil, "refusée")
+    assertEq(MTIR.binderAddEntry(data, nil), nil, "nil refusé")
     assertEq(MTIR.binderCount(data), 0, "vide")
 end
 
 T["ids stables : jamais réutilisés après un retrait"] = function()
     local data = MTIR.binderNewData()
-    MTIR.binderAddEntry(data, entry("A"), 3)
-    MTIR.binderAddEntry(data, entry("B"), 3)
+    MTIR.binderAddEntry(data, entry("A"))
+    MTIR.binderAddEntry(data, entry("B"))
     local removed = MTIR.binderRemoveEntry(data, 1)
     assertEq(removed.name, "A", "entrée retirée")
     assertEq(MTIR.binderFindEntry(data, 2).name, "B", "B garde son id")
-    assertEq(MTIR.binderAddEntry(data, entry("C"), 3), 3, "nouvel id après retrait")
+    assertEq(MTIR.binderAddEntry(data, entry("C")), 3, "nouvel id après retrait")
     assertEq(MTIR.binderRemoveEntry(data, 1), nil, "id retiré introuvable")
     assertEq(MTIR.binderFindEntry(data, "3").name, "C", "id reçu en texte")
 end
@@ -124,14 +125,14 @@ end
 T["ModData de l'entrée copiée, pas partagée avec l'objet"] = function()
     local data = MTIR.binderNewData()
     local source = entry("A")
-    MTIR.binderAddEntry(data, source, 3)
+    MTIR.binderAddEntry(data, source)
     source.modData.MTIR_Pattern.uses = 1
     assertEq(MTIR.binderEntryPattern(MTIR.binderFindEntry(data, 1)).uses, 5, "copie indépendante")
 end
 
 T["usure : une utilisation de moins, retrait à zéro"] = function()
     local data = MTIR.binderNewData()
-    MTIR.binderAddEntry(data, entry("A", { uses = 2 }), 3)
+    MTIR.binderAddEntry(data, entry("A", { uses = 2 }))
     assertEq(MTIR.binderWearEntry(data, 1), "used", "première couture")
     assertEq(MTIR.binderEntryPattern(MTIR.binderFindEntry(data, 1)).uses, 1, "une utilisation restante")
     assertEq(MTIR.binderWearEntry(data, 1), "worn", "patron usé")
@@ -170,19 +171,6 @@ T["ranger puis sortir : type, nom et toutes les données conservés"] = function
     assertTrue(inventory.items[item], "dans l'inventaire")
     assertEq(MTIR.getBinderCount(binder), 0, "classeur vide")
     assertTrue(math.abs(binder.weight - 0.3) < 1e-6, "poids du classeur vide")
-end
-
-T["classeur plein : rien n'est rangé"] = function()
-    OPTS.PatternBinderCapacity = 1
-    local binder = newItem(MTIR.BINDER_ITEM, "Classeur", {})
-    local first = newItem(PATTERN_ITEM, "P1", { MTIR_Pattern = patternData() })
-    local second = newItem(PATTERN_ITEM, "P2", { MTIR_Pattern = patternData() })
-    inventory:AddItem(first)
-    inventory:AddItem(second)
-    assertTrue(MTIR.storePatternInBinder(character, binder, first), "premier rangé")
-    assertTrue(MTIR.isBinderFull(binder), "plein")
-    assertEq(MTIR.storePatternInBinder(character, binder, second), false, "second refusé")
-    assertTrue(inventory.items[second], "second toujours dans l'inventaire")
 end
 
 T["couture d'après une entrée : usure synchronisée, retrait du patron usé"] = function()

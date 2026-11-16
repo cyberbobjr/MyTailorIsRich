@@ -25,7 +25,6 @@ MTIR.BINDER_DATA_KEY = "MTIR_Binder"
 -- Poids du classeur vide (Weight du script) et d'un patron rangé (feuilles sans pochette).
 local BINDER_WEIGHT = 0.3
 local WEIGHT_PER_PATTERN = 0.1
-local DEFAULT_CAPACITY = 20
 
 -- ----------------------------------------------------------------------------
 -- Données pures (tables Lua)
@@ -87,10 +86,10 @@ function MTIR.binderFindEntry(binderData, id)
     return nil, nil
 end
 
---- Ajoute une entrée { type, name, modData } ; rend son id, ou nil si le
---- classeur est plein ou l'entrée n'est pas un patron.
-function MTIR.binderAddEntry(binderData, entry, capacity)
-    if MTIR.binderEntryPattern(entry) == nil or MTIR.binderCount(binderData) >= capacity then
+--- Ajoute une entrée { type, name, modData } ; rend son id, ou nil si l'entrée
+--- n'est pas un patron. Aucune limite de nombre : seul le poids du classeur grandit.
+function MTIR.binderAddEntry(binderData, entry)
+    if MTIR.binderEntryPattern(entry) == nil then
         return nil
     end
     binderData.entries = binderData.entries or {}
@@ -145,10 +144,6 @@ function MTIR.isBinder(item)
     return item ~= nil and item:getFullType() == MTIR.BINDER_ITEM
 end
 
-function MTIR.getBinderCapacity()
-    return math.max(1, math.floor(tonumber(MTIR.opt("PatternBinderCapacity")) or DEFAULT_CAPACITY))
-end
-
 --- Données du classeur en lecture (nil s'il n'a jamais rien contenu). Aucune écriture.
 function MTIR.getBinderData(binder)
     if not MTIR.isBinder(binder) or not binder:hasModData() then
@@ -166,10 +161,6 @@ end
 
 function MTIR.getBinderCount(binder)
     return MTIR.binderCount(MTIR.getBinderData(binder))
-end
-
-function MTIR.isBinderFull(binder)
-    return MTIR.getBinderCount(binder) >= MTIR.getBinderCapacity()
 end
 
 --- Données du patron rangé sous `entryId`, ou nil.
@@ -247,7 +238,7 @@ end
 
 --- Autorité : range `pattern` dans `binder` (le patron disparaît). Vrai si fait.
 function MTIR.storePatternInBinder(character, binder, pattern)
-    if not MTIR.getPatternData(pattern) or MTIR.isBinderFull(binder) then
+    if not MTIR.getPatternData(pattern) then
         return false
     end
     -- Nom en clé brute (avant la 0.4.5) : recalculé avant d'être recopié.
@@ -257,7 +248,7 @@ function MTIR.storePatternInBinder(character, binder, pattern)
         type = pattern:getFullType(),
         name = pattern:getName(),
         modData = pattern:getModData(),
-    }, MTIR.getBinderCapacity())
+    })
     if not id then
         return false
     end

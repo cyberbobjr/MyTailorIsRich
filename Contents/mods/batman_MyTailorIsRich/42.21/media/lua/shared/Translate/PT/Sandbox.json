@@ -71,7 +71,5 @@
     "Sandbox_MyTailorIsRich_EnablePatternCopy": "Cópias de moldes",
     "Sandbox_MyTailorIsRich_EnablePatternCopy_tooltip": "Permite copiar um molde para folhas novas sem o destruir. A cópia é menos precisa do que o original.",
     "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss": "Precisão perdida por cópia",
-    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "Níveis de Alfaiataria retirados à precisão de uma cópia de molde (uma cópia de cópia volta a perdê-los). 0: cópias perfeitas.",
-    "Sandbox_MyTailorIsRich_PatternBinderCapacity": "Moldes por pasta",
-    "Sandbox_MyTailorIsRich_PatternBinderCapacity_tooltip": "Quantos moldes de costura cabem numa pasta de moldes."
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "Níveis de Alfaiataria retirados à precisão de uma cópia de molde (uma cópia de cópia volta a perdê-los). 0: cópias perfeitas."
 }

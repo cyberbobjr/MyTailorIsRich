@@ -71,7 +71,5 @@
     "Sandbox_MyTailorIsRich_EnablePatternCopy": "Schnittmuster-Kopien",
     "Sandbox_MyTailorIsRich_EnablePatternCopy_tooltip": "Erlaubt, ein Schnittmuster auf neue Blätter zu kopieren, ohne es zu zerstören. Die Kopie ist ungenauer als das Original.",
     "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss": "Genauigkeitsverlust pro Kopie",
-    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "Schneiderei-Stufen, die eine Schnittmuster-Kopie an Genauigkeit verliert (eine Kopie einer Kopie verliert sie erneut). 0: perfekte Kopien.",
-    "Sandbox_MyTailorIsRich_PatternBinderCapacity": "Schnittmuster pro Mappe",
-    "Sandbox_MyTailorIsRich_PatternBinderCapacity_tooltip": "Wie viele Schnittmuster eine Schnittmustermappe aufnehmen kann."
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "Schneiderei-Stufen, die eine Schnittmuster-Kopie an Genauigkeit verliert (eine Kopie einer Kopie verliert sie erneut). 0: perfekte Kopien."
 }

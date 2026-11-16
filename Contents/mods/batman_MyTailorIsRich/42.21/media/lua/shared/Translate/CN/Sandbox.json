@@ -71,7 +71,5 @@
     "Sandbox_MyTailorIsRich_EnablePatternCopy": "图纸复制",
     "Sandbox_MyTailorIsRich_EnablePatternCopy_tooltip": "允许把缝纫图纸复制到新纸上而不毁掉原图纸. 副本的精度低于原图纸.",
     "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss": "每次复制损失的精度",
-    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "图纸副本的精度降低多少缝纫等级 (副本的副本会再次降低). 0: 完美副本.",
-    "Sandbox_MyTailorIsRich_PatternBinderCapacity": "每个图纸夹的图纸数",
-    "Sandbox_MyTailorIsRich_PatternBinderCapacity_tooltip": "一个图纸夹能收纳多少份缝纫图纸."
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "图纸副本的精度降低多少缝纫等级 (副本的副本会再次降低). 0: 完美副本."
 }

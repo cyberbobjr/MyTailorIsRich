@@ -23,7 +23,7 @@ local function validate(self)
     local character = self.character
     return MTIR.isBinder(self.binder) and MTIR.hasItem(character, self.binder)
         and MTIR.hasItem(character, self.pattern) and not MTIR.sameItem(self.binder, self.pattern)
-        and MTIR.getPatternData(self.pattern) ~= nil and not MTIR.isBinderFull(self.binder)
+        and MTIR.getPatternData(self.pattern) ~= nil
 end
 
 function MTIR_BinderStoreAction:isValid()

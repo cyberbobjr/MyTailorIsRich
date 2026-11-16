@@ -71,7 +71,5 @@
     "Sandbox_MyTailorIsRich_EnablePatternCopy": "Copies de patrons",
     "Sandbox_MyTailorIsRich_EnablePatternCopy_tooltip": "Permet de copier un patron sur des feuilles neuves sans le détruire. La copie est moins précise que l'original.",
     "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss": "Précision perdue par copie",
-    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "Niveaux de Couture retirés à la précision d'une copie de patron (une copie de copie en perd encore). 0 : copies parfaites.",
-    "Sandbox_MyTailorIsRich_PatternBinderCapacity": "Patrons par classeur",
-    "Sandbox_MyTailorIsRich_PatternBinderCapacity_tooltip": "Nombre de patrons de couture qu'un classeur à patrons peut contenir."
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "Niveaux de Couture retirés à la précision d'une copie de patron (une copie de copie en perd encore). 0 : copies parfaites."
 }

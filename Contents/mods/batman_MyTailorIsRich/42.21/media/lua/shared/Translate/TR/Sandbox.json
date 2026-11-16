@@ -71,7 +71,5 @@
     "Sandbox_MyTailorIsRich_EnablePatternCopy": "Kalıp kopyaları",
     "Sandbox_MyTailorIsRich_EnablePatternCopy_tooltip": "Dikiş kalıbını yok etmeden yeni kâğıtlara kopyalamaya izin verir. Kopya, orijinalinden daha az hassastır.",
     "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss": "Kopya başına hassasiyet kaybı",
-    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "Bir kalıp kopyasının hassasiyetinden düşülen Terzilik seviyeleri (kopyanın kopyası bunları yeniden kaybeder). 0: kusursuz kopyalar.",
-    "Sandbox_MyTailorIsRich_PatternBinderCapacity": "Klasör başına kalıp sayısı",
-    "Sandbox_MyTailorIsRich_PatternBinderCapacity_tooltip": "Bir kalıp klasörünün alabileceği dikiş kalıbı sayısı."
+    "Sandbox_MyTailorIsRich_PatternCopyPrecisionLoss_tooltip": "Bir kalıp kopyasının hassasiyetinden düşülen Terzilik seviyeleri (kopyanın kopyası bunları yeniden kaybeder). 0: kusursuz kopyalar."
 }
