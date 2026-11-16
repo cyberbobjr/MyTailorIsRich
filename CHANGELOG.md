@@ -3,6 +3,14 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.5.0 — 2026-11-16
+
+### New features
+- **Pattern album.** Your pattern binder now opens as an old-fashioned album, like a card binder: pages of patterns on the left with a search bar (name, category such as Top or Shoes, material such as Denim), and on the right your character wearing the selected garment in 3D, with the materials and tools it needs for your size. From there you can sew it by hand, take it out, or send it to the nearest sewing machine ready to sew. Drop patterns on the page to store them. The album grows with the game's font size (large and 4K screens), and you can drag its corner to make it bigger.
+- **Unlimited pattern binder.** A binder now holds as many patterns as you like; only its weight grows. The "patterns per binder" sandbox option is gone.
+- **Pick patterns from the album at the machine.** Clicking the pattern slot of a sewing machine opens the same album, with search, to choose among the patterns you carry and those in your binders.
+- **Tear up a pattern.** A pattern you no longer need can be torn up for a sheet of paper (in hand, no tool).
+
 ## 0.4.16 — 2026-11-15
 
 ### Fixes

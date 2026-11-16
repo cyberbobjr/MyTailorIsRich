@@ -74,7 +74,7 @@ Las ampollas no te infectan, pero te ralentizan hasta curarse: ¡véndalas!
 [*]O encuentra [b]patrones de tienda[/b] en mercerías y librerías de moda, para cualquier prenda, [b]otros mods incluidos[/b].
 [*]Usa [b]Coser con patrón[/b] en la talla que elijas, con el tejido del original (algodón, vaquero, cuero). Con poca habilidad, puede salir una talla de más o de menos. Cada patrón sirve 5 veces.
 [*][b]Copiar el patrón[/b] en papel nuevo, en una mesa, sin destruirlo: cada copia es un poco menos precisa.
-[*]Guarda hasta 20 patrones en una [b]Carpeta de patrones[/b] (fabricada o hallada con material de costura). Las máquinas cosen directamente desde ella.
+[*]Guarda los patrones que quieras en una [b]Carpeta de patrones[/b]: álbum con búsqueda y vista previa 3D. Las máquinas cosen desde ella.
 [*][b]Vista previa sobre mí[/b]: ve a tu personaje con la prenda en 3D antes de coserla.
 [*]Coser a mano requiere un [b]dedal[/b].
 [*]El calzado es cosa de expertos: Sastrería 8, aguja, [b]punzón[/b], pegamento, cuero o tela, solo a mano. El calzado de goma no tiene patrón.

@@ -74,7 +74,7 @@ Une ampoule n'infecte pas, mais ralentit jusqu'à guérison : pansez-la !
 [*]Ou trouvez des [b]patrons du commerce[/b] dans les merceries et les librairies de mode, pour tout vêtement, [b]autres mods compris[/b].
 [*][b]Cousez d'après un patron[/b] dans la taille de votre choix, avec le même tissu que l'original (coton, jean, cuir). À faible niveau, une taille d'écart est possible. Chaque patron sert 5 fois.
 [*][b]Copier le patron[/b] sur papier neuf, à une table, sans l'abîmer : chaque copie perd en précision.
-[*]Jusqu'à 20 patrons dans un [b]Classeur à patrons[/b] (fabriqué ou trouvé en mercerie). Les machines y puisent directement.
+[*]Autant de patrons que voulu dans un [b]Classeur à patrons[/b] : album avec recherche et aperçu 3D. Les machines y puisent directement.
 [*][b]Aperçu sur moi[/b] : voyez le vêtement sur vous en 3D avant de le coudre.
 [*]Coudre à la main demande un [b]dé à coudre[/b].
 [*]Chaussures réservées aux experts : Couture 8, aiguille, [b]poinçon[/b], colle, cuir ou tissu, à la main seulement. Les chaussures en caoutchouc n'ont pas de patron.
