@@ -1,6 +1,6 @@
 [h1]My Tailor Is Rich — Tailles de vêtements et pointures[/h1]
 
-[b]Build 42.21 · Solo et multijoueur[/b]
+[b]Build 42.22 · Solo et multijoueur[/b]
 
 Cette veste en cuir parfaite sur un zombie ? Elle fait peut-être deux tailles de moins que vous. Ces rangers ? Du 46, et vous chaussez du 41.
 
@@ -10,7 +10,7 @@ Vêtements et chaussures ont une taille. Trouvez ce qui vous va, retouchez, cous
 
 [list]
 [*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (obligatoire) : taille et état dans les infobulles.
-[*][b]Incompatible[/b] avec [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url], qu'il réécrit pour la Build 42.21 : n'activez pas les deux.
+[*][b]Incompatible[/b] avec [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url], qu'il réécrit pour la Build 42.22 : n'activez pas les deux.
 [*]Compatible avec [b]Immersive Weighing[/b] (la taille est cachée avec le poids) et [b]Dynamic Body Shape Redux[/b] (les vêtements des zombies suivent leur silhouette).
 [/list]
 

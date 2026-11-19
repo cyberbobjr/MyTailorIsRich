@@ -1,6 +1,6 @@
 # My Tailor Is Rich — documentation
 
-Mod Project Zomboid Build 42.21 (solo et multijoueur) qui donne une taille aux vêtements (XS à XXL) et une pointure aux chaussures (EU 35 à 47), avec retouches, usure, patrons de couture, classeur à patrons, teinture, broderie et machines à coudre.
+Mod Project Zomboid Build 42.22 (solo et multijoueur) qui donne une taille aux vêtements (XS à XXL) et une pointure aux chaussures (EU 35 à 47), avec retouches, usure, patrons de couture, classeur à patrons, teinture, broderie et machines à coudre.
 
 La présentation publique du mod est le [README du dépôt](../README.md) (anglais, puis français) ; l'historique des versions est dans [CHANGELOG.md](../CHANGELOG.md).
 

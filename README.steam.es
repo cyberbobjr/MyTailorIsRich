@@ -1,6 +1,6 @@
 [h1]My Tailor Is Rich — Tallas de ropa y números de calzado[/h1]
 
-[b]Build 42.21 · Un jugador y multijugador[/b]
+[b]Build 42.22 · Un jugador y multijugador[/b]
 
 ¿Esa chaqueta de cuero perfecta de un zombi? Quizá dos tallas más pequeña que la tuya. ¿Esas botas militares? Un 46, y tú calzas un 41.
 
@@ -10,7 +10,7 @@ Ropa y zapatos tienen talla. Encuentra lo que te vale, arregla, cose y tiñe el 
 
 [list]
 [*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (obligatorio): muestra talla y estado en las descripciones emergentes.
-[*][b]No es compatible[/b] con [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]. Este mod es su reescritura para la Build 42.21: no actives los dos.
+[*][b]No es compatible[/b] con [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]. Este mod es su reescritura para la Build 42.22: no actives los dos.
 [*]Compatible con [b]Immersive Weighing[/b] (la talla se oculta junto con el peso) y [b]Dynamic Body Shape Redux[/b] (la ropa de los zombis sigue su silueta).
 [/list]
 

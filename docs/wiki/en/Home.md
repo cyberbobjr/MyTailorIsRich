@@ -1,6 +1,6 @@
 # My Tailor Is Rich
 
-**Clothing & shoe sizes for Project Zomboid Build 42.21 — singleplayer and multiplayer.**
+**Clothing & shoe sizes for Project Zomboid Build 42.22 — singleplayer and multiplayer.**
 
 Clothes get a size from XS to XXL, shoes an EU size from 35 to 47. Loot that doesn't fit, read the labels, resize, recondition, trace sewing patterns, sew on electric or treadle machines, dye and embroider your clothes.
 

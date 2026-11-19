@@ -1,6 +1,6 @@
 # My Tailor Is Rich
 
-**Tailles des vêtements et pointures des chaussures pour Project Zomboid Build 42.21, en solo et en multijoueur.**
+**Tailles des vêtements et pointures des chaussures pour Project Zomboid Build 42.22, en solo et en multijoueur.**
 
 Les vêtements ont une taille de XS à XXL, les chaussures une pointure EU de 35 à 47. Le butin ne vous va pas toujours : lisez les étiquettes, retouchez, remettez en état, tracez des patrons, cousez à la machine électrique ou à pédale, teignez et brodez vos vêtements.
 

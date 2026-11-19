@@ -5,7 +5,7 @@
 | Mod | Status |
 |---|---|
 | [TooltipLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672) | **Required.** |
-| [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) | **Incompatible** (declared in the mod). My Tailor Is Rich is its rewrite for Build 42.21. |
+| [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) | **Incompatible** (declared in the mod). My Tailor Is Rich is its rewrite for Build 42.22. |
 | [Immersive Weighing](https://steamcommunity.com/sharedfiles/filedetails/?id=3791897755) | Compatible: when your weight is hidden, your size is hidden too, since it follows your weight. |
 | [Nutrition Makes Sense](https://steamcommunity.com/sharedfiles/filedetails/?id=3690404044) | Compatible: on the Character screen, your size shows right after its weekly weight change. Detected automatically, nothing to set up. |
 | [Dynamic Body Shape Redux](https://steamcommunity.com/sharedfiles/filedetails/?id=3834708923) | Compatible: a zombie's clothes are the size of its body shape (XS or S emaciated, M underweight, L normal, XL fat, XXL obese). **Preview on me** shows the widened garment on a fat or obese character. |

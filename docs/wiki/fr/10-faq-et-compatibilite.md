@@ -5,7 +5,7 @@
 | Mod | État |
 |---|---|
 | [TooltipLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672) | **Obligatoire.** |
-| [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) | **Incompatible** (déclaré dans le mod). My Tailor Is Rich en est la réécriture pour la Build 42.21. |
+| [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) | **Incompatible** (déclaré dans le mod). My Tailor Is Rich en est la réécriture pour la Build 42.22. |
 | [Immersive Weighing](https://steamcommunity.com/sharedfiles/filedetails/?id=3791897755) | Compatible : quand le poids est masqué, la taille l'est aussi, puisqu'elle suit le poids. |
 | [Nutrition Makes Sense](https://steamcommunity.com/sharedfiles/filedetails/?id=3690404044) | Compatible : sur l'écran Personnage, la taille s'affiche juste après sa variation de poids hebdomadaire. Détecté automatiquement, rien à régler. |
 | [Dynamic Body Shape Redux](https://steamcommunity.com/sharedfiles/filedetails/?id=3834708923) | Compatible : les vêtements d'un zombie sont à la taille de sa silhouette (XS ou S émacié, M maigre, L normal, XL gros, XXL obèse). **Aperçu sur moi** montre le vêtement élargi sur un personnage gros ou obèse. |

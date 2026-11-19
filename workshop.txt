@@ -3,7 +3,7 @@ id=3810122988
 title=My Tailor Is Rich - Clothing & Shoe Sizes
 description=[h1]My Tailor Is Rich — Clothing & Shoe Sizes[/h1]
 description=
-description=[b]Build 42.21 · Singleplayer & Multiplayer[/b]
+description=[b]Build 42.22 · Singleplayer & Multiplayer[/b]
 description=
 description=That perfect leather jacket on a zombie? It might be two sizes too small. Those army boots? Size 46, and you wear a 41.
 description=
@@ -13,7 +13,7 @@ description=[h2]Requirements[/h2]
 description=
 description=[list]
 description=[*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (required): shows size and condition in item tooltips.
-description=[*][b]Not compatible[/b] with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]. This mod is its Build 42.21 rewrite: don't enable both.
+description=[*][b]Not compatible[/b] with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url]. This mod is its Build 42.22 rewrite: don't enable both.
 description=[*]Compatible with [b]Immersive Weighing[/b] (size hidden along with weight) and [b]Dynamic Body Shape Redux[/b] (zombies' clothes match their body shape).
 description=[/list]
 description=
@@ -124,7 +124,7 @@ description=[url=https://discord.gg/QEsBya7hUA]Discord[/url]
 description=
 description=[h2]Credits[/h2]
 description=
-description=Based on [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] by [b]Gootube[/b], including its sounds. Rewritten for Build 42.21 with multiplayer support, then expanded with shoe sizes, patterns, sewing machines, dyeing and embroidery. Tooltips by [b]TooltipLib[/b].
+description=Based on [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] by [b]Gootube[/b], including its sounds. Rewritten for Build 42.22 with multiplayer support, then expanded with shoe sizes, patterns, sewing machines, dyeing and embroidery. Tooltips by [b]TooltipLib[/b].
 description=Sewing machine sounds: electric machine by Joseph Sardin ([url=https://bigsoundbank.com]BigSoundBank[/url], CC0); treadle machine by Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), trimmed into loops.
 description=Source code (MIT) on [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].
 tags=Build 42;Clothing/Armor;Multiplayer;Realistic;Skills

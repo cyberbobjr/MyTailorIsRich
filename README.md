@@ -1,6 +1,6 @@
 # My Tailor Is Rich — Clothing & Shoe Sizes
 
-**Build 42.21 · Singleplayer & Multiplayer**
+**Build 42.22 · Singleplayer & Multiplayer**
 
 Clothes and shoes finally have sizes. Loot that doesn't fit, resize it with your tailoring skills, and think twice before sprinting in boots three sizes too big.
 
@@ -11,7 +11,7 @@ Clothes and shoes finally have sizes. Loot that doesn't fit, resize it with your
 ## Requirements
 
 - **[TooltipLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672)** (required): the size and wear lines in item tooltips.
-- **Incompatible** with [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356). This mod is a full rewrite of it for Build 42.21.
+- **Incompatible** with [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356). This mod is a full rewrite of it for Build 42.22.
 - **Compatible** with [Immersive Weighing](https://steamcommunity.com/sharedfiles/filedetails/?id=3791897755): when your weight is hidden, the size shown next to it is hidden too, since it follows your weight.
 - **Compatible** with [Dynamic Body Shape Redux](https://steamcommunity.com/sharedfiles/filedetails/?id=3834708923): a zombie's clothes are the size of its body shape (XS or S for emaciated, M underweight, L normal, XL fat, XXL obese), and **Preview on me** shows the widened version of a garment on a fat or obese character.
 
@@ -125,7 +125,7 @@ English, French, German, Spanish, Portuguese (Brazil and Portugal), Russian, Sim
 
 ## Credits
 
-Based on [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) by **Gootube** (Workshop 3491510356), including its sounds. It was rewritten and ported to Build 42.21 with multiplayer support, then expanded with shoe sizes and sewing patterns. Tooltips by **TooltipLib**.
+Based on [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) by **Gootube** (Workshop 3491510356), including its sounds. It was rewritten and ported to Build 42.22 with multiplayer support, then expanded with shoe sizes and sewing patterns. Tooltips by **TooltipLib**.
 
 ## License
 
@@ -135,14 +135,14 @@ The mod's code, translations and images are released under the [MIT License](LIC
 
 # Français
 
-**Build 42.21 · Solo et multijoueur**
+**Build 42.22 · Solo et multijoueur**
 
 Les vêtements et les chaussures ont enfin une taille. Trouvez ce qui vous va, retouchez le reste, et réfléchissez avant de sprinter avec des bottes trois pointures trop grandes.
 
 ## Prérequis
 
 - **[TooltipLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672)** (obligatoire) : les lignes de taille et d'usure dans les infobulles.
-- **Incompatible** avec [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356), dont ce mod est une réécriture complète pour la Build 42.21.
+- **Incompatible** avec [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356), dont ce mod est une réécriture complète pour la Build 42.22.
 - **Compatible** avec [Immersive Weighing](https://steamcommunity.com/sharedfiles/filedetails/?id=3791897755) : quand le poids est caché, la taille affichée à côté l'est aussi, puisqu'elle découle du poids.
 - **Compatible** avec [Dynamic Body Shape Redux](https://steamcommunity.com/sharedfiles/filedetails/?id=3834708923) : les vêtements d'un zombie sont à la taille de sa silhouette (XS ou S pour émacié, M maigre, L normal, XL gros, XXL obèse), et **Aperçu sur moi** montre la version élargie du vêtement sur un personnage gros ou obèse.
 
@@ -256,7 +256,7 @@ Anglais, français, allemand, espagnol, portugais (Brésil et Portugal), russe, 
 
 ## Crédits
 
-Basé sur [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) de **Gootube** (Workshop 3491510356), dont il reprend les sons. Réécrit et porté en Build 42.21 avec le multijoueur, puis enrichi des pointures de chaussures et des patrons de couture. Infobulles par **TooltipLib**.
+Basé sur [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356) de **Gootube** (Workshop 3491510356), dont il reprend les sons. Réécrit et porté en Build 42.22 avec le multijoueur, puis enrichi des pointures de chaussures et des patrons de couture. Infobulles par **TooltipLib**.
 
 ## Licence
 

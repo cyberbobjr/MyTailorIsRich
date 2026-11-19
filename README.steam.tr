@@ -1,6 +1,6 @@
 [h1]My Tailor Is Rich — Kıyafet Bedenleri ve Ayakkabı Numaraları[/h1]
 
-[b]Build 42.21 · Tek oyunculu ve çok oyunculu[/b]
+[b]Build 42.22 · Tek oyunculu ve çok oyunculu[/b]
 
 Zombinin ceketi iki beden küçük; botları 46 numara, sen 41 giyiyorsun.
 
@@ -10,7 +10,7 @@ Her kıyafetin ve ayakkabının bir ölçüsü var. Uyanları bul, kalanları ta
 
 [list]
 [*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672]TooltipLib[/url][/b] (gerekli): eşya bilgi kutularında beden ve durum gösterir.
-[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] ile [b]uyumsuzdur[/b]. Build 42.21 için yeniden yazıldı: ikisini birlikte açma.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] ile [b]uyumsuzdur[/b]. Build 42.22 için yeniden yazıldı: ikisini birlikte açma.
 [*][b]Immersive Weighing[/b] (kilo gizlenince beden de gizlenir) ve [b]Dynamic Body Shape Redux[/b] (zombi kıyafetleri vücut tipine uyar) ile uyumlu.
 [/list]
 
@@ -119,6 +119,6 @@ Bir kahve, geliştirmeye destek olur.
 
 [h2]Katkıda bulunanlar[/h2]
 
-[b]Gootube[/b]'un [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] modu ve sesleri temel alındı. Build 42.21 ve çok oyunculu için yeniden yazıldı; ayakkabı numaraları, kalıplar, makineler, boyama ve işleme eklendi. Bilgi kutuları: [b]TooltipLib[/b].
+[b]Gootube[/b]'un [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356]Realistic Clothes[/url] modu ve sesleri temel alındı. Build 42.22 ve çok oyunculu için yeniden yazıldı; ayakkabı numaraları, kalıplar, makineler, boyama ve işleme eklendi. Bilgi kutuları: [b]TooltipLib[/b].
 Dikiş makinesi sesleri: elektrikli makine Joseph Sardin ([url=https://bigsoundbank.com]BigSoundBank[/url], CC0); pedallı makine Work With Sounds / Museum of Municipal Engineering ([url=https://commons.wikimedia.org/wiki/File:WWS_Glovemakermachinesewing2.ogg]Wikimedia Commons[/url], [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]), döngüler hâlinde kesildi.
 Kaynak kodu (MIT): [url=https://github.com/cyberbobjr/MyTailorIsRich]GitHub[/url].

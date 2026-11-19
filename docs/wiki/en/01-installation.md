@@ -2,9 +2,9 @@
 
 ## Requirements
 
-- **Project Zomboid Build 42.21** or later (the mod declares `versionMin=42.21`).
+- **Project Zomboid Build 42.22** or later (the mod declares `versionMin=42.21`).
 - **[TooltipLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3694097672)** (required): it draws the size, wear, embroidery and binder lines in item tooltips.
-- **Not with [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356)**: the two mods are declared incompatible. My Tailor Is Rich is a full rewrite of it for Build 42.21.
+- **Not with [Realistic Clothes](https://steamcommunity.com/sharedfiles/filedetails/?id=3491510356)**: the two mods are declared incompatible. My Tailor Is Rich is a full rewrite of it for Build 42.22.
 
 ## Singleplayer
 
