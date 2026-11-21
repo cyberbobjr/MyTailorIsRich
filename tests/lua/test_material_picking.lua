@@ -44,14 +44,21 @@ function T.setup()
     loadMod("shared/MyTailorIsRich/MTIR_Core.lua")
 end
 
-T["feuille vierge acceptée ; écrite, nommée, favorite, verrouillée ou à ModData refusée"] = function()
+T["feuille vierge acceptée ; écrite, nommée, favorite ou verrouillée refusée"] = function()
     assertEq(MTIR.isBlankSheet(newItem({})), true, "vierge")
     assertEq(MTIR.isBlankSheet(newItem({ pages = "Ma note" })), false, "écrite")
     assertEq(MTIR.isBlankSheet(newItem({ customName = true, name = "Courses" })), false, "renommée")
     assertEq(MTIR.isBlankSheet(newItem({ name = "Note de quête" })), false, "nom différent du script")
     assertEq(MTIR.isBlankSheet(newItem({ favorite = true })), false, "favorite")
     assertEq(MTIR.isBlankSheet(newItem({ lockedBy = "bob" })), false, "verrouillée")
-    assertEq(MTIR.isBlankSheet(newItem({ modData = true })), false, "document d'un mod")
+end
+
+T["feuille vierge portant des ModData d'un autre mod acceptée"] = function()
+    local name = "Morceau de papier"
+    local crafted = newItem({ name = name, scriptName = name,
+        modData = { customName = name, ["Base.Paperwork"] = 1 } })
+    assertEq(MTIR.isBlankSheet(crafted), true, "ingrédients notés par un autre mod")
+    assertEq(MTIR.isBlankSheet(newItem({ modData = { anything = true } })), true, "donnée quelconque")
 end
 
 T["pickItems saute les favoris et échoue s'il n'en reste pas assez"] = function()
@@ -80,16 +87,13 @@ T["papier vierge : customName vanilla résiduel égal au nom normal accepté"] =
     assertEq(picked:size(), 2, "deux feuilles utilisables")
 end
 
-T["customName résiduel ne déprotège ni un document, ni une note, ni un favori"] = function()
-    local md = { customName = "Sheet of Paper" }
+T["les ModData ne déprotègent ni une note, ni un favori, ni un verrou, ni un nom"] = function()
+    local md = { customName = "Sheet of Paper", quest = true }
     assertEq(MTIR.isBlankSheet(newItem({ modData = md, pages = "My note" })), false, "texte protégé")
     assertEq(MTIR.isBlankSheet(newItem({ modData = md, favorite = true })), false, "favori protégé")
     assertEq(MTIR.isBlankSheet(newItem({ modData = md, lockedBy = "reader" })), false, "verrou protégé")
     assertEq(MTIR.isBlankSheet(newItem({ modData = md, customName = true })), false, "nom personnalisé protégé")
-    assertEq(MTIR.isBlankSheet(newItem({ modData = { customName = "Old note" } })), false,
-        "ancienne marque différente protégée")
-    assertEq(MTIR.isBlankSheet(newItem({ modData = { customName = "Sheet of Paper", quest = true } })), false,
-        "autres données de document protégées")
+    assertEq(MTIR.isBlankSheet(newItem({ modData = md, name = "Quest note" })), false, "nom différent protégé")
 end
 
 T["fils : bobines Thread d'abord, puis les autres du tag"] = function()

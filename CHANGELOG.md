@@ -3,6 +3,11 @@
 Each `## <version> — <date>` section is published as the Steam Workshop change note
 (`.claude/tools/steam_workshop_publish.py`). The top version must match `modversion=` in `mod.info`.
 
+## 0.5.1 — 2026-11-21
+
+### Fixes
+- **Crafted paper counts as blank paper.** Sheets of paper made with recipes from other mods (recycled paperwork, for example) showed as 0 available when tracing or copying a pattern, because another mod had tagged them. They are now accepted. Written, renamed, locked and favorited sheets are still left alone.
+
 ## 0.5.0 — 2026-11-16
 
 ### New features
